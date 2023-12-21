@@ -1,0 +1,5 @@
+-- Commento a caso
+CREATE TABLE Test(
+    idTest BIGINT PRIMARY KEY AUTO_INCREMENT,
+    Valore VARCHAR(64) NOT NULL
+);
