@@ -1,10 +1,28 @@
-const mysql=require("mysql");
-const connection = mysql.createPool({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PWD,
-    database: process.env.DB_NAME,
-    multipleStatements: true,
-    connectionLimit: 500
+const seq=require("sequelize").Sequelize;
+
+const sequelize = new seq(
+    process.env.DB_NAME,
+    process.env.DB_USER,
+    process.env.DB_PWD,
+    {
+        host: process.env.DB_HOST,
+        dialect: 'mysql',
+        pool: {
+            max: 500,
+            min: 0,
+            idle: 10000
+        },
+        query:{
+            raw: true
+        },
+        logging: process.env.DEBUG_DB>0
+    },
+);
+
+sequelize.authenticate().then(() => {
+    console.log('Connessione con il DB riuscita.');
+}).catch((error) => {
+    console.error("Errore durante il collegamento con il DB: "+error);
 });
-module.exports=connection;
+
+module.exports=sequelize;

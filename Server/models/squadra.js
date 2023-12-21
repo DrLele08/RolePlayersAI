@@ -1,29 +1,30 @@
+const db=require("./database");
+const DataTypes=require("sequelize").DataTypes;
+
 const squadra={};
 
-const sql=require("./database");
+const Squadra = db.define('Squadra', {
+    idSquadra: {
+        type: DataTypes.BIGINT,
+        autoIncrement: true,
+        primaryKey: true
+    },
+    Nome: {
+        type: DataTypes.STRING,
+        allowNull: false
+    }
+}, {
+    freezeTableName: true,
+    timestamps: false
+});
 
 
-squadra.getById=async(id)=>{
-  return new Promise((resolve,reject)=>{
-      let query="SELECT * FROM Squadra WHERE idSquadra=?";
-      sql.query(query,[id],(errQ,risQ)=>{
-          if(errQ)
-          {
-              reject("Errore DB: "+errQ);
-          }
-          else
-          {
-              if(risQ.length>0)
-              {
-                  resolve(risQ[0]);
-              }
-              else
-              {
-                  reject("Nessun ID trovato");
-              }
-          }
-      });
-  });
+/**
+ * Restituisce la squadra con l'ID dato in input.
+ * @param {Number} id Identificativo della squadra
+ */
+squadra.getById=(id)=>{
+    return Squadra.findByPk(id);
 };
 
 module.exports=squadra;
