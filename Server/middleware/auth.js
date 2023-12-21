@@ -1,4 +1,4 @@
 module.exports=(req,ris,next)=>{
-    console.log("Middleware in corso...")
+    console.log("Middleware in corso...");
     next();
 };

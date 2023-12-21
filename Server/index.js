@@ -36,8 +36,10 @@ app.use((req,ris,next)=>{
 
 
 //Attivazione routes per chiamate HTTP
-require("./platform/routes/test.js")(app);
-require("./api/routes/test.js")(app);
+require("./platform/routes/squadra.js")(app);
+
+
+require("./api/routes/squadra.js")(app);
 
 
 //Avvio del server

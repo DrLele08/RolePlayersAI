@@ -1,10 +1,10 @@
 const utils=require("../../models/utils")
-const test=require("../../models/test");
+const squadra=require("../../services/squadraService");
 
-exports.Test=(req,ris)=>{
+exports.GetById=(req,ris)=>{
     let idSquadra=req.params.idSquadra;
 
-    test.getById(idSquadra)
+    squadra.getById(idSquadra)
         .then((squadra)=>{
             ris.render("test",{squadra:squadra})
         })

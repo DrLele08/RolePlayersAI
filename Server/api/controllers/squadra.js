@@ -1,4 +1,4 @@
-exports.Test1=(req,ris)=>{
+exports.GetById=(req,ris)=>{
     let json={};
 
     json.Test="Ciaoooo";

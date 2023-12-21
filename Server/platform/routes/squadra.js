@@ -1,9 +1,10 @@
 module.exports=app=>{
     const router=require("express").Router();
     const middlewareAuth=require("../../middleware/auth");
-    const test=require("../controllers/test.js");
+    const squadra=require("../controllers/squadra.js");
 
-    router.get("/:idSquadra",middlewareAuth,test.Test);
+    router.get("/:idSquadra",middlewareAuth,squadra.GetById);
+
 
     app.use("/",router);
 };

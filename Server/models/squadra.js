@@ -1,10 +1,11 @@
-const test={};
+const squadra={};
 
-const sql=require("../models/database")
+const sql=require("./database");
 
-test.getById=async(id)=>{
+
+squadra.getById=async(id)=>{
   return new Promise((resolve,reject)=>{
-      let query="SELECT * FROM Test WHERE idTest=?";
+      let query="SELECT * FROM Squadra WHERE idSquadra=?";
       sql.query(query,[id],(errQ,risQ)=>{
           if(errQ)
           {
@@ -25,4 +26,4 @@ test.getById=async(id)=>{
   });
 };
 
-module.exports=test;
+module.exports=squadra;

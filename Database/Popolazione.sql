@@ -1,4 +1,4 @@
 -- Commento Fake
-INSERT INTO Test(Valore) VALUES("Napoli");
-INSERT INTO Test(Valore) VALUES("Milan");
-INSERT INTO Test(Valore) VALUES("Inter");
+INSERT INTO Squadra(Nome) VALUES("Napoli");
+INSERT INTO Squadra(Nome) VALUES("Milan");
+INSERT INTO Squadra(Nome) VALUES("Inter");
