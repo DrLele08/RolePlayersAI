@@ -6,9 +6,13 @@ exports.GetById=(req,ris)=>{
 
     squadra.getById(idSquadra)
         .then((squadra)=>{
-            ris.render("test",{squadra:squadra})
+            ris.render("test",{squadra:squadra});
         })
         .catch((errore)=>{
-            ris.render("error",{errore:errore})
+            ris.render("error",{errore:errore});
         });
+};
+
+exports.Home=(req,ris)=>{
+  ris.render("home",{utente:"Raffaele"});
 };
