@@ -21,4 +21,23 @@ creazioneService.getById=async(idCreazione)=>{
     }
 };
 
+creazioneService.DeleteById=async(idCreazione)=>{
+    if(idCreazione>0)
+    {
+        let creazioneEliminata = await creazione.deleteById(idCreazione);
+        if(creazioneEliminata !== null)
+        {
+            return creazioneEliminata;
+        }
+        else
+        {
+            return Promise.reject("Creazione non trovata");
+        }
+    }
+    else
+    {
+        return Promise.reject("ID minore di 0");
+    }
+};
+
 module.exports=creazioneService;

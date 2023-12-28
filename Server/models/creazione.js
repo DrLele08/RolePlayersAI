@@ -1,4 +1,4 @@
-const db=require("./database");
+const db=require("../../../../OneDrive/Unisa/TERZO ANNO/RolePlayersAI-main/Server/models/database");
 const DataTypes=require("sequelize").DataTypes;
 const utente = require("./utente"); //bisogna crearlo
 
@@ -118,4 +118,22 @@ creazione.createAmbiente = (dati)=>{
         tipo: 1
     });
 };
+
+/**
+ * Elimina una creazione presente nel DB
+ *
+ * @function
+ * @param {Number} id - ID della creazione
+ *
+ * @returns {Promise<Number>} - Promise che si risolve con il numero dell'id della creazione eliminata
+ */
+creazione.deleteById = async (id) =>{
+ await creazione.destroy({
+    where: {
+        idCreazione: id,
+    },
+});
+ return id;
+}
+
 module.exports=creazione;
