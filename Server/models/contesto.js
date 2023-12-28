@@ -1,12 +1,12 @@
 const db= require("./database");
 const DataTypes= require("sequelize").DataTypes;
-const utente = require("./utente"); //Bisogna creare il model utente
+const utente = require("./utente"); //TODO Bisogna creare il model Utente
 const ambiente = require("./creazione");
 
 const contesto = {};
 
 const Contesto = db.define('Contesto',{
-    id: {
+    idContesto: {
         type: DataTypes.BIGINT,
         autoIncrement: true,
         primaryKey: true,
@@ -23,12 +23,12 @@ const Contesto = db.define('Contesto',{
         allowNull: false
     },
 
-    is_pubblico: {
+    isPubblico: {
         type: DataTypes.BOOLEAN,
         allowNull: false
     },
 
-    utente_id: {
+    FkUtente: {
         type: DataTypes.BIGINT,
         allowNull: false,
         references: {
@@ -37,7 +37,7 @@ const Contesto = db.define('Contesto',{
         }
     },
 
-    ambiente_id: {
+    FkAmbiente: {
         type: DataTypes.BIGINT,
         allowNull: false,
         references: {
@@ -50,11 +50,11 @@ const Contesto = db.define('Contesto',{
 //Associazioni
 
 Contesto.belongsTo(utente.Utente, { //Bisogna creare il model Utente
-    foreignKey: 'utente_id',
+    foreignKey: 'FkUtente',
     as: 'Utente'
 });
 Contesto.belongsTo(Ambiente, {
-    foreignKey: 'ambiente_id',
+    foreignKey: 'FkUtente',
     as: 'Ambiente'
 });
 
@@ -77,7 +77,7 @@ contesto.getById=(id)=>{
  * @function
  * @returns {Promise<Array<Contesto>>} - Promise che si risolve con un array di istanze, oppure un array vuoto se non sono presenti
  */
-Contesto.getList = ()=> {
+Contesto.getAll = ()=> {
     return Contesto.findAll();
 };
 
@@ -112,12 +112,16 @@ contesto.createContesto = (dati) =>{
  * Elimina un Contesto presente nel DB
  *
  * @function
- * @param {Number} id - ID del Contesto
+ * @param {Number} idContesto - ID del Contesto
  *
- * @returns {Promise<Number>} - Promise che si risolve con il numero dell'id del contesto eliminato
+ * @return {Promise<Number>}
  */
-//Elimina Contesto
-
-
+contesto.deleteContesto = (idContesto) =>{
+     return Contesto.destroy({
+        where: {
+            idContesto: idContesto
+        }
+    })
+}
 
 module.exports=contesto;
