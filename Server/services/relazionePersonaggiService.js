@@ -1,10 +1,11 @@
 const relazionePersonaggi=require("../models/relazionePersonaggi");
+const utils = require("../models/utils");
 
 const relazionePersonaggiService={};
 
 
 relazionePersonaggiService.getById = async (idRelazione) =>{
-    if(isValidId(idRelazione)){
+    if(utils.checkId(idRelazione)){
         let relazione = await relazionePersonaggi.getById(idRelazione);
         if(relazione !== null){
             return relazione;
@@ -20,7 +21,7 @@ relazionePersonaggiService.getById = async (idRelazione) =>{
 
 relazionePersonaggiService.createRelazionePersonaggi = async (dati) =>{
     if(isValidDati(dati)){
-        if(isValidId(dati.contesto_id) && isValidId(dati.personaggio1_id) && isValidId(dati.personaggio2_id)){
+        if(utils.checkId(dati.contesto_id) && utils.checkId(dati.personaggio1_id) && utils.checkId(dati.personaggio2_id)){
             return relazionePersonaggi.createRelazionePersonaggi(dati);
         }
         else{
@@ -33,7 +34,7 @@ relazionePersonaggiService.createRelazionePersonaggi = async (dati) =>{
 }
 
 relazionePersonaggiService.getByContesto = async (idContesto) =>{
-    if(isValidId(idContesto)){
+    if(utils.checkId(idContesto)){
         return relazionePersonaggi.getByContesto(idContesto);
     }
     else{
@@ -41,10 +42,6 @@ relazionePersonaggiService.getByContesto = async (idContesto) =>{
     }
 }
 
-//Controlla la validità di un ID
-function isValidId(id){
-    return id > 0;
-}
 
 //Controlla la validità dei dati per la creazione di una nuova Relazione
 function isValidDati(dati){
