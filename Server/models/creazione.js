@@ -72,7 +72,7 @@ creazione.getById=(id)=>{
  *
  * @param {Object} dati - Dati del nuovo personaggio
  * @param {Number} dati.utente_id - Id dell`utente che ha creato il Personaggio
- * @param {Number} dati.nome - Nome del Personaggio
+ * @param {String} dati.nome - Nome del Personaggio
  * @param {String} dati.immagine - Percorso immagine del personaggio
  * @param {String} dati.descrizione - Descrizione del personaggio
  * @param {Boolean} dati.is_pubblico - Indica se il personaggio è pubblico o privato
@@ -101,7 +101,7 @@ creazione.createPersonaggio = (dati)=>{
  *
  * @param {Object} dati - Dati del nuovo ambiente
  * @param {Number} dati.utente_id - Id dell`utente che ha creato l'ambiente
- * @param {Number} dati.nome - Nome ambiente
+ * @param {String} dati.nome - Nome ambiente
  * @param {String} dati.immagine - Percorso immagine ambiente
  * @param {String} dati.descrizione - Descrizione ambiente
  * @param {Boolean} dati.is_pubblico - Indica se l'ambiente è pubblico o privato
