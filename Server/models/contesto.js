@@ -54,7 +54,7 @@ Contesto.belongsTo(utente.Utente, { //Bisogna creare il model Utente
     as: 'Utente'
 });
 Contesto.belongsTo(Ambiente, {
-    foreignKey: 'FkUtente',
+    foreignKey: 'FkAmbiente',
     as: 'Ambiente'
 });
 
@@ -63,11 +63,11 @@ Contesto.belongsTo(Ambiente, {
  *Restituisce il Contesto con l`ID dato in input.
  *
  * @function
- * @param {Number} id - ID del Contesto
+ * @param {Number} idContesto - ID del Contesto
  * @returns {Promise<Contesto | null>} - Promise che si risolve con l`istanza di Contesto corrispondente all ID, o null se non trovato
  */
-contesto.getById=(id)=>{
-    return Contesto.findByPk(id);
+contesto.getById=(idContesto)=>{
+    return Contesto.findByPk(idContesto);
 }
 
 
@@ -88,22 +88,22 @@ Contesto.getAll = ()=> {
  * @function
  *
  * @param {Object} dati - Dati del Contesto
- * @param {Number} dati.utente_id - Id dell'utente che ha creato il contesto
- * @param {Number} dati.ambiente_id - Id dell'ambiente in cui è stato definito il contesto
+ * @param {Number} dati.FkUtente - Id dell'utente che ha creato il contesto
+ * @param {Number} dati.FkAmbiente - Id dell'ambiente in cui è stato definito il contesto
  * @param {String} dati.nome - Nome del Contesto
  * @param {String} dati.descrizione - Descrizione del Contesto
- * @param {Boolean} dati.is_pubblico - Indica se il Contesto è pubblico o privato
+ * @param {Boolean} dati.isPubblico - Indica se il Contesto è pubblico o privato
  *
  * @returns {Promise<Contesto>} - Promise che si risolve con l'istanza del contesto creato
  */
 
 contesto.createContesto = (dati) =>{
     return Contesto.create({
-        utente_id: dati.utente_id,
-        ambiente_id: dati.ambiente_id,
+        FkUtente: dati.FkUtente,
+        FKAmbiente: dati.FkAmbiente,
         nome: dati.nome,
         descrizione: dati.descrizione,
-        is_pubblico: dati.is_pubblico
+        isPubblico: dati.isPubblico
     });
 };
 
