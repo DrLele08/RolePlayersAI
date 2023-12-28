@@ -1,6 +1,6 @@
 const db= require("./database");
 const DataTypes= require("sequelize").DataTypes;
-const utente = require("./utente"); //Bisogna creare il model contesto
+const utente = require("./utente"); //Bisogna creare il model utente
 const ambiente = require("./creazione");
 
 const contesto = {};
