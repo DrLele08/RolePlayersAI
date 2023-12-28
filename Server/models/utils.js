@@ -9,4 +9,9 @@ utils.checkParameter=(req,vettParam)=>{
     return true;
 };
 
+//Controlla la validità dell`ID
+utils.checkId=(id)=>{
+    return id > 0;
+}
+
 module.exports=utils;
