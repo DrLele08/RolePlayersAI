@@ -55,5 +55,13 @@ Creazione.belongsTo(utente.Utente, { //Bisogna creare il model Utente
     as: 'Creatore'
 });
 
+/**
+ * Restituisce la creazione con l'id dato in input.
+ * @param {Number} id Identificativo della creazione
+ */
+creazione.getById=(id)=>{
+    return Creazione.findByPk(id);
+};
+
 
 module.exports=creazione;
