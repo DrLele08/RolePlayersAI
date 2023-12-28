@@ -57,6 +57,7 @@ Creazione.belongsTo(utente.Utente, { //Bisogna creare il model Utente
 
 /**
  * Restituisce la creazione con l'id dato in input.
+ * @function
  * @param {Number} id Identificativo della creazione
  */
 creazione.getById=(id)=>{
@@ -91,4 +92,30 @@ creazione.createPersonaggio = (dati)=>{
     });
 };
 
+
+
+/**
+ * Crea e inserisce un nuovo Ambiente all`interno del DB
+ *
+ * @function
+ *
+ * @param {Object} dati - Dati del nuovo ambiente
+ * @param {Number} dati.utente_id - Id dell`utente che ha creato l'ambiente
+ * @param {Number} dati.nome - Nome ambiente
+ * @param {String} dati.immagine - Percorso immagine ambiente
+ * @param {String} dati.descrizione - Descrizione ambiente
+ * @param {Boolean} dati.is_pubblico - Indica se l'ambiente è pubblico o privato
+ *
+ * @return {Promise<Creazione>} - Promise che si risolve con l`istanza del'ambiente appena creato
+ */
+creazione.createAmbiente = (dati)=>{
+    return Creazione.create({
+        utente_id: dati.utente_id,
+        nome: dati.nome,
+        immagine: dati.immagine,
+        descrizione: dati.descrizione,
+        is_pubblico: dati.is_pubblico,
+        tipo: 'Ambiente'
+    });
+};
 module.exports=creazione;
