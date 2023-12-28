@@ -61,3 +61,6 @@ function isValidDati(dati){
 
     return true;
 }
+
+
+module.exports=relazionePersonaggiService;
