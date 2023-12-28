@@ -1,0 +1,32 @@
+//
+// Main init file of global bootstrap and theme functions, mixins, variables and config
+//
+
+
+// Custom functions & mixins
+@import "base/functions";
+@import "base/mixins";
+@import "components/mixins";
+@import "vendors/plugins/mixins";
+
+// Custom variables
+@import "components/variables.custom";
+@import "components/variables";
+@import "components/variables-dark";
+@import "components/variables.override";
+
+// Bootstrap initializaton
+@import "../../../tools/node_modules/bootstrap/scss/functions";
+@import "../../../tools/node_modules/bootstrap/scss/variables";
+@import "../../../tools/node_modules/bootstrap/scss/variables-dark";
+@import "../../../tools/node_modules/bootstrap/scss/maps";
+@import "../../../tools/node_modules/bootstrap/scss/mixins";
+@import "../../../tools/node_modules/bootstrap/scss/utilities";
+
+// 3rd-Party plugins variables
+@import "vendors/plugins/variables";
+@import "vendors/plugins/variables-dark";
+
+// Custom layout variables
+@import "layout/variables";
+
