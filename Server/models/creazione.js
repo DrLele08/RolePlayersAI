@@ -55,5 +55,31 @@ Creazione.belongsTo(utente.Utente, { //Bisogna creare il model Utente
     as: 'Creatore'
 });
 
+/**
+ * Crea e inserisce un nuovo Personaggio all`interno del DB
+ *
+ * @function
+ *
+ * @param {Object} dati - Dati del nuovo personaggio
+ * @param {Number} dati.utente_id - Id dell`utente che ha creato il Personaggio
+ * @param {Number} dati.nome - Nome del Personaggio
+ * @param {String} dati.immagine - Percorso immagine del personaggio
+ * @param {String} dati.descrizione - Descrizione del personaggio
+ * @param {Boolean} dati.is_pubblico - Indica se il personaggio è pubblico o privato
+ * @param {String} dati.sesso - Enum che rappresenta il sesso del personaggio {Uomo, Donna o Altro}
+ *
+ * @return {Promise<Creazione>} - Promise che si risolve con l`istanza del personaggio appena creato
+ */
+creazione.createPersonaggio = (dati)=>{
+    return Creazione.create({
+        utente_id: dati.utente_id,
+        nome: dati.nome,
+        immagine: dati.immagine,
+        descrizione: dati.descrizione,
+        is_pubblico: dati.is_pubblico,
+        tipo: 'Personaggio',
+        sesso: dati.sesso
+    });
+};
 
 module.exports=creazione;
