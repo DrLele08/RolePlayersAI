@@ -7,7 +7,7 @@ module.exports=app=>{
     const creazione=require("../controllers/creazione");
 
     router.get("/:idCreazione",middlewareAuth,creazione.GetById);
-
+    router.get("/:idCreazione",middlewareAuth,creazione.DeleteById);
 
     app.use("/api/creazione",router);
 };
