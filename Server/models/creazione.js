@@ -56,6 +56,14 @@ Creazione.belongsTo(utente.Utente, { //Bisogna creare il model Utente
 });
 
 /**
+ * Restituisce la creazione con l'id dato in input.
+ * @param {Number} id Identificativo della creazione
+ */
+creazione.getById=(id)=>{
+    return Creazione.findByPk(id);
+};
+
+/**
  * Crea e inserisce un nuovo Personaggio all`interno del DB
  *
  * @function
