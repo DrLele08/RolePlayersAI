@@ -6,7 +6,6 @@ exports.GetById= async (req,ris)=> {
     try {
         const contesto = await contestoService.getById(idContesto);
         json.Ris = 1;
-        json.Mess = "OK";
         json.Contesto = contesto;
         ris.json(json);
     } catch (error) {
@@ -22,7 +21,6 @@ exports.DeleteContesto= async (req,ris)=> {
     try {
         const contesto = await contestoService.deleteContesto(idContesto);
         json.Ris = 1;
-        json.Mess = "OK";
         json.Contesto = contesto;
         ris.json(json);
     } catch (error) {

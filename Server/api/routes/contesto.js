@@ -4,7 +4,7 @@ module.exports=app=>{
     const contesto=require("../controllers/contesto");
 
     router.get("/:idContesto",middlewareAuth,contesto.GetById);
-    router.get("/:idContesto",middlewareAuth,contesto.DeleteContesto);
+    router.get("/:deleteContesto",middlewareAuth,contesto.DeleteContesto);
 
     app.use("/api/contesto",router);
 };

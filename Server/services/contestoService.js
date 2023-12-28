@@ -4,8 +4,8 @@ const utils = require("../models/utils");
 const contestoService = {};
 
 contestoService.createContesto = async (dati) =>{
-    if(isValidDatiContesto(dati)){
-        if(utils.checkId(dati.FkUtente) && utils.checkId(dati.FkAmbiente)){
+    if(utils.isValidDatiContesto(dati)){
+        if(utils.checkId(dati.fkUtente) && utils.checkId(dati.fkAmbiente)){
             return contesto.createContesto(dati);
         }
         else{
@@ -49,23 +49,6 @@ contestoService.deleteContesto = async(idContesto) =>{
     else{
         return Promise.reject("ID minore di 0");
     }
-}
-
-
-
-function isValidDatiContesto(dati){
-    if(!dati){
-        return false;
-    }
-
-    const requiredFields = ['nome', 'descrizione', 'isPubblico', 'FkUtente', 'FkAmbiente'];
-    for(const field of requiredFields){
-        if(!(field in dati) || dati[field] === undefined || dati[field] === null){
-            return false;
-        }
-    }
-
-    return true;
 }
 
 module.exports=contestoService;

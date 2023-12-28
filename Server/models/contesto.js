@@ -12,7 +12,23 @@ const Contesto = db.define('Contesto',{
         primaryKey: true,
         allowNull: false
     },
+    fkUtente: {
+        type: DataTypes.BIGINT,
+        allowNull: false,
+        references: {
+            model: utente.Utente,
+            key: 'id'
+        }
+    },
 
+    fkAmbiente: {
+        type: DataTypes.BIGINT,
+        allowNull: false,
+        references: {
+            model: ambiente.Creazione,
+            key: 'id'
+        }
+    },
     nome: {
         type: DataTypes.STRING(25),
         allowNull: false
@@ -26,35 +42,19 @@ const Contesto = db.define('Contesto',{
     isPubblico: {
         type: DataTypes.BOOLEAN,
         allowNull: false
-    },
-
-    FkUtente: {
-        type: DataTypes.BIGINT,
-        allowNull: false,
-        references: {
-            model: utente.Utente,
-            key: 'id'
-        }
-    },
-
-    FkAmbiente: {
-        type: DataTypes.BIGINT,
-        allowNull: false,
-        references: {
-            model: ambiente.Creazione,
-            key: 'id'
-        }
     }
+
+
 });
 
 //Associazioni
 
 Contesto.belongsTo(utente.Utente, { //Bisogna creare il model Utente
-    foreignKey: 'FkUtente',
+    foreignKey: 'fkUtente',
     as: 'Utente'
 });
 Contesto.belongsTo(Ambiente, {
-    foreignKey: 'FkAmbiente',
+    foreignKey: 'fkAmbiente',
     as: 'Ambiente'
 });
 
@@ -88,8 +88,8 @@ Contesto.getAll = ()=> {
  * @function
  *
  * @param {Object} dati - Dati del Contesto
- * @param {Number} dati.FkUtente - Id dell'utente che ha creato il contesto
- * @param {Number} dati.FkAmbiente - Id dell'ambiente in cui è stato definito il contesto
+ * @param {Number} dati.fkUtente - Id dell'utente che ha creato il contesto
+ * @param {Number} dati.fkAmbiente - Id dell'ambiente in cui è stato definito il contesto
  * @param {String} dati.nome - Nome del Contesto
  * @param {String} dati.descrizione - Descrizione del Contesto
  * @param {Boolean} dati.isPubblico - Indica se il Contesto è pubblico o privato
@@ -99,8 +99,8 @@ Contesto.getAll = ()=> {
 
 contesto.createContesto = (dati) =>{
     return Contesto.create({
-        FkUtente: dati.FkUtente,
-        FKAmbiente: dati.FkAmbiente,
+        fkUtente: dati.fkUtente,
+        fKAmbiente: dati.fkAmbiente,
         nome: dati.nome,
         descrizione: dati.descrizione,
         isPubblico: dati.isPubblico
