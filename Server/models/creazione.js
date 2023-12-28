@@ -6,18 +6,18 @@ const creazione = {};
 
 
 const Creazione = db.define('Creazione', {
-    id: {
+    idCreazione: {
         type: DataTypes.BIGINT,
         autoIncrement: true,
         primaryKey: true,
         allowNull: false
     },
-    utente_id: {    //Bisogna creare il model Utente
+    fkUtente: {    //Bisogna creare il model Utente
         type: DataTypes.BIGINT,
         allowNull: false,
         references:{
             model: utente.Utente,
-            key: 'id'
+            key: 'idUtente'
         }
     },
     nome:{
@@ -51,17 +51,17 @@ const Creazione = db.define('Creazione', {
 
 //Associazioni
 Creazione.belongsTo(utente.Utente, { //Bisogna creare il model Utente
-    foreignKey: 'utente_id',
+    foreignKey: 'fkUtente',
     as: 'Creatore'
 });
 
 /**
  * Restituisce la creazione con l'id dato in input.
  * @function
- * @param {Number} id Identificativo della creazione
+ * @param {Number} idCreazione Identificativo della creazione
  */
-creazione.getById=(id)=>{
-    return Creazione.findByPk(id);
+creazione.getById=(idCreazione)=>{
+    return Creazione.findByPk(idCreazione);
 };
 
 
@@ -71,7 +71,7 @@ creazione.getById=(id)=>{
  * @function
  *
  * @param {Object} dati - Dati del nuovo personaggio
- * @param {Number} dati.utente_id - Id dell`utente che ha creato il Personaggio
+ * @param {Number} dati.fkUtente - Id dell`utente che ha creato il Personaggio
  * @param {String} dati.nome - Nome del Personaggio
  * @param {String} dati.immagine - Percorso immagine del personaggio
  * @param {String} dati.descrizione - Descrizione del personaggio
@@ -82,12 +82,12 @@ creazione.getById=(id)=>{
  */
 creazione.createPersonaggio = (dati)=>{
     return Creazione.create({
-        utente_id: dati.utente_id,
+        fkUtente: dati.fkUtente,
         nome: dati.nome,
         immagine: dati.immagine,
         descrizione: dati.descrizione,
         is_pubblico: dati.is_pubblico,
-        tipo: 'Personaggio',
+        tipo: 0,
         sesso: dati.sesso
     });
 };
@@ -100,7 +100,7 @@ creazione.createPersonaggio = (dati)=>{
  * @function
  *
  * @param {Object} dati - Dati del nuovo ambiente
- * @param {Number} dati.utente_id - Id dell`utente che ha creato l'ambiente
+ * @param {Number} dati.fkUtente - Id dell`utente che ha creato l'ambiente
  * @param {String} dati.nome - Nome ambiente
  * @param {String} dati.immagine - Percorso immagine ambiente
  * @param {String} dati.descrizione - Descrizione ambiente
@@ -110,12 +110,12 @@ creazione.createPersonaggio = (dati)=>{
  */
 creazione.createAmbiente = (dati)=>{
     return Creazione.create({
-        utente_id: dati.utente_id,
+        fkUtente: dati.fkUtente,
         nome: dati.nome,
         immagine: dati.immagine,
         descrizione: dati.descrizione,
         is_pubblico: dati.is_pubblico,
-        tipo: 'Ambiente'
+        tipo: 1
     });
 };
 module.exports=creazione;

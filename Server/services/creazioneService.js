@@ -2,10 +2,10 @@ const creazione=require("../models/creazione");
 
 const creazioneService={};
 
-creazioneService.getById=async(id)=>{
-    if(id>0)
+creazioneService.getById=async(idCreazione)=>{
+    if(idCreazione>0)
     {
-        let creazioneCercata = await creazione.getById(id);
+        let creazioneCercata = await creazione.getById(idCreazione);
         if(creazioneCercata !== null)
         {
             return creazioneCercata;
