@@ -1,6 +1,5 @@
 const contesto = require("../models/contesto");
 const utils = require("../models/utils");
-const relazionePersonaggi = require("../models/relazionePersonaggi");
 
 const contestoService = {};
 
