@@ -49,7 +49,7 @@ const Contesto = db.define('Contesto',{
 
 //Associazioni
 
-Contesto.belongsTo(utente.Utente, { //Bisogna creare il model Utente
+Contesto.belongsTo(utente.Utente, { //TODO Bisogna creare il model Utente
     foreignKey: 'fkUtente',
     as: 'Utente'
 });
