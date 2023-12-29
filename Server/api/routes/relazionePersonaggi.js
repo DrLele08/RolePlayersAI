@@ -3,8 +3,11 @@ module.exports=app=>{
     const middlewareAuth=require("../../middleware/auth");
     const relazionePersonaggiController=require("../controllers/relazionePersonaggi.js");
 
-    //Route per gestire richieste di una specifica relazione tra personaggi passando l`id
-    router.get("/:idRelazione", middlewareAuth, relazionePersonaggiController.GetById);
+    router.get("/:idRelazionePersonaggi", middlewareAuth, relazionePersonaggiController.GetById);
+
+    router.get("/contesto/:idContesto", middlewareAuth, relazionePersonaggiController.GetByContesto);
+
+    router.post("/", middlewareAuth, relazionePersonaggiController.CreateRelazionePersonaggi);
 
     app.use("/api/relazionePersonaggi",router);
 };
