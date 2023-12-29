@@ -6,7 +6,7 @@ module.exports=app=>{
     router.get("/", middlewareAuth, contesto.GetAll);
     router.post("/", middlewareAuth, contesto.CreateContesto);
     router.get("/:idContesto",middlewareAuth,contesto.GetById);
-    router.delete("/:deleteContesto",middlewareAuth,contesto.DeleteContesto);
+    router.delete("/:idContesto",middlewareAuth,contesto.DeleteContesto);
 
     app.use("/api/contesto",router);
 };
