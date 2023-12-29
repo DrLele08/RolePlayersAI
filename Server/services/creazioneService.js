@@ -73,6 +73,34 @@ function isValidDatiAmbiente(dati){
     return true;
 }
 
+creazioneService.GetByName=async(nome)=>{
+    if(!nome || nome ==='' || nome.length >50) {
+        return Promise.reject("Nome non valido");
+    }
+    else {
+        let Lista = await creazione.getByName(nome);
+        if (Lista !== null) {
+            return Lista;
+        } else {
+            return Promise.reject("Nessun risultato trovato");
+        }
+    }
 
+};
+
+creazioneService.GetByType=async(t)=>{
+    if(!t || t !=='Personaggio' || t!=='Ambiente') {
+        return Promise.reject("Nome non valido");
+    }
+    else {
+        let Lista = await creazione.getByType(t);
+        if (Lista !== null) {
+            return Lista;
+        } else {
+            return Promise.reject("Nessun risultato trovato");
+        }
+    }
+
+};
 
 module.exports=creazioneService;

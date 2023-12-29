@@ -1,6 +1,6 @@
 const db=require("../../../../OneDrive/Unisa/TERZO ANNO/RolePlayersAI-main/Server/models/database");
 const DataTypes=require("sequelize").DataTypes;
-const utente = require("./utente"); //bisogna crearlo
+const utente = require("./utente"); //TODO bisogna crearlo
 
 const creazione = {};
 
@@ -57,7 +57,9 @@ Creazione.belongsTo(utente.Utente, { //Bisogna creare il model Utente
 
 /**
  * Restituisce la creazione con l'id dato in input.
+ *
  * @function
+ *
  * @param {Number} idCreazione Identificativo della creazione
  */
 creazione.getById=(idCreazione)=>{
@@ -128,12 +130,37 @@ creazione.createAmbiente = (dati)=>{
  * @returns {Promise<Number>} - Promise che si risolve con il numero dell'id della creazione eliminata
  */
 creazione.deleteById = async (id) =>{
- await creazione.destroy({
+ return creazione.destroy({
     where: {
         idCreazione: id,
     },
 });
- return id;
 }
+
+/**
+ * Restituisce la creazione con il nome dato in input.
+ * @function
+ * @param {String} name nome della creazione
+ */
+creazione.getByName=(name)=>{
+    return Creazione.findAll({
+        where: {
+            nome: name,
+        }
+    })
+};
+
+/**
+ * Restituisce la creazione con il tipo dato in input.
+ * @function
+ * @param {String} t tipo della creazione
+ */
+creazione.getByType=(t)=>{
+    return Creazione.findAll({
+        where: {
+            tipo: t,
+        }
+    })
+};
 
 module.exports=creazione;
