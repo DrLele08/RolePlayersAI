@@ -12,10 +12,6 @@ const RelazionePersonaggi = db.define('RelazionePersonaggi', {
         primaryKey: true,
         allowNull: false
     },
-    descrizione: {
-        type: DataTypes.STRING(255),
-        allowNull: false
-    },
     fkContesto:{
         type: DataTypes.BIGINT,
         allowNull: false,
@@ -39,6 +35,10 @@ const RelazionePersonaggi = db.define('RelazionePersonaggi', {
             model: personaggio.Creazione,
             key: 'idCreazione'
         }
+    },
+    descrizione: {
+        type: DataTypes.STRING(255),
+        allowNull: false
     }
 },{
     freezeTableName: true,
