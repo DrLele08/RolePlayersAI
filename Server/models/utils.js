@@ -9,7 +9,7 @@ const utils={};
  * @param {String[]} requiredFields - Array contenente i nomi dei campi richiesti
  * @return {boolean} - True se i dati sono validi, False altrimenti
  */
-utils.checkParameter=(dati ,requiredFields)=>{
+utils.checkParameters=(dati ,requiredFields)=>{
     if(!dati){
         return false;
     }
