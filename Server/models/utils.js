@@ -33,21 +33,4 @@ utils.checkId=(id)=>{
     return id > 0;
 }
 
-
-//TODO eliminare questa funzione (anche nel service Contesto) e utilizzare checkParameter
-utils.isValidDatiContesto=(dati)=>{
-    if(!dati){
-        return false;
-    }
-
-    const requiredFields = ['nome', 'descrizione', 'isPubblico', 'FkUtente', 'FkAmbiente'];
-    for(const field of requiredFields){
-        if(!(field in dati) || dati[field] === undefined || dati[field] === null){
-            return false;
-        }
-    }
-
-    return true;
-}
-
 module.exports=utils;

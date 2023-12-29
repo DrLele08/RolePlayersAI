@@ -1,10 +1,14 @@
 const contesto = require("../models/contesto");
 const utils = require("../models/utils");
 
+
+
 const contestoService = {};
 
+const requiredFields = ['nome','fkUtente', 'fkAmbiente','descrizione', 'isPubblico'];
+
 contestoService.createContesto = async (dati) =>{
-    if(utils.isValidDatiContesto(dati)){
+    if(utils.checkParameters(dati, requiredFields)){
         if(utils.checkId(dati.fkUtente) && utils.checkId(dati.fkAmbiente)){
             return contesto.createContesto(dati);
         }
