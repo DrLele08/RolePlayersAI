@@ -2,6 +2,8 @@ const db= require("./database");
 const DataTypes=require("sequelize").DataTypes;
 const utente = require("./utente"); //TODO bisogna crearlo
 
+const pageSize = 16;
+
 const creazione = {};
 
 
@@ -162,5 +164,46 @@ creazione.getByType=(t)=>{
         }
     })
 };
+
+
+/**
+ * Ottiene una lista paginata di creazioni in base al tipo e al numero di pagina
+ *
+ * @async
+ * @function
+ *
+ * @param {String} tipo - Tipo di creazioni da recuperare ("Personaggio" | "Ambiente")
+ * @param {Number} page - Numero di pagina desiderato
+ * @return {Promise<{
+ *     totalItems: Number,
+ *     totalPages: Number,
+ *     currentPage: Number,
+ *     pageSize: Number,
+ *     creazioni: Creazione[]
+ * }>} - Promise che si risolve con un oggetto contenente informazioni sulla paginazione e la lista di creazioni
+ */
+creazione.getCreationsWithPagination = async (tipo, page) =>{
+    const offset = (page-1) * pageSize;
+
+    //restituisce i risultati della findAll combinati ai risultati della Count
+    const result = await Creazione.findAndCountAll({
+        where: {
+            tipo: tipo
+        },
+        limit: pageSize,
+        offset: offset
+    });
+
+    //Calcola il numero totale di pagine per visualizzare tutti i risultati (arrotondato per eccesso)
+    const totalPages = (result.count + pageSize - 1)/pageSize;
+
+    return {
+        totalItems: result.count,
+        totalPages: totalPages,
+        currentPage: page,
+        pageSize: pageSize,
+        creazioni: result.rows
+    };
+}
 
 module.exports=creazione;
