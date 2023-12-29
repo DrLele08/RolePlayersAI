@@ -22,7 +22,8 @@ const Utente = db.define('Utente', {
     },
     username:{
         type: DataTypes.STRING(25),
-        allowNull: false
+        allowNull: false,
+        unique: true
     },
     nome:{
         type: DataTypes.STRING(25),
@@ -34,10 +35,11 @@ const Utente = db.define('Utente', {
     },
     email:{
         type: DataTypes.STRING(50),
-        allowNull: false
+        allowNull: false,
+        unique: true
     },
     password:{
-        type: DataTypes.CHAR(256),
+        type: DataTypes.STRING(256),
         allowNull: false
     },
     dataNascita:{
