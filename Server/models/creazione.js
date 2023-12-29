@@ -1,4 +1,4 @@
-const db=require("../../../../OneDrive/Unisa/TERZO ANNO/RolePlayersAI-main/Server/models/database");
+const db= require("./database");
 const DataTypes=require("sequelize").DataTypes;
 const utente = require("./utente"); //TODO bisogna crearlo
 
