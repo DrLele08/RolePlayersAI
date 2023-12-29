@@ -1,12 +1,12 @@
 const db= require("./database");
 const DataTypes= require("sequelize").DataTypes;
-const contesto = require("./contesto"); //Bisogna creare il model contesto
+const contesto = require("./contesto");
 const personaggio = require("./creazione");
 
 const relazionePersonaggi = {};
 
 const RelazionePersonaggi = db.define('RelazionePersonaggi', {
-    id: {
+    idRelazionePersonaggi: {
         type: DataTypes.BIGINT,
         autoIncrement: true,
         primaryKey: true,
@@ -16,28 +16,28 @@ const RelazionePersonaggi = db.define('RelazionePersonaggi', {
         type: DataTypes.STRING(255),
         allowNull: false
     },
-    contesto_id:{
+    fkContesto:{
         type: DataTypes.BIGINT,
         allowNull: false,
         references:{
-            model: contesto.Contesto, //bisogna creare il model contesto
-            key: 'id'
+            model: contesto.Contesto,
+            key: 'idContesto'
         }
     },
-    personaggio1_id:{
+    fkPersonaggio1:{
         type: DataTypes.BIGINT,
         allowNull: false,
         references: {
             model: personaggio.Creazione,
-            key: 'id'
+            key: 'idCreazione'
         }
     },
-    personaggio2_id:{
+    fkPersonaggio2:{
         type: DataTypes.BIGINT,
         allowNull: false,
         references: {
             model: personaggio.Creazione,
-            key: 'id'
+            key: 'idCreazione'
         }
     }
 },{
@@ -47,16 +47,16 @@ const RelazionePersonaggi = db.define('RelazionePersonaggi', {
 
 
 //Associazioni
-RelazionePersonaggi.belongsTo(Contesto, { //bisogna creare il model contesto
-    foreignKey: 'contesto_id',
+RelazionePersonaggi.belongsTo(contesto.Contesto, {
+    foreignKey: 'fkContesto',
     as: 'Contesto'
 });
-RelazionePersonaggi.belongsTo(Personaggio, {
-    foreignKey: 'personaggio1_id',
+RelazionePersonaggi.belongsTo(personaggio.Creazione, {
+    foreignKey: 'fkPersonaggio1',
     as: 'Personaggio1'
 });
 RelazionePersonaggi.belongsTo(Personaggio, {
-    foreignKey: 'personaggio2_id',
+    foreignKey: 'fkPersonaggio2',
     as: 'Personaggio2'
 });
 
@@ -79,18 +79,18 @@ relazionePersonaggi.getById=(id)=>{
  *
  * @param {Object} dati - Dati della nuova relazione
  * @param {String} dati.descrizione - Descrizione della relazione
- * @param {Number} dati.contesto_id - ID del contesto in cui è definita la relazione
- * @param {Number} dati.personaggio1_id - ID del primo personaggio che partecipa alla relazione
- * @param {Number} dati.personaggio2_id - ID del secondo personaggio che partecipa alla relazione
+ * @param {Number} dati.fkContesto - ID del contesto in cui è definita la relazione
+ * @param {Number} dati.fkPersonaggio1 - ID del primo personaggio che partecipa alla relazione
+ * @param {Number} dati.fkPersonaggio2 - ID del secondo personaggio che partecipa alla relazione
  *
  * @returns {Promise<RelazionePersonaggi>} - Promise che si risolve con l`istanza di RelazionePersonaggi appena creata e inserita nel DB
  */
 relazionePersonaggi.createRelazionePersonaggi = (dati)=>{
     return RelazionePersonaggi.create({
         descrizione: dati.descrizione,
-        contesto_id: dati.contesto_id,
-        personaggio1_id: dati.personaggio1_id,
-        personaggio2_id: dati.personaggio2_id
+        fkContesto: dati.fkContesto,
+        fkPersonaggio1: dati.fkPersonaggio1,
+        fkPersonaggio2: dati.fkPersonaggio2
     });
 };
 
@@ -104,7 +104,7 @@ relazionePersonaggi.createRelazionePersonaggi = (dati)=>{
 relazionePersonaggi.getByContesto = (idContesto)=>{
     return RelazionePersonaggi.findAll({
         where: {
-            contesto: idContesto
+            fkContesto: idContesto
         }
     });
 };

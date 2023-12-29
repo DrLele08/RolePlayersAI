@@ -3,6 +3,8 @@ const utils = require("../models/utils");
 
 const relazionePersonaggiService={};
 
+const requiredFields = ['descrizione', 'fkContesto', 'fkPersonaggio1', 'fkPersonaggio2'];
+
 
 relazionePersonaggiService.getById = async (idRelazione) =>{
     if(utils.checkId(idRelazione)){
@@ -20,8 +22,8 @@ relazionePersonaggiService.getById = async (idRelazione) =>{
 };
 
 relazionePersonaggiService.createRelazionePersonaggi = async (dati) =>{
-    if(isValidDati(dati)){
-        if(utils.checkId(dati.contesto_id) && utils.checkId(dati.personaggio1_id) && utils.checkId(dati.personaggio2_id)){
+    if(utils.checkParameters(dati, requiredFields)){
+        if(utils.checkId(dati.fkContesto) && utils.checkId(dati.fkPersonaggio1) && utils.checkId(dati.fkPersonaggio2)){
             return relazionePersonaggi.createRelazionePersonaggi(dati);
         }
         else{
@@ -41,23 +43,5 @@ relazionePersonaggiService.getByContesto = async (idContesto) =>{
         return Promise.reject("ID Contesto non valido");
     }
 }
-
-
-//Controlla la validità dei dati per la creazione di una nuova Relazione
-function isValidDati(dati){
-    if(!dati){
-        return false;
-    }
-
-    const requiredFields = ['descrizione', 'contesto_id', 'personaggio1_id', 'personaggio2_id'];
-    for(const field of requiredFields){
-        if(!(field in dati) || dati[field] === undefined || dati[field] === null){
-            return false;
-        }
-    }
-
-    return true;
-}
-
 
 module.exports=relazionePersonaggiService;
