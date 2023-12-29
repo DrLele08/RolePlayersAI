@@ -40,6 +40,17 @@ contestoService.getById = async(idContesto) =>{
     }
 };
 
+contestoService.getAll = async()=>{
+    let ListaContesti = await contesto.getAll();
+
+    if(ListaContesti !== null){
+        return ListaContesti;
+    }
+    else{
+        return Promise.reject("Lista dei Contesti Vuota");
+    }
+}
+
 contestoService.deleteContesto = async(idContesto) =>{
     if(utils.checkId(idContesto)) {
         let ContestoCercato = await contesto.deleteContesto(idContesto);
