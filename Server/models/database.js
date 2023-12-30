@@ -1,4 +1,5 @@
 const seq=require("sequelize").Sequelize;
+const utilsDB=require("./utilsDB");
 
 const sequelize = new seq(
     process.env.DB_NAME,
@@ -13,7 +14,7 @@ const sequelize = new seq(
             idle: 10000
         },
         query:{
-            raw: true
+            raw: false
         },
         logging: process.env.DEBUG_DB>0
     },
@@ -21,6 +22,8 @@ const sequelize = new seq(
 
 sequelize.authenticate().then(() => {
     console.log('Connessione con il DB riuscita.');
+    utilsDB.SetRelationships();
+    console.log('Associazioni create.');
 }).catch((error) => {
     console.error("Errore durante il collegamento con il DB: "+error);
 });
