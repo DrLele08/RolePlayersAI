@@ -86,6 +86,24 @@ utilsDB.SetRelationships=()=>{
        as: 'CreazioniCreate'
     });
 
+
+    /*
+    Contesto --> Creazione (Personaggi) M:N
+    Per utilizzarla bisonga fare:
+    const contesto = await  contestoService.getById(id);
+    const personaggi = await  contesto.getCreaziones(); --> bisogna aggiungere la s dopo il nome della tabella
+    */
+    contesto.Contesto.belongsToMany(creazione.Creazione, {
+        through: 'ContestoPersonaggio',
+        timestamps: false,
+        foreignKey: 'idContesto'
+    });
+    creazione.Creazione.belongsToMany(contesto.Contesto, {
+        through: 'ContestoPersonaggio',
+        timestamps: false,
+        foreignKey: 'idPersonaggio'
+    });
+
 };
 
 module.exports=utilsDB;
