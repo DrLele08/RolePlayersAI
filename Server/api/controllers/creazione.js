@@ -32,14 +32,16 @@ exports.DeleteById = async (req,res)=>{
     }
 };
 
-exports.GetByName = async (req,res)=>{
+exports.GetByFilter = async (req,res)=>{
     let json = {};
-    let nome = req.params.nomeCreazione;
+    let nome = req.query.Nome;
+    let tipo = req.query.Tipo;
+    let pagina = req.query.Pagina
 
     try{
-        const creazione = await creazioneService.GetByName(nome);
+        const risCreazione = await creazioneService.GetByFilter(nome,tipo,pagina);
         json.Ris = 1;
-        json.Creazione = creazione;
+        json.Creazione = risCreazione;
         res.json(json);
     }catch (error){
         json.Ris = 0;
@@ -48,21 +50,6 @@ exports.GetByName = async (req,res)=>{
     }
 };
 
-exports.GetByType = async (req,res)=>{
-    let json = {};
-    let tipo = req.params.tipoCreazione;
-
-    try{
-        const creazione = await creazioneService.GetByName(tipo);
-        json.Ris = 1;
-        json.Creazione = creazione;
-        res.json(json);
-    }catch (error){
-        json.Ris = 0;
-        json.Mess = error.message || "Errore Generico";
-        res.json(json);
-    }
-};
 
 exports.CreateAmbiente = async (req, res)=>{
     let json = {};
