@@ -57,5 +57,28 @@ creazioneService.createAmbiente = async (dati) =>{
     }
 }
 
+creazioneService.getByFilter = async (nome, tipo, isPubblico, page)=>{
+    if(page > 0){
+        let filters = {};
+
+        if(nome !== undefined){
+            nome = nome.trim();
+            if(nome.length > 0){
+                filters.nome = nome;
+            }
+        }
+        if(!isNaN(tipo)){
+            filters.tipo = tipo;
+        }
+        if(Boolean(isPubblico) === isPubblico){
+            filters.isPubblico = isPubblico;
+        }
+
+        return creazione.getByFilter(filters, page);
+    }
+    else{
+        return Promise.reject("Pagina non valida");
+    }
+}
 
 module.exports=creazioneService;
