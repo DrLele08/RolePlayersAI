@@ -1,10 +1,14 @@
 const contesto = require("../models/contesto");
 const utils = require("../models/utils");
 
+
+
 const contestoService = {};
 
+const requiredFields = ['nome','fkUtente', 'fkAmbiente','descrizione', 'isPubblico'];
+
 contestoService.createContesto = async (dati) =>{
-    if(utils.isValidDatiContesto(dati)){
+    if(utils.checkParameters(dati, requiredFields)){
         if(utils.checkId(dati.fkUtente) && utils.checkId(dati.fkAmbiente)){
             return contesto.createContesto(dati);
         }
@@ -35,6 +39,17 @@ contestoService.getById = async(idContesto) =>{
         return Promise.reject("ID minore di 0");
     }
 };
+
+contestoService.getAll = async()=>{
+    let ListaContesti = await contesto.getAll();
+
+    if(ListaContesti !== null){
+        return ListaContesti;
+    }
+    else{
+        return Promise.reject("Lista dei Contesti Vuota");
+    }
+}
 
 contestoService.deleteContesto = async(idContesto) =>{
     if(utils.checkId(idContesto)) {

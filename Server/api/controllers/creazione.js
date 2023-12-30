@@ -1,7 +1,5 @@
 const creazioneService = require("../../services/creazioneService")
 
-
-
 exports.GetById = async (req,res)=>{
     let json = {};
     let idCreazione = req.params.idCreazione;//TODO da chiedere
@@ -34,14 +32,16 @@ exports.DeleteById = async (req,res)=>{
     }
 };
 
-exports.GetByName = async (req,res)=>{
+exports.GetByFilter = async (req,res)=>{
     let json = {};
-    let nome = req.params;//TODO da chiedere
+    let nome = req.query.Nome;
+    let tipo = req.query.Tipo;
+    let pagina = req.query.Pagina
 
     try{
-        const creazione = await creazioneService.GetByName(nome);
+        const risCreazione = await creazioneService.GetByFilter(nome,tipo,pagina);
         json.Ris = 1;
-        json.Creazione = creazione;
+        json.Creazione = risCreazione;
         res.json(json);
     }catch (error){
         json.Ris = 0;
@@ -50,19 +50,31 @@ exports.GetByName = async (req,res)=>{
     }
 };
 
-exports.GetByType = async (req,res)=>{
+
+exports.CreateAmbiente = async (req, res)=>{
     let json = {};
-    let tipo = req.params;//TODO da chiedere
+
+    const fkUtente = req.body.fkUtente;
+    const nome = req.body.nome;
+    const immagine = req.body.immagine;
+    const descrizione = req.body.descrizione;
+    const is_pubblico = req.body.is_pubblico;
+    const tipo = 1;
 
     try{
-        const creazione = await creazioneService.GetByName(tipo);
+        const nuovoAmbiente = creazioneService.createAmbiente({
+            fkUtente: fkUtente,
+            nome: nome,
+            immagine: immagine,
+            is_pubblico: is_pubblico,
+            tipo: tipo,
+            descrizione: descrizione
+        });
         json.Ris = 1;
-        json.Creazione = creazione;
+        json.NuovoAmbiente = nuovoAmbiente;
         res.json(json);
     }catch (error){
         json.Ris = 0;
         json.Mess = error.message || "Errore Generico";
-        res.json(json);
     }
-};
-
+}

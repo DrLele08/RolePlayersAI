@@ -22,7 +22,7 @@ relazionePersonaggiService.getById = async (idRelazione) =>{
 };
 
 relazionePersonaggiService.createRelazionePersonaggi = async (dati) =>{
-    if(isValidDati(dati)){
+    if(utils.checkParameters(dati, requiredFields)){
         if(utils.checkId(dati.fkContesto) && utils.checkId(dati.fkPersonaggio1) && utils.checkId(dati.fkPersonaggio2)){
             return relazionePersonaggi.createRelazionePersonaggi(dati);
         }
@@ -43,22 +43,5 @@ relazionePersonaggiService.getByContesto = async (idContesto) =>{
         return Promise.reject("ID Contesto non valido");
     }
 }
-
-
-//Controlla la validità dei dati per la creazione di una nuova Relazione
-function isValidDati(dati){
-    if(!dati){
-        return false;
-    }
-
-    for(const field of requiredFields){
-        if(!(field in dati) || dati[field] === undefined || dati[field] === null){
-            return false;
-        }
-    }
-
-    return true;
-}
-
 
 module.exports=relazionePersonaggiService;
