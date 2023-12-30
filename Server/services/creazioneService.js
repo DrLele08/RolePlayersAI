@@ -3,6 +3,7 @@ const utils = require("../models/utils");
 
 
 const creazioneService={};
+const requiredFields = ['fkUtente', 'nome', 'immagine', 'descrizione', 'isPubblico', 'tipo'];
 
 creazioneService.getById=async(idCreazione)=>{
     if(idCreazione>0)
@@ -42,9 +43,8 @@ creazioneService.DeleteById=async(idCreazione)=>{
     }
 };
 
-
 creazioneService.createAmbiente = async (dati) =>{
-    if(isValidDatiAmbiente(dati)){
+    if(utils.checkParameters(dati, requiredFields)){
         if(utils.checkId(dati.fkUtente)){
             return creazione.createAmbiente(dati);
         }
@@ -57,50 +57,5 @@ creazioneService.createAmbiente = async (dati) =>{
     }
 }
 
-//Controlla la validità dei dati per la creazione di un ambiente
-function isValidDatiAmbiente(dati){
-    if(!dati){
-        return false;
-    }
-
-    const requiredFields = ['fkUtente', 'nome', 'immagine', 'descrizione', 'is_pubblico', 'tipo'];
-    for(const field of requiredFields){
-        if(!(field in dati) || dati[field] === undefined || dati[field] === null){
-            return false;
-        }
-    }
-
-    return true;
-}
-
-creazioneService.GetByName=async(nome)=>{
-    if(!nome || nome ==='' || nome.length >50) {
-        return Promise.reject("Nome non valido");
-    }
-    else {
-        let Lista = await creazione.getByName(nome);
-        if (Lista !== null) {
-            return Lista;
-        } else {
-            return Promise.reject("Nessun risultato trovato");
-        }
-    }
-
-};
-
-creazioneService.GetByType=async(t)=>{
-    if(!t || t !=='Personaggio' || t!=='Ambiente') {
-        return Promise.reject("Nome non valido");
-    }
-    else {
-        let Lista = await creazione.getByType(t);
-        if (Lista !== null) {
-            return Lista;
-        } else {
-            return Promise.reject("Nessun risultato trovato");
-        }
-    }
-
-};
 
 module.exports=creazioneService;
