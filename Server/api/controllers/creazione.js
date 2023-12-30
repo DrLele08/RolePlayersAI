@@ -36,10 +36,11 @@ exports.GetByFilter = async (req,res)=>{
     let json = {};
     let nome = req.query.Nome;
     let tipo = req.query.Tipo;
-    let pagina = req.query.Pagina
+    let isPublic = req.query.isPubblico;
+    let pagina = req.query.Pagina;
 
     try{
-        const risCreazione = await creazioneService.GetByFilter(nome,tipo,pagina);
+        const risCreazione = await creazioneService.GetByFilter(nome,tipo,isPublic,pagina);
         json.Ris = 1;
         json.Creazione = risCreazione;
         res.json(json);

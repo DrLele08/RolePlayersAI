@@ -1,6 +1,7 @@
 const db= require("./database");
 const DataTypes=require("sequelize").DataTypes;
-const utente = require("./utente"); //TODO bisogna crearlo
+const utente = require("./utente");
+
 
 const pageSize = 16;
 
@@ -52,7 +53,7 @@ const Creazione = db.define('Creazione', {
 });
 
 //Associazioni
-Creazione.belongsTo(utente.Utente, { //Bisogna creare il model Utente
+Creazione.belongsTo(utente.Utente, {
     foreignKey: 'fkUtente',
     as: 'Creatore'
 });
@@ -66,6 +67,11 @@ Creazione.belongsTo(utente.Utente, { //Bisogna creare il model Utente
  */
 creazione.getById=(idCreazione)=>{
     return Creazione.findByPk(idCreazione);
+};
+
+
+creazione.getAll = ()=> {
+    return Creazione.findAndCountAll();
 };
 
 
@@ -148,7 +154,7 @@ creazione.deleteById = async (id) =>{
  * @param {Object} filters - Oggetto contenente i criteri di filtraggio per la query
  * @param {String} [filters.nome] - Nome della creazione da cercare (la ricerca avverrà in base ad una corrispondenza parziale)
  * @param {Number} filters.tipo - Tipo della creazione da cercare (0=Personaggio, 1=Ambiente)
- * @param {Boolean} isPubblico - Indica se la creazione da cercare è pubblica o privata
+ * @param {Boolean} filters.isPubblico - Indica se la creazione da cercare è pubblica o privata
  * @param {Number} page - Numero di pagina desiderato per la visualizzazione dei risultati
  * @return {Promise<{
  *      totalItems: Number,

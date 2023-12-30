@@ -1,6 +1,6 @@
 const creazione=require("../models/creazione");
 const utils = require("../models/utils");
-
+const fs = require('fs');
 
 const creazioneService={};
 const requiredFields = ['fkUtente', 'nome', 'immagine', 'descrizione', 'isPubblico', 'tipo'];
@@ -46,6 +46,10 @@ creazioneService.DeleteById=async(idCreazione)=>{
 creazioneService.createAmbiente = async (dati) =>{
     if(utils.checkParameters(dati, requiredFields)){
         if(utils.checkId(dati.fkUtente)){
+
+            //Salva percorso file
+            //ma nel model abbiamo solo string immagine
+
             return creazione.createAmbiente(dati);
         }
         else{
