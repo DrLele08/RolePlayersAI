@@ -9,7 +9,7 @@ module.exports=app=>{
 
     router.get("/:idCreazione",middlewareAuth,creazione.GetById);
     router.delete("/:idCreazione",middlewareAuth,creazione.DeleteById);
-    router.get("/cerca",middlewareAuth,creazione.GetByFiltro);
+    router.get("/cerca",middlewareAuth,creazione.GetByFilter);
 
     router.post("/", middlewareAuth, creazione.CreateAmbiente);
 

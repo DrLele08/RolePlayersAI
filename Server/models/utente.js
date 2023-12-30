@@ -47,7 +47,7 @@ const Utente = db.define('Utente', {
         allowNull: false
     },
     telefono:{
-        type: DataType.STRING(9),
+        type: DataTypes.STRING(9),
         allowNull: true
     },
     ruolo:{

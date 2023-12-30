@@ -42,6 +42,9 @@ require("./platform/routes/squadra.js")(app);
 require("./api/routes/squadra.js")(app);
 
 require("./api/routes/creazione.js")(app);
+require("./api/routes/relazionePersonaggi.js")(app);
+require("./api/routes/contesto.js")(app);
+
 
 //Avvio del server
 const port=process.env.PORT;
