@@ -1,4 +1,4 @@
-USE RoleplayersAI;
+USE RolePlayersAI;
 
 INSERT INTO Abbonamento(nomeTier, prezzo, maxMsg)
 VALUES ('Free', 0, 100),
