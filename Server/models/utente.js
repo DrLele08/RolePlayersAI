@@ -51,7 +51,7 @@ const Utente = db.define('Utente', {
         allowNull: true
     },
     ruolo:{
-        type: DataTypes.ENUM('Utente', 'Moderatore', 'Admin'),
+        type: DataTypes.ENUM('Utente', 'Moderatore', 'Amministratore'),
         allowNull: false
     },
     msgRimanenti:{
