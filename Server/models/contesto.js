@@ -43,19 +43,9 @@ const Contesto = db.define('Contesto',{
         type: DataTypes.BOOLEAN,
         allowNull: false
     }
-
-
-});
-
-//Associazioni
-
-Contesto.belongsTo(utente.Utente, { //TODO Bisogna creare il model Utente
-    foreignKey: 'fkUtente',
-    as: 'Utente'
-});
-Contesto.belongsTo(Ambiente, {
-    foreignKey: 'fkAmbiente',
-    as: 'Ambiente'
+},{
+    freezeTableName: true,
+    timestamps: false
 });
 
 
@@ -123,5 +113,7 @@ contesto.deleteContesto = (idContesto) =>{
         }
     })
 }
+
+contesto.Contesto=Contesto;
 
 module.exports=contesto;
