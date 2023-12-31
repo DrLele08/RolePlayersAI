@@ -67,15 +67,8 @@ const Utente = db.define('Utente', {
     timestamps: false
 });
 
-//Associazioni
-Utente.belongsTo(abbonamento.Abbonamento, {
-    foreignKey: 'fkAbbonamento',
-    as: 'Abbonamento'
-});
-
-//TODO aggiungere tutte le altre associazioni
-
 //TODO aggiungere le query
 
+utente.Utente=Utente;
 
 module.exports=utente;

@@ -51,11 +51,6 @@ const Creazione = db.define('Creazione', {
     timestamps: false
 });
 
-//Associazioni
-Creazione.belongsTo(utente.Utente, { //Bisogna creare il model Utente
-    foreignKey: 'fkUtente',
-    as: 'Creatore'
-});
 
 /**
  * Restituisce la creazione con l'id dato in input.
@@ -185,7 +180,7 @@ creazione.getByFilter = async (filters, page) =>{
     };
 }
 
-
+creazione.Creazione=Creazione;
 
 module.exports=creazione;
 
