@@ -30,7 +30,7 @@ exports.CreateContesto = async (req,res) =>{
 
 exports.GetById= async (req,res)=> {
     let json = {};
-    let idContesto = req.params.idContesto;
+    let idContesto = req.query.idContesto;
     try {
         const contesto = await contestoService.getById(idContesto);
         json.Ris = 1;
@@ -47,9 +47,9 @@ exports.GetAll = async (req,res) =>{
     let json = {};
 
     try{
-        const ListaContesti = await contestoService.getAll();
+        const listaContesti = await contestoService.getAll();
         json.Ris = 1;
-        json.Contesto = ListaContesti;
+        json.Contesto = listaContesti;
         res.json(json);
     }
     catch(error){
@@ -61,7 +61,7 @@ exports.GetAll = async (req,res) =>{
 
 exports.DeleteContesto= async (req,res)=> {
     let json = {};
-    let idContesto = req.params.idContesto;
+    let idContesto = req.query.idContesto;
     try {
         const contesto = await contestoService.deleteContesto(idContesto);
         json.Ris = 1;

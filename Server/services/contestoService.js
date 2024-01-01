@@ -9,6 +9,8 @@ const requiredFields = ['nome','fkUtente', 'fkAmbiente','descrizione', 'isPubbli
 
 contestoService.createContesto = async (dati) =>{
     if(utils.checkParameters(dati, requiredFields)){
+        dati.nome.trim();
+        dati.descrizione.trim();
         if(utils.checkId(dati.fkUtente) && utils.checkId(dati.fkAmbiente)){
             return contesto.createContesto(dati);
         }
@@ -41,10 +43,10 @@ contestoService.getById = async(idContesto) =>{
 };
 
 contestoService.getAll = async()=>{
-    let ListaContesti = await contesto.getAll();
+    let listaContesti = await contesto.getAll();
 
-    if(ListaContesti !== null){
-        return ListaContesti;
+    if(listaContesti !== null){
+        return listaContesti;
     }
     else{
         return Promise.reject("Lista dei Contesti Vuota");
@@ -53,9 +55,9 @@ contestoService.getAll = async()=>{
 
 contestoService.deleteContesto = async(idContesto) =>{
     if(utils.checkId(idContesto)) {
-        let ContestoCercato = await contesto.deleteContesto(idContesto);
+        let contestoCercato = await contesto.deleteContesto(idContesto);
 
-        if (ContestoCercato !== null) {
+        if (contestoCercato !== null) {
             return idContesto;
         } else {
             return Promise.reject("Contesto non trovato");
