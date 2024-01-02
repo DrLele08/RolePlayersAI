@@ -58,7 +58,7 @@ relazionePersonaggiService.getByContesto = async (idContesto) =>{
     }
 
     let relazioni = await relazionePersonaggi.getByContesto(idContesto);
-    if(relazioni !== null){
+    if(relazioni !== null && relazioni.length > 0){
         return relazioni;
     }
     else{

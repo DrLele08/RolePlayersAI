@@ -41,7 +41,7 @@ exports.CreateRelazionePersonaggi = async (req, res)=>{
     const fkPersonaggio2 = req.body.fkPersonaggio2;
 
     try{
-        const nuovaRelazione = relazionePersonaggi.createRelazionePersonaggi({
+        const nuovaRelazione = await relazionePersonaggi.createRelazionePersonaggi({
             descrizione: descrizione,
             fkContesto: fkContesto,
             fkPersonaggio1: fkPersonaggio1,
