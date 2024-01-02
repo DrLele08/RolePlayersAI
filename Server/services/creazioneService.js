@@ -43,13 +43,21 @@ creazioneService.DeleteById=async(idCreazione)=>{
     }
 };
 
-creazioneService.createAmbiente = async (dati,img) =>{
+creazioneService.createCreazione = async (dati) =>{
     if(utils.checkParameters(dati, requiredFields)){
         if(utils.checkId(dati.fkUtente)){
 
-           fs.writeFileSync("/public/img/ambiente",img); //TODO come fare
+           fs.writeFileSync("/public/img/ambiente",dati.img); //TODO come fare
 
-            return creazione.createAmbiente(dati);
+            if (0 === dati.tipo) // se è un personaggio
+            {
+                return creazione.createPersonaggio(dati);
+            }
+            else  // se è un ambiente
+            {
+                return creazione.createAmbiente(dati);
+            }
+
         }
         else{
             return Promise.reject("ID non valido");

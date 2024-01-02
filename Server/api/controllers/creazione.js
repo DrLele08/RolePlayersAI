@@ -2,7 +2,7 @@ const creazioneService = require("../../services/creazioneService")
 
 exports.GetById = async (req,res)=>{
     let json = {};
-    let idCreazione = req.params.idCreazione;//TODO da chiedere
+    let idCreazione = req.params.idCreazione;
 
     try{
         const creazione = await creazioneService.getById(idCreazione);
@@ -52,27 +52,29 @@ exports.GetByFilter = async (req,res)=>{
 };
 
 
-exports.CreateAmbiente = async (req, res)=>{
+exports.CreateCreazione = async (req, res)=>{
     let json = {};
 
     const fkUtente = req.body.fkUtente;
     const nome = req.body.nome;
     const immagine = req.body.immagine;
     const descrizione = req.body.descrizione;
-    const is_pubblico = req.body.is_pubblico;
-    const tipo = 1;
+    const isPubblico = req.body.is_pubblico;
+    const tipo = req.body.tipo;
+    const img = req.file.img; //TODO come fare
 
     try{
-        const nuovoAmbiente = creazioneService.createAmbiente({
+        const nuovaCreazione = creazioneService.createCreazione({
             fkUtente: fkUtente,
             nome: nome,
             immagine: immagine,
-            is_pubblico: is_pubblico,
+            isPubblico: isPubblico,
             tipo: tipo,
-            descrizione: descrizione
+            descrizione: descrizione,
+            img:img
         });
         json.Ris = 1;
-        json.NuovoAmbiente = nuovoAmbiente;
+        json.NuovaCreazione = nuovaCreazione;
         res.json(json);
     }catch (error){
         json.Ris = 0;
