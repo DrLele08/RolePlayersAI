@@ -1,3 +1,5 @@
+const utente = require("./utente");
+const creazione = require("./creazione");
 const utilsDB={};
 
 //TODO: Completare tutte le associazioni quando vengono fatti i model necessari
@@ -102,6 +104,32 @@ utilsDB.SetRelationships=()=>{
         through: 'ContestoPersonaggio',
         timestamps: false,
         foreignKey: 'idPersonaggio'
+    });
+
+
+    //Utente --> Creazione (M:N InventarioCreazione)
+    utente.Utente.belongsToMany(creazione.Creazione, {
+        through: 'InventarioCreazione',
+        timestamps: false,
+        foreignKey: 'idUtente'
+    });
+    creazione.Creazione.belongsToMany(utente.Utente, {
+        through: 'InventarioCreazione',
+        timestamps: false,
+        foreignKey: 'idCreazione'
+    });
+
+
+    //Utente --> Contesto (M:N InventarioContesto)
+    utente.Utente.belongsToMany(contesto.Contesto, {
+        through: 'InventarioContesto',
+        timestamps: false,
+        foreignKey: 'idUtente'
+    });
+    contesto.Contesto.belongsToMany(utente.Utente, {
+        through: 'InventarioContesto',
+        timestamps: false,
+        foreignKey: 'idContesto'
     });
 
 };
