@@ -1,13 +1,12 @@
-const relazionePersonaggiService = require("../../services/relazionePersonaggiService");
+const relazionePersonaggi = require("../../services/relazionePersonaggiService");
 
 exports.GetById = async (req,res)=>{
     let json = {};
     let idRelazionePersonaggi = req.params.idRelazionePersonaggi;
 
     try{
-        const relazione = await relazionePersonaggiService.getById(idRelazionePersonaggi);
+        const relazione = await relazionePersonaggi.getById(idRelazionePersonaggi);
         json.Ris = 1;
-        json.Mess = "OK";
         json.RelazionePersonaggi = relazione;
         res.json(json);
     }catch (error){
@@ -22,9 +21,8 @@ exports.GetByContesto = async (req,res)=>{
     let idContesto = req.params.idContesto;
 
     try{
-        const relazioni = await relazionePersonaggiService.getByContesto(idContesto);
+        const relazioni = await relazionePersonaggi.getByContesto(idContesto);
         json.Ris = 1;
-        json.Mess = "OK";
         json.RelazioniPersonaggi = relazioni;
         res.json(json);
     }catch (error){
@@ -43,18 +41,18 @@ exports.CreateRelazionePersonaggi = async (req, res)=>{
     const fkPersonaggio2 = req.body.fkPersonaggio2;
 
     try{
-        const nuovaRelazione = relazionePersonaggiService.createRelazionePersonaggi({
+        const nuovaRelazione = relazionePersonaggi.createRelazionePersonaggi({
             descrizione: descrizione,
             fkContesto: fkContesto,
             fkPersonaggio1: fkPersonaggio1,
             fkPersonaggio2: fkPersonaggio2
         });
         json.Ris = 1;
-        json.Mess = "OK";
         json.NuovaRelazionePersonaggi = nuovaRelazione;
         res.json(json);
     }catch (error){
         json.Ris = 0;
-        json.Mess
+        json.Mess = error.message || "Errore Generico";
+        res.json(json)
     }
 }
