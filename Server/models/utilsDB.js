@@ -1,5 +1,3 @@
-const utente = require("./utente");
-const creazione = require("./creazione");
 const utilsDB={};
 
 //TODO: Completare tutte le associazioni quando vengono fatti i model necessari
