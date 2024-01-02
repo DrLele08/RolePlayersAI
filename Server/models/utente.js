@@ -47,7 +47,7 @@ const Utente = db.define('Utente', {
         allowNull: false
     },
     telefono:{
-        type: DataTypes.STRING(9),
+        type: DataTypes.STRING(10),
         allowNull: true
     },
     ruolo:{
@@ -67,7 +67,16 @@ const Utente = db.define('Utente', {
     timestamps: false
 });
 
-//TODO aggiungere le query
+/**
+ *Restituisce l`utente con l`ID dato in input.
+ *
+ * @function
+ * @param {Number} id - ID dell'utente
+ * @returns {Promise<Utente | null>} - Promise che si risolve con l'istanza dell'utente corrispondente all'ID, o null se non trovato
+ */
+utente.getById=(id)=>{
+    return Utente.findByPk(id);
+};
 
 utente.Utente=Utente;
 
