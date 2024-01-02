@@ -11,7 +11,7 @@ module.exports=app=>{
     router.delete("/:idCreazione",middlewareAuth,creazione.DeleteById);
     router.get("/cerca",middlewareAuth,creazione.GetByFilter);
 
-    router.post("/", middlewareAuth, creazione.CreateAmbiente);
+    router.post("/", middlewareAuth, creazione.CreateCreazione);
 
     app.use("/api/creazione",router);
 };
