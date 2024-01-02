@@ -29,13 +29,9 @@ const Abbonamento = db.define('Abbonamento', {
     timestamps: false
 });
 
-//Associazioni
-Abbonamento.hasMany(utente.Utente, {
-    foreignKey: 'fkAbbonamento',
-    as: 'UtentiAbbonati'
-});
 
 //TODO scrivere le query
 
+abbonamento.Abbonamento=Abbonamento;
 
 module.exports=abbonamento;
