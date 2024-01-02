@@ -188,6 +188,30 @@ creazione.getByFilter = async (filters, page) =>{
     };
 }
 
+
+/**
+ *
+ * @return {Promise}
+ */
+creazione.getCreazioniPopolari = () =>{
+    return Creazione.findAll({
+        attributes: [
+            "idCreazione",
+            "nome",
+            //[db.literal('(SELECT COUNT(*) FROM InventarioCreazione WHERE InventarioCreazione.idCreazione = Creazione.idCreazione)'), 'utentiCount']
+            [db.fn('COUNT', db.col('Utentes->InventarioCreazione.idCreazione')), 'utentiCount']
+        ],
+        include: [
+            {
+                model: utente.Utente,
+                attributes:[],
+                through: {attributes: []},
+            },
+        ],
+        group: ['Creazione.idCreazione']
+    });
+}
+
 creazione.Creazione=Creazione;
 
 module.exports=creazione;
