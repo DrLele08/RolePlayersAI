@@ -67,7 +67,7 @@ contesto.getById=(idContesto)=>{
  * @function
  * @returns {Promise<Array<Contesto>>} - Promise che si risolve con un array di istanze, oppure un array vuoto se non sono presenti
  */
-Contesto.getAll = ()=> {
+contesto.getAll = ()=> {
     return Contesto.findAll();
 };
 
