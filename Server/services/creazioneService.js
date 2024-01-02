@@ -47,17 +47,29 @@ creazioneService.createCreazione = async (dati) =>{
     if(utils.checkParameters(dati, requiredFields)){
         if(utils.checkId(dati.fkUtente)){
 
-           fs.writeFileSync("/public/img/ambiente",dati.img); //TODO come fare
+
+
+
+
+            if (!dati.img.mimeType.includes("image")) {
+                return Promise.reject("Formato immagine non valido");
+            }
+
+            fs.writeFileSync("/public/img/ambiente",dati.img); //TODO come fare
+            let nuovaCreazione;
 
             if (0 === dati.tipo) // se è un personaggio
             {
-                return creazione.createPersonaggio(dati);
+                nuovaCreazione = await creazione.createPersonaggio(dati);
+
             }
             else  // se è un ambiente
             {
-                return creazione.createAmbiente(dati);
+                 nuovaCreazione = await creazione.createAmbiente(dati);
             }
-
+            nuovaCreazione.immagine="/public/img/creazione/creazione_"+nuovaCreazione.idCreazione+".jpeg";
+            fs.writeFileSync(nuovaCreazione.immagine,dati.img);
+            return creazione.updateImg(nuovaCreazione);
         }
         else{
             return Promise.reject("ID non valido");

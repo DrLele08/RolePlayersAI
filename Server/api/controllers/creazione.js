@@ -18,7 +18,7 @@ exports.GetById = async (req,res)=>{
 
 exports.DeleteById = async (req,res)=>{
     let json = {};
-    let idCreazione = req.params.idCreazione;//TODO da chiedere
+    let idCreazione = req.params.idCreazione;
 
     try{
         const creazione = await creazioneService.DeleteById(idCreazione);
@@ -59,7 +59,7 @@ exports.CreateCreazione = async (req, res)=>{
     const nome = req.body.nome;
     const immagine = req.body.immagine;
     const descrizione = req.body.descrizione;
-    const isPubblico = req.body.is_pubblico;
+    const isPubblico = req.body.isPubblico;
     const tipo = req.body.tipo;
     const img = req.file.img; //TODO come fare
 

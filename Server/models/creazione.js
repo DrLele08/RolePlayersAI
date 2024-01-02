@@ -91,7 +91,6 @@ creazione.createPersonaggio = (dati)=>{
     return Creazione.create({
         fkUtente: dati.fkUtente,
         nome: dati.nome,
-        immagine: dati.immagine,
         descrizione: dati.descrizione,
         isPubblico: dati.isPubblico,
         tipo: 0,
@@ -119,12 +118,21 @@ creazione.createAmbiente = (dati)=>{
     return Creazione.create({
         fkUtente: dati.fkUtente,
         nome: dati.nome,
-        immagine: dati.immagine,
         descrizione: dati.descrizione,
         isPubblico: dati.isPubblico,
         tipo: 1
     });
 };
+
+ creazione.updateImg = async (dati) =>{
+    return await Creazione.update({immagine: dati.immagine},
+        {
+            where:{
+                idCreazione: dati.idCreazione
+            }
+
+    });
+}
 
 /**
  * Elimina una creazione presente nel DB
