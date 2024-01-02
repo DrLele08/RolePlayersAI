@@ -68,14 +68,16 @@ const Utente = db.define('Utente', {
 });
 
 /**
- *Restituisce l`utente con l`ID dato in input.
+ *Restituisce l`utente con l`ID dato in input escludendo le informazioni riguardanti password e auth token.
  *
  * @function
  * @param {Number} id - ID dell'utente
- * @returns {Promise<Utente | null>} - Promise che si risolve con l'istanza dell'utente corrispondente all'ID, o null se non trovato
+ * @returns {Promise} - Promise che si risolve con l'istanza dell'utente corrispondente all'ID, o null se non trovato
  */
 utente.getById=(id)=>{
-    return Utente.findByPk(id);
+    return Utente.findByPk(id, {
+        attributes: {exclude: ['password', 'authToken']}
+    });
 };
 
 utente.Utente=Utente;
