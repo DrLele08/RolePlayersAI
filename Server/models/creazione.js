@@ -63,7 +63,15 @@ creazione.getById=(idCreazione)=>{
     return Creazione.findByPk(idCreazione);
 };
 
-
+/**
+ * Restituisce tutte le creazioni create nel DB
+ *
+ * @function
+ * @returns {Promise<Array<creazione>>} - Promise che si risolve con un array di istanze, oppure un array vuoto se non sono presenti
+ */
+creazione.getAll = ()=> {
+    return creazione.findAll();
+};
 /**
  * Crea e inserisce un nuovo Personaggio all`interno del DB
  *

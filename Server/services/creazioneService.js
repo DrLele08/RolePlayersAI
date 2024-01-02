@@ -43,12 +43,11 @@ creazioneService.DeleteById=async(idCreazione)=>{
     }
 };
 
-creazioneService.createAmbiente = async (dati) =>{
+creazioneService.createAmbiente = async (dati,img) =>{
     if(utils.checkParameters(dati, requiredFields)){
         if(utils.checkId(dati.fkUtente)){
 
-            //Salva percorso file
-            //ma nel model abbiamo solo string immagine
+           fs.writeFileSync("/public/img/ambiente",img); //TODO come fare
 
             return creazione.createAmbiente(dati);
         }
