@@ -9,8 +9,8 @@ const requiredFields = ['nome','fkUtente', 'fkAmbiente','descrizione', 'isPubbli
 
 contestoService.createContesto = async (dati) =>{
     if(utils.checkParameters(dati, requiredFields)){
-        dati.nome.trim();
-        dati.descrizione.trim();
+        dati.nome = dati.nome.trim();
+        dati.descrizione = dati.descrizione.trim();
         if(utils.checkId(dati.fkUtente) && utils.checkId(dati.fkAmbiente)){
             return contesto.createContesto(dati);
         }
