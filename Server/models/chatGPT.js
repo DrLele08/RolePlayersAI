@@ -17,8 +17,8 @@ const chatGPT={};
  * @example
  * const messaggi = [
  *   { role: "system", content: "Utente inizia la conversazione." },
- *   { role: "utente", content: "Qual è il significato della vita?" },
- *   { role: "assistente", content: "Il significato della vita è..." }
+ *   { role: "user", content: "Qual è il significato della vita?" },
+ *   { role: "assistant", content: "Il significato della vita è..." }
  * ];
  * try {
  *   const risultato = await chatGPT.inviaMessaggio(messaggi);
