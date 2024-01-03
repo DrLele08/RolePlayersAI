@@ -1,6 +1,5 @@
 const utilsDB={};
 
-//TODO: Completare tutte le associazioni quando vengono fatti i model necessari
 //Serve ad inizializzare tutte le associazioni tra i vari Models
 utilsDB.SetRelationships=()=>{
     const utente=require("./utente");
@@ -8,6 +7,9 @@ utilsDB.SetRelationships=()=>{
     const contesto=require("./contesto");
     const creazione=require("./creazione");
     const relazionePersonaggi=require("./relazionePersonaggi");
+    const sessione=require("./sessione");
+    const conversazione=require("./conversazione");
+    const messaggio=require("./messaggio");
 
 
     //Utente --> Abbonamento
@@ -85,6 +87,63 @@ utilsDB.SetRelationships=()=>{
        foreignKey: 'fkUtente',
        as: 'CreazioniCreate'
     });
+
+
+
+    //Sessione --> Utente
+    sessione.Sessione.belongsTo(utente.Utente, {
+        foreignKey: 'fkUtente',
+        as: 'Utente'
+    });
+    utente.Utente.hasMany(sessione.Sessione, {
+        foreignKey: 'fkUtente',
+        as: 'Sessioni'
+    });
+
+    //Sessione --> Contesto
+    sessione.Sessione.belongsTo(contesto.Contesto, {
+        foreignKey: 'fkContesto',
+        as: 'Contesto'
+    });
+    contesto.Contesto.hasMany(sessione.Sessione, {
+        foreignKey: 'fkContesto',
+        as: 'Sessioni'
+    });
+
+
+
+    //Conversazione --> Sessione
+    conversazione.Conversazione.belongsTo(sessione.Sessione, {
+        foreignKey: 'fkSessione',
+        as: 'Sessione'
+    });
+    sessione.Sessione.hasMany(conversazione.Conversazione, {
+        foreignKey: 'fkSessione',
+        as: 'Conversazioni'
+    });
+
+    //Conversazione --> Creazione (Personaggio)
+    conversazione.Conversazione.belongsTo(creazione.Creazione, {
+        foreignKey: 'fkPersonaggio',
+        as: 'Personaggio'
+    });
+    creazione.Creazione.hasMany(conversazione.Conversazione, {
+        foreignKey: 'fkPersonaggio',
+        as: 'Conversazioni'
+    });
+
+
+
+    //Messaggio --> Conversazione
+    messaggio.Messaggio.belongsTo(conversazione.Conversazione, {
+        foreignKey: 'fkConversazione',
+        as: 'Conversazione'
+    });
+    conversazione.Conversazione.hasMany(messaggio.Messaggio, {
+        foreignKey: 'fkConversazione',
+        as: 'Messaggi'
+    });
+
 
 
     /*
