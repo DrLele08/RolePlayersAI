@@ -89,14 +89,8 @@ utente.getById=(id)=>{
  * @returns {Promise<Abbonamento>} - Promise che si risolve con l'istanza dell'utente corrispondente all'ID, o null se non trovato
  */
 utente.getActualAbbonamento=async(idUtente) => {
-    const utenteid = await utente.findOne({
-        where: { id: idUtente },
-        include: [{
-            model: abbonamento.Abbonamento,
-            as: 'fkAbbonamento'
-        }]
-    })
-    return utenteid.fkAbbonamento;
+    const utenteCercato = await utente.findByPk(idUtente);
+    return utenteCercato.getAbbonamento();
 };
 
 

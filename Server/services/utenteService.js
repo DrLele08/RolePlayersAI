@@ -20,7 +20,7 @@ utenteService.getById = async (idUtente) =>{
 utenteService.getActualAbbonamento = async (idUtente) =>{
 
     if(utils.checkId(idUtente)) {
-        const abbonamento = utente.getActualAbbonamento(idUtente);
+        const abbonamento = await utente.getActualAbbonamento(idUtente);
 
         if (abbonamento) {
             return abbonamento;
