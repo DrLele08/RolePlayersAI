@@ -28,20 +28,3 @@ abbonamentoService.getAll = async()=>{
         return Promise.reject("Lista degli Abbonamenti vuota");
     }
 }
-
-
-abbonamentoService.deleteAbbonamento= async(idAbbonamento)=>{
-    if(utils.checkId(idAbbonamento)){
-        let abbonamentoEliminato = abbonamento.deleteContesto(idAbbonamento)
-
-        if(abbonamentoEliminato !== null){
-            return idAbbonamento;
-        }
-        else{
-            return Promise.reject("Abbonamento non trovato");
-        }
-    }
-    else{
-        return Promise.reject("ID minore di 0");
-    }
-}

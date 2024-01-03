@@ -1,6 +1,5 @@
 const db= require("./database");
 const DataTypes= require("sequelize").DataTypes;
-const utente = require("./utente");
 
 const abbonamento = {};
 
@@ -53,22 +52,6 @@ abbonamento.getAbbonamentoById = (idAbbonamento) =>{
 
 abbonamento.getAll = () =>{
     return Abbonamento.findAll();
-}
-
-/**
- * Elimina un Abbonamento presente nel DB
- *
- * @function
- * @param {Number} idAbbonamento - ID del Abbonamento
- *
- * @return {Promise<Number>}
- */
-abbonamento.deleteAbbonamento = (idAbbonamento) =>{
-    return Abbonamento.destroy({
-        where: {
-            idAbbonamento: idAbbonamento
-        }
-    })
 }
 
 abbonamento.Abbonamento=Abbonamento;

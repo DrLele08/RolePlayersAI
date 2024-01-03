@@ -1,6 +1,6 @@
 const db= require("./database");
 const DataTypes= require("sequelize").DataTypes;
-const abbonamento = require("./abbonamento"); //TODO creare model Abbonamento
+const abbonamento = require("./abbonamento");
 
 const utente = {};
 
@@ -79,6 +79,26 @@ utente.getById=(id)=>{
         attributes: {exclude: ['password', 'authToken']}
     });
 };
+
+
+/**
+ *Restituisce l`abbonamento con l`ID dato in input.
+ *
+ * @function
+ * @param {Number} idUtente - ID dell'utente
+ * @returns {Promise<Abbonamento>} - Promise che si risolve con l'istanza dell'utente corrispondente all'ID, o null se non trovato
+ */
+utente.getActualAbbonamento=async(idUtente) => {
+    const utenteid = await utente.findOne({
+        where: { id: idUtente },
+        include: [{
+            model: abbonamento.Abbonamento,
+            as: 'fkAbbonamento'
+        }]
+    })
+    return utenteid.fkAbbonamento;
+};
+
 
 utente.Utente=Utente;
 
