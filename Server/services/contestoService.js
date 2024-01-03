@@ -41,10 +41,10 @@ contestoService.createContesto = async (dati) =>{
     }
 }
 
-contestoService.getById = async(idContesto) =>{
+contestoService.getContestoById = async(idContesto) =>{
     if(utils.checkId(idContesto))
     {
-        let contestoCercato = await contesto.getById(idContesto);
+        let contestoCercato = await contesto.getContestoById(idContesto);
         if(contestoCercato !== null)
         {
             return contestoCercato;

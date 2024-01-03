@@ -56,7 +56,7 @@ const Contesto = db.define('Contesto',{
  * @param {Number} idContesto - ID del Contesto
  * @returns {Promise<Contesto | null>} - Promise che si risolve con l`istanza di Contesto corrispondente all ID, o null se non trovato
  */
-contesto.getById=(idContesto)=>{
+contesto.getContestoById=(idContesto)=>{
     return Contesto.findByPk(idContesto);
 }
 
