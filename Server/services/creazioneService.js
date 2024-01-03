@@ -48,14 +48,6 @@ creazioneService.createCreazione = async (dati) =>{
         if(utils.checkId(dati.fkUtente)){
 
 
-
-
-
-            if (!dati.img.mimeType.includes("image")) {
-                return Promise.reject("Formato immagine non valido");
-            }
-
-            fs.writeFileSync("/public/img/ambiente",dati.img); //TODO come fare
             let nuovaCreazione;
 
             if (0 === dati.tipo) // se è un personaggio
@@ -65,10 +57,21 @@ creazioneService.createCreazione = async (dati) =>{
             }
             else  // se è un ambiente
             {
-                 nuovaCreazione = await creazione.createAmbiente(dati);
+                nuovaCreazione = await creazione.createAmbiente(dati);
             }
-            nuovaCreazione.immagine="/public/img/creazione/creazione_"+nuovaCreazione.idCreazione+".jpeg";
-            fs.writeFileSync(nuovaCreazione.immagine,dati.img);
+
+            let fotoUrl="public/image/creazione/default.jpeg"
+            let baseUrl = process.env.BASE_URL;
+
+            if (dati.img.mimeType.includes("image")) {
+                nuovaCreazione.immagine="/public/img/creazione/creazione_"+nuovaCreazione.idCreazione+".jpeg";
+                fs.writeFileSync(nuovaCreazione.immagine,dati.img);
+                nuovaCreazione.immagine = baseUrl +nuovaCreazione.immagine;
+            }
+            else {
+                nuovaCreazione.immagine = baseUrl + fotoUrl;
+            }
+
             return creazione.updateImg(nuovaCreazione);
         }
         else{
