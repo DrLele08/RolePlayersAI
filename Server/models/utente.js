@@ -81,6 +81,28 @@ utente.getById=(id)=>{
 };
 
 
+
+/**
+ *Restituisce l`utente con l`ID dato in input escludendo le informazioni riguardanti password e auth token.
+ *
+ * @function
+ * @param {Number} id - ID dell'utente
+ * @param {String} tokenAuth - token Autenticazione
+ * @returns {Promise} - Promise che si risolve con l'istanza dell'utente corrispondente all'ID, o null se non trovato
+ */
+utente.getByIdandTokenAuth=(id,tokenAuth)=>{
+return Utente.findAll({
+    where:{
+        idUtente : id,
+        authToken : tokenAuth,
+    },
+        attributes: {exclude: ['password', 'authToken']}
+    });
+};
+
+
+
+
 /**
  *Restituisce l`abbonamento con l`ID dato in input.
  *
