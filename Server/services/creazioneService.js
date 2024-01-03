@@ -1,8 +1,9 @@
 const creazione=require("../models/creazione");
 const utils = require("../models/utils");
-
+const fs = require('fs');
 
 const creazioneService={};
+const requiredFields = ['fkUtente', 'nome', 'immagine', 'descrizione', 'isPubblico', 'tipo'];
 
 creazioneService.getById=async(idCreazione)=>{
     if(idCreazione>0)
@@ -42,11 +43,33 @@ creazioneService.DeleteById=async(idCreazione)=>{
     }
 };
 
-
-creazioneService.createAmbiente = async (dati) =>{
-    if(isValidDatiAmbiente(dati)){
+creazioneService.createCreazione = async (dati) =>{
+    if(utils.checkParameters(dati, requiredFields)){
         if(utils.checkId(dati.fkUtente)){
-            return creazione.createAmbiente(dati);
+
+
+
+
+
+            if (!dati.img.mimeType.includes("image")) {
+                return Promise.reject("Formato immagine non valido");
+            }
+
+            fs.writeFileSync("/public/img/ambiente",dati.img); //TODO come fare
+            let nuovaCreazione;
+
+            if (0 === dati.tipo) // se è un personaggio
+            {
+                nuovaCreazione = await creazione.createPersonaggio(dati);
+
+            }
+            else  // se è un ambiente
+            {
+                 nuovaCreazione = await creazione.createAmbiente(dati);
+            }
+            nuovaCreazione.immagine="/public/img/creazione/creazione_"+nuovaCreazione.idCreazione+".jpeg";
+            fs.writeFileSync(nuovaCreazione.immagine,dati.img);
+            return creazione.updateImg(nuovaCreazione);
         }
         else{
             return Promise.reject("ID non valido");
@@ -57,50 +80,43 @@ creazioneService.createAmbiente = async (dati) =>{
     }
 }
 
-//Controlla la validità dei dati per la creazione di un ambiente
-function isValidDatiAmbiente(dati){
-    if(!dati){
-        return false;
-    }
+creazioneService.getByFilter = async (nome, tipo, isPubblico, page)=>{
+    if(page > 0){
+        let filters = {};
 
-    const requiredFields = ['fkUtente', 'nome', 'immagine', 'descrizione', 'is_pubblico', 'tipo'];
-    for(const field of requiredFields){
-        if(!(field in dati) || dati[field] === undefined || dati[field] === null){
-            return false;
+        if(nome !== undefined){
+            nome = nome.trim();
+            if(nome.length > 0){
+                filters.nome = nome;
+            }
         }
-    }
+        if(!isNaN(tipo)){
+            filters.tipo = tipo;
+        }
+        if(Boolean(isPubblico) === isPubblico){
+            filters.isPubblico = isPubblico;
+        }
 
-    return true;
+        return creazione.getByFilter(filters, page);
+    }
+    else{
+        return Promise.reject("Pagina non valida");
+    }
 }
 
-creazioneService.GetByName=async(nome)=>{
-    if(!nome || nome ==='' || nome.length >50) {
-        return Promise.reject("Nome non valido");
+creazioneService.getCreazioniPopolari = async (limit, tipo)=>{
+    const DEFAULT_LIMIT = 8;
+    if(limit < 1){
+        limit = DEFAULT_LIMIT
     }
-    else {
-        let Lista = await creazione.getByName(nome);
-        if (Lista !== null) {
-            return Lista;
-        } else {
-            return Promise.reject("Nessun risultato trovato");
+
+    if(tipo!==undefined && tipo!==null){
+        if(tipo !== "Personaggio" || tipo !== "Ambiente"){
+            tipo = null;
         }
     }
 
-};
-
-creazioneService.GetByType=async(t)=>{
-    if(!t || t !=='Personaggio' || t!=='Ambiente') {
-        return Promise.reject("Nome non valido");
-    }
-    else {
-        let Lista = await creazione.getByType(t);
-        if (Lista !== null) {
-            return Lista;
-        } else {
-            return Promise.reject("Nessun risultato trovato");
-        }
-    }
-
-};
+    return creazione.getCreazioniPopolari(limit, tipo);
+}
 
 module.exports=creazioneService;

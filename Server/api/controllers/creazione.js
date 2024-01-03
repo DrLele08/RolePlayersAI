@@ -2,7 +2,7 @@ const creazioneService = require("../../services/creazioneService")
 
 exports.GetById = async (req,res)=>{
     let json = {};
-    let idCreazione = req.params.idCreazione;//TODO da chiedere
+    let idCreazione = req.params.idCreazione;
 
     try{
         const creazione = await creazioneService.getById(idCreazione);
@@ -18,7 +18,7 @@ exports.GetById = async (req,res)=>{
 
 exports.DeleteById = async (req,res)=>{
     let json = {};
-    let idCreazione = req.params.idCreazione;//TODO da chiedere
+    let idCreazione = req.params.idCreazione;
 
     try{
         const creazione = await creazioneService.DeleteById(idCreazione);
@@ -32,14 +32,17 @@ exports.DeleteById = async (req,res)=>{
     }
 };
 
-exports.GetByName = async (req,res)=>{
+exports.GetByFilter = async (req,res)=>{
     let json = {};
-    let nome = req.params.nomeCreazione;
+    let nome = req.query.Nome;
+    let tipo = req.query.Tipo;
+    let isPublic = req.query.isPubblico;
+    let pagina = req.query.Pagina;
 
     try{
-        const creazione = await creazioneService.GetByName(nome);
+        const risCreazione = await creazioneService.GetByFilter(nome,tipo,isPublic,pagina);
         json.Ris = 1;
-        json.Creazione = creazione;
+        json.Creazione = risCreazione;
         res.json(json);
     }catch (error){
         json.Ris = 0;
@@ -48,43 +51,30 @@ exports.GetByName = async (req,res)=>{
     }
 };
 
-exports.GetByType = async (req,res)=>{
-    let json = {};
-    let tipo = req.params.tipoCreazione;
 
-    try{
-        const creazione = await creazioneService.GetByName(tipo);
-        json.Ris = 1;
-        json.Creazione = creazione;
-        res.json(json);
-    }catch (error){
-        json.Ris = 0;
-        json.Mess = error.message || "Errore Generico";
-        res.json(json);
-    }
-};
-
-exports.CreateAmbiente = async (req, res)=>{
+exports.CreateCreazione = async (req, res)=>{
     let json = {};
 
     const fkUtente = req.body.fkUtente;
     const nome = req.body.nome;
     const immagine = req.body.immagine;
     const descrizione = req.body.descrizione;
-    const is_pubblico = req.body.is_pubblico;
-    const tipo = 1;
+    const isPubblico = req.body.isPubblico;
+    const tipo = req.body.tipo;
+    const img = req.file.img; //TODO come fare
 
     try{
-        const nuovoAmbiente = creazioneService.createAmbiente({
+        const nuovaCreazione = creazioneService.createCreazione({
             fkUtente: fkUtente,
             nome: nome,
             immagine: immagine,
-            is_pubblico: is_pubblico,
+            isPubblico: isPubblico,
             tipo: tipo,
-            descrizione: descrizione
+            descrizione: descrizione,
+            img:img
         });
         json.Ris = 1;
-        json.NuovoAmbiente = nuovoAmbiente;
+        json.NuovaCreazione = nuovaCreazione;
         res.json(json);
     }catch (error){
         json.Ris = 0;

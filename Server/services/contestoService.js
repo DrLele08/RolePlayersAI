@@ -1,30 +1,50 @@
 const contesto = require("../models/contesto");
 const utils = require("../models/utils");
 
-
-
 const contestoService = {};
 
 const requiredFields = ['nome','fkUtente', 'fkAmbiente','descrizione', 'isPubblico'];
 
 contestoService.createContesto = async (dati) =>{
     if(utils.checkParameters(dati, requiredFields)){
-        if(utils.checkId(dati.fkUtente) && utils.checkId(dati.fkAmbiente)){
-            return contesto.createContesto(dati);
+
+        //Verifica nome
+        dati.nome = dati.nome.trim();
+        if(dati.nome < 1 || dati.nome > 50){
+             return Promise.reject("Nome non valido");
         }
-        else{
-            return Promise.reject("ID non valido");
+
+        //Verifica descrizione
+        dati.descrizione = dati.descrizione.trim();
+        if(dati.descrizione < 20 || dati.descrizione > 512){
+            return Promise.reject("Descrizione non valida");
+        }
+
+        //Verifica id Utente
+        if(!utils.checkId(dati.fkUtente)){
+            return Promise.reject("Id Utente non valido");
+        }
+
+        //Verifica id Ambiente
+        if(!utils.checkId(dati.fkAmbiente)){
+            return Promise.reject("Id Ambiente non valido");
+        }
+
+        //Creazione Nuovo Contesto
+        let nuovoContesto = await contesto.createContesto(dati);
+        if(nuovoContesto !== null){
+            return nuovoContesto;
         }
     }
     else{
-        return Promise.reject("Dati non validi");
+        return Promise.reject("Creazione Contesto fallita");
     }
 }
 
-contestoService.getById = async(idContesto) =>{
+contestoService.getContestoById = async(idContesto) =>{
     if(utils.checkId(idContesto))
     {
-        let contestoCercato = await contesto.getById(idContesto);
+        let contestoCercato = await contesto.getContestoById(idContesto);
         if(contestoCercato !== null)
         {
             return contestoCercato;
@@ -41,10 +61,10 @@ contestoService.getById = async(idContesto) =>{
 };
 
 contestoService.getAll = async()=>{
-    let ListaContesti = await contesto.getAll();
+    let listaContesti = await contesto.getAll();
 
-    if(ListaContesti !== null){
-        return ListaContesti;
+    if(listaContesti !== null){
+        return listaContesti;
     }
     else{
         return Promise.reject("Lista dei Contesti Vuota");
@@ -53,9 +73,9 @@ contestoService.getAll = async()=>{
 
 contestoService.deleteContesto = async(idContesto) =>{
     if(utils.checkId(idContesto)) {
-        let ContestoCercato = await contesto.deleteContesto(idContesto);
+        let contestoEliminata = await contesto.deleteContesto(idContesto);
 
-        if (ContestoCercato !== null) {
+        if (contestoEliminata !== null) {
             return idContesto;
         } else {
             return Promise.reject("Contesto non trovato");

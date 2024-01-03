@@ -34,7 +34,7 @@ const Creazione = db.define('Creazione', {
         type: DataTypes.STRING(512),
         allowNull: false
     },
-    is_pubblico:{
+    isPubblico:{
         type: DataTypes.BOOLEAN,
         allowNull: false
     },
@@ -51,11 +51,6 @@ const Creazione = db.define('Creazione', {
     timestamps: false
 });
 
-//Associazioni
-Creazione.belongsTo(utente.Utente, { //Bisogna creare il model Utente
-    foreignKey: 'fkUtente',
-    as: 'Creatore'
-});
 
 /**
  * Restituisce la creazione con l'id dato in input.
@@ -68,7 +63,15 @@ creazione.getById=(idCreazione)=>{
     return Creazione.findByPk(idCreazione);
 };
 
-
+/**
+ * Restituisce tutte le creazioni create nel DB
+ *
+ * @function
+ * @returns {Promise<Array<creazione>>} - Promise che si risolve con un array di istanze, oppure un array vuoto se non sono presenti
+ */
+creazione.getAll = ()=> {
+    return creazione.findAll();
+};
 /**
  * Crea e inserisce un nuovo Personaggio all`interno del DB
  *
@@ -79,7 +82,7 @@ creazione.getById=(idCreazione)=>{
  * @param {String} dati.nome - Nome del Personaggio
  * @param {String} dati.immagine - Percorso immagine del personaggio
  * @param {String} dati.descrizione - Descrizione del personaggio
- * @param {Boolean} dati.is_pubblico - Indica se il personaggio è pubblico o privato
+ * @param {Boolean} dati.isPubblico - Indica se il personaggio è pubblico o privato
  * @param {String} dati.sesso - Enum che rappresenta il sesso del personaggio {Uomo, Donna o Altro}
  *
  * @return {Promise<Creazione>} - Promise che si risolve con l`istanza del personaggio appena creato
@@ -88,9 +91,8 @@ creazione.createPersonaggio = (dati)=>{
     return Creazione.create({
         fkUtente: dati.fkUtente,
         nome: dati.nome,
-        immagine: dati.immagine,
         descrizione: dati.descrizione,
-        is_pubblico: dati.is_pubblico,
+        isPubblico: dati.isPubblico,
         tipo: 0,
         sesso: dati.sesso
     });
@@ -108,7 +110,7 @@ creazione.createPersonaggio = (dati)=>{
  * @param {String} dati.nome - Nome ambiente
  * @param {String} dati.immagine - Percorso immagine ambiente
  * @param {String} dati.descrizione - Descrizione ambiente
- * @param {Boolean} dati.is_pubblico - Indica se l'ambiente è pubblico o privato
+ * @param {Boolean} dati.isPubblico - Indica se l'ambiente è pubblico o privato
  *
  * @return {Promise<Creazione>} - Promise che si risolve con l`istanza del'ambiente appena creato
  */
@@ -116,12 +118,21 @@ creazione.createAmbiente = (dati)=>{
     return Creazione.create({
         fkUtente: dati.fkUtente,
         nome: dati.nome,
-        immagine: dati.immagine,
         descrizione: dati.descrizione,
-        is_pubblico: dati.is_pubblico,
+        isPubblico: dati.isPubblico,
         tipo: 1
     });
 };
+
+ creazione.updateImg = async (dati) =>{
+    return await Creazione.update({immagine: dati.immagine},
+        {
+            where:{
+                idCreazione: dati.idCreazione
+            }
+
+    });
+}
 
 /**
  * Elimina una creazione presente nel DB
@@ -140,56 +151,35 @@ creazione.deleteById = async (id) =>{
 }
 
 /**
- * Restituisce la creazione con il nome dato in input.
- * @function
- * @param {String} name nome della creazione
- */
-creazione.getByName=(name)=>{
-    return Creazione.findAll({
-        where: {
-            nome: name,
-        }
-    })
-};
-
-/**
- * Restituisce la creazione con il tipo dato in input.
- * @function
- * @param {String} t tipo della creazione
- */
-creazione.getByType=(t)=>{
-    return Creazione.findAll({
-        where: {
-            tipo: t,
-        }
-    })
-};
-
-
-/**
- * Ottiene una lista paginata di creazioni in base al tipo e al numero di pagina
+ * Restituisce una lista di creazioni filtrate e paginate in base ai criteri specificati
  *
  * @async
  * @function
  *
- * @param {String} tipo - Tipo di creazioni da recuperare ("Personaggio" | "Ambiente")
- * @param {Number} page - Numero di pagina desiderato
+ * @param {Object} filters - Oggetto contenente i criteri di filtraggio per la query
+ * @param {String} [filters.nome] - Nome della creazione da cercare (la ricerca avverrà in base ad una corrispondenza parziale)
+ * @param {Number} filters.tipo - Tipo della creazione da cercare (0=Personaggio, 1=Ambiente)
+ * @param {Boolean} isPubblico - Indica se la creazione da cercare è pubblica o privata
+ * @param {Number} page - Numero di pagina desiderato per la visualizzazione dei risultati
  * @return {Promise<{
- *     totalItems: Number,
- *     totalPages: Number,
- *     currentPage: Number,
- *     pageSize: Number,
- *     creazioni: Creazione[]
- * }>} - Promise che si risolve con un oggetto contenente informazioni sulla paginazione e la lista di creazioni
+ *      totalItems: Number,
+ *      totalPages: Number,
+ *      currentPage: Number,
+ *      pageSize: Number,
+ *      creazioni: Creazione[]
+ *      }>} - Promise che si risolve con un oggetto contenente informazioni sulla paginazione e la lista di creazioni
  */
-creazione.getCreationsWithPagination = async (tipo, page) =>{
+creazione.getByFilter = async (filters, page) =>{
+    const Op = require("sequelize").Op;
     const offset = (page-1) * pageSize;
 
-    //restituisce i risultati della findAll combinati ai risultati della Count
+    if(filters.nome){
+        filters.nome = {[Op.substring]: filters.nome}
+    }
+
+    //restituisce i risultati della findAll con filtri combinati ai risultati della Count
     const result = await Creazione.findAndCountAll({
-        where: {
-            tipo: tipo
-        },
+        where: filters,
         limit: pageSize,
         offset: offset
     });
@@ -206,4 +196,48 @@ creazione.getCreationsWithPagination = async (tipo, page) =>{
     };
 }
 
+
+/**
+ * Restituisce le creazioni più popolari in base ai parametri forniti
+ *
+ * @function
+ *
+ * @param {Number} limit - Limite di creazioni da restituire
+ * @param {String} tipo - tipo della creazione ('Personaggio' || 'Ambiente')
+ *
+ * @return {Promise<Creazione[]>} Promise che si risolve con un array di oggetti Creazione che soddisfano i criteri specificati
+ */
+creazione.getCreazioniPopolari = (limit, tipo) =>{
+    let whereClause = {
+        isPubblico: true,
+    };
+    if(tipo !== undefined && tipo !== null){
+        whereClause.tipo = tipo;
+    }
+
+    return Creazione.findAll({
+        attributes: [
+            "idCreazione",
+            "nome",
+            "immagine",
+            "descrizione",
+            [db.fn('COUNT', db.col('Utentes->InventarioCreazione.idUtente')), 'utentiCount']
+        ],
+        include: [
+            {
+                model: utente.Utente,
+                attributes:[],
+                through: {attributes: []},
+            },
+        ],
+        where: whereClause,
+        group: ['Creazione.idCreazione'],
+        order: [['utentiCount', 'DESC']]
+    })
+    .then(results => results.slice(0, limit));
+}
+
+creazione.Creazione=Creazione;
+
 module.exports=creazione;
+

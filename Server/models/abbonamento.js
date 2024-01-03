@@ -1,6 +1,5 @@
 const db= require("./database");
 const DataTypes= require("sequelize").DataTypes;
-const utente = require("./utente");
 
 const abbonamento = {};
 
@@ -29,13 +28,32 @@ const Abbonamento = db.define('Abbonamento', {
     timestamps: false
 });
 
-//Associazioni
-Abbonamento.hasMany(utente.Utente, {
-    foreignKey: 'fkAbbonamento',
-    as: 'UtentiAbbonati'
-});
 
 //TODO scrivere le query
 
+/**
+ * Restituisce l'abbonamento con l'ID dato in input.
+ *
+ * @function
+ * @param {Number} idAbbonamento - ID dell'Abbonamento
+ * @returns {Promise<Abbonamento>} - Promise che si risolve con un array di istanze, oppure un array vuoto se non sono presenti
+ */
+
+abbonamento.getAbbonamentoById = (idAbbonamento) =>{
+    return Abbonamento.findByPk(idAbbonamento);
+}
+
+/**
+ * Restituisce tutti gli abbonamenti creati nel DB
+ *
+ * @function
+ * @returns {Promise<Array<Abbonamento>>} - Promise che si risolve con un array di istanze, oppure un array vuoto se non sono presenti
+ */
+
+abbonamento.getAll = () =>{
+    return Abbonamento.findAll();
+}
+
+abbonamento.Abbonamento=Abbonamento;
 
 module.exports=abbonamento;

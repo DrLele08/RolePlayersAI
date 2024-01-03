@@ -1,6 +1,6 @@
 const db= require("./database");
 const DataTypes= require("sequelize").DataTypes;
-const abbonamento = require("./abbonamento"); //TODO creare model Abbonamento
+const abbonamento = require("./abbonamento");
 
 const utente = {};
 
@@ -47,11 +47,11 @@ const Utente = db.define('Utente', {
         allowNull: false
     },
     telefono:{
-        type: DataType.STRING(9),
+        type: DataTypes.STRING(10),
         allowNull: true
     },
     ruolo:{
-        type: DataTypes.ENUM('Utente', 'Moderatore', 'Admin'),
+        type: DataTypes.ENUM('Utente', 'Moderatore', 'Amministratore'),
         allowNull: false
     },
     msgRimanenti:{
@@ -67,15 +67,33 @@ const Utente = db.define('Utente', {
     timestamps: false
 });
 
-//Associazioni
-Utente.belongsTo(abbonamento.Abbonamento, {
-    foreignKey: 'fkAbbonamento',
-    as: 'Abbonamento'
-});
+/**
+ *Restituisce l`utente con l`ID dato in input escludendo le informazioni riguardanti password e auth token.
+ *
+ * @function
+ * @param {Number} id - ID dell'utente
+ * @returns {Promise} - Promise che si risolve con l'istanza dell'utente corrispondente all'ID, o null se non trovato
+ */
+utente.getById=(id)=>{
+    return Utente.findByPk(id, {
+        attributes: {exclude: ['password', 'authToken']}
+    });
+};
 
-//TODO aggiungere tutte le altre associazioni
 
-//TODO aggiungere le query
+/**
+ *Restituisce l`abbonamento con l`ID dato in input.
+ *
+ * @function
+ * @param {Number} idUtente - ID dell'utente
+ * @returns {Promise<Abbonamento>} - Promise che si risolve con l'istanza dell'utente corrispondente all'ID, o null se non trovato
+ */
+utente.getActualAbbonamento=async(idUtente) => {
+    const utenteCercato = await utente.findByPk(idUtente);
+    return utenteCercato.getAbbonamento();
+};
 
+
+utente.Utente=Utente;
 
 module.exports=utente;

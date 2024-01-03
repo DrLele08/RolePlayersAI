@@ -46,21 +46,6 @@ const RelazionePersonaggi = db.define('RelazionePersonaggi', {
 });
 
 
-//Associazioni
-RelazionePersonaggi.belongsTo(contesto.Contesto, {
-    foreignKey: 'fkContesto',
-    as: 'Contesto'
-});
-RelazionePersonaggi.belongsTo(personaggio.Creazione, {
-    foreignKey: 'fkPersonaggio1',
-    as: 'Personaggio1'
-});
-RelazionePersonaggi.belongsTo(Personaggio, {
-    foreignKey: 'fkPersonaggio2',
-    as: 'Personaggio2'
-});
-
-
 /**
  *Restituisce la relazione tra personaggi con l`ID dato in input.
  *
@@ -108,5 +93,7 @@ relazionePersonaggi.getByContesto = (idContesto)=>{
         }
     });
 };
+
+relazionePersonaggi.RelazionePersonaggi=RelazionePersonaggi;
 
 module.exports=relazionePersonaggi;

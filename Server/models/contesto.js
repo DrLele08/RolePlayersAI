@@ -43,19 +43,9 @@ const Contesto = db.define('Contesto',{
         type: DataTypes.BOOLEAN,
         allowNull: false
     }
-
-
-});
-
-//Associazioni
-
-Contesto.belongsTo(utente.Utente, { //TODO Bisogna creare il model Utente
-    foreignKey: 'fkUtente',
-    as: 'Utente'
-});
-Contesto.belongsTo(Ambiente, {
-    foreignKey: 'fkAmbiente',
-    as: 'Ambiente'
+},{
+    freezeTableName: true,
+    timestamps: false
 });
 
 
@@ -66,7 +56,7 @@ Contesto.belongsTo(Ambiente, {
  * @param {Number} idContesto - ID del Contesto
  * @returns {Promise<Contesto | null>} - Promise che si risolve con l`istanza di Contesto corrispondente all ID, o null se non trovato
  */
-contesto.getById=(idContesto)=>{
+contesto.getContestoById=(idContesto)=>{
     return Contesto.findByPk(idContesto);
 }
 
@@ -77,7 +67,7 @@ contesto.getById=(idContesto)=>{
  * @function
  * @returns {Promise<Array<Contesto>>} - Promise che si risolve con un array di istanze, oppure un array vuoto se non sono presenti
  */
-Contesto.getAll = ()=> {
+contesto.getAll = ()=> {
     return Contesto.findAll();
 };
 
@@ -123,5 +113,7 @@ contesto.deleteContesto = (idContesto) =>{
         }
     })
 }
+
+contesto.Contesto=Contesto;
 
 module.exports=contesto;

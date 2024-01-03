@@ -8,10 +8,10 @@ module.exports=app=>{
     const creazione=require("../controllers/creazione");
 
     router.get("/:idCreazione",middlewareAuth,creazione.GetById);
-    router.get("/:idCreazione",middlewareAuth,creazione.DeleteById);
-    router.get("/:nomeCreazione",middlewareAuth,creazione.GetByName);
-    router.get("/:tipoCreazione",middlewareAuth,creazione.GetByType);
-    router.post("/", middlewareAuth, creazione.CreateAmbiente);
+    router.delete("/:idCreazione",middlewareAuth,creazione.DeleteById);
+    router.get("/cerca",middlewareAuth,creazione.GetByFilter);
+
+    router.post("/", middlewareAuth, creazione.CreateCreazione);
 
     app.use("/api/creazione",router);
 };
