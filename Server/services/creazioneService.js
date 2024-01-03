@@ -110,6 +110,12 @@ creazioneService.getCreazioniPopolari = async (limit, tipo)=>{
         limit = DEFAULT_LIMIT
     }
 
+    if(tipo!==undefined && tipo!==null){
+        if(tipo !== "Personaggio" || tipo !== "Ambiente"){
+            tipo = null;
+        }
+    }
+
     return creazione.getCreazioniPopolari(limit, tipo);
 }
 

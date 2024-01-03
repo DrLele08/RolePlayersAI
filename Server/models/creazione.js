@@ -203,7 +203,7 @@ creazione.getByFilter = async (filters, page) =>{
  * @function
  *
  * @param {Number} limit - Limite di creazioni da restituire
- * @param {Number} tipo - valore numerico associato all`enum (0='Personaggio', 1='Ambiente')
+ * @param {String} tipo - tipo della creazione ('Personaggio' || 'Ambiente')
  *
  * @return {Promise<Creazione[]>} Promise che si risolve con un array di oggetti Creazione che soddisfano i criteri specificati
  */
@@ -211,7 +211,7 @@ creazione.getCreazioniPopolari = (limit, tipo) =>{
     let whereClause = {
         isPubblico: true,
     };
-    if(tipo){
+    if(tipo !== undefined && tipo !== null){
         whereClause.tipo = tipo;
     }
 
@@ -221,7 +221,7 @@ creazione.getCreazioniPopolari = (limit, tipo) =>{
             "nome",
             "immagine",
             "descrizione",
-            [db.fn('COUNT', db.col('Utentes->InventarioCreazione.idCreazione')), 'utentiCount']
+            [db.fn('COUNT', db.col('Utentes->InventarioCreazione.idUtente')), 'utentiCount']
         ],
         include: [
             {
@@ -232,9 +232,9 @@ creazione.getCreazioniPopolari = (limit, tipo) =>{
         ],
         where: whereClause,
         group: ['Creazione.idCreazione'],
-        order: [['utentiCount', 'DESC']],
-        limit: limit
-    });
+        order: [['utentiCount', 'DESC']]
+    })
+    .then(results => results.slice(0, limit));
 }
 
 creazione.Creazione=Creazione;
