@@ -208,9 +208,11 @@ creazione.getByFilter = async (filters, page) =>{
  * @return {Promise<Creazione[]>} Promise che si risolve con un array di oggetti Creazione che soddisfano i criteri specificati
  */
 creazione.getCreazioniPopolari = (limit, tipo) =>{
-    let whereClause = {};
+    let whereClause = {
+        isPubblico: true,
+    };
     if(tipo){
-        whereClause = {tipo: tipo};
+        whereClause.tipo = tipo;
     }
 
     return Creazione.findAll({
