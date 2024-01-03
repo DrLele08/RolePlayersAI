@@ -140,7 +140,7 @@
 							<!--begin::Search-->
 							<div id="kt_header_search" class="header-search d-flex align-items-center w-100" data-kt-search-keypress="true" data-kt-search-min-length="2" data-kt-search-enter="enter" data-kt-search-layout="menu" data-kt-search-responsive="false" data-kt-menu-trigger="auto" data-kt-menu-permanent="true" data-kt-menu-placement="bottom-start">
 								<!--begin::Form-->
-								<form data-kt-search-element="form" class="w-100 position-relative" autocomplete="off">
+								<form data-kt-search-element="form" class="w-100 position-relative" autocomplete="off" onsubmit="return cerca()">
 									<!--begin::Hidden input(Added to disable form autocomplete)-->
 									<input type="hidden" />
 									<!--end::Hidden input-->
@@ -151,9 +151,8 @@
 										<span class="path2"></span>
 									</i>
 									<!--end::Icon-->
-
 									<!--begin::Input-->
-									<input type="text" class="search-input form-control ps-13 fs-7 h-40px" name="search" value="" placeholder="Cerca..." data-kt-search-element="input" />
+									<input type="text" id="textRicerca" class="search-input form-control ps-13 fs-7 h-40px" name="search" value="" placeholder="Cerca..." data-kt-search-element="input" />
 									<!--end::Input-->
 								</form>
 								<!--end::Form-->
@@ -178,8 +177,7 @@
 											<!--end::Heading-->
 
 											<!--begin::Items-->
-											<div class="scroll-y mh-200px mh-lg-325px">
-												<!--begin::Item-->
+											<div class="scroll-y mh-200px mh-lg-325px" id="divRicerca">
 												<div class="d-flex align-items-center mb-5">
 													<!--begin::Title-->
 													<div class="d-flex flex-column">
@@ -188,7 +186,24 @@
 													</div>
 													<!--end::Title-->
 												</div>
-												<!--end::Item-->
+
+												<div class="d-flex align-items-center mb-5">
+													<!--begin::Title-->
+													<div class="d-flex flex-column">
+														<a href="#" class="fs-6 text-gray-800 text-hover-primary fw-semibold">"Landing UI Design" Launch</a>
+														<span class="fs-7 text-muted fw-semibold">#24005</span>
+													</div>
+													<!--end::Title-->
+												</div>
+
+												<div class="d-flex align-items-center mb-5">
+													<!--begin::Title-->
+													<div class="d-flex flex-column">
+														<a href="#" class="fs-6 text-gray-800 text-hover-primary fw-semibold">"Landing UI Design" Launch</a>
+														<span class="fs-7 text-muted fw-semibold">#24005</span>
+													</div>
+													<!--end::Title-->
+												</div>
 											</div>
 											<!--end::Items-->
 										</div>
@@ -586,6 +601,60 @@
 		<script src="assets/js/custom/apps/chat/chat.js"></script>
 		<script src="assets/js/custom/utilities/modals/users-search.js"></script>
 		<!--end::Custom Javascript-->
+
+		<script>
+			function cerca()
+			{
+				let nome=document.getElementById("textRicerca").value;
+				listaRecenti.push(nome);
+				setCookie("recenti",JSON.stringify(listaRecenti));
+				return false;
+			}
+
+			function setCookie(cName, cValue) {
+				let date = new Date();
+				date.setTime(date.getTime() + (90 * 24 * 60 * 60 * 1000));
+				const expires = "expires=" + date.toUTCString();
+				document.cookie = cName + "=" + cValue + "; " + expires + "; path=/";
+			}
+
+			function getCookieValue(name)
+			{
+				const regex = new RegExp(`(^| )${name}=([^;]+)`)
+				const match = document.cookie.match(regex)
+				if (match) {
+					return match[2]
+				}
+			}
+
+			let listaRecentiStr=getCookieValue("recenti");
+			let listaRecenti=[];
+
+			if(listaRecentiStr !== undefined && listaRecentiStr.length>0)
+			{
+				listaRecenti=JSON.parse(listaRecentiStr);
+
+			}
+
+			let html="";
+			let actual=0;
+			for(let i=(listaRecenti.length-1);(i>=0 && actual<5);i--) {
+				let obj = listaRecenti[i];
+				let item = `<div class="d-flex align-items-center mb-5">
+						<!--begin::Title-->
+						<div class="d-flex flex-column">
+							<a href="#" class="fs-6 text-gray-800 text-hover-primary fw-semibold">${obj}</a>
+						</div>
+						<!--end::Title-->
+					</div>`;
+				html+=item;
+				actual++;
+			}
+
+			document.getElementById("divRicerca").innerHTML=html;
+
+
+		</script>
 		<!--end::Javascript-->
 	</body>
 	<!--end::Body-->
