@@ -104,4 +104,13 @@ creazioneService.getByFilter = async (nome, tipo, isPubblico, page)=>{
     }
 }
 
+creazioneService.getCreazioniPopolari = async (limit, tipo)=>{
+    const DEFAULT_LIMIT = 8;
+    if(limit < 1){
+        limit = DEFAULT_LIMIT
+    }
+
+    return creazione.getCreazioniPopolari(limit, tipo);
+}
+
 module.exports=creazioneService;

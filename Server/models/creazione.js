@@ -198,15 +198,27 @@ creazione.getByFilter = async (filters, page) =>{
 
 
 /**
+ * Restituisce le creazioni più popolari in base ai parametri forniti
  *
- * @return {Promise}
+ * @function
+ *
+ * @param {Number} limit - Limite di creazioni da restituire
+ * @param {Number} tipo - valore numerico associato all`enum (0='Personaggio', 1='Ambiente')
+ *
+ * @return {Promise<Creazione[]>} Promise che si risolve con un array di oggetti Creazione che soddisfano i criteri specificati
  */
-creazione.getCreazioniPopolari = () =>{
+creazione.getCreazioniPopolari = (limit, tipo) =>{
+    let whereClause = {};
+    if(tipo){
+        whereClause = {tipo: tipo};
+    }
+
     return Creazione.findAll({
         attributes: [
             "idCreazione",
             "nome",
-            //[db.literal('(SELECT COUNT(*) FROM InventarioCreazione WHERE InventarioCreazione.idCreazione = Creazione.idCreazione)'), 'utentiCount']
+            "immagine",
+            "descrizione",
             [db.fn('COUNT', db.col('Utentes->InventarioCreazione.idCreazione')), 'utentiCount']
         ],
         include: [
@@ -216,7 +228,10 @@ creazione.getCreazioniPopolari = () =>{
                 through: {attributes: []},
             },
         ],
-        group: ['Creazione.idCreazione']
+        where: whereClause,
+        group: ['Creazione.idCreazione'],
+        order: [['utentiCount', 'DESC']],
+        limit: limit
     });
 }
 
