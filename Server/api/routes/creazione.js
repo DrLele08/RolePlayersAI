@@ -1,10 +1,10 @@
-const middlewareAuth = require("../../middleware/auth");
+const middlewareAuth = require("../../middleware/authApi");
 const creazione = require("../controllers/creazione");
 
 
 module.exports=app=>{
     const router=require("express").Router();
-    const middlewareAuth=require("../../middleware/auth");
+    const middlewareAuth=require("../../middleware/authApi");
     const creazione=require("../controllers/creazione");
 
     router.get("/:idCreazione",middlewareAuth([1,2,3]),creazione.GetById);
