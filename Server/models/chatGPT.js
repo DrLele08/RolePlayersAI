@@ -40,3 +40,5 @@ chatGPT.inviaMessaggio=async(listaMessaggi)=>{
         return Promise.reject("Errore CHAT GPT");
     }
 };
+
+module.exports=chatGPT;
