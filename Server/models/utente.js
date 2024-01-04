@@ -60,6 +60,9 @@ const Utente = db.define('Utente', {
         type: DataTypes.INTEGER,
         allowNull: false
     },
+    scadenzaAbbonamento:{
+        type: DataTypes.DATE,
+    },
     authToken:{
         type: DataTypes.CHAR(64),
         allowNull: false
@@ -123,21 +126,25 @@ utente.getActualAbbonamento=async(idUtente) => {
  * @function
  * @param {Number} idUtente - ID dell'utente
  * @param {Number} idAbbonamento - ID dell'abbonamento che si intende cambiare con quello attuale
- * @returns {Promise<Stripe.Response<Stripe.Subscription>>}
+ * @returns {Promise<Abbonamento>} - Promise che si risolve con l'oggetto Abbonamento, o null se non trovato
  */
 
 utente.cambiaAbbonamento = async (idUtente, idAbbonamento) =>{
-    const nuovoAbbonamento  = await abbonamento.getAbbonamentoById(idAbbonamento);
-    let prezzo = nuovoAbbonamento.prezzo;
+    const utenteCambio = utente.getById(idUtente);
+    let nuovaScadenzaAbbonamento = new Date(utenteCambio.scadenzaAbbonamento);
+    nuovaScadenzaAbbonamento.setDate(nuovaScadenzaAbbonamento.getDate() +30 );
+    utente.scadenzaAbbonamento = nuovaScadenzaAbbonamento;
 
+    const nuovoAbbonamento = utente.getAbbonamento();
+    utente.msgRimanenti = nuovoAbbonamento.maxMsg;
 
+    return nuovoAbbonamento;
+}
+utente.effettuaPagamento = async (idUtente, tipoAbbonamento) =>{
 
-    return stripe.subscriptions.create({
-        customer: idUtente,
-        items: [{price: prezzo}]
-    })
 }
 
+utente.verificaPagamento= async (idUtente, idPagamento,)
 utente.Utente=Utente;
 
 module.exports=utente;

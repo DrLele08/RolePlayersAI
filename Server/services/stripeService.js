@@ -8,52 +8,76 @@ const stripeService = {}
 
 stripeService.cambiaAbbonamento= async(idUtente, idAbbonamento)=>{
 
-
-    app.use(express.static('public'));
-
-    const YOUR_DOMAIN = 'http://localhost:3000';
-
-    app.post('/create-checkout-session', async (req, res) => {
-        const session = await stripe.checkout.sessions.create({
-            line_items: [
-                {
-                    // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-                    price: '{{PRICE_ID}}',
-                    quantity: 1,
-                },
-            ],
-            mode: 'payment',
-            success_url: `${YOUR_DOMAIN}/success.html`,
-            cancel_url: `${YOUR_DOMAIN}/cancel.html`,
-        });
-
-        res.redirect(303, session.url);
-    });
-
-    app.listen(3000, () => console.log('Running on port 3000'));
-
     if(!utils.checkId(idUtente)){
         return Promise.reject("Id Utente non valido");
     }
     if(!utils.checkId(idAbbonamento)){
         return Promise.reject("Id Abbonamento non valido");
     }
-    //getCustomer
-    const customer = await stripe.customers.retrieve(idUtente);
 
-    //Se ha un abbonamento attivo lo cancella
-    if(customer.subscriptions && customer.subscriptions.data.length > 0){
-
-        const idSubscription = customer.subscriptions.data[0].id;
-        if(idSubscription === idAbbonamento){
-            return Promise.reject("Abbonamento già sottoscritto");
-        }
-        await stripe.subscriptions.del(idSubscription);
-    }
-
-    //Ne crea uno nuovo
+    //Crea un nuovo Abbonamento
     const nuovoAbbonamento = await utente.cambiaAbbonamento(idUtente, idAbbonamento);
 
     return nuovoAbbonamento;
 
+}
+
+stripeService.effettuaPagamento = async(idUtente, tipoAbbonamento) => {
+    if(!utils.checkId(idUtente)){
+        return Promise.reject("Id Utente non valido");
+    }
+
+    switch (tipoAbbonamento) {
+        case 'free':
+            return {success: true};
+        case 'base':
+            unitAmount = 19.99;
+            break;
+        case 'enterprise':
+            unitAmount = 29.99;
+            break;
+        default:
+            // Gestione di un tipo non valido
+            return { success: false, message: "Tipo di abbonamento non valido." };
+    }
+
+    const baseUrl=process.env.BASE_URL;
+
+    const session = await stripe.checkout.sessions.create({
+        line_items: [
+            {
+                price_data: {
+                    currency: 'eur',
+                    product_data: {
+                        name: 'Abbonamento ' + tipoAbbonamento,
+                        images: ['https://www.vistanet.it/napoli/wp-content/uploads/sites/5/2023/04/pizza-napoli-1.jpg'],
+                    },
+                    unit_amount: unitAmount
+                },
+                quantity: 1,
+            },
+        ],
+        mode: 'payment',
+        success_url: `http://${baseUrl}/payment/verify/${idUtente}/{CHECKOUT_SESSION_ID}`,
+        cancel_url: `http://${baseUrl}/error.html`,
+    });
+    return {success: true, sessionUrl: session.url};
+}
+
+
+stripeService.verificaPagamento = async(idUtente, idPagamento, idAbbonamento)=> {
+    const session = await stripe.checkout.sessions.retrieve(idPagamento);
+
+    console.log("Pagamento: " + session.payment_status);
+    console.log(idUtente);
+
+    if (session.payment_status === "paid") {
+        // Tutto ok, cambiare tipo abbonamento
+        await stripeService.cambiaAbbonamento(idUtente, idAbbonamento);
+        return {success: true, message: "Cambio abbonamento effettuato con successo."};
+    }
+    else {
+        // Errore, non hai pagato
+        return {success: false, message: "Errore: il pagamento non è stato effettuato."};
+    }
 }
