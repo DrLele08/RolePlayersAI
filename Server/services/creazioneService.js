@@ -5,14 +5,23 @@ const fs = require('fs');
 const creazioneService={};
 const requiredFields = ['fkUtente', 'nome', 'immagine', 'descrizione', 'isPubblico', 'tipo'];
 
-creazioneService.getById=async(idCreazione)=>{
+creazioneService.getById=async(dati)=>{
     if(idCreazione>0)
     {
         let creazioneCercata = await creazione.getById(idCreazione);
+
         if(creazioneCercata !== null)
         {
-            return creazioneCercata;
+            if(creazioneCercata.isPubblico)
+            {
+                return creazioneCercata;
+            }
+            else if (creazioneCercata.fkUtente===req.idUtente){
+                return creazioneCercata;
+            }
+
         }
+
         else
         {
             return Promise.reject("Creazione non trovata");
@@ -79,6 +88,7 @@ creazioneService.createCreazione = async (dati) =>{
         }
     }
     else{
+        console.log(dati);
         return Promise.reject("Dati non validi");
     }
 }

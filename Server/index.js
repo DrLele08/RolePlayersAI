@@ -1,5 +1,6 @@
 const express=require('express');
 const app=express();
+let session = require('express-session')
 
 //Gestione directory statica accessibile
 app.use(express.static('public'));
@@ -14,6 +15,14 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
+//Gestione sessione
+app.set('trust proxy', 1) // trust first proxy
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true }
+}))
 
 //Gestione Handlebars per frontend
 const expressHbs = require('express-handlebars');

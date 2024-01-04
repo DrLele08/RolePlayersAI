@@ -1,8 +1,9 @@
-/*const utenteModel = require("../models/utente");
+const utenteModel = require("../models/utente");
+
 module.exports=  (ruoli)=> {
     return  (req, res, next) => {
         let json = {}
-       // let authPlatoform = req.; //todo come ricavare la sessione
+       let authPlatoform = req.session;
         if(authPlatoform!==undefined) {
             let authParams = authPlatoform.split(".");
             if(authParams.length===2) {
@@ -26,40 +27,30 @@ module.exports=  (ruoli)=> {
 
                         if(ruoli.includes(idRuolo))
                         {
-
+                            req.idUtente=utente[0].idUtente;
+                            req.idRuolo=idRuolo;
                             next();
                         }
                         else {
-                            json.Ris = 0;
-                            json.Mess = "Non hai i permessi";
-                            res.json(json);
+                            res.render("error",{errore:"Non hai i permessi"});
                         }
                     }
                     else {
-                        json.Ris = 0;
-                        json.Mess = "Non hai i permessi";
-                        res.json(json);
+                        res.render("error",{errore:"Non hai i permessi"});
                     }
 
 
                 }).catch((errore)=>{
-                    json.Ris = 0;
-                    json.Mess = errore;
-                    res.json(json);
+                    res.render("error",{errore:"Non hai i permessi"});
                 });
             }
             else {
-                json.Ris = 0;
-                json.Mess = "Lunghezza parametri non corretta";
-                res.json(json);
+                res.render("error",{errore:"Non hai i permessi"});
             }
         }
         else {
-            json.Ris = 0;
-            json.Mess = "Non hai i permessi";
-            res.json(json);
+            res.render("error",{errore:"Non hai i permessi"});
         }
     };
 };
 
-*/
