@@ -91,6 +91,7 @@ creazione.createPersonaggio = (dati)=>{
     return Creazione.create({
         fkUtente: dati.fkUtente,
         nome: dati.nome,
+        immagine: "fittizio",
         descrizione: dati.descrizione,
         isPubblico: dati.isPubblico,
         tipo: 0,
@@ -118,6 +119,7 @@ creazione.createAmbiente = (dati)=>{
     return Creazione.create({
         fkUtente: dati.fkUtente,
         nome: dati.nome,
+        immagine: "fittizio",
         descrizione: dati.descrizione,
         isPubblico: dati.isPubblico,
         tipo: 1

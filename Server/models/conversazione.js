@@ -34,6 +34,17 @@ const Conversazione = db.define('Conversazione', {
     timestamps: false
 });
 
+/**
+ * Restituisce la conversazione con l`ID dato in input
+ *
+ * @function
+ * @param {Number} idConversazione - ID della conversazione richiesta
+ * @return {Promise<>} Promise contenente l`istanza della conversazione trovata oppure null se non è stata trovata
+ */
+conversazione.getById = (idConversazione)=>{
+    return Conversazione.findByPk(idConversazione);
+}
+
 conversazione.Conversazione=Conversazione;
 
 module.exports=conversazione;
