@@ -7,11 +7,11 @@ module.exports=app=>{
     const middlewareAuth=require("../../middleware/auth");
     const creazione=require("../controllers/creazione");
 
-    router.get("/:idCreazione",middlewareAuth,creazione.GetById);
-    router.delete("/:idCreazione",middlewareAuth,creazione.DeleteById);
-    router.get("/cerca",middlewareAuth,creazione.GetByFilter);
+    router.get("/:idCreazione",middlewareAuth([1,2,3]),creazione.GetById);
+    router.delete("/:idCreazione",middlewareAuth([2,3]),creazione.DeleteById);
+    router.get("/cerca",middlewareAuth([1,2,3]),creazione.GetByFilter);
 
-    router.post("/", middlewareAuth, creazione.CreateCreazione);
+    router.post("/", middlewareAuth([[1,2,3]]), creazione.CreateCreazione);
 
     app.use("/api/creazione",router);
 };

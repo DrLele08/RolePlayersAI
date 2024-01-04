@@ -1,6 +1,8 @@
 const db= require("./database");
 const DataTypes= require("sequelize").DataTypes;
 const abbonamento = require("./abbonamento");
+const stripe = require('stripe')('sk_test_51OURuIHOFfOlBPkf5Zoi0O0G9o3OmzAHZ3plZCPzBpa2C8PYevvdYc9DgAHKmG1dqHGvhEfAzihtwUc1zPjabuRb00i0nGIHy3');
+
 
 const utente = {};
 
@@ -81,6 +83,28 @@ utente.getById=(id)=>{
 };
 
 
+
+/**
+ *Restituisce l`utente con l`ID dato in input escludendo le informazioni riguardanti password e auth token.
+ *
+ * @function
+ * @param {Number} id - ID dell'utente
+ * @param {String} tokenAuth - token Autenticazione
+ * @returns {Promise} - Promise che si risolve con l'istanza dell'utente corrispondente all'ID, o null se non trovato
+ */
+utente.getByIdandTokenAuth=(id,tokenAuth)=>{
+return Utente.findAll({
+    where:{
+        idUtente : id,
+        authToken : tokenAuth,
+    },
+        attributes: {exclude: ['password', 'authToken']}
+    });
+};
+
+
+
+
 /**
  *Restituisce l`abbonamento con l`ID dato in input.
  *
@@ -93,6 +117,26 @@ utente.getActualAbbonamento=async(idUtente) => {
     return utenteCercato.getAbbonamento();
 };
 
+/**
+ *Restituisce l`abbonamento cambiato con l`ID dato in input.
+ *
+ * @function
+ * @param {Number} idUtente - ID dell'utente
+ * @param {Number} idAbbonamento - ID dell'abbonamento che si intende cambiare con quello attuale
+ * @returns {Promise<Stripe.Response<Stripe.Subscription>>}
+ */
+
+utente.cambiaAbbonamento = async (idUtente, idAbbonamento) =>{
+    const nuovoAbbonamento  = await abbonamento.getAbbonamentoById(idAbbonamento);
+    let prezzo = nuovoAbbonamento.prezzo;
+
+
+
+    return stripe.subscriptions.create({
+        customer: idUtente,
+        items: [{price: prezzo}]
+    })
+}
 
 utente.Utente=Utente;
 

@@ -61,7 +61,7 @@ exports.CreateCreazione = async (req, res)=>{
     const descrizione = req.body.descrizione;
     const isPubblico = req.body.isPubblico;
     const tipo = req.body.tipo;
-    const img = req.file.img; //TODO come fare
+    const img = req.file.img;
 
     try{
         const nuovaCreazione = creazioneService.createCreazione({
