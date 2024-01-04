@@ -3,12 +3,12 @@ const utils = require("../models/utils");
 const fs = require('fs');
 
 const creazioneService={};
-const requiredFields = ['fkUtente', 'nome', 'immagine', 'descrizione', 'isPubblico', 'tipo'];
+const requiredFields = ['fkUtente', 'nome', 'descrizione', 'isPubblico', 'tipo'];
 
 creazioneService.getById=async(dati)=>{
-    if(idCreazione>0)
+    if(dati.idCreazione>0)
     {
-        let creazioneCercata = await creazione.getById(idCreazione);
+        let creazioneCercata = await creazione.getById(dati.idCreazione);
 
         if(creazioneCercata !== null)
         {
@@ -16,8 +16,11 @@ creazioneService.getById=async(dati)=>{
             {
                 return creazioneCercata;
             }
-            else if (creazioneCercata.fkUtente===req.idUtente){
+            else if (creazioneCercata.fkUtente===dati.idUtente){
                 return creazioneCercata;
+            }
+            else {
+                return Promise.reject("Non hai i permessi");
             }
 
         }
@@ -69,18 +72,20 @@ creazioneService.createCreazione = async (dati) =>{
                 nuovaCreazione = await creazione.createAmbiente(dati);
             }
 
-            let fotoUrl="public/image/creazione/default.jpeg"
+            let fotoUrl="/img/creazione/default.jpeg"
             let baseUrl = process.env.BASE_URL;
 
-            if (dati.img.mimeType.includes("image")) {
-                nuovaCreazione.immagine="/public/img/creazione/creazione_"+nuovaCreazione.idCreazione+".jpeg";
-                fs.writeFileSync(nuovaCreazione.immagine,dati.img);
+            if (dati.img.mimetype.includes("image")) {
+                nuovaCreazione.immagine="/img/creazione/creazione_"+nuovaCreazione.idCreazione+".jpeg";
+
+                fs.writeFileSync(nuovaCreazione.immagine,dati.img.buffer); //todo (errore) path sbagliato???
                 nuovaCreazione.immagine = baseUrl +nuovaCreazione.immagine;
             }
             else {
                 nuovaCreazione.immagine = baseUrl + fotoUrl;
             }
-
+            console.log("Percorso: "+nuovaCreazione.immagine);
+            console.log("Creazione: "+nuovaCreazione.immagine);
             return creazione.updateImg(nuovaCreazione);
         }
         else{

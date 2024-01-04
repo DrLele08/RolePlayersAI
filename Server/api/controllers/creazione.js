@@ -6,7 +6,11 @@ exports.GetById = async (req,res)=>{
     let idUtente = req.idUtente;
     let idRuolo = req.idRuolo;
     try{
-        const creazione = await creazioneService.getById(idCreazione);
+        const creazione = await creazioneService.getById({
+            idCreazione: idCreazione,
+            idUtente: idUtente,
+            idRuolo: idRuolo
+        });
         json.Ris = 1;
         json.Creazione = creazione;
         res.json(json);

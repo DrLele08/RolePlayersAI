@@ -16,12 +16,10 @@ app.use(bodyParser.urlencoded({
 }));
 
 //Gestione sessione
-app.set('trust proxy', 1) // trust first proxy
 app.use(session({
-    secret: 'keyboard cat',
-    resave: false,
+    secret: process.env.SESSION_KEY,
+    resave: true,
     saveUninitialized: true,
-    cookie: { secure: true }
 }))
 
 //Gestione Handlebars per frontend
