@@ -1,7 +1,11 @@
 
 module.exports=  (ruoli)=> {
     return (req, res, next) => {
-        let authPlatoform = req.session;
+        //let authPlatoform = req.session;
+        let authPlatoform={
+            idUtente:1,
+            tokenAuth:"auth_token_1"
+        };
         if (authPlatoform !== undefined) {
             let id = authPlatoform.idUtente;
             let token = authPlatoform.tokenAuth;
@@ -21,6 +25,8 @@ module.exports=  (ruoli)=> {
                     if (ruoli.includes(idRuolo)) {
                         req.idUtente = utente[0].idUtente;
                         req.idRuolo = idRuolo;
+                        res.locals.idUtente=authPlatoform.idUtente;
+                        res.locals.tokenAuth=authPlatoform.tokenAuth
                         next();
                     } else {
                         res.render("error", {errore: "Non hai i permessi"});
@@ -34,10 +40,10 @@ module.exports=  (ruoli)=> {
                 res.render("error", {errore: errore});
             });
 
-            } else {
-                res.render("error", {errore: "Non hai i permessi"});
-            }
+        } else {
+            res.render("error", {errore: "Non hai i permessi"});
         }
+    }
         ;
-    };
+};
 
