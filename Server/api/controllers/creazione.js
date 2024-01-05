@@ -24,9 +24,15 @@ exports.GetById = async (req,res)=>{
 exports.DeleteById = async (req,res)=>{
     let json = {};
     let idCreazione = req.params.idCreazione;
+    let idUtente = req.idUtente;
+    let idRuolo = req.idRuolo;
 
     try{
-        const creazione = await creazioneService.DeleteById(idCreazione);
+        const creazione = await creazioneService.DeleteById({
+            idCreazione: idCreazione,
+            idUtente: idUtente,
+            idRuolo: idRuolo
+        });
         json.Ris = 1;
         json.Creazione = creazione;
         res.json(json);
@@ -41,11 +47,10 @@ exports.GetByFilter = async (req,res)=>{
     let json = {};
     let nome = req.query.Nome;
     let tipo = req.query.Tipo;
-    let isPublic = req.query.isPubblico;
     let pagina = req.query.Pagina;
 
     try{
-        const risCreazione = await creazioneService.GetByFilter(nome,tipo,isPublic,pagina);
+        const risCreazione = await creazioneService.getByFilter(nome,tipo,pagina);
         json.Ris = 1;
         json.Creazione = risCreazione;
         res.json(json);

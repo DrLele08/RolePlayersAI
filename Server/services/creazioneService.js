@@ -16,7 +16,7 @@ creazioneService.getById=async(dati)=>{
             {
                 return creazioneCercata;
             }
-            else if (creazioneCercata.fkUtente===dati.idUtente){
+            else if (creazioneCercata.fkUtente===dati.idUtente || dati.idRuolo ===2 || dati.idRuolo===3){
                 return creazioneCercata;
             }
             else {
@@ -36,13 +36,16 @@ creazioneService.getById=async(dati)=>{
     }
 };
 
-creazioneService.DeleteById=async(idCreazione)=>{
-    if(idCreazione>0)
-    {
-        let creazioneEliminata = await creazione.deleteById(idCreazione);
-        if(creazioneEliminata !== null)
-        {
-            return creazioneEliminata;
+creazioneService.DeleteById=async(dati)=>{
+    if(dati.idCreazione>0) {
+        let creazioneEliminata = await creazione.deleteById(dati.idCreazione);
+        if (creazioneEliminata !== null) {
+
+            if (dati.idRuolo === 2 || dati.idRuolo === 3) {
+                return creazioneEliminata;
+            } else {
+                return Promise.reject("Non hai i permessi");
+            }
         }
         else
         {
@@ -78,14 +81,13 @@ creazioneService.createCreazione = async (dati) =>{
             if (dati.img.mimetype.includes("image")) {
                 nuovaCreazione.immagine="/img/creazione/creazione_"+nuovaCreazione.idCreazione+".jpeg";
 
-                fs.writeFileSync(nuovaCreazione.immagine,dati.img.buffer); //todo (errore) path sbagliato???
+                fs.writeFileSync("./public"+nuovaCreazione.immagine,dati.img.buffer);
                 nuovaCreazione.immagine = baseUrl +nuovaCreazione.immagine;
             }
             else {
                 nuovaCreazione.immagine = baseUrl + fotoUrl;
             }
-            console.log("Percorso: "+nuovaCreazione.immagine);
-            console.log("Creazione: "+nuovaCreazione.immagine);
+
             return creazione.updateImg(nuovaCreazione);
         }
         else{
@@ -98,7 +100,7 @@ creazioneService.createCreazione = async (dati) =>{
     }
 }
 
-creazioneService.getByFilter = async (nome, tipo, isPubblico, page)=>{
+creazioneService.getByFilter = async (nome, tipo, page)=>{
     if(page > 0){
         let filters = {};
 
@@ -110,9 +112,6 @@ creazioneService.getByFilter = async (nome, tipo, isPubblico, page)=>{
         }
         if(!isNaN(tipo)){
             filters.tipo = tipo;
-        }
-        if(Boolean(isPubblico) === isPubblico){
-            filters.isPubblico = isPubblico;
         }
 
         return creazione.getByFilter(filters, page);
