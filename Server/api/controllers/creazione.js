@@ -50,7 +50,7 @@ exports.GetByFilter = async (req,res)=>{
     let pagina = req.query.Pagina;
 
     try{
-        const risCreazione = await creazioneService.GetByFilter(nome,tipo,pagina);
+        const risCreazione = await creazioneService.getByFilter(nome,tipo,pagina);
         json.Ris = 1;
         json.Creazione = risCreazione;
         res.json(json);

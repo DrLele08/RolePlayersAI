@@ -14,7 +14,7 @@ module.exports=  (ruoli)=> {
                         idRuolo = 1;
                     } else if (r === 'Moderatore') {
                         idRuolo = 2;
-                    } else if (r === 'Admin') {
+                    } else if (r === 'Amministratore') {
                         idRuolo = 3;
                     }
 
