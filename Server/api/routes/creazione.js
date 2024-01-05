@@ -8,9 +8,10 @@ module.exports=app=>{
     const creazione=require("../controllers/creazione");
     const multer=require('multer');
 
-    router.get("/:idCreazione",middlewareAuth([1,2,3]),creazione.GetById);
-    router.delete("/:idCreazione",middlewareAuth([2,3]),creazione.DeleteById);//todo da chiedere: un utente un può eliminare una sua creazione?
     router.get("/cerca",middlewareAuth([1,2,3]),creazione.GetByFilter);
+    router.get("/:idCreazione",middlewareAuth([1,2,3]),creazione.GetById);
+    router.delete("/:idCreazione",middlewareAuth([2,3]),creazione.DeleteById);
+
 
     router.post("/",multer().single("foto"), middlewareAuth([1,2,3]), creazione.CreateCreazione);
 

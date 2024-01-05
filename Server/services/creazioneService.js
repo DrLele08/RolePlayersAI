@@ -81,14 +81,13 @@ creazioneService.createCreazione = async (dati) =>{
             if (dati.img.mimetype.includes("image")) {
                 nuovaCreazione.immagine="/img/creazione/creazione_"+nuovaCreazione.idCreazione+".jpeg";
 
-                fs.writeFileSync(nuovaCreazione.immagine,dati.img.buffer); //todo (errore) path sbagliato???
+                fs.writeFileSync("./public"+nuovaCreazione.immagine,dati.img.buffer);
                 nuovaCreazione.immagine = baseUrl +nuovaCreazione.immagine;
             }
             else {
                 nuovaCreazione.immagine = baseUrl + fotoUrl;
             }
-            console.log("Percorso: "+nuovaCreazione.immagine);
-            console.log("Creazione: "+nuovaCreazione.immagine);
+
             return creazione.updateImg(nuovaCreazione);
         }
         else{
