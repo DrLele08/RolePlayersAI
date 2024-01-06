@@ -3,9 +3,14 @@ const creazioneService = require("../../services/creazioneService")
 exports.GetById = async (req,res)=>{
     let json = {};
     let idCreazione = req.params.idCreazione;
-
+    let idUtente = req.idUtente;
+    let idRuolo = req.idRuolo;
     try{
-        const creazione = await creazioneService.getById(idCreazione);
+        const creazione = await creazioneService.getById({
+            idCreazione: idCreazione,
+            idUtente: idUtente,
+            idRuolo: idRuolo
+        });
         json.Ris = 1;
         json.Creazione = creazione;
         res.json(json);
@@ -19,9 +24,15 @@ exports.GetById = async (req,res)=>{
 exports.DeleteById = async (req,res)=>{
     let json = {};
     let idCreazione = req.params.idCreazione;
+    let idUtente = req.idUtente;
+    let idRuolo = req.idRuolo;
 
     try{
-        const creazione = await creazioneService.DeleteById(idCreazione);
+        const creazione = await creazioneService.DeleteById({
+            idCreazione: idCreazione,
+            idUtente: idUtente,
+            idRuolo: idRuolo
+        });
         json.Ris = 1;
         json.Creazione = creazione;
         res.json(json);
@@ -36,11 +47,14 @@ exports.GetByFilter = async (req,res)=>{
     let json = {};
     let nome = req.query.Nome;
     let tipo = req.query.Tipo;
-    let isPublic = req.query.isPubblico;
     let pagina = req.query.Pagina;
+    let dati = {
+        idUtente: req.idUtente,
+        idRuolo: req.idRuolo
+    }
 
     try{
-        const risCreazione = await creazioneService.GetByFilter(nome,tipo,isPublic,pagina);
+        const risCreazione = await creazioneService.getByFilter(nome,tipo,pagina,dati);
         json.Ris = 1;
         json.Creazione = risCreazione;
         res.json(json);
@@ -61,7 +75,7 @@ exports.CreateCreazione = async (req, res)=>{
     const descrizione = req.body.descrizione;
     const isPubblico = req.body.isPubblico;
     const tipo = req.body.tipo;
-    const img = req.file.img;
+    const img = req.file;
 
     try{
         const nuovaCreazione = creazioneService.createCreazione({

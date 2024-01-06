@@ -1,5 +1,6 @@
 const express=require('express');
 const app=express();
+let session = require('express-session')
 
 //Gestione directory statica accessibile
 app.use(express.static('public'));
@@ -14,6 +15,12 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
+//Gestione sessione
+app.use(session({
+    secret: process.env.SESSION_KEY,
+    resave: true,
+    saveUninitialized: true,
+}))
 
 //Gestione Handlebars per frontend
 const expressHbs = require('express-handlebars');
@@ -30,13 +37,14 @@ app.set('views','./platform/views');
 
 //Gestione BASE_URL per assets
 app.use((req,ris,next)=>{
-    ris.locals.absoluteUrl=process.env.BASE_URL;
+    ris.locals.BASE_URL=process.env.BASE_URL;
     next();
 });
 
 
 //Attivazione routes per chiamate HTTP
 require("./platform/routes/squadra.js")(app);
+require("./platform/routes/pagamento")(app);
 
 
 require("./api/routes/squadra.js")(app);
@@ -44,6 +52,7 @@ require("./api/routes/squadra.js")(app);
 require("./api/routes/creazione.js")(app);
 require("./api/routes/relazionePersonaggi.js")(app);
 require("./api/routes/contesto.js")(app);
+require("./api/routes/conversazione.js")(app);
 
 
 //Avvio del server

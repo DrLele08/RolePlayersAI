@@ -1,36 +1,11 @@
 const stripe = require('stripe')('sk_test_51OURuIHOFfOlBPkf5Zoi0O0G9o3OmzAHZ3plZCPzBpa2C8PYevvdYc9DgAHKmG1dqHGvhEfAzihtwUc1zPjabuRb00i0nGIHy3');
 const utils = require("../models/utils");
 const utente = require("../models/utente");
-const express = require('express');
-const app = express();
+const abbonamento = require("../models/abbonamento");
 
 const stripeService = {}
 
 stripeService.cambiaAbbonamento= async(idUtente, idAbbonamento)=>{
-
-
-    app.use(express.static('public'));
-
-    const YOUR_DOMAIN = 'http://localhost:3000';
-
-    app.post('/create-checkout-session', async (req, res) => {
-        const session = await stripe.checkout.sessions.create({
-            line_items: [
-                {
-                    // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-                    price: '{{PRICE_ID}}',
-                    quantity: 1,
-                },
-            ],
-            mode: 'payment',
-            success_url: `${YOUR_DOMAIN}/success.html`,
-            cancel_url: `${YOUR_DOMAIN}/cancel.html`,
-        });
-
-        res.redirect(303, session.url);
-    });
-
-    app.listen(3000, () => console.log('Running on port 3000'));
 
     if(!utils.checkId(idUtente)){
         return Promise.reject("Id Utente non valido");
@@ -38,22 +13,80 @@ stripeService.cambiaAbbonamento= async(idUtente, idAbbonamento)=>{
     if(!utils.checkId(idAbbonamento)){
         return Promise.reject("Id Abbonamento non valido");
     }
-    //getCustomer
-    const customer = await stripe.customers.retrieve(idUtente);
 
-    //Se ha un abbonamento attivo lo cancella
-    if(customer.subscriptions && customer.subscriptions.data.length > 0){
+    //Crea un nuovo Abbonamento
 
-        const idSubscription = customer.subscriptions.data[0].id;
-        if(idSubscription === idAbbonamento){
-            return Promise.reject("Abbonamento già sottoscritto");
-        }
-        await stripe.subscriptions.del(idSubscription);
-    }
 
-    //Ne crea uno nuovo
-    const nuovoAbbonamento = await utente.cambiaAbbonamento(idUtente, idAbbonamento);
-
-    return nuovoAbbonamento;
+    return await utente.cambiaAbbonamento(idUtente, idAbbonamento);
 
 }
+
+stripeService.effettuaPagamento = async(idUtente, idAbbonamento) => {
+    if(!utils.checkId(idUtente)){
+        return Promise.reject("Id Utente non valido");
+    }
+
+
+    const nuovoAbbonamento = await abbonamento.getAbbonamentoById(idAbbonamento);
+
+    if(parseFloat(nuovoAbbonamento.prezzo) === 0.0){
+        await stripeService.cambiaAbbonamento(idUtente, idAbbonamento);
+        return {success: true, sessionUrl: "conferma.html"};
+    }
+
+    if(nuovoAbbonamento.prezzo > 0) {
+
+        const baseUrl = process.env.BASE_URL;
+        const session = await stripe.checkout.sessions.create({
+            line_items: [
+                {
+                    price_data: {
+                        currency: 'eur',
+                        product_data: {
+                            name: 'Abbonamento ' + nuovoAbbonamento.nomeTier,
+                            images: ['https://extensionsforjoomla.com/images/stories/virtuemart/product/stripe-checkout.png'],
+                        },
+                        unit_amount: Math.round(nuovoAbbonamento.prezzo * 100)
+                    },
+                    quantity: 1,
+                },
+            ],
+            metadata: {
+                idAbbonamento: idAbbonamento
+            },
+            mode: 'payment',
+            success_url: `${baseUrl}/pagamento/verify/${idUtente}/{CHECKOUT_SESSION_ID}`,
+            cancel_url: `${baseUrl}/error.html`,
+        });
+        return {success: true, sessionUrl: session.url};
+    }
+    else{
+        return {success: false, sessionUrl: "Abbonamento non valido"};
+    }
+}
+
+
+stripeService.verificaPagamento = async(idUtente, idPagamento)=> {
+    const session = await stripe.checkout.sessions.retrieve(idPagamento);
+
+    try {
+        let idAbbonamento = session.metadata.idAbbonamento
+
+        console.log("Pagamento: " + session.payment_status);
+        console.log(idUtente);
+
+        if (session.payment_status === "paid") {
+            // Tutto ok, cambiare tipo abbonamento
+            await stripeService.cambiaAbbonamento(idUtente, idAbbonamento);
+            return {success: true, message: "Cambio abbonamento effettuato con successo."};
+        } else {
+            // Errore, non hai pagato
+            return {success: false, message: "Errore: il pagamento non è stato effettuato."};
+        }
+    }
+    catch(error){
+        return{success:false, message: "Errore: il pagamento non è stato effettuato."};
+    }
+}
+
+module.exports=stripeService;

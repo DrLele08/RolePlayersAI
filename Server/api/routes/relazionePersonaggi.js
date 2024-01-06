@@ -1,13 +1,13 @@
 module.exports=app=>{
     const router=require("express").Router();
-    const middlewareAuth=require("../../middleware/auth");
+    const middlewareAuth=require("../../middleware/authApi");
     const relazionePersonaggi=require("../controllers/relazionePersonaggi.js");
 
-    router.get("/:idRelazionePersonaggi", middlewareAuth, relazionePersonaggi.GetById);
+    router.get("/:idRelazionePersonaggi", middlewareAuth([1,2,3]), relazionePersonaggi.GetById);
 
-    router.get("/contesto/:idContesto", middlewareAuth, relazionePersonaggi.GetByContesto);
+    router.get("/contesto/:idContesto", middlewareAuth([1,2,3]), relazionePersonaggi.GetByContesto);
 
-    router.post("/", middlewareAuth, relazionePersonaggi.CreateRelazionePersonaggi);
+    router.post("/", middlewareAuth([1,2,3]), relazionePersonaggi.CreateRelazionePersonaggi);
 
     app.use("/api/relazionePersonaggi",router);
 };

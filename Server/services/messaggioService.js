@@ -2,7 +2,6 @@ const messaggio=require("../models/messaggio");
 const conversazione=require("../models/conversazione");
 const chatGPT = require("../models/chatGPT");
 const utils = require("../models/utils");
-const {Promise} = require("../public/assets/plugins/global/plugins.bundle");
 
 const messaggioService={};
 const requiredFields = ['idConversazione', 'messaggio'];
@@ -27,7 +26,8 @@ messaggioService.inviaMessaggio = async (dati)=>{
     }
 
     //Costruisci lista messaggi
-    let listMessaggi = buildListMessaggi(dati);
+    let listMessaggi = [];
+    listMessaggi = await buildListMessaggi(dati);
 
     //Salva messaggio inviato
     await messaggio.createMessaggio({
@@ -48,11 +48,11 @@ messaggioService.inviaMessaggio = async (dati)=>{
 
 };
 
-
 //Funzione che costruisce la lista di messaggi da dare in input a ChatGPT
 async function buildListMessaggi(dati) {
     //Inserisce tutti i messaggi system nella lista
-    let listMessaggi = buildSystemListMessaggi(dati);
+    let listMessaggi = [];
+    listMessaggi = await buildSystemListMessaggi(dati);
 
     //Recupera i messaggi dal DB e li inserisce nella lista
     const messaggi = await messaggio.getByConversazione(dati.idConversazione);
@@ -81,24 +81,68 @@ async function buildListMessaggi(dati) {
 }
 
 
-
 //Funzione per costruire tutti i messaggi system da inserire nella lista di messaggi da inviare a ChatGPT
 async function buildSystemListMessaggi(dati){
     let listMessaggi = [];
     const conv = await conversazione.getById(dati.idConversazione);
     const sessione = await conv.getSessione();
     const contesto = await sessione.getContesto();
+    const ambiente = await contesto.getAmbiente();
+    const personaggi = await contesto.getCreaziones();
+    const relazioniPersonaggi = await contesto.getRelazioniPersonaggi();
+    const personaggioConversazione = await conv.getPersonaggio();
 
+    //Descrizione Ambiente
     listMessaggi.push({
         "role": "system",
-        "content": contesto.descrizione
+        "content": "Ambiente in cui si svolge la conversazione: " + ambiente.nome
+    });
+    listMessaggi.push({
+        "role": "system",
+        "content": "Descrizione dell`ambiente: " + ambiente.descrizione
     });
 
-    //TODO: Inserire informazioni dell`ambiente
+    //Descrizione di tutti i personaggi
+    let nomiPersonaggi= "Nell`ambiente ci sono i seguenti personaggi: ";
+    for(let i=0; i<personaggi.length; i++){
+        nomiPersonaggi += personaggi[i].nome;
+        if(i<personaggi.length-1){
+            nomiPersonaggi += ", ";
+        }
+    }
+    listMessaggi.push({
+        "role": "system",
+        "content": nomiPersonaggi
+    });
+    for(let i=0; i<personaggi.length; i++){
+        listMessaggi.push({
+            "role": "system",
+            "content": "Descrizione di " + personaggi[i].nome + ": " + personaggi[i].descrizione //TODO: Aggiungere info sul sesso
+        });
+    }
 
-    //TODO: Inserire informazioni dei personaggi
 
-    //TODO: Inserire informazioni delle relazioni
+    //Informazioni sulle relazioni
+    for(let i=0; i<relazioniPersonaggi.length; i++){
+        const p1 = await relazioniPersonaggi[i].getPersonaggio1();
+        const p2 = await relazioniPersonaggi[i].getPersonaggio2();
+        listMessaggi.push({
+            "role": "system",
+            "content": "Relazione tra " + p1.nome + " e " + p2.nome + ": " + relazioniPersonaggi[i].descrizione
+        });
+    }
+
+    //Descrizione Contesto
+    listMessaggi.push({
+        "role": "system",
+        "content": "La situazione iniziale è la seguente: " + contesto.descrizione
+    });
+    listMessaggi.push({
+        "role": "system",
+        "content": "Da questo momento dovrai rispondere impersonando " + personaggioConversazione.nome +
+            " e rispettando tutte le descrizioni e le relazioni tra i vari personaggi. " +
+            "Le risposte non dovranno essere più lunghe di 450 caratteri."
+    });
 
     return listMessaggi;
 }

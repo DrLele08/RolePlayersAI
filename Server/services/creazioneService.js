@@ -3,16 +3,28 @@ const utils = require("../models/utils");
 const fs = require('fs');
 
 const creazioneService={};
-const requiredFields = ['fkUtente', 'nome', 'immagine', 'descrizione', 'isPubblico', 'tipo'];
+const requiredFields = ['fkUtente', 'nome', 'descrizione', 'isPubblico', 'tipo'];
 
-creazioneService.getById=async(idCreazione)=>{
-    if(idCreazione>0)
+creazioneService.getById=async(dati)=>{
+    if(dati.idCreazione>0)
     {
-        let creazioneCercata = await creazione.getById(idCreazione);
+        let creazioneCercata = await creazione.getById(dati.idCreazione);
+
         if(creazioneCercata !== null)
         {
-            return creazioneCercata;
+            if(creazioneCercata.isPubblico)
+            {
+                return creazioneCercata;
+            }
+            else if (creazioneCercata.fkUtente===dati.idUtente || dati.idRuolo ===2 || dati.idRuolo===3){
+                return creazioneCercata;
+            }
+            else {
+                return Promise.reject("Non hai i permessi");
+            }
+
         }
+
         else
         {
             return Promise.reject("Creazione non trovata");
@@ -24,13 +36,16 @@ creazioneService.getById=async(idCreazione)=>{
     }
 };
 
-creazioneService.DeleteById=async(idCreazione)=>{
-    if(idCreazione>0)
-    {
-        let creazioneEliminata = await creazione.deleteById(idCreazione);
-        if(creazioneEliminata !== null)
-        {
-            return creazioneEliminata;
+creazioneService.DeleteById=async(dati)=>{
+    if(dati.idCreazione>0) {
+        let creazioneEliminata = await creazione.deleteById(dati.idCreazione);
+        if (creazioneEliminata !== null) {
+
+            if (dati.idRuolo === 2 || dati.idRuolo === 3) {
+                return creazioneEliminata;
+            } else {
+                return Promise.reject("Non hai i permessi");
+            }
         }
         else
         {
@@ -60,12 +75,13 @@ creazioneService.createCreazione = async (dati) =>{
                 nuovaCreazione = await creazione.createAmbiente(dati);
             }
 
-            let fotoUrl="public/image/creazione/default.jpeg"
+            let fotoUrl="/img/creazione/default.jpeg"
             let baseUrl = process.env.BASE_URL;
 
-            if (dati.img.mimeType.includes("image")) {
-                nuovaCreazione.immagine="/public/img/creazione/creazione_"+nuovaCreazione.idCreazione+".jpeg";
-                fs.writeFileSync(nuovaCreazione.immagine,dati.img);
+            if (dati.img.mimetype.includes("image")) {
+                nuovaCreazione.immagine="/img/creazione/creazione_"+nuovaCreazione.idCreazione+".jpeg";
+
+                fs.writeFileSync("./public"+nuovaCreazione.immagine,dati.img.buffer);
                 nuovaCreazione.immagine = baseUrl +nuovaCreazione.immagine;
             }
             else {
@@ -79,11 +95,12 @@ creazioneService.createCreazione = async (dati) =>{
         }
     }
     else{
+        console.log(dati);
         return Promise.reject("Dati non validi");
     }
 }
 
-creazioneService.getByFilter = async (nome, tipo, isPubblico, page)=>{
+creazioneService.getByFilter = async (nome, tipo, page, dati)=>{
     if(page > 0){
         let filters = {};
 
@@ -93,14 +110,32 @@ creazioneService.getByFilter = async (nome, tipo, isPubblico, page)=>{
                 filters.nome = nome;
             }
         }
+
+
         if(!isNaN(tipo)){
-            filters.tipo = tipo;
-        }
-        if(Boolean(isPubblico) === isPubblico){
-            filters.isPubblico = isPubblico;
+            if(tipo ==='Personaggio' || 'Ambiente')
+            {
+                filters.tipo = tipo;
+            }
+
         }
 
-        return creazione.getByFilter(filters, page);
+        /* todo ricavare la creazione
+        if(creazione.isPublic)
+        {
+            aggiungi creazione al nuovo array
+        }
+        else if (dati.idUtente === fkUtente || dati.idRuolo === 2 || dati.idRuolo ===3)
+        {
+            aggiungi creazione al nuovo array
+        }
+
+           ritorna promise con nuovo array.
+
+         */
+
+
+
     }
     else{
         return Promise.reject("Pagina non valida");

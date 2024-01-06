@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Inizio::Head-->
+<head>
+    <title> RoleplayersAI</title>
+    <meta charset="utf-8" />
+    <meta name="description" content="Il miglior sito per fare roleplay con dei bot" />
+    <meta name="keywords" content="Node.js, web design, figma, roleplay, AI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:locale" content="it_Ita" />
+    <link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
+    <link rel="shortcut icon" href="{{BASE_URL}}/assets/media/logos/favicon.ico"/>
+    <!--begin::Fonts(mandatory for all pages)-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
+    <!--end::Fonts-->
+
+    <!--begin::Vendor Stylesheets(used for this page only)-->
+    <link href="{{BASE_URL}}/assets/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="{{BASE_URL}}/assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
+    <!--end::Vendor Stylesheets-->
+
+    <!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
+    <link href="{{BASE_URL}}/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="{{BASE_URL}}/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+    <!--end::Global Stylesheets Bundle-->
+    <script>// Frame-busting to prevent site from being loaded within a frame without permission (click-jacking) if (window.top != window.self) { window.top.location.replace(window.self.location.href); }</script>
+</head>
+<!--Fine::Head-->
+
+<!--Inizio::Body-->
+<body id="kt_body" class="aside-enabled">
+<!--begin::Theme mode setup on page load-->
+<script>var defaultThemeMode = "light"; var themeMode; if ( document.documentElement ) { if ( document.documentElement.hasAttribute("data-bs-theme-mode")) { themeMode = document.documentElement.getAttribute("data-bs-theme-mode"); } else { if ( localStorage.getItem("data-bs-theme") !== null ) { themeMode = localStorage.getItem("data-bs-theme"); } else { themeMode = defaultThemeMode; } } if (themeMode === "system") { themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; } document.documentElement.setAttribute("data-bs-theme", themeMode); }</script>
+<!--end::Theme mode setup on page load-->
+
+<!--begin::Main-->
+<!--begin::Root-->
+<div class="d-flex flex-column flex-root">
+    {{> barraLaterale}}
+<!--begin::Wrapper-->
+<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+    {{> header}}
+    <!--begin::Content-->
+    <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+        <!--begin::Post-->
+        <div class="post d-flex flex-column-fluid" id="kt_post">
+            <!--begin::Container-->
+            <div id="kt_content_container" class="container-xxl">
+                <!--begin::Row-->
+                <div class="row g-5 g-xl-8">
+                    <div class="col-xl-4">
+                        <!--begin::Statistics Widget 5-->
+                        <a href="#" class="card bg-body-white hoverable card-xl-stretch mb-xl-8">
+                            <!--begin::Body-->
+                            <div class="card-body">
+                                <div class="text-gray-900 fw-bold fs-2 mb-2 mt-5">Scopri i vantaggi</div>
+                                <div class="text-gray-900 fs-2 mb-20 mt-5">Scopri i vantaggi dei nostri abbonamenti Base e Enterprise, Cosa aspetti? Clicca su questo pannello per scoprire di più.</div>
+                            </div>
+                            <!--end::Body-->
+                        </a>
+                        <!--end::Statistics Widget 5-->
+                    </div>
+                    <div class="col-xl-4">
+                        <!--begin::Statistics Widget 5-->
+                        <!--begin::Body-->
+                        <div class="card bg-body-white hoverable card-xl-stretch mb-xl-8">
+                            <div class="card-body">
+                                <div class="text-gray-900 fw-bold fs-2 mb-2 mt-5">Note sugli aggiornamenti</div>
+                                <div class="text-gray-900 fs-2 mb-20 mt-5">Abbbiamo risolto alcune...</div>
+                            </div>
+                        </div>
+                        <!--end::Body-->
+                        <!--end::Statistics Widget 5-->
+                    </div>
+                    <!--end::Row-->
+                    <!--begin::Row-->
+                    <div class="row g-5 g-xl-8">
+                        <div class="col-xl-4">
+                            <!--begin::Statistics Widget 5-->
+                            <!--begin::Body-->
+                            <div class="card bg-body-white hoverable card-xl-stretch mb-xl-8">
+                                <div class="card-body">
+                                    <div class="text-gray-900 fw-bold fs-2 mb-2 mt-5">Personaggi popolari</div>
+                                    <div class="text-gray-900 fs-2 mb-20 mt-5">
+
+                                        <!--begin::Wrapper-->
+                                        <div class="d-flex align-items-center">
+                                            <!--begin::Icon-->
+                                            <img src="{{BASE_URL}}/assets/media/svg/card-logos/american-express.svg" alt="" class="me-4" />
+                                            <!--end::Icon-->
+                                            <!--begin::Details-->
+                                            <div>
+                                                <div class="fs-4 fw-bold">Zio Pasquale</div>
+                                                <div class="fs-6 fw-semibold text-gray-500">Calvo, impegnato, ...</div>
+                                                <button class="btn btn-sm btn-light btn-active-light-primary me-3" data-kt-billing-action="card-delete">
+                                                    <!--begin::Indicator label-->
+                                                    <span class="indicator-label">Aggiungi all'inventario</span>
+                                                    <!--end::Indicator label-->
+                                                    <!--begin::Indicator progress-->
+                                                    <span class="indicator-progress">Please wait...
+																<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                                    <!--end::Indicator progress-->
+                                                </button>
+                                            </div>
+                                            <!--end::Details-->
+                                        </div>
+                                        <!--end::Wrapper-->
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end::Body-->
+                            <!--end::Statistics Widget 5-->
+                        </div>
+
+                        <div class="col-xl-4">
+                            <!--begin::Statistics Widget 5-->
+                            <!--begin::Body-->
+                            <div class="card bg-body-white hoverable card-xl-stretch mb-xl-8">
+                                <div class="card-body">
+                                    <div class="text-gray-900 fw-bold fs-2 mb-2 mt-5">Ambienti popolari</div>
+                                    <div class="text-gray-900 fs-2 mb-20 mt-5">
+
+                                        <!--begin::Wrapper-->
+                                        <div class="d-flex align-items-center">
+                                            <!--begin::Icon-->
+                                            <img src="{{BASE_URL}}/assets/media/svg/card-logos/american-express.svg" alt="" class="me-4" />
+                                            <!--end::Icon-->
+                                            <!--begin::Details-->
+                                            <div>
+                                                <div class="fs-4 fw-bold">Banca Mediolanum</div>
+                                                <div class="fs-6 fw-semibold text-gray-500">Costruita intirno a te</div>
+                                                <button class="btn btn-sm btn-light btn-active-light-primary me-3" data-kt-billing-action="card-delete">
+                                                    <!--begin::Indicator label-->
+                                                    <span class="indicator-label">Aggiungi all'inventario</span>
+                                                    <!--end::Indicator label-->
+                                                    <!--begin::Indicator progress-->
+                                                    <span class="indicator-progress">Please wait...
+																<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                                    <!--end::Indicator progress-->
+                                                </button>
+                                            </div>
+                                            <!--end::Details-->
+                                        </div>
+                                        <!--end::Wrapper-->
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end::Body-->
+                            <!--end::Statistics Widget 5-->
+                        </div>
+                    </div>
+                    <!--end::Row-->
+                </div>
+                <!--end::Container-->
+            </div>
+            <!--end::Post-->
+        </div>
+        <!--end::Content-->
+        {{> footer}}
+    </div>
+    <!--end::Wrapper-->
+</div>
+<!--end::Page-->
+</div>
+<!--end::Root-->
+
+<!--begin::Javascript-->
+<script>var hostUrl = "assets/";</script>
+<!--begin::Global Javascript Bundle(mandatory for all pages)-->
+<script src="assets/plugins/global/plugins.bundle.js"></script>
+<script src="assets/js/scripts.bundle.js"></script>
+<!--end::Global Javascript Bundle-->
+
+<!--begin::Vendors Javascript(used for this page only)-->
+<script src="assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/radar.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/map.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/geodata/worldLow.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/geodata/continentsLow.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/geodata/usaLow.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/geodata/worldTimeZonesLow.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/geodata/worldTimeZoneAreasLow.js"></script>
+<script src="assets/plugins/custom/datatables/datatables.bundle.js"></script>
+<!--end::Vendors Javascript-->
+<!--begin::Custom Javascript(used for this page only)-->
+<script src="assets/js/widgets.bundle.js"></script>
+<script src="assets/js/custom/widgets.js"></script>
+<script src="assets/js/custom/apps/chat/chat.js"></script>
+<script src="assets/js/custom/utilities/modals/users-search.js"></script>
+<!--end::Custom Javascript-->
+<!--end::Javascript-->
+</body>
+<!--end::Body-->
+</html>

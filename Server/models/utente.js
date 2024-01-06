@@ -60,6 +60,9 @@ const Utente = db.define('Utente', {
         type: DataTypes.INTEGER,
         allowNull: false
     },
+    scadenzaAbbonamento:{
+        type: DataTypes.DATE,
+    },
     authToken:{
         type: DataTypes.CHAR(64),
         allowNull: false
@@ -123,19 +126,38 @@ utente.getActualAbbonamento=async(idUtente) => {
  * @function
  * @param {Number} idUtente - ID dell'utente
  * @param {Number} idAbbonamento - ID dell'abbonamento che si intende cambiare con quello attuale
- * @returns {Promise<Stripe.Response<Stripe.Subscription>>}
+ * @returns {Promise<Abbonamento>} - Promise che si risolve con l'oggetto Abbonamento, o null se non trovato
  */
 
-utente.cambiaAbbonamento = async (idUtente, idAbbonamento) =>{
-    const nuovoAbbonamento  = await abbonamento.getAbbonamentoById(idAbbonamento);
-    let prezzo = nuovoAbbonamento.prezzo;
+utente.cambiaAbbonamento = async (idUtente, idAbbonamento) => {
+    const utenteCambio = await utente.getById(idUtente);
+    const Abbonamento = await abbonamento.getAbbonamentoById(idAbbonamento);
 
+    const nuovaScadenza = new Date();
+    nuovaScadenza.setDate(nuovaScadenza.getDate() + 30);
 
-
-    return stripe.subscriptions.create({
-        customer: idUtente,
-        items: [{price: prezzo}]
-    })
+    const messaggiRimanenti = Abbonamento.maxMsg;
+    if (parseFloat(Abbonamento.prezzo) === 0.0) {
+        return await Utente.update({
+            fkAbbonamento: idAbbonamento,
+            scadenzaAbbonamento: null,
+            msgRimanenti: messaggiRimanenti
+        }, {
+            where: {
+                idUtente: utenteCambio.idUtente
+            }
+        });
+    } else {
+        return await Utente.update({
+            fkAbbonamento: idAbbonamento,
+            scadenzaAbbonamento: nuovaScadenza,
+            msgRimanenti: messaggiRimanenti
+        }, {
+            where: {
+                idUtente: utenteCambio.idUtente
+            }
+        });
+    }
 }
 
 utente.Utente=Utente;

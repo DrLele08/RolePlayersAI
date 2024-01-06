@@ -1,6 +1,7 @@
 const db= require("./database");
 const DataTypes=require("sequelize").DataTypes;
-const utente = require("./utente"); //TODO bisogna crearlo
+const utente = require("./utente");
+const {Op} = require("sequelize"); //TODO bisogna crearlo
 
 const pageSize = 16;
 
@@ -91,6 +92,7 @@ creazione.createPersonaggio = (dati)=>{
     return Creazione.create({
         fkUtente: dati.fkUtente,
         nome: dati.nome,
+        immagine: "fittizio",
         descrizione: dati.descrizione,
         isPubblico: dati.isPubblico,
         tipo: 0,
@@ -118,6 +120,7 @@ creazione.createAmbiente = (dati)=>{
     return Creazione.create({
         fkUtente: dati.fkUtente,
         nome: dati.nome,
+        immagine: "fittizio",
         descrizione: dati.descrizione,
         isPubblico: dati.isPubblico,
         tipo: 1
@@ -176,6 +179,7 @@ creazione.getByFilter = async (filters, page) =>{
     if(filters.nome){
         filters.nome = {[Op.substring]: filters.nome}
     }
+
 
     //restituisce i risultati della findAll con filtri combinati ai risultati della Count
     const result = await Creazione.findAndCountAll({

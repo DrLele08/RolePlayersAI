@@ -19,25 +19,25 @@ module.exports=  (ruoli)=> {
                             else if (r === 'Moderatore'){
                                 idRuolo= 2;
                             }
-                            else if (r === 'Admin')
+                            else if (r === 'Amministratore')
                             {
                                 idRuolo = 3;
                             }
-
                             if(ruoli.includes(idRuolo))
                             {
-
+                                req.idUtente=utente[0].idUtente;
+                                req.idRuolo=idRuolo;
                                 next();
                             }
                             else {
                                 json.Ris = 0;
-                                json.Mess = "Non hai i permessi";
+                                json.Mess = "Non hai i permessi (ruolo non incluso)";
                                 res.json(json);
                             }
                         }
                         else {
                             json.Ris = 0;
-                            json.Mess = "Non hai i permessi";
+                            json.Mess = "Non hai i permessi (utente non trovato)";
                             res.json(json);
                         }
 
@@ -56,7 +56,7 @@ module.exports=  (ruoli)=> {
         }
         else {
                 json.Ris = 0;
-                json.Mess = "Non hai i permessi";
+                json.Mess = "Non hai i permessi (auth undefinied) ";
                 res.json(json);
         }
     };
