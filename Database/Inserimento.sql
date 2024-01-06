@@ -21,9 +21,9 @@ CREATE TABLE Utente(
     dataNascita DATE NOT NULL,
     telefono VARCHAR(10),
     ruolo ENUM('Utente', 'Moderatore', 'Amministratore') NOT NULL DEFAULT 'Utente',
-    msgRimanenti INT NOT NULL,
+    msgRimanenti INT NOT NULL DEFAULT 100,
     scadenzaAbbonamento DATE,
-    authToken CHAR(64) NOT NULL,
+    authToken CHAR(64),
     PRIMARY KEY (idUtente),
     FOREIGN KEY (fkAbbonamento) REFERENCES Abbonamento(idAbbonamento)
         ON DELETE CASCADE
@@ -38,7 +38,7 @@ CREATE TABLE Creazione(
     descrizione VARCHAR(512) NOT NULL,
     isPubblico BOOLEAN NOT NULL,
     tipo ENUM('Personaggio', 'Ambiente') NOT NULL,
-    sesso ENUM('Uomo', 'Donna', 'Altro') NOT NULL,
+    sesso ENUM('Uomo', 'Donna', 'Altro'),
     PRIMARY KEY (idCreazione),
     FOREIGN KEY (fkUtente) REFERENCES Utente(idUtente)
         ON DELETE CASCADE
@@ -49,7 +49,7 @@ CREATE TABLE Contesto(
 	idContesto BIGINT AUTO_INCREMENT,
     fkUtente BIGINT NOT NULL,
     fkAmbiente BIGINT NOT NULL,
-    nome VARCHAR(25) NOT NULL,
+    nome VARCHAR(50) NOT NULL,
     descrizione VARCHAR(512) NOT NULL,
     isPubblico BOOLEAN NOT NULL,
     PRIMARY KEY (idContesto),

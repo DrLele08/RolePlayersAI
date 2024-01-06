@@ -1,8 +1,8 @@
 const stripeService = require("../../services/stripeService");
 
 exports.EffettuaPagamento=async(req,ris)=>{
-        let idUtente = req.params.idUtente;
-        let idAbbonamento = req.params.tipoAbbonamento;
+        let idUtente = req.idUtente;
+        let idAbbonamento = req.params.idAbbonamento;
 
         const result = await stripeService.effettuaPagamento(idUtente, idAbbonamento);
 
@@ -10,21 +10,20 @@ exports.EffettuaPagamento=async(req,ris)=>{
         if (result.success) {
             ris.redirect(303, result.sessionUrl);
         } else {
-            ris.render("Errore, Tipo di abbonamento non valido", { errore: result.message });
+            ris.render("error", { errore: result.message });
         }
 };
 
 exports.VerificaPagamento = async (req, ris) => {
     let idUtente = req.params.idUtente;
     let idPagamento = req.params.idPagamento;
-    let idAbbonamento = req.params.idAbbonamento;
 
-    const result = await stripeService.verificaPagamento(idUtente, idPagamento, idAbbonamento);
+    const result = await stripeService.verificaPagamento(idUtente, idPagamento);
 
     // Invia la risposta al chiamante (client)
     if (result.success) {
-        ris.render("Cambio abbonamento effettuato con successo", { utente: idUtente });
+        ris.render("home", { utente: idUtente });
     } else {
-        ris.render("Errore, Non hai pagato", { errore: result.message });
+        ris.render("error", { errore: result.message });
     }
 };

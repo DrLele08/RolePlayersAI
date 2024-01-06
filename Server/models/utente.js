@@ -129,22 +129,37 @@ utente.getActualAbbonamento=async(idUtente) => {
  * @returns {Promise<Abbonamento>} - Promise che si risolve con l'oggetto Abbonamento, o null se non trovato
  */
 
-utente.cambiaAbbonamento = async (idUtente, idAbbonamento) =>{
-    const utenteCambio = utente.getById(idUtente);
-    let nuovaScadenzaAbbonamento = new Date(utenteCambio.scadenzaAbbonamento);
-    nuovaScadenzaAbbonamento.setDate(nuovaScadenzaAbbonamento.getDate() +30 );
-    utente.scadenzaAbbonamento = nuovaScadenzaAbbonamento;
+utente.cambiaAbbonamento = async (idUtente, idAbbonamento) => {
+    const utenteCambio = await utente.getById(idUtente);
+    const Abbonamento = await abbonamento.getAbbonamentoById(idAbbonamento);
 
-    const nuovoAbbonamento = utente.getAbbonamento();
-    utente.msgRimanenti = nuovoAbbonamento.maxMsg;
+    const nuovaScadenza = new Date();
+    nuovaScadenza.setDate(nuovaScadenza.getDate() + 30);
 
-    return nuovoAbbonamento;
+    const messaggiRimanenti = Abbonamento.maxMsg;
+    if (parseFloat(Abbonamento.prezzo) === 0.0) {
+        return await Utente.update({
+            fkAbbonamento: idAbbonamento,
+            scadenzaAbbonamento: null,
+            msgRimanenti: messaggiRimanenti
+        }, {
+            where: {
+                idUtente: utenteCambio.idUtente
+            }
+        });
+    } else {
+        return await Utente.update({
+            fkAbbonamento: idAbbonamento,
+            scadenzaAbbonamento: nuovaScadenza,
+            msgRimanenti: messaggiRimanenti
+        }, {
+            where: {
+                idUtente: utenteCambio.idUtente
+            }
+        });
+    }
 }
-utente.effettuaPagamento = async (idUtente, tipoAbbonamento) =>{
 
-}
-
-utente.verificaPagamento= async (idUtente, idPagamento,)
 utente.Utente=Utente;
 
 module.exports=utente;

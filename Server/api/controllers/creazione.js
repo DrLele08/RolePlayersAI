@@ -48,9 +48,13 @@ exports.GetByFilter = async (req,res)=>{
     let nome = req.query.Nome;
     let tipo = req.query.Tipo;
     let pagina = req.query.Pagina;
+    let dati = {
+        idUtente: req.idUtente,
+        idRuolo: req.idRuolo
+    }
 
     try{
-        const risCreazione = await creazioneService.getByFilter(nome,tipo,pagina);
+        const risCreazione = await creazioneService.getByFilter(nome,tipo,pagina,dati);
         json.Ris = 1;
         json.Creazione = risCreazione;
         res.json(json);
