@@ -2,9 +2,9 @@ const stripeService = require("../../services/stripeService");
 
 exports.EffettuaPagamento=async(req,ris)=>{
         let idUtente = req.params.idUtente;
-        let tipoAbbonamento = req.params.tipoAbbonamento;
+        let idAbbonamento = req.params.tipoAbbonamento;
 
-        const result = await stripeService.effettuaPagamento(idUtente, tipoAbbonamento);
+        const result = await stripeService.effettuaPagamento(idUtente, idAbbonamento);
 
         // Invia la risposta al chiamante (client)
         if (result.success) {

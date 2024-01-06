@@ -37,7 +37,7 @@ app.set('views','./platform/views');
 
 //Gestione BASE_URL per assets
 app.use((req,ris,next)=>{
-    ris.locals.absoluteUrl=process.env.BASE_URL;
+    ris.locals.BASE_URL=process.env.BASE_URL;
     next();
 });
 

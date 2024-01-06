@@ -28,7 +28,7 @@ exports.CreateContesto = async (req,res) =>{
     }
 }
 
-exports.GetById= async (req,res)=> {
+exports.GetContestoById= async (req,res)=> {
     let json = {};
     let idContesto = req.query.idContesto;
     try {
