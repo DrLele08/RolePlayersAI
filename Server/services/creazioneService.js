@@ -100,7 +100,7 @@ creazioneService.createCreazione = async (dati) =>{
     }
 }
 
-creazioneService.getByFilter = async (nome, tipo, page)=>{
+creazioneService.getByFilter = async (nome, tipo, page, dati)=>{
     if(page > 0){
         let filters = {};
 
@@ -110,11 +110,32 @@ creazioneService.getByFilter = async (nome, tipo, page)=>{
                 filters.nome = nome;
             }
         }
+
+
         if(!isNaN(tipo)){
-            filters.tipo = tipo;
+            if(tipo ==='Personaggio' || 'Ambiente')
+            {
+                filters.tipo = tipo;
+            }
+
         }
 
-        return creazione.getByFilter(filters, page);
+        /* todo ricavare la creazione
+        if(creazione.isPublic)
+        {
+            aggiungi creazione al nuovo array
+        }
+        else if (dati.idUtente === fkUtente || dati.idRuolo === 2 || dati.idRuolo ===3)
+        {
+            aggiungi creazione al nuovo array
+        }
+
+           ritorna promise con nuovo array.
+
+         */
+
+
+
     }
     else{
         return Promise.reject("Pagina non valida");
