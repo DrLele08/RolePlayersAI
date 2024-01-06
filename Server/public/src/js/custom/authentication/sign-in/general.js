@@ -14,21 +14,49 @@ var KTSigninGeneral = function () {
             form,
             {
                 fields: {
+                    'name': {
+                        validators: {
+                            notEmpty: {
+                                message: 'Nome richiesto'
+                            }
+                        }
+                    },
+                    'surname': {
+                        validators: {
+                            notEmpty: {
+                                message: 'Cognome richiesto'
+                            }
+                        }
+                    },
+                    'username': {
+                        validators: {
+                            notEmpty: {
+                                message: 'Username richiesto'
+                            }
+                        }
+                    },
+                    'birthday': {
+                        validators: {
+                            notEmpty: {
+                                message: 'Data di nascita richiesta'
+                            }
+                        }
+                    },
                     'email': {
                         validators: {
                             regexp: {
                                 regexp: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                                message: 'The value is not a valid email address',
+                                message: 'Indirizzo e-mail non valido',
                             },
                             notEmpty: {
-                                message: 'Email address is required'
+                                message: 'E-mail richiesta'
                             }
                         }
                     },
                     'password': {
                         validators: {
                             notEmpty: {
-                                message: 'The password is required'
+                                message: 'Password richiesta'
                             }
                         }
                     }
@@ -71,10 +99,10 @@ var KTSigninGeneral = function () {
 
                         // Show message popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                         Swal.fire({
-                            text: "You have successfully logged in!",
+                            text: "Accesso eseguito!",
                             icon: "success",
                             buttonsStyling: false,
-                            confirmButtonText: "Ok, got it!",
+                            confirmButtonText: "Ok",
                             customClass: {
                                 confirmButton: "btn btn-primary"
                             }
@@ -94,10 +122,10 @@ var KTSigninGeneral = function () {
                 } else {
                     // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                     Swal.fire({
-                        text: "Sorry, looks like there are some errors detected, please try again.",
+                        text: "Rilevati degli errori, riprovare.",
                         icon: "error",
                         buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
+                        confirmButtonText: "Ok",
                         customClass: {
                             confirmButton: "btn btn-primary"
                         }
@@ -129,10 +157,10 @@ var KTSigninGeneral = function () {
 
                             // Show message popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                             Swal.fire({
-                                text: "You have successfully logged in!",
+                                text: "Accesso eseguito!",
                                 icon: "success",
                                 buttonsStyling: false,
-                                confirmButtonText: "Ok, got it!",
+                                confirmButtonText: "Ok",
                                 customClass: {
                                     confirmButton: "btn btn-primary"
                                 }
@@ -146,10 +174,10 @@ var KTSigninGeneral = function () {
                         } else {
                             // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                             Swal.fire({
-                                text: "Sorry, the email or password is incorrect, please try again.",
+                                text: "E-mail o password errati, riprovare.",
                                 icon: "error",
                                 buttonsStyling: false,
-                                confirmButtonText: "Ok, got it!",
+                                confirmButtonText: "Ok",
                                 customClass: {
                                     confirmButton: "btn btn-primary"
                                 }
@@ -157,10 +185,10 @@ var KTSigninGeneral = function () {
                         }
                     }).catch(function (error) {
                         Swal.fire({
-                            text: "Sorry, looks like there are some errors detected, please try again.",
+                            text: "E-mail o password errati, riprovare.",
                             icon: "error",
                             buttonsStyling: false,
-                            confirmButtonText: "Ok, got it!",
+                            confirmButtonText: "Ok",
                             customClass: {
                                 confirmButton: "btn btn-primary"
                             }
@@ -175,10 +203,10 @@ var KTSigninGeneral = function () {
                 } else {
                     // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                     Swal.fire({
-                        text: "Sorry, looks like there are some errors detected, please try again.",
+                        text: "Rilevati degli errori, riprovare.",
                         icon: "error",
                         buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
+                        confirmButtonText: "Ok",
                         customClass: {
                             confirmButton: "btn btn-primary"
                         }
