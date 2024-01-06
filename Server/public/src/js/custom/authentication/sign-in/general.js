@@ -14,34 +14,6 @@ var KTSigninGeneral = function () {
             form,
             {
                 fields: {
-                    'name': {
-                        validators: {
-                            notEmpty: {
-                                message: 'Nome richiesto'
-                            }
-                        }
-                    },
-                    'surname': {
-                        validators: {
-                            notEmpty: {
-                                message: 'Cognome richiesto'
-                            }
-                        }
-                    },
-                    'username': {
-                        validators: {
-                            notEmpty: {
-                                message: 'Username richiesto'
-                            }
-                        }
-                    },
-                    'birthday': {
-                        validators: {
-                            notEmpty: {
-                                message: 'Data di nascita richiesta'
-                            }
-                        }
-                    },
                     'email': {
                         validators: {
                             regexp: {
