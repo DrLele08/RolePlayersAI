@@ -23,7 +23,7 @@ CREATE TABLE Utente(
     ruolo ENUM('Utente', 'Moderatore', 'Amministratore') NOT NULL DEFAULT 'Utente',
     msgRimanenti INT NOT NULL DEFAULT 100,
     scadenzaAbbonamento DATE,
-    authToken CHAR(64),
+    authToken CHAR(64) NOT NULL,
     PRIMARY KEY (idUtente),
     FOREIGN KEY (fkAbbonamento) REFERENCES Abbonamento(idAbbonamento)
         ON DELETE CASCADE
