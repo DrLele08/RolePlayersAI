@@ -2,7 +2,6 @@ const stripe = require('stripe')('sk_test_51OURuIHOFfOlBPkf5Zoi0O0G9o3OmzAHZ3plZ
 const utils = require("../models/utils");
 const utente = require("../models/utente");
 const abbonamento = require("../models/abbonamento");
-const express = require('express');
 
 const stripeService = {}
 
