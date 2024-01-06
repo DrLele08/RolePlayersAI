@@ -1,6 +1,6 @@
 module.exports=app=>{
     const router=require("express").Router();
-    const middlewareAuth=require("../../middleware/authApi");
+    const middlewareAuth=require("../../middleware/authPlatform");
     const pagamento=require("../controllers/pagamento");
 
     //Route per effettuare il pagamento, l'idAbbonamento sarebbe quello del DB
