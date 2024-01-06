@@ -15,9 +15,9 @@ stripeService.cambiaAbbonamento= async(idUtente, idAbbonamento)=>{
     }
 
     //Crea un nuovo Abbonamento
-    const nuovoAbbonamento = await utente.cambiaAbbonamento(idUtente, idAbbonamento);
 
-    return nuovoAbbonamento;
+
+    return await utente.cambiaAbbonamento(idUtente, idAbbonamento);
 
 }
 
@@ -26,16 +26,17 @@ stripeService.effettuaPagamento = async(idUtente, idAbbonamento) => {
         return Promise.reject("Id Utente non valido");
     }
 
-    const nuovoAbbonamento = abbonamento.getById(idAbbonamento);
 
-    if(nuovoAbbonamento.prezzo === 0){
-        return {success: true};
+    const nuovoAbbonamento = await abbonamento.getAbbonamentoById(idAbbonamento);
+
+    if(parseFloat(nuovoAbbonamento.prezzo) === 0.0){
+        await stripeService.cambiaAbbonamento(idUtente, idAbbonamento);
+        return {success: true, sessionUrl: "conferma.html"};
     }
 
     if(nuovoAbbonamento.prezzo > 0) {
 
         const baseUrl = process.env.BASE_URL;
-
         const session = await stripe.checkout.sessions.create({
             line_items: [
                 {
@@ -43,39 +44,48 @@ stripeService.effettuaPagamento = async(idUtente, idAbbonamento) => {
                         currency: 'eur',
                         product_data: {
                             name: 'Abbonamento ' + nuovoAbbonamento.nomeTier,
-                            images: ['https://www.vistanet.it/napoli/wp-content/uploads/sites/5/2023/04/pizza-napoli-1.jpg'],
+                            images: ['https://extensionsforjoomla.com/images/stories/virtuemart/product/stripe-checkout.png'],
                         },
-                        unit_amount: nuovoAbbonamento.prezzo * 1000
+                        unit_amount: Math.round(nuovoAbbonamento.prezzo * 100)
                     },
                     quantity: 1,
                 },
             ],
+            metadata: {
+                idAbbonamento: idAbbonamento
+            },
             mode: 'payment',
-            success_url: `http://${baseUrl}/payment/verify/${idUtente}/{CHECKOUT_SESSION_ID}`,
-            cancel_url: `http://${baseUrl}/error.html`,
+            success_url: `${baseUrl}/pagamento/verify/${idUtente}/{CHECKOUT_SESSION_ID}`,
+            cancel_url: `${baseUrl}/error.html`,
         });
         return {success: true, sessionUrl: session.url};
     }
     else{
-        return {success: true, sessionUrl: null};
+        return {success: false, sessionUrl: "Abbonamento non valido"};
     }
 }
 
 
-stripeService.verificaPagamento = async(idUtente, idPagamento, idAbbonamento)=> {
+stripeService.verificaPagamento = async(idUtente, idPagamento)=> {
     const session = await stripe.checkout.sessions.retrieve(idPagamento);
 
-    console.log("Pagamento: " + session.payment_status);
-    console.log(idUtente);
+    try {
+        let idAbbonamento = session.metadata.idAbbonamento
 
-    if (session.payment_status === "paid") {
-        // Tutto ok, cambiare tipo abbonamento
-        await stripeService.cambiaAbbonamento(idUtente, idAbbonamento);
-        return {success: true, message: "Cambio abbonamento effettuato con successo."};
+        console.log("Pagamento: " + session.payment_status);
+        console.log(idUtente);
+
+        if (session.payment_status === "paid") {
+            // Tutto ok, cambiare tipo abbonamento
+            await stripeService.cambiaAbbonamento(idUtente, idAbbonamento);
+            return {success: true, message: "Cambio abbonamento effettuato con successo."};
+        } else {
+            // Errore, non hai pagato
+            return {success: false, message: "Errore: il pagamento non è stato effettuato."};
+        }
     }
-    else {
-        // Errore, non hai pagato
-        return {success: false, message: "Errore: il pagamento non è stato effettuato."};
+    catch(error){
+        return{success:false, message: "Errore: il pagamento non è stato effettuato."};
     }
 }
 

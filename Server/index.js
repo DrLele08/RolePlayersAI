@@ -44,6 +44,7 @@ app.use((req,ris,next)=>{
 
 //Attivazione routes per chiamate HTTP
 require("./platform/routes/squadra.js")(app);
+require("./platform/routes/pagamento")(app);
 
 
 require("./api/routes/squadra.js")(app);

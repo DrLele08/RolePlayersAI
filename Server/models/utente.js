@@ -129,23 +129,35 @@ utente.getActualAbbonamento=async(idUtente) => {
  * @returns {Promise<Abbonamento>} - Promise che si risolve con l'oggetto Abbonamento, o null se non trovato
  */
 
-utente.cambiaAbbonamento = async (idUtente, idAbbonamento) =>{
-    const utenteCambio = await utente.findByPk(idUtente);
-    const Abbonamento = await abbonamento.findByPk(idAbbonamento);
+utente.cambiaAbbonamento = async (idUtente, idAbbonamento) => {
+    const utenteCambio = await utente.getById(idUtente);
+    const Abbonamento = await abbonamento.getAbbonamentoById(idAbbonamento);
 
     const nuovaScadenza = new Date();
     nuovaScadenza.setDate(nuovaScadenza.getDate() + 30);
 
     const messaggiRimanenti = Abbonamento.maxMsg;
-    return await utente.update({
-        fkAbbonamento: idAbbonamento,
-        scadenzaAbbonamento: nuovaScadenza,
-        msgRimanenti: messaggiRimanenti
-    },{
-        where: {
-            idUtente: utenteCambio.idUtente
-        }
-    });
+    if (parseFloat(Abbonamento.prezzo) === 0.0) {
+        return await Utente.update({
+            fkAbbonamento: idAbbonamento,
+            scadenzaAbbonamento: null,
+            msgRimanenti: messaggiRimanenti
+        }, {
+            where: {
+                idUtente: utenteCambio.idUtente
+            }
+        });
+    } else {
+        return await Utente.update({
+            fkAbbonamento: idAbbonamento,
+            scadenzaAbbonamento: nuovaScadenza,
+            msgRimanenti: messaggiRimanenti
+        }, {
+            where: {
+                idUtente: utenteCambio.idUtente
+            }
+        });
+    }
 }
 
 utente.Utente=Utente;
