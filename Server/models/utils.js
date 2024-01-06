@@ -35,4 +35,15 @@ utils.checkId=(id)=>{
     return id > 0;
 }
 
+/**
+ * Calcola l'hash SHA-256 di una stringa fornita.
+ *
+ * @param {string} pwd - La stringa da cui calcolare l'hash SHA-256.
+ * @returns {string} - L'hash SHA-256 rappresentato in formato base64.
+ */
+utils.sha256 = (pwd) => {
+    const crypto = require('crypto');
+    return crypto.createHash('sha256').update(pwd).digest('base64');
+}
+
 module.exports=utils;
