@@ -51,6 +51,7 @@ require("./api/routes/squadra.js")(app);
 require("./api/routes/creazione.js")(app);
 require("./api/routes/relazionePersonaggi.js")(app);
 require("./api/routes/contesto.js")(app);
+require("./api/routes/conversazione.js")(app);
 
 
 //Avvio del server

@@ -2,7 +2,6 @@ const messaggio=require("../models/messaggio");
 const conversazione=require("../models/conversazione");
 const chatGPT = require("../models/chatGPT");
 const utils = require("../models/utils");
-const {Promise} = require("../public/assets/plugins/global/plugins.bundle");
 
 const messaggioService={};
 const requiredFields = ['idConversazione', 'messaggio'];
@@ -27,7 +26,8 @@ messaggioService.inviaMessaggio = async (dati)=>{
     }
 
     //Costruisci lista messaggi
-    let listMessaggi = buildListMessaggi(dati);
+    let listMessaggi = [];
+    listMessaggi = await buildListMessaggi(dati);
 
     //Salva messaggio inviato
     await messaggio.createMessaggio({
@@ -51,7 +51,8 @@ messaggioService.inviaMessaggio = async (dati)=>{
 //Funzione che costruisce la lista di messaggi da dare in input a ChatGPT
 async function buildListMessaggi(dati) {
     //Inserisce tutti i messaggi system nella lista
-    let listMessaggi = buildSystemListMessaggi(dati);
+    let listMessaggi = [];
+    listMessaggi = await buildSystemListMessaggi(dati);
 
     //Recupera i messaggi dal DB e li inserisce nella lista
     const messaggi = await messaggio.getByConversazione(dati.idConversazione);
@@ -87,7 +88,7 @@ async function buildSystemListMessaggi(dati){
     const sessione = await conv.getSessione();
     const contesto = await sessione.getContesto();
     const ambiente = await contesto.getAmbiente();
-    const personaggi = await contesto.getCreaziones(); //TODO: Da provare se funziona
+    const personaggi = await contesto.getCreaziones();
     const relazioniPersonaggi = await contesto.getRelazioniPersonaggi();
     const personaggioConversazione = await conv.getPersonaggio();
 
@@ -121,7 +122,6 @@ async function buildSystemListMessaggi(dati){
     }
 
 
-    //TODO: Inserire solo le relazioni del personaggio con il quale si sta conversando???
     //Informazioni sulle relazioni
     for(let i=0; i<relazioniPersonaggi.length; i++){
         const p1 = await relazioniPersonaggi[i].getPersonaggio1();
@@ -140,7 +140,8 @@ async function buildSystemListMessaggi(dati){
     listMessaggi.push({
         "role": "system",
         "content": "Da questo momento dovrai rispondere impersonando " + personaggioConversazione.nome +
-            " e rispettando tutte le descrizioni e le relazioni tra i vari personaggi"
+            " e rispettando tutte le descrizioni e le relazioni tra i vari personaggi. " +
+            "Le risposte non dovranno essere più lunghe di 450 caratteri."
     });
 
     return listMessaggi;
