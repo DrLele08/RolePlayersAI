@@ -93,7 +93,7 @@ async function buildListMessaggi(dati) {
     //Inserisci il messaggio appena inviato nella lista
     listMessaggi.push({
         "role": "user",
-        "content": dati.messaggio
+        "content": "Rispondi in modo breve e conciso ma rispettando la personalità del personaggio che interpreti: " + dati.messaggio
     });
 
     return listMessaggi;
