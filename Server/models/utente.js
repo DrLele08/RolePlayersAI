@@ -168,19 +168,19 @@ utente.cambiaAbbonamento = async (idUtente, idAbbonamento) => {
  * Crea un nuovo Utente e lo inserisce nel database.
  *
  * @param {Object} data - Dati del nuovo utente.
- * @param {String} data.username Username del nuovo utente.
- * @param {String} data.nome Nome del nuovo utente.
- * @param {String} data.cognome Cognome del nuovo utente.
- * @param {String} data.email Email del nuovo utente.
- * @param {String} data.password Password del nuovo utente.
- * @param {Date} data.dataNascita Data di nascita del nuovo utente.
- * @param {String} data.telefono Numero di telefono del nuovo utente.
- * @param {String} data.authToken Token di autenticazione per il nuovo utente.
+ * @param {String} data.username - Username del nuovo utente.
+ * @param {String} data.nome - Nome del nuovo utente.
+ * @param {String} data.cognome - Cognome del nuovo utente.
+ * @param {String} data.email - Email del nuovo utente.
+ * @param {String} data.password - Password del nuovo utente.
+ * @param {Date} data.dataNascita - Data di nascita del nuovo utente.
+ * @param {String} data.telefono - Numero di telefono del nuovo utente.
+ * @param {String} data.authToken - Token di autenticazione per il nuovo utente.
  *
- * @returns {Promise<Utente>} Istanza di Utente appena creata.
+ * @returns {Promise<Utente>} - Istanza di Utente appena creata.
  */
 utente.createUtente = async (data) => {
-    return Utente.create({
+    return await Utente.create({
         username: data.username,
         nome: data.nome,
         cognome: data.cognome,
