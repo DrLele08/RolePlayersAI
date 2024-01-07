@@ -5,14 +5,16 @@ exports.InviaMessaggio = async(req, res) =>{
 
     const messaggio = req.body.messaggio;
     const idConversazione = req.body.idConversazione;
+    const idUtente = res.locals.idUtente;
 
     try{
         const risposta = await messaggioService.inviaMessaggio({
             messaggio: messaggio,
-            idConversazione: idConversazione
+            idConversazione: idConversazione,
+            idUtente: idUtente
         });
         json.Ris = 1;
-        json.risposta = risposta;
+        json.Risposta = risposta;
         res.json(json);
     }catch (error){
         json.Ris = 0;

@@ -31,7 +31,8 @@ const chatGPT={};
 chatGPT.inviaMessaggio=async(listaMessaggi)=>{
     const chatCompletion = await openai.chat.completions.create({
         model: "gpt-3.5-turbo",
-        messages: listaMessaggi
+        messages: listaMessaggi,
+        max_tokens: 130
     });
     if(chatCompletion.choices !== undefined && chatCompletion.choices.length>0) {
         return chatCompletion.choices[0].message;

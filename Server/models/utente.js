@@ -132,7 +132,6 @@ utente.getActualAbbonamento=async(idUtente) => {
  * @param {Number} idAbbonamento - ID dell'abbonamento che si intende cambiare con quello attuale
  * @returns {Promise<Abbonamento>} - Promise che si risolve con l'oggetto Abbonamento, o null se non trovato
  */
-
 utente.cambiaAbbonamento = async (idUtente, idAbbonamento) => {
     const utenteCambio = await utente.getById(idUtente);
     const Abbonamento = await abbonamento.getAbbonamentoById(idAbbonamento);
@@ -191,6 +190,26 @@ utente.createUtente = async (data) => {
         authToken: data.authToken
     });
 }
+
+/**
+ * Aggiorna il numero di messaggi rimanenti per un utente nel database.
+ *
+ * @async
+ * @function
+ * @param {number} idUtente - L'ID dell'utente.
+ * @param {number} msgAggiornati - Il nuovo numero di messaggi rimanenti da assegnare all'utente.
+ * @returns {Promise<Array<number>>} Un array contenente il numero di righe modificate nel database.
+ */
+utente.updateMsgRimanenti = async (idUtente, msgAggiornati)=>{
+    return await Utente.update({
+        msgRimanenti: msgAggiornati
+    },{
+        where: {
+            idUtente: idUtente
+        }
+    });
+};
+
 
 utente.Utente=Utente;
 
