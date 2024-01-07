@@ -1,13 +1,13 @@
 const messaggio=require("../models/messaggio");
 const conversazione=require("../models/conversazione");
+const utente=require("../models/utente");
 const chatGPT = require("../models/chatGPT");
 const utils = require("../models/utils");
 
 const messaggioService={};
-const requiredFields = ['idConversazione', 'messaggio'];
+const requiredFields = ['idConversazione', 'idUtente', 'messaggio'];
 
 
-//TODO: Bisogna scalare i messaggi rimanenti dell`utente
 messaggioService.inviaMessaggio = async (dati)=>{
     //Verifica Parametri obbligatori
     if(!utils.checkParameters(dati, requiredFields)){
@@ -15,8 +15,22 @@ messaggioService.inviaMessaggio = async (dati)=>{
     }
 
     //Controllo ID
-    if(!utils.checkId(dati.idConversazione)){
+    if(!utils.checkId(dati.idConversazione) || !utils.checkId(dati.idUtente)){
         return Promise.reject("ID non valido");
+    }
+
+
+    //Controllo appartenenza della sessione
+    conv = await conversazione.getById(dati.idConversazione);
+    sess = await conv.getSessione();
+    if(sess.fkUtente !== dati.idUtente){
+        return Promise.reject("La conversazione non appartiene ad una sessione dell`utente");
+    }
+
+    //Controllo messaggi rimanenti
+    user = await utente.getById(dati.idUtente);
+    if(user.msgRimanenti < 1){
+        return Promise.reject("0 Messaggi Rimanenti");
     }
 
     //Controllo lunghezza messaggio
@@ -39,12 +53,17 @@ messaggioService.inviaMessaggio = async (dati)=>{
     //Invia Lista Messaggi a ChatGPT e aspetta la risposta
     const risposta = await chatGPT.inviaMessaggio(listMessaggi);
 
-    //Salva la risposta nel DB e restituisci il messaggio salvato
-    return await messaggio.createMessaggio({
+    //Aggiorna Messaggi Rimanenti
+    utente.updateMsgRimanenti(user.idUtente, user.msgRimanenti-1);
+
+    //Salva la risposta nel DB e restituisci la risposta
+    await messaggio.createMessaggio({
         "fkConversazione": dati.idConversazione,
         "corpo": risposta.content,
         "isUtente": false
     });
+
+    return risposta.content;
 
 };
 
@@ -117,10 +136,10 @@ async function buildSystemListMessaggi(dati){
     for(let i=0; i<personaggi.length; i++){
         listMessaggi.push({
             "role": "system",
-            "content": "Descrizione di " + personaggi[i].nome + ": " + personaggi[i].descrizione //TODO: Aggiungere info sul sesso
+            "content": "Descrizione di " + personaggi[i].nome + ": " + personaggi[i].descrizione +
+            "(sesso di " + personaggi[i].nome + ": " + personaggi[i].sesso + ")"
         });
     }
-
 
     //Informazioni sulle relazioni
     for(let i=0; i<relazioniPersonaggi.length; i++){
@@ -140,8 +159,8 @@ async function buildSystemListMessaggi(dati){
     listMessaggi.push({
         "role": "system",
         "content": "Da questo momento dovrai rispondere impersonando " + personaggioConversazione.nome +
-            " e rispettando tutte le descrizioni e le relazioni tra i vari personaggi. " +
-            "Le risposte non dovranno essere più lunghe di 450 caratteri."
+            " e rispettando tutte le descrizioni e le relazioni fornite. Le risposte dovranno essere brevi " +
+            "e concise ma dovranno rispettare la personalità di " + personaggioConversazione.nome
     });
 
     return listMessaggi;
