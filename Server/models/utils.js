@@ -46,4 +46,16 @@ utils.sha256 = (pwd) => {
     return crypto.createHash('sha256').update(pwd).digest('base64');
 }
 
+/**
+ * Converte una data dal formato "dd-mm-yyyy" nel formato "yyyy-mm-dd".
+ *
+ * @param {Date} date - Data da convertire, sotto forma di stringa.
+ *
+ * @returns {string} - La data in formato "yyyy-mm-dd".
+ */
+utils.toMySQLDate = (date) => {
+    const parts = date.toString().split("-");
+    return parts[2] + '-' + parts[1] + '-' + parts[0];
+}
+
 module.exports=utils;

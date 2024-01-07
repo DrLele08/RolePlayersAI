@@ -14,14 +14,14 @@ registrazioneService.createUtente = async(data) => {
         return Promise.reject("Formato username non valido!");
 
     // Nome formato da solo lettere e spazi (secondi nomi?) e lunghezza compresa tra 2 e 25 caratteri.
-    if (!data.name.match("^[a-zA-Z\\s]{2,25}$"))
+    if (!data.nome.match("^[a-zA-Z\\s]{2,25}$"))
         return Promise.reject("Formato nome non valido!");
 
     // Cognome formato da solo lettere, apostrofi e spazi e lunghezza compresa tra 2 e 25 caratteri.
     if (!data.cognome.match("^[a-zA-Z\\s']{2,25}$"))
         return Promise.reject("Formato cognome non valido!");
 
-    if (!data.email.match("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,10}$"))
+    if (!data.email.match("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"))
         return Promise.reject("Formato email non valido!");
 
     if (!data.password.match("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$"))
@@ -30,8 +30,8 @@ registrazioneService.createUtente = async(data) => {
     if (!data.dataNascita.match("^[0-9]{2}-[0-9]{2}-[0-9]{4}$"))
         return Promise.reject("Formato data di nascita non valido!");
 
-    // Numero di telefono che inizia con un '+' (per il prefisso) seguito da tutti numeri e lunghezza compresa tra 13 e 14 caratteri.
-    if (!data.telefono.match("^\\+\\d{13,14}$"))
+    // Numero di telefono che inizia con un '+' (per il prefisso) seguito da tutti numeri e lunghezza compresa tra 12 e 14 caratteri.
+    if (!data.telefono.match("^\\+\\d{12,14}$"))
         return Promise.reject("Formato numero di telefono non valido!");
 
     data.authToken = randomString.generate({
@@ -39,7 +39,7 @@ registrazioneService.createUtente = async(data) => {
         charset: 'alphanumeric'
     });
 
-    return await utente.CreateUtente(data);
+    return utente.createUtente(data).catch(() => Promise.reject("Username e/o email già presenti!"));
 };
 
 module.exports = registrazioneService;

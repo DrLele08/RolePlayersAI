@@ -18,6 +18,7 @@ const Utente = db.define('Utente', {
     fkAbbonamento: {
         type: DataTypes.BIGINT,
         allowNull: false,
+        defaultValue: 1,
         references:{
             model: abbonamento.Abbonamento,
             key: 'idAbbonamento'
@@ -46,7 +47,7 @@ const Utente = db.define('Utente', {
         allowNull: false
     },
     dataNascita:{
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
         allowNull: false
     },
     telefono:{
@@ -55,11 +56,13 @@ const Utente = db.define('Utente', {
     },
     ruolo:{
         type: DataTypes.ENUM('Utente', 'Moderatore', 'Amministratore'),
-        allowNull: false
+        allowNull: false,
+        defaultValue: 'Utente'
     },
     msgRimanenti:{
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        defaultValue: 100
     },
     scadenzaAbbonamento:{
         type: DataTypes.DATE,
@@ -183,7 +186,7 @@ utente.createUtente = async (data) => {
         cognome: data.cognome,
         email: data.email,
         password: utils.sha256(data.password),
-        dataNascita: data.dataNascita,
+        dataNascita: utils.toMySQLDate(data.dataNascita),
         telefono: data.telefono,
         authToken: data.authToken
     });
