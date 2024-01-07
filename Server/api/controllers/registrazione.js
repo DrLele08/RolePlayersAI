@@ -3,6 +3,13 @@ const registrazioneService = require("../../services/registrazioneService");
 exports.CreateUtente = async(req, res) => {
     let json = {};
 
+    if (req.session.idUtente != null) {
+        json.Ris = 0;
+        json.Mess = "Hai già effettuato l'accesso!";
+        res.json(json);
+        return;
+    }
+
     let data = {
         username: req.body.username,
         nome: req.body.nome,
@@ -15,6 +22,11 @@ exports.CreateUtente = async(req, res) => {
 
     registrazioneService.createUtente(data).then((utente) => {
         res.status(201);
+
+        // salva ID e auth-token dell'utente nella sessione
+        req.session.idUtente = utente.idUtente;
+        req.session.authToken = utente.authToken;
+
         json.Ris = 1;
         json.Utente = utente;
     }).catch(error => {

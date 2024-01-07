@@ -1,3 +1,4 @@
+const db = require("./database");
 const utils={};
 
 
@@ -38,8 +39,8 @@ utils.checkId=(id)=>{
 /**
  * Calcola l'hash SHA-256 di una stringa fornita.
  *
- * @param {string} pwd - La stringa da cui calcolare l'hash SHA-256.
- * @returns {string} - L'hash SHA-256 rappresentato in formato base64.
+ * @param {String} pwd - La stringa da cui calcolare l'hash SHA-256.
+ * @returns {String} - L'hash SHA-256 rappresentato in formato base64.
  */
 utils.sha256 = (pwd) => {
     const crypto = require('crypto');
@@ -51,11 +52,20 @@ utils.sha256 = (pwd) => {
  *
  * @param {Date} date - Data da convertire, sotto forma di stringa.
  *
- * @returns {string} - La data in formato "yyyy-mm-dd".
+ * @returns {String} - La data in formato "yyyy-mm-dd".
  */
 utils.toMySQLDate = (date) => {
     const parts = date.toString().split("-");
     return parts[2] + '-' + parts[1] + '-' + parts[0];
+}
+
+/**
+ * Restituisce l'istante attuale regolato al fuso orario UTC+1.
+ *
+ * @returns {Literal} - Un'espressione rappresentante l'istante attuale (UTC+1) nel formato SQL.
+ */
+utils.getCurrentDateTime = () => {
+    return db.literal('CONVERT_TZ(NOW(), \'+00:00\', \'+01:00\')');
 }
 
 module.exports=utils;

@@ -67,7 +67,7 @@ CREATE TABLE Sessione(
     fkContesto BIGINT NOT NULL,
     titolo VARCHAR(255) NOT NULL,
     dataCreazione DATETIME NOT NULL DEFAULT NOW(),
-    ultimoAvvio DATETIME NOT NULL,
+    ultimoAvvio DATETIME,
     PRIMARY KEY (idSessione),
     FOREIGN KEY (fkUtente) REFERENCES Utente(idUtente)
         ON DELETE CASCADE

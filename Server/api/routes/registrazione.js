@@ -3,7 +3,6 @@ module.exports = app => {
     const registrazioneControl = require("../controllers/registrazione");
     const multer=require('multer');
 
-
     router.post("/", multer().any(), registrazioneControl.CreateUtente);
 
     app.use("/api/registrazione", router);
