@@ -55,6 +55,8 @@ require("./api/routes/contesto.js")(app);
 require("./api/routes/conversazione.js")(app);
 require("./api/routes/registrazione")(app);
 
+require("./platform/routes/registrazione")(app);
+
 
 //Avvio del server
 const port=process.env.PORT;
