@@ -300,7 +300,7 @@
 								<!--begin::Page title-->
 								<div class="page-title d-flex justify-content-center flex-column me-5">
 									<!--begin::Title-->
-									<h1 class="d-flex flex-column text-gray-900 fw-bold fs-3 mb-0">Table Pricing</h1>
+									<h1 class="d-flex flex-column text-gray-900 fw-bold fs-3 mb-0">Gestione abbonamento</h1>
 									<!--end::Title-->
 									<!--begin::Breadcrumb-->
 									<ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 pt-1">
@@ -315,7 +315,7 @@
 										</li>
 										<!--end::Item-->
 										<!--begin::Item-->
-										<li class="breadcrumb-item text-muted">Pricing</li>
+										<li class="breadcrumb-item text-muted">Abbonamenti</li>
 										<!--end::Item-->
 										<!--begin::Item-->
 										<li class="breadcrumb-item">
@@ -323,7 +323,7 @@
 										</li>
 										<!--end::Item-->
 										<!--begin::Item-->
-										<li class="breadcrumb-item text-gray-900">Table Pricing</li>
+										<li class="breadcrumb-item text-gray-900">Gestione abbonamento</li>
 										<!--end::Item-->
 									</ul>
 									<!--end::Breadcrumb-->
@@ -331,85 +331,6 @@
 								<!--end::Page title-->
 								<!--begin::Action group-->
 								<div class="d-flex align-items-stretch overflow-auto pt-3 pt-lg-0">
-									<!--begin::Action wrapper-->
-									<div class="d-flex align-items-center">
-										<!--begin::Label-->
-										<span class="fs-7 fw-bold text-gray-700 pe-4 text-nowrap d-none d-xxl-block">Sort By:</span>
-										<!--end::Label-->
-										<!--begin::Select-->
-										<select class="form-select form-select-sm form-select-solid w-100px w-xxl-125px" data-control="select2" data-placeholder="Latest" data-hide-search="true">
-											<option value=""></option>
-											<option value="1" selected="selected">Latest</option>
-											<option value="2">In Progress</option>
-											<option value="3">Done</option>
-										</select>
-										<!--end::Select-->
-									</div>
-									<!--end::Action wrapper-->
-									<!--begin::Action wrapper-->
-									<div class="d-flex align-items-center">
-										<!--begin::Separartor-->
-										<div class="bullet bg-secondary h-35px w-1px mx-5"></div>
-										<!--end::Separartor-->
-										<!--begin::Label-->
-										<span class="fs-7 text-gray-700 fw-bold d-none d-sm-block">Impact 
-										<span class="d-none d-xxl-inline">Level</span>:</span>
-										<!--end::Label-->
-										<!--begin::NoUiSlider-->
-										<div class="d-flex align-items-center ps-4" id="kt_toolbar">
-											<div id="kt_toolbar_slider" class="noUi-target noUi-target-primary w-75px w-xxl-150px noUi-sm"></div>
-											<span id="kt_toolbar_slider_value" class="d-flex flex-center bg-light-primary rounded-circle w-35px h-35px ms-4 fs-7 fw-bold text-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Set impact level"></span>
-										</div>
-										<!--end::NoUiSlider-->
-										<!--begin::Separartor-->
-										<div class="bullet bg-secondary h-35px w-1px mx-5"></div>
-										<!--end::Separartor-->
-									</div>
-									<!--end::Action wrapper-->
-									<!--begin::Action wrapper-->
-									<div class="d-flex align-items-center">
-										<!--begin::Label-->
-										<span class="fs-7 text-gray-700 fw-bold pe-3 d-none d-xxl-block">Quick Tools:</span>
-										<!--end::Label-->
-										<!--begin::Actions-->
-										<div class="d-flex">
-											<!--begin::Action-->
-											<a href="#" class="btn btn-sm btn-icon btn-icon-muted btn-active-icon-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_invite_friends">
-												<i class="ki-duotone ki-file fs-1">
-													<span class="path1"></span>
-													<span class="path2"></span>
-												</i>
-											</a>
-											<!--end::Action-->
-											<!--begin::Notifications-->
-											<div class="d-flex align-items-center">
-												<!--begin::Menu- wrapper-->
-												<a href="apps/subscriptions/add.html" class="btn btn-sm btn-icon btn-icon-muted btn-active-icon-primary">
-													<i class="ki-duotone ki-add-files fs-1">
-														<span class="path1"></span>
-														<span class="path2"></span>
-														<span class="path3"></span>
-													</i>
-												</a>
-												<!--end::Menu wrapper-->
-											</div>
-											<!--end::Notifications-->
-											<!--begin::Quick links-->
-											<div class="d-flex align-items-center">
-												<!--begin::Menu wrapper-->
-												<a href="apps/file-manager/folders.html" class="btn btn-sm btn-icon btn-icon-muted btn-active-icon-primary">
-													<i class="ki-duotone ki-file-up fs-1">
-														<span class="path1"></span>
-														<span class="path2"></span>
-													</i>
-												</a>
-												<!--end::Menu wrapper-->
-											</div>
-											<!--end::Quick links-->
-										</div>
-										<!--end::Actions-->
-									</div>
-									<!--end::Action wrapper-->
 									<!--begin::Theme mode-->
 									<div class="d-flex align-items-center">
 										<!--begin::Menu toggle-->
@@ -479,7 +400,7 @@
 															<span class="path4"></span>
 														</i>
 													</span>
-													<span class="menu-title">System</span>
+													<span class="menu-title">Sistema</span>
 												</a>
 											</div>
 											<!--end::Menu item-->
@@ -508,51 +429,18 @@
 										<!--begin::Table container-->
 										<div class="table-responsive">
 											<!--begin::Table-->
-											<table class="table align-middle table-striped gy-7">
+											<table class="table table-striped gy-7">
 												<!--begin::Table head-->
-												<thead class="align-middle">
+												<thead class="">
 													<tr id="kt_pricing">
-														<th>
-															<!--begin::Nav group-->
-															<div class="nav bg-light rounded-pill px-3 py-2 ms-9 mb-15 w-225px" data-kt-buttons="true">
-																<!--begin::Nav link-->
-																<button class="nav-link active btn btn-active btn-active-dark fw-bold btn-color-gray-600 active py-3 px-5 m-1 rounded-pill" data-kt-plan="month">Monthly</button>
-																<!--end::Nav link-->
-																<!--begin::Nav link-->
-																<button class="nav-link btn btn-active btn-active-dark fw-bold btn-color-gray-600 py-3 px-5 m-1 rounded-pill" data-kt-plan="annual">Annually</button>
-																<!--end::Nav link-->
-															</div>
-															<!--end::Nav group-->
-														</th>
-														<th class="text-center min-w-200px">
+														<th class="text-center min-w-200px align-middle">
 															<div class="min-w-200px mb-15">
-																<div class="text-primary fs-3 fw-bold mb-7">Free</div>
-																<div class="fs-5x fw-semibold d-flex justify-content-center align-items-start lh-sm">
-																<span class="align-self-start fs-2 mt-3">$</span>0</div>
-																<div class="text-muted fw-bold mb-7">Monthly</div>
-																<a href="#" class="btn btn-light-primary fw-bold mx-auto">Start</a>
-															</div>
-														</th>
-														<th class="text-center min-w-200px">
-															<div class="min-w-200px bg-primary card-rounded py-12 mb-15">
-																<div class="text-white fs-3 fw-bold mb-7">Pro</div>
-																<div class="fs-5x text-white d-flex justify-content-center align-items-start">
-																	<span class="fs-2 mt-3">$</span>
-																	<span class="lh-sm fw-semibold" data-kt-plan-price-month="99" data-kt-plan-price-annual="399">99</span>
+																<div class="text-primary fs-3 fw-bold mb-7">Base</div>
+																<div class="fs-5x d-flex justify-content-center ">
+																	<span class="fs-2 mt-3">€</span>
+																	<span class="lh-sm fw-semibold" data-kt-plan-price-month="19,99">19,99</span>
 																</div>
-																<div class="text-white fw-bold mb-7">Monthly</div>
-																<a href="#" class="btn bg-white bg-opacity-20 bg-hover-white text-hover-primary text-white fw-bold mx-auto">Start</a>
-															</div>
-														</th>
-														<th class="text-center min-w-200px">
-															<div class="min-w-200px mb-15">
-																<div class="text-primary fs-3 fw-bold mb-7">Lifetime</div>
-																<div class="fs-5x d-flex justify-content-center align-items-start">
-																	<span class="fs-2 mt-3">$</span>
-																	<span class="lh-sm fw-semibold" data-kt-plan-price-month="199" data-kt-plan-price-annual="999">199</span>
-																</div>
-																<div class="text-muted fw-bold mb-7">Monthly</div>
-																<a href="#" class="btn btn-light-primary fw-bold mx-auto">Select</a>
+																<div class="text-muted fw-bold mb-7">Mensile</div>
 															</div>
 														</th>
 													</tr>
@@ -562,35 +450,9 @@
 												<tbody>
 													<tr>
 														<th class="card-rounded-start">
-															<div class="fw-bold d-flex align-items-center ps-9 fs-3">Sublicense Visuals</div>
+															<div class="fw-bold d-flex align-items-center ps-9 fs-3">Fino a 5000 richieste al mese</div>
 														</th>
 														<td>
-															<div class="flex-root d-flex justify-content-center">
-																<span class="h-40px w-40px d-flex flex-center d-block">
-																	<i class="ki-duotone ki-check fs-2x text-success"></i>
-																</span>
-																<span class="h-40px w-40px d-flex flex-center d-none">
-																	<i class="ki-duotone ki-cross fs-2x text-0">
-																		<span class="path1"></span>
-																		<span class="path2"></span>
-																	</i>
-																</span>
-															</div>
-														</td>
-														<td>
-															<div class="px-7 flex-root d-flex justify-content-center">
-																<span class="h-40px w-40px d-flex flex-center d-block">
-																	<i class="ki-duotone ki-check fs-2x text-success"></i>
-																</span>
-																<span class="h-40px w-40px d-flex flex-center d-none">
-																	<i class="ki-duotone ki-cross fs-2x text-0">
-																		<span class="path1"></span>
-																		<span class="path2"></span>
-																	</i>
-																</span>
-															</div>
-														</td>
-														<td class="card-rounded-end">
 															<div class="flex-root d-flex justify-content-center">
 																<span class="h-40px w-40px d-flex flex-center d-block">
 																	<i class="ki-duotone ki-check fs-2x text-success"></i>
@@ -606,35 +468,9 @@
 													</tr>
 													<tr>
 														<th class="card-rounded-start">
-															<div class="fw-bold d-flex align-items-center ps-9 fs-3">Free Updates</div>
+															<div class="fw-bold d-flex align-items-center ps-9 fs-3">Priorità standard</div>
 														</th>
 														<td>
-															<div class="flex-root d-flex justify-content-center">
-																<span class="h-40px w-40px d-flex flex-center d-block">
-																	<i class="ki-duotone ki-check fs-2x text-success"></i>
-																</span>
-																<span class="h-40px w-40px d-flex flex-center d-none">
-																	<i class="ki-duotone ki-cross fs-2x text-0">
-																		<span class="path1"></span>
-																		<span class="path2"></span>
-																	</i>
-																</span>
-															</div>
-														</td>
-														<td>
-															<div class="px-7 flex-root d-flex justify-content-center">
-																<span class="h-40px w-40px d-flex flex-center d-block">
-																	<i class="ki-duotone ki-check fs-2x text-success"></i>
-																</span>
-																<span class="h-40px w-40px d-flex flex-center d-none">
-																	<i class="ki-duotone ki-cross fs-2x text-0">
-																		<span class="path1"></span>
-																		<span class="path2"></span>
-																	</i>
-																</span>
-															</div>
-														</td>
-														<td class="card-rounded-end">
 															<div class="flex-root d-flex justify-content-center">
 																<span class="h-40px w-40px d-flex flex-center d-block">
 																	<i class="ki-duotone ki-check fs-2x text-success"></i>
@@ -650,35 +486,9 @@
 													</tr>
 													<tr>
 														<th class="card-rounded-start">
-															<div class="fw-bold d-flex align-items-center ps-9 fs-3">Theme Support</div>
+															<div class="fw-bold d-flex align-items-center ps-9 fs-3">Precisione standard</div>
 														</th>
 														<td>
-															<div class="flex-root d-flex justify-content-center">
-																<span class="h-40px w-40px d-flex flex-center d-block">
-																	<i class="ki-duotone ki-check fs-2x text-success"></i>
-																</span>
-																<span class="h-40px w-40px d-flex flex-center d-none">
-																	<i class="ki-duotone ki-cross fs-2x text-0">
-																		<span class="path1"></span>
-																		<span class="path2"></span>
-																	</i>
-																</span>
-															</div>
-														</td>
-														<td>
-															<div class="px-7 flex-root d-flex justify-content-center">
-																<span class="h-40px w-40px d-flex flex-center d-block">
-																	<i class="ki-duotone ki-check fs-2x text-success"></i>
-																</span>
-																<span class="h-40px w-40px d-flex flex-center d-none">
-																	<i class="ki-duotone ki-cross fs-2x text-0">
-																		<span class="path1"></span>
-																		<span class="path2"></span>
-																	</i>
-																</span>
-															</div>
-														</td>
-														<td class="card-rounded-end">
 															<div class="flex-root d-flex justify-content-center">
 																<span class="h-40px w-40px d-flex flex-center d-block">
 																	<i class="ki-duotone ki-check fs-2x text-success"></i>
@@ -694,7 +504,7 @@
 													</tr>
 													<tr>
 														<th class="card-rounded-start">
-															<div class="fw-bold d-flex align-items-center ps-9 fs-3">Unlimited Websites</div>
+															<div class="fw-bold d-flex align-items-center ps-9 fs-3">Richieste web + API</div>
 														</th>
 														<td>
 															<div class="flex-root d-flex justify-content-center">
@@ -702,120 +512,6 @@
 																	<i class="ki-duotone ki-check fs-2x text-success"></i>
 																</span>
 																<span class="h-40px w-40px d-flex flex-center d-block">
-																	<i class="ki-duotone ki-cross fs-2x text-danger">
-																		<span class="path1"></span>
-																		<span class="path2"></span>
-																	</i>
-																</span>
-															</div>
-														</td>
-														<td>
-															<div class="px-7 flex-root d-flex justify-content-center">
-																<span class="h-40px w-40px d-flex flex-center d-block">
-																	<i class="ki-duotone ki-check fs-2x text-success"></i>
-																</span>
-																<span class="h-40px w-40px d-flex flex-center d-none">
-																	<i class="ki-duotone ki-cross fs-2x text-danger">
-																		<span class="path1"></span>
-																		<span class="path2"></span>
-																	</i>
-																</span>
-															</div>
-														</td>
-														<td class="card-rounded-end">
-															<div class="flex-root d-flex justify-content-center">
-																<span class="h-40px w-40px d-flex flex-center d-block">
-																	<i class="ki-duotone ki-check fs-2x text-success"></i>
-																</span>
-																<span class="h-40px w-40px d-flex flex-center d-none">
-																	<i class="ki-duotone ki-cross fs-2x text-danger">
-																		<span class="path1"></span>
-																		<span class="path2"></span>
-																	</i>
-																</span>
-															</div>
-														</td>
-													</tr>
-													<tr>
-														<th class="card-rounded-start">
-															<div class="fw-bold d-flex align-items-center ps-9 fs-3">DDOS Protection</div>
-														</th>
-														<td>
-															<div class="flex-root d-flex justify-content-center">
-																<span class="h-40px w-40px d-flex flex-center d-none">
-																	<i class="ki-duotone ki-check fs-2x text-success"></i>
-																</span>
-																<span class="h-40px w-40px d-flex flex-center d-block">
-																	<i class="ki-duotone ki-cross fs-2x text-danger">
-																		<span class="path1"></span>
-																		<span class="path2"></span>
-																	</i>
-																</span>
-															</div>
-														</td>
-														<td>
-															<div class="px-7 flex-root d-flex justify-content-center">
-																<span class="h-40px w-40px d-flex flex-center d-none">
-																	<i class="ki-duotone ki-check fs-2x text-success"></i>
-																</span>
-																<span class="h-40px w-40px d-flex flex-center d-block">
-																	<i class="ki-duotone ki-cross fs-2x text-danger">
-																		<span class="path1"></span>
-																		<span class="path2"></span>
-																	</i>
-																</span>
-															</div>
-														</td>
-														<td class="card-rounded-end">
-															<div class="flex-root d-flex justify-content-center">
-																<span class="h-40px w-40px d-flex flex-center d-block">
-																	<i class="ki-duotone ki-check fs-2x text-success"></i>
-																</span>
-																<span class="h-40px w-40px d-flex flex-center d-none">
-																	<i class="ki-duotone ki-cross fs-2x text-danger">
-																		<span class="path1"></span>
-																		<span class="path2"></span>
-																	</i>
-																</span>
-															</div>
-														</td>
-													</tr>
-													<tr>
-														<th class="card-rounded-start">
-															<div class="fw-bold d-flex align-items-center ps-9 fs-3">Domain Reseller</div>
-														</th>
-														<td>
-															<div class="flex-root d-flex justify-content-center">
-																<span class="h-40px w-40px d-flex flex-center d-none">
-																	<i class="ki-duotone ki-check fs-2x text-success"></i>
-																</span>
-																<span class="h-40px w-40px d-flex flex-center d-block">
-																	<i class="ki-duotone ki-cross fs-2x text-danger">
-																		<span class="path1"></span>
-																		<span class="path2"></span>
-																	</i>
-																</span>
-															</div>
-														</td>
-														<td>
-															<div class="px-7 flex-root d-flex justify-content-center">
-																<span class="h-40px w-40px d-flex flex-center d-none">
-																	<i class="ki-duotone ki-check fs-2x text-success"></i>
-																</span>
-																<span class="h-40px w-40px d-flex flex-center d-block">
-																	<i class="ki-duotone ki-cross fs-2x text-danger">
-																		<span class="path1"></span>
-																		<span class="path2"></span>
-																	</i>
-																</span>
-															</div>
-														</td>
-														<td class="card-rounded-end">
-															<div class="flex-root d-flex justify-content-center">
-																<span class="h-40px w-40px d-flex flex-center d-block">
-																	<i class="ki-duotone ki-check fs-2x text-success"></i>
-																</span>
-																<span class="h-40px w-40px d-flex flex-center d-none">
 																	<i class="ki-duotone ki-cross fs-2x text-danger">
 																		<span class="path1"></span>
 																		<span class="path2"></span>
@@ -828,6 +524,30 @@
 												<!--end::Table body-->
 											</table>
 											<!--end::Table-->
+											<div class="mb-10 ">
+												<button type="submit" id="downgrade_sub" class="btn btn-danger" style="background-color: #ff0000">
+													<!--begin::Indicator label-->
+													<span class="indicator-label">Passa ad un piano più economico</span>
+													<!--end::Indicator label-->
+													<!--begin::Indicator progress-->
+														<span class="indicator-progress">Attendi per favore...
+														<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+													<!--end::Indicator progress-->
+												</button>
+											</div>
+											<!--end::Button-->
+											<div class="mb-10">
+											<button type="submit" id="upgrade_sub" class="btn btn-primary" >
+												<!--begin::Indicator label-->
+												<span class="indicator-label">Passa ad un abbonamento migliore</span>
+												<!--end::Indicator label-->
+												<!--begin::Indicator progress-->
+												<span class="indicator-progress">Attendi per favore...
+																			<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+												<!--end::Indicator progress-->
+											</button>
+										</div>
+										<!--end::Button-->
 										</div>
 										<!--end::Table container-->
 									</div>

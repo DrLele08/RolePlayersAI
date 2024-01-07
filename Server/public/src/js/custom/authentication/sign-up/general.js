@@ -47,6 +47,8 @@ var KTSignupGeneral = function () {
                             }
                         }
                     },
+                    'phone': {
+                    },
                     'email': {
                         validators: {
                             regexp: {
@@ -216,6 +218,8 @@ var KTSignupGeneral = function () {
                                 message: 'Data di nascita richiesta'
                             }
                         }
+                    },
+                    'phone': {
                     },
                     'email': {
                         validators: {
