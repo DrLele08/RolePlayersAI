@@ -19,7 +19,7 @@ CREATE TABLE Utente(
     email VARCHAR(50) UNIQUE NOT NULL,
     password CHAR(255) NOT NULL,
     dataNascita DATE NOT NULL,
-    telefono VARCHAR(10),
+    telefono VARCHAR(14),
     ruolo ENUM('Utente', 'Moderatore', 'Amministratore') NOT NULL DEFAULT 'Utente',
     msgRimanenti INT NOT NULL DEFAULT 100,
     scadenzaAbbonamento DATE,
