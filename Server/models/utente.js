@@ -4,9 +4,7 @@ const abbonamento = require("./abbonamento");
 const utils = require("../models/utils.js");
 const stripe = require('stripe')('sk_test_51OURuIHOFfOlBPkf5Zoi0O0G9o3OmzAHZ3plZCPzBpa2C8PYevvdYc9DgAHKmG1dqHGvhEfAzihtwUc1zPjabuRb00i0nGIHy3');
 
-
 const utente = {};
-
 
 const Utente = db.define('Utente', {
     idUtente: {
@@ -83,13 +81,11 @@ const Utente = db.define('Utente', {
  * @param {Number} id - ID dell'utente
  * @returns {Promise} - Promise che si risolve con l'istanza dell'utente corrispondente all'ID, o null se non trovato
  */
-utente.getById=(id)=>{
-    return Utente.findByPk(id, {
+utente.getById = async (id) => {
+    return await Utente.findByPk(id, {
         attributes: {exclude: ['password', 'authToken']}
     });
 };
-
-
 
 /**
  *Restituisce l`utente con l`ID dato in input escludendo le informazioni riguardanti password e auth token.
@@ -99,12 +95,12 @@ utente.getById=(id)=>{
  * @param {String} tokenAuth - token Autenticazione
  * @returns {Promise} - Promise che si risolve con l'istanza dell'utente corrispondente all'ID, o null se non trovato
  */
-utente.getByIdandTokenAuth=(id,tokenAuth)=>{
-return Utente.findAll({
-    where:{
-        idUtente : id,
-        authToken : tokenAuth,
-    },
+utente.getByIdandTokenAuth = async (id, tokenAuth) => {
+    return await Utente.findAll({
+        where: {
+            idUtente: id,
+            authToken: tokenAuth,
+        },
         attributes: {exclude: ['password', 'authToken']}
     });
 };
@@ -119,7 +115,7 @@ return Utente.findAll({
  * @param {Number} idUtente - ID dell'utente
  * @returns {Promise<Abbonamento>} - Promise che si risolve con l'istanza dell'utente corrispondente all'ID, o null se non trovato
  */
-utente.getActualAbbonamento=async(idUtente) => {
+utente.getActualAbbonamento = async(idUtente) => {
     const utenteCercato = await utente.findByPk(idUtente);
     return utenteCercato.getAbbonamento();
 };
@@ -211,6 +207,6 @@ utente.updateMsgRimanenti = async (idUtente, msgAggiornati)=>{
 };
 
 
-utente.Utente=Utente;
+utente.Utente = Utente;
 
-module.exports=utente;
+module.exports = utente;

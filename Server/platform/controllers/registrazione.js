@@ -1,3 +1,7 @@
-exports.PaginaRegistrazione = (req,ris)=> {
-    ris.render("./public/authentication/layouts/corporate/sign-up.html");
+exports.PaginaRegistrazione = (req, ris)=> {
+    if (req.session.idUtente == null) {
+        ris.render("sing-up");
+    } else {
+        ris.render("index")
+    }
 };
