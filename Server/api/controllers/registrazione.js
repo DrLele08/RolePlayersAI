@@ -1,6 +1,6 @@
 const utenteService = require("../../services/utenteService");
 
-exports.CreateUtente = async(req, res) => {
+exports.createUtente = async(req, res) => {
     let json = {};
 
     if (req.session.idUtente != null) {

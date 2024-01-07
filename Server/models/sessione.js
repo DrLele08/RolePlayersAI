@@ -55,8 +55,8 @@ const Sessione = db.define('Sessione', {
  *
  * @returns {Promise<Sessione>} - Promise che si risolve con l'istanza della Sessione corrispondente, o null se non trovato.
  */
-sessione.getById = (id) => {
-    return Sessione.findByPk(id);
+sessione.getById = async (id) => {
+    return await Sessione.findByPk(id);
 }
 
 /**
@@ -66,8 +66,8 @@ sessione.getById = (id) => {
  *
  * @returns {Promise<Array>} - Array di tutte le sessioni trovate, ordinate in base all'ultimo avvio.
  */
-sessione.getByUtente = (idUtente) => {
-    return Sessione.findAll({
+sessione.getByUtente = async (idUtente) => {
+    return await Sessione.findAll({
         where: {
             fkUtente: idUtente
         },
@@ -79,16 +79,16 @@ sessione.getByUtente = (idUtente) => {
  * Crea una nuova Sessione e la inserisce nel database.
  *
  * @param {Object} data - I dati della nuova sessione.
- * @param {Number} data.fkUtente - ID del creatore della sessione.
- * @param {Number} data.fkContesto - ID del Contesto su cui viene avviata la sessione.
+ * @param {Number} data.utente - ID del creatore della sessione.
+ * @param {Number} data.contesto - ID del Contesto su cui viene avviata la sessione.
  * @param {String} data.titolo - Nome della sessione.
  *
  * @returns {Promise<Sessione>} - Istanza della Sessione appena creata.
  */
 sessione.createSessione = async (data) => {
     return await Sessione.create({
-        fkUtente: data.fkUtente,
-        fkContesto: data.fkContesto,
+        fkUtente: data.utente,
+        fkContesto: data.contesto,
         titolo: data.titolo,
     });
 }
