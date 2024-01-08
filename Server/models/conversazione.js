@@ -82,7 +82,7 @@ conversazione.getBySessioneAndPersonaggio = (idSessione, idPersonaggio)=>{
  */
 conversazione.createConversazione = (dati) =>{
     const currentDate = new Date();
-    return conversazione.create({
+    return Conversazione.create({
         fkSessione: dati.fkSessione,
         fkPersonaggio: dati.fkPersonaggio,
         dataAvvio: currentDate,

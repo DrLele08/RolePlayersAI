@@ -52,7 +52,7 @@ conversazioneService.createConversazione = async (dati)=>{
 
     //Prima di crearla controlla se esiste già una conversazione con quel personaggio in quella sessione
     const conv = await conversazione.getBySessioneAndPersonaggio(dati.fkSessione, dati.fkPersonaggio);
-    if(conv !== null){
+    if(conv.length !== 0){
         return Promise.reject("Conversazione gia esistente");
     }
     else{
