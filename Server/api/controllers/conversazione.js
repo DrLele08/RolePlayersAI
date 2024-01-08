@@ -1,4 +1,5 @@
 const messaggioService = require("../../services/messaggioService");
+const conversazioneService = require("../../services/conversazioneService");
 
 exports.InviaMessaggio = async(req, res) =>{
     let json = {};
@@ -21,4 +22,40 @@ exports.InviaMessaggio = async(req, res) =>{
         json.Mess = error.message || "Errore Generico";
         res.json(json)
     }
-}
+};
+
+exports.GetById = async(req, res) =>{
+    let json = {};
+
+    const idConversazione = res.params.idConversazione;
+    const idUtente = res.locals.idUtente;
+
+    try{
+        const conv = await conversazioneService.getById(idConversazione, idUtente);
+        json.Ris = 1;
+        json.Conversazione = conv;
+        res.json(json);
+    }catch (error){
+        json.Ris = 0;
+        json.Mess = error.message || "Errore Generico";
+        res.json(json)
+    }
+};
+
+exports.GetMessages = async(req, res) =>{
+    let json = {};
+
+    const idConversazione = res.params.idConversazione;
+    const idUtente = res.locals.idUtente;
+
+    try{
+        const conv = await conversazioneService.getMessages(idConversazione, idUtente);
+        json.Ris = 1;
+        json.Conversazione = conv;
+        res.json(json);
+    }catch (error){
+        json.Ris = 0;
+        json.Mess = error.message || "Errore Generico";
+        res.json(json)
+    }
+};

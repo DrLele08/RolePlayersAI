@@ -24,7 +24,7 @@ conversazioneService.getById = async (idConversazione, idUtente) =>{
     }
 };
 
-conversazioneService.getMessaggiByConversazione = async (idConversazione, idUtente) =>{
+conversazioneService.getMessages = async (idConversazione, idUtente) =>{
     if(!utils.checkId(idConversazione) || !utils.checkId(idUtente)){
         return Promise.reject("ID non valido");
     }
