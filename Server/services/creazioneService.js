@@ -38,11 +38,11 @@ creazioneService.getById=async(dati)=>{
 
 creazioneService.DeleteById=async(dati)=>{
     if(dati.idCreazione>0) {
-        let creazioneEliminata = await creazione.deleteById(dati.idCreazione);
-        if (creazioneEliminata !== null) {
+        let creazione = await creazione.getById(dati.idCreazione);
+        if (creazione !== null) {
 
             if (dati.idRuolo === 2 || dati.idRuolo === 3) {
-                return creazioneEliminata;
+                return creazione.deleteById(dati.idCreazione);
             } else {
                 return Promise.reject("Non hai i permessi");
             }
@@ -61,7 +61,35 @@ creazioneService.DeleteById=async(dati)=>{
 creazioneService.createCreazione = async (dati) =>{
     if(utils.checkParameters(dati, requiredFields)){
         if(utils.checkId(dati.fkUtente)){
+            let err = 0;
+            dati.nome = dati.nome.trim();
+            dati.descrizione = dati.descrizione.trim();
+            dati.tipo = dati.tipo.trim();
 
+            if (dati.nome.length > 0 && dati.nome.length < 51 ) {
+
+                }
+            else {
+                err = 1;
+            }
+            if(dati.idUtente!==dati.fkUtente)
+            {
+                err = 1;
+            }
+            if (dati.descrizione.length > 0 && dati.descrizione.length < 513) {
+
+            }
+            else{
+                err = 1;
+            }
+            if (dati.tipo !== 'Personaggio' || 'Ambiente') {
+                err = 1;
+            }
+
+            if(err)
+            {
+                return Promise.reject("Dati non validi");
+            }
 
             let nuovaCreazione;
 
@@ -95,7 +123,6 @@ creazioneService.createCreazione = async (dati) =>{
         }
     }
     else{
-        console.log(dati);
         return Promise.reject("Dati non validi");
     }
 }
