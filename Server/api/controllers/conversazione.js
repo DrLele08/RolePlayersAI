@@ -6,7 +6,7 @@ exports.InviaMessaggio = async(req, res) =>{
 
     const messaggio = req.body.messaggio;
     const idConversazione = req.body.idConversazione;
-    const idUtente = res.locals.idUtente;
+    const idUtente = req.idUtente;
 
     try{
         const risposta = await messaggioService.inviaMessaggio({
@@ -28,7 +28,7 @@ exports.GetById = async(req, res) =>{
     let json = {};
 
     const idConversazione = res.params.idConversazione;
-    const idUtente = res.locals.idUtente;
+    const idUtente = req.idUtente;
 
     try{
         const conv = await conversazioneService.getById(idConversazione, idUtente);
@@ -46,7 +46,7 @@ exports.GetMessages = async(req, res) =>{
     let json = {};
 
     const idConversazione = res.params.idConversazione;
-    const idUtente = res.locals.idUtente;
+    const idUtente = req.idUtente;
 
     try{
         const conv = await conversazioneService.getMessages(idConversazione, idUtente);
