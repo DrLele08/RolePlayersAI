@@ -11,7 +11,7 @@ exports.GetById = async (req,res)=>{
         res.json(json);
     }catch (error){
         json.Ris = 0;
-        json.Mess = error.message || "Errore Generico";
+        json.Mess = error || "Errore Generico";
         res.json(json);
     }
 };
@@ -27,7 +27,7 @@ exports.GetByContesto = async (req,res)=>{
         res.json(json);
     }catch (error){
         json.Ris = 0;
-        json.Mess = error.message || "Errore Generico";
+        json.Mess = error || "Errore Generico";
         res.json(json);
     }
 };
@@ -52,7 +52,7 @@ exports.CreateRelazionePersonaggi = async (req, res)=>{
         res.json(json);
     }catch (error){
         json.Ris = 0;
-        json.Mess = error.message || "Errore Generico";
+        json.Mess = error || "Errore Generico";
         res.json(json)
     }
 }
