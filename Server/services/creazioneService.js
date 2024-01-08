@@ -101,39 +101,41 @@ creazioneService.createCreazione = async (dati) =>{
 }
 
 creazioneService.getByFilter = async (nome, tipo, page, dati)=>{
-    if(page > 0){
+    if(page > 0) {
         let filters = {};
 
-        if(nome !== undefined){
+        if (nome !== undefined) {
             nome = nome.trim();
-            if(nome.length > 0){
+            if (nome.length > 0) {
                 filters.nome = nome;
             }
         }
 
 
-        if(!isNaN(tipo)){
-            if(tipo ==='Personaggio' || 'Ambiente')
-            {
+        if (!isNaN(tipo)) {
+            if (tipo === 'Personaggio' || 'Ambiente') {
                 filters.tipo = tipo;
             }
 
         }
 
-        /* todo ricavare la creazione
-        if(creazione.isPublic)
-        {
-            aggiungi creazione al nuovo array
+        let result = await creazione.getByFilter(filters, page);
+
+        for (let i = 0; i < result.totalItems; i++) {
+            if (!result.creazioni[i].isPubblico) {
+
+                result.creazioni.splice(i, 1); //rimuove elemento dall'array
+                result.totalItems--;
+            }
+            else if (dati.idUtente !== result.creazioni[i].fkUtente || dati.idRuolo !== 2 || dati.idRuolo !== 3) {
+                result.creazioni.splice(i, 1); //rimuove elemento dall'array
+                result.totalItems--;
+            }
         }
-        else if (dati.idUtente === fkUtente || dati.idRuolo === 2 || dati.idRuolo ===3)
-        {
-            aggiungi creazione al nuovo array
-        }
 
-           ritorna promise con nuovo array.
+        result.totalPages = (result.totalItems + result.pageSize - 1)/result.pageSize;
 
-         */
-
+        return result;
 
 
     }
