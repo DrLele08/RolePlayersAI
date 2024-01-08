@@ -29,7 +29,7 @@ const Conversazione = db.define('Conversazione', {
             key: 'idCreazione'
         }
     },
-    dataCreazione: {
+    dataAvvio: {
         type: DataTypes.DATE,
         allowNull: false,
         defaultValue: db.literal('NOW()')
@@ -85,7 +85,7 @@ conversazione.createConversazione = (dati) =>{
     return conversazione.create({
         fkSessione: dati.fkSessione,
         fkPersonaggio: dati.fkPersonaggio,
-        dataCreazione: currentDate,
+        dataAvvio: currentDate,
         ultimoAvvio: currentDate
     });
 };
