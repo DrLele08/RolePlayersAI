@@ -79,17 +79,17 @@ sessione.getByUtente = async (idUtente) => {
  * Crea una nuova Sessione e la inserisce nel database.
  *
  * @param {Object} data - I dati della nuova sessione.
- * @param {Number} data.utente - ID del creatore della sessione.
- * @param {Number} data.contesto - ID del Contesto su cui viene avviata la sessione.
+ * @param {Number} data.idUtente - ID del creatore della sessione.
+ * @param {Number} data.idContesto - ID del Contesto su cui viene avviata la sessione.
  * @param {String} data.titolo - Nome della sessione.
  *
  * @returns {Promise<Sessione>} - Istanza della Sessione appena creata.
  */
 sessione.createSessione = async (data) => {
     return await Sessione.create({
-        fkUtente: data.utente,
-        fkContesto: data.contesto,
-        titolo: data.titolo,
+        fkUtente: data.idUtente,
+        fkContesto: data.idContesto,
+        titolo: data.titolo
     });
 }
 

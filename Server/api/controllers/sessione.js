@@ -15,3 +15,23 @@ exports.getByUtente = async(req, res) => {
         json.Mess = error || "Errore generico";
     }).finally(() => res.json(json));
 }
+
+exports.createUtente = async(req, res) => {
+    let json = {};
+
+    let data = {
+        idUtente: req.body.idUtente,
+        idContesto: req.body.idContesto,
+        titolo: req.body.titolo
+    };
+
+    sessioneService.createSessione(data).then((sessione) => {
+        res.status(201);
+        json.Ris = 1;
+        json.Sessione = sessione;
+    }).catch(error => {
+        res.status(400);
+        json.Ris = 0;
+        json.Mess = error || "Errore generico";
+    }).finally(() => res.json(json));
+}
