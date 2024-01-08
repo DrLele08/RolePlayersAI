@@ -5,7 +5,7 @@ module.exports = app => {
     const sessioneControl = require("../controllers/sessione");
 
     router.get("/getByUtente/:idUtente", middlewareAuth([1, 2, 3]), sessioneControl.getByUtente);
-    router.post("/create", multer().any(), middlewareAuth([1, 2, 3]), sessioneControl.createUtente);
+    router.post("/create", multer().any(), middlewareAuth([1, 2, 3]), sessioneControl.createSessione);
 
     app.use("/api/sessione", router);
 }
