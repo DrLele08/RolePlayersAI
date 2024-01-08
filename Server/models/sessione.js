@@ -4,6 +4,7 @@ const utente = require("./utente");
 const utils = require("../models/utils");
 const contesto = require("./contesto");
 const {Sequelize} = require("sequelize");
+const moment = require("moment-timezone");
 
 const sessione = {}
 
@@ -37,7 +38,11 @@ const Sessione = db.define('Sessione', {
     dataCreazione: {
         type: DataTypes.DATE,
         allowNull: false,
-        defaultValue: utils.getCurrentDateTime()
+        defaultValue: DataTypes.NOW,
+        get() {
+            const value = this.getDataValue('dataCreazione');
+            return moment(value).format();
+        }
     },
     ultimoAvvio: {
         type: DataTypes.DATE,
@@ -101,7 +106,7 @@ sessione.createSessione = async (data) => {
  */
 sessione.setUltimoAvvioToNow = async (id) => {
     const result = await Sessione.update({
-        ultimoAvvio: utils.getCurrentDateTime()
+        ultimoAvvio: db.literal("NOW()")
     }, {
         where: {
             idSessione: id
