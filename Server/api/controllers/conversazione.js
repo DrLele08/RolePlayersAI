@@ -15,7 +15,8 @@ exports.InviaMessaggio = async(req, res) =>{
             idUtente: idUtente
         });
         json.Ris = 1;
-        json.Risposta = risposta;
+        json.Risposta = risposta.risposta;
+        json.MsgRimanenti = risposta.msgRimanenti;
         res.json(json);
     }catch (error){
         json.Ris = 0;
