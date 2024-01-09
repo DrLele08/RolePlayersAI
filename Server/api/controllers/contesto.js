@@ -1,4 +1,5 @@
 const contestoService = require("../../services/contestoService");
+const creazioneService = require("../../services/creazioneService");
 
 exports.CreateContesto = async (req,res) =>{
     let json = {};
@@ -30,34 +31,24 @@ exports.CreateContesto = async (req,res) =>{
 
 exports.GetContestoById= async (req,res)=> {
     let json = {};
-    let idContesto = req.query.idContesto;
-    try {
-        const contesto = await contestoService.getById(idContesto);
+    let idContesto = req.params.idContesto;
+    let idUtente = req.idUtente;
+    let idRuolo = req.idRuolo;
+    try{
+        const contesto = await contestoService.getContestoById({
+            idContesto: idContesto,
+            idUtente: idUtente,
+            idRuolo: idRuolo
+        });
         json.Ris = 1;
         json.Contesto = contesto;
         res.json(json);
-    } catch (error) {
+    }catch (error){
         json.Ris = 0;
         json.Mess = error || "Errore Generico";
         res.json(json);
     }
 };
-
-exports.GetAll = async (req,res) =>{
-    let json = {};
-
-    try{
-        const listaContesti = await contestoService.getAll();
-        json.Ris = 1;
-        json.Contesto = listaContesti;
-        res.json(json);
-    }
-    catch(error){
-        json.Ris = 0;
-        json.Mess = error || "Errore Generico";
-        res.json(json);
-    }
-}
 
 exports.DeleteContesto= async (req,res)=> {
     let json = {};
@@ -68,6 +59,29 @@ exports.DeleteContesto= async (req,res)=> {
         json.Contesto = contesto;
         res.json(json);
     } catch (error) {
+        json.Ris = 0;
+        json.Mess = error || "Errore Generico";
+        res.json(json);
+    }
+};
+
+exports.GetByFilter = async (req,res)=>{
+    let json = {};
+    let nome = req.query.Nome;
+    let pagina = req.query.Pagina;
+    let idUtente= req.idUtente;
+    let idRuolo= req.idRuolo;
+
+
+    try{
+        const risContesto = await creazioneService.getByFilter(nome,pagina,{
+            idUtente: idUtente,
+            idRuolo: idRuolo
+        });
+        json.Ris = 1;
+        json.Creazione = risContesto;
+        res.json(json);
+    }catch (error){
         json.Ris = 0;
         json.Mess = error || "Errore Generico";
         res.json(json);

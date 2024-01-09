@@ -1,4 +1,4 @@
-const stripeService = require("../../services/stripeService");
+const stripeService = require("../../services/pagamentoService");
 
 exports.EffettuaPagamento=async(req,ris)=>{
         let idUtente = req.idUtente;

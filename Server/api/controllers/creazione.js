@@ -48,13 +48,15 @@ exports.GetByFilter = async (req,res)=>{
     let nome = req.query.Nome;
     let tipo = req.query.Tipo;
     let pagina = req.query.Pagina;
-    let dati = {
-        idUtente: req.idUtente,
-        idRuolo: req.idRuolo
-    }
+    let idUtente= req.idUtente;
+    let idRuolo= req.idRuolo;
+
 
     try{
-        const risCreazione = await creazioneService.getByFilter(nome,tipo,pagina,dati);
+        const risCreazione = await creazioneService.getByFilter(nome,tipo,pagina,{
+            idUtente: idUtente,
+            idRuolo: idRuolo
+        });
         json.Ris = 1;
         json.Creazione = risCreazione;
         res.json(json);
@@ -75,11 +77,12 @@ exports.CreateCreazione = async (req, res)=>{
     const descrizione = req.body.descrizione;
     const isPubblico = req.body.isPubblico;
     const tipo = req.body.tipo;
-    const img = req.file;
+    const img = req.file; //todo se non si passa un img
     const idUtente = req.idUtente;
 
+
     try{
-        const nuovaCreazione = creazioneService.createCreazione({
+        const nuovaCreazione = await creazioneService.createCreazione({
             fkUtente: fkUtente,
             nome: nome,
             immagine: immagine,
@@ -87,7 +90,7 @@ exports.CreateCreazione = async (req, res)=>{
             tipo: tipo,
             descrizione: descrizione,
             img:img,
-            idUtente: idUtente,
+            idUtente: idUtente
         });
         json.Ris = 1;
         json.NuovaCreazione = nuovaCreazione;
