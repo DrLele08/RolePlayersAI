@@ -1,9 +1,7 @@
 const db= require("./database");
-const DataTypes=require("sequelize").DataTypes;
+const DataTypes= require("sequelize").DataTypes;
 const utente = require("./utente");
-const utils = require("../models/utils");
 const contesto = require("./contesto");
-const {Sequelize} = require("sequelize");
 const moment = require("moment-timezone");
 
 const sessione = {}
@@ -47,6 +45,10 @@ const Sessione = db.define('Sessione', {
     ultimoAvvio: {
         type: DataTypes.DATE,
         allowNull: true,
+        get() {
+            const value = this.getDataValue('ultimoAvvio');
+            return moment(value).format();
+        }
     }
 },{
     freezeTableName: true,
@@ -117,20 +119,12 @@ sessione.setUltimoAvvioToNow = async (id) => {
     return result[0] === 1;
 }
 
-/**
- * Elimina una Sessione dal database.
- *
- * @param {Number} id - ID della sessione da eliminare.
- * @returns {Promise<Boolean>} - Promise che risolve a `true` se l'eliminazione ha avuto successo, altrimenti a `false`.
- */
 sessione.deleteById = async (id) => {
-    const result = await Sessione.destroy({
+    return await Sessione.destroy({
         where: {
             idSessione: id
         }
     });
-
-    return result === 1;
 }
 
 sessione.Sessione = Sessione;

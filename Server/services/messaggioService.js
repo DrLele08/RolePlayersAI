@@ -20,14 +20,14 @@ messaggioService.inviaMessaggio = async (dati)=>{
     }
 
     //Controllo appartenenza della sessione
-    conv = await conversazione.getById(dati.idConversazione);
-    sess = await conv.getSessione();
+    const conv = await conversazione.getById(dati.idConversazione);
+    const sess = await conv.getSessione();
     if(sess.fkUtente !== dati.idUtente){
         return Promise.reject("La conversazione non appartiene ad una sessione dell`utente");
     }
 
     //Controllo messaggi rimanenti
-    user = await utente.getById(dati.idUtente);
+    const user = await utente.getById(dati.idUtente);
     if(user.msgRimanenti < 1){
         return Promise.reject("0 Messaggi Rimanenti");
     }
@@ -54,7 +54,8 @@ messaggioService.inviaMessaggio = async (dati)=>{
     const risposta = await chatGPT.inviaMessaggio(listMessaggi);
 
     //Aggiorna Messaggi Rimanenti
-    utente.updateMsgRimanenti(user.idUtente, user.msgRimanenti-1);
+    const msgRimanenti = user.msgRimanenti-1;
+    await utente.updateMsgRimanenti(user.idUtente, msgRimanenti);
 
     //Salva la risposta nel DB e restituisci la risposta
     await messaggio.createMessaggio({
@@ -63,7 +64,10 @@ messaggioService.inviaMessaggio = async (dati)=>{
         "isUtente": false
     });
 
-    return risposta.content;
+    return {
+        risposta: risposta.content,
+        msgRimanenti: msgRimanenti
+    };
 
 };
 

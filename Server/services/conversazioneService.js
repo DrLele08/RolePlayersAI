@@ -24,9 +24,13 @@ conversazioneService.getById = async (idConversazione, idUtente) =>{
     }
 };
 
-conversazioneService.getMessages = async (idConversazione, idUtente) =>{
+conversazioneService.getMessages = async (idConversazione, pagina, idUtente) =>{
     if(!utils.checkId(idConversazione) || !utils.checkId(idUtente)){
         return Promise.reject("ID non valido");
+    }
+
+    if(pagina < 1){
+        pagina = 1;
     }
 
     const conv = await conversazione.getById(idConversazione);
@@ -38,7 +42,7 @@ conversazioneService.getMessages = async (idConversazione, idUtente) =>{
         return Promise.reject("La conversazione appartiene ad un altro utente");
     }
 
-    return await messaggio.getByConversazione(idConversazione);
+    return await messaggio.getByConversazionePaginated(idConversazione, pagina);
 };
 
 conversazioneService.createConversazione = async (dati)=>{
