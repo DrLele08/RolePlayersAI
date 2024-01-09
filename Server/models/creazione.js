@@ -28,7 +28,7 @@ const Creazione = db.define('Creazione', {
     },
     immagine:{
         type: DataTypes.STRING(255),
-        allowNull: false
+        default:"default.jpg"
     },
     descrizione:{
         type: DataTypes.STRING(512),
@@ -87,14 +87,13 @@ creazione.getAll = ()=> {
  *
  * @return {Promise<Creazione>} - Promise che si risolve con l`istanza del personaggio appena creato
  */
-creazione.createPersonaggio = (dati)=>{
-    return Creazione.create({
+creazione.createPersonaggio = async (dati)=>{
+    return await Creazione.create({
         fkUtente: dati.fkUtente,
         nome: dati.nome,
-        immagine: "fittizio",
         descrizione: dati.descrizione,
         isPubblico: dati.isPubblico,
-        tipo: 0,
+        tipo: 'Personaggio',
         sesso: dati.sesso
     });
 };
@@ -115,14 +114,13 @@ creazione.createPersonaggio = (dati)=>{
  *
  * @return {Promise<Creazione>} - Promise che si risolve con l`istanza del'ambiente appena creato
  */
-creazione.createAmbiente = (dati)=>{
-    return Creazione.create({
+creazione.createAmbiente = async (dati)=>{
+    return await Creazione.create({
         fkUtente: dati.fkUtente,
         nome: dati.nome,
-        immagine: "fittizio",
         descrizione: dati.descrizione,
         isPubblico: dati.isPubblico,
-        tipo: 1
+        tipo: 'Ambiente'
     });
 };
 //verifica
@@ -224,7 +222,6 @@ creazione.getByFilter = async (filters, page,dati) => {
             filters,
         });
 
-    //todo controllare perchè dà ambiente quando il tipo è personaggio
 
    if(dati.idRuolo===1){
        let creazioniPubbliche = result.filter(c => c.isPubblico===true);

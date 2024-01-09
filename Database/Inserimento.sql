@@ -34,7 +34,7 @@ CREATE TABLE Creazione(
 	idCreazione BIGINT AUTO_INCREMENT,
     fkUtente BIGINT NOT NULL,
     nome VARCHAR(50) NOT NULL,
-    immagine VARCHAR(255) NOT NULL,
+    immagine VARCHAR(255),
     descrizione VARCHAR(512) NOT NULL,
     isPubblico BOOLEAN NOT NULL,
     tipo ENUM('Personaggio', 'Ambiente') NOT NULL,
@@ -82,7 +82,7 @@ CREATE TABLE Conversazione(
     fkSessione BIGINT NOT NULL,
     fkPersonaggio BIGINT NOT NULL,
     dataAvvio DATETIME NOT NULL DEFAULT NOW(),
-    ultimoAvvio DATETIME NOT NULL,
+    ultimoAvvio DATETIME NOT NULL DEFAULT NOW(),
     PRIMARY KEY (idConversazione),
     FOREIGN KEY (fkSessione) REFERENCES Sessione(idSessione)
         ON DELETE CASCADE

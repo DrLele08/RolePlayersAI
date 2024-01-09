@@ -83,7 +83,7 @@ creazioneService.createCreazione = async (dati) =>{
 
             let nuovaCreazione;
 
-            if (0 === dati.tipo) // se è un personaggio
+            if ('Personaggio' === dati.tipo) // se è un personaggio
             {
                 nuovaCreazione = await creazione.createPersonaggio(dati);
 
@@ -96,17 +96,24 @@ creazioneService.createCreazione = async (dati) =>{
             let fotoUrl="/img/creazione/default.jpeg"
             let baseUrl = process.env.BASE_URL;
 
-            if (dati.img.mimetype.includes("image")) {
-                nuovaCreazione.immagine="/img/creazione/creazione_"+nuovaCreazione.idCreazione+".jpeg";
+            if(dati.img !== undefined)
+            {
+                if (dati.img.mimetype.includes("image")) {
+                    nuovaCreazione.immagine="/img/creazione/creazione_"+nuovaCreazione.idCreazione+".jpeg";
 
-                fs.writeFileSync("./public"+nuovaCreazione.immagine,dati.img.buffer);
-                nuovaCreazione.immagine = baseUrl +nuovaCreazione.immagine;
+                    fs.writeFileSync("./public"+nuovaCreazione.immagine,dati.img.buffer);
+                    nuovaCreazione.immagine = baseUrl +nuovaCreazione.immagine;
+                }
+                else {
+                    nuovaCreazione.immagine = baseUrl + fotoUrl;
+                }
             }
             else {
                 nuovaCreazione.immagine = baseUrl + fotoUrl;
             }
 
-            return await creazione.updateImg(nuovaCreazione);
+            await creazione.updateImg(nuovaCreazione);
+            return nuovaCreazione;
         }
         else{
             return Promise.reject("ID non valido");
@@ -128,8 +135,7 @@ creazioneService.getByFilter = async (nome, tipo, page, dati)=>{
             }
         }
 
-
-        if (!isNaN(tipo)) {
+        if (isNaN(tipo)) {
             if (tipo === 'Personaggio' || tipo === 'Ambiente') {
                 filters.tipo = tipo;
             }

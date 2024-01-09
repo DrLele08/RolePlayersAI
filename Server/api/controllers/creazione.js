@@ -73,7 +73,6 @@ exports.CreateCreazione = async (req, res)=>{
 
     const fkUtente = req.body.fkUtente;
     const nome = req.body.nome;
-    const immagine = req.body.immagine;
     const descrizione = req.body.descrizione;
     const isPubblico = req.body.isPubblico;
     const tipo = req.body.tipo;
@@ -85,7 +84,6 @@ exports.CreateCreazione = async (req, res)=>{
         const nuovaCreazione = await creazioneService.createCreazione({
             fkUtente: fkUtente,
             nome: nome,
-            immagine: immagine,
             isPubblico: isPubblico,
             tipo: tipo,
             descrizione: descrizione,
