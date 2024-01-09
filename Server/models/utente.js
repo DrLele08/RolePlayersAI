@@ -175,7 +175,7 @@ utente.cambiaAbbonamento = async (idUtente, idAbbonamento) => {
  * @returns {Promise<Utente>} - Istanza di Utente appena creata.
  */
 utente.createUtente = async (data) => {
-    return await Utente.create({
+    let nuovoUtente = await Utente.create({
         username: data.username,
         nome: data.nome,
         cognome: data.cognome,
@@ -185,6 +185,8 @@ utente.createUtente = async (data) => {
         telefono: data.telefono,
         authToken: data.authToken
     });
+    delete nuovoUtente.dataValues.password;
+    return nuovoUtente;
 }
 
 /**
