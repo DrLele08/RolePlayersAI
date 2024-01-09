@@ -134,7 +134,7 @@ creazioneService.getByFilter = async (nome, tipo, page, dati)=>{
                 filters.tipo = tipo;
             }
         }
-        //non prende il tipo
+        //tipo errore
 
         return creazione.getByFilter(filters, page,dati);
 

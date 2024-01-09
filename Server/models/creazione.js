@@ -126,7 +126,7 @@ creazione.createAmbiente = (dati)=>{
         tipo: 1
     });
 };
-//verifica
+//ver
  creazione.updateImg = async (dati) =>{
     return await Creazione.update({immagine: dati.immagine},
         {
