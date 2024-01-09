@@ -62,8 +62,8 @@ conversazione.getById = (idConversazione)=>{
  * @param {Number} idPersonaggio - ID del personaggio
  * @return {Promise<>} Promise contenente l`istanza della conversazione trovata oppure null se non è stata trovata
  */
-conversazione.getBySessioneAndPersonaggio = (idSessione, idPersonaggio)=>{
-    return Conversazione.findAll({
+conversazione.getBySessioneAndPersonaggio = async(idSessione, idPersonaggio)=>{
+    return await Conversazione.findAll({
         where: {
             fkSessione: idSessione,
             fkPersonaggio: idPersonaggio
