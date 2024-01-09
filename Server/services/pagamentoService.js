@@ -11,21 +11,29 @@ pagamentoService.effettuaPagamento = async(idUtente, idAbbonamento) => {
         return Promise.reject("Id Utente non valido");
     }
 
+
+
     if(idAbbonamento !== null) {
         const nuovoAbbonamento = await abbonamento.getAbbonamentoById(idAbbonamento);
+        const utenteCorrente = await utente.getById(idUtente);
+        const abbonamentoCorrente = await utenteCorrente.fkAbbonamento;
 
-        if (parseFloat(nuovoAbbonamento.prezzo) === 0.0) {
-            await utente.cambiaAbbonamento(idUtente, idAbbonamento);
-            return {success: true, sessionUrl: "conferma.html"};
-        }
+        if (abbonamentoCorrente !== nuovoAbbonamento.idAbbonamento) {
+            if (parseFloat(nuovoAbbonamento.prezzo) === 0.0) {
+                await utente.cambiaAbbonamento(idUtente, idAbbonamento);
+                return {success: true, sessionUrl: "conferma.html"};
+            }
 
-        if (nuovoAbbonamento.prezzo > 0) {
-            return paymentStripe.effettuaPagamento(idUtente, nuovoAbbonamento);
+            if (nuovoAbbonamento.prezzo > 0) {
+                return paymentStripe.effettuaPagamento(idUtente, nuovoAbbonamento);
+            } else {
+                return {success: false, message: "Abbonamento non valido"};
+            }
         } else {
-            return {success: false, message: "Abbonamento non valido"};
+            return {success: false, message: "Abbonamento già attivo"};
         }
     }
-    else{
+    else {
         return {success: false, message: "ID Abbonamento non valido"};
     }
 }
