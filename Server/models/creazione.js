@@ -199,6 +199,18 @@ creazione.getByFilter = async (filters, page) =>{
     };
 }
 
+creazione.getByUtenteAndFilters = async(idUtente, nome, tipo, pagina) => {
+    return await Creazione.findAll({
+        where: {
+            fkUtente: idUtente,
+            nome: {
+                [Op.like]: '%' + nome + '%'
+            },
+            tipo: tipo
+        }
+    })
+}
+
 
 /**
  * Restituisce le creazioni più popolari in base ai parametri forniti
