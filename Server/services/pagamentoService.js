@@ -16,7 +16,7 @@ pagamentoService.effettuaPagamento = async(idUtente, idAbbonamento) => {
     if(idAbbonamento !== null) {
         const nuovoAbbonamento = await abbonamento.getAbbonamentoById(idAbbonamento);
         const utenteCorrente = await utente.getById(idUtente);
-        const abbonamentoCorrente = await utenteCorrente.fkAbbonamento;
+        const abbonamentoCorrente = utenteCorrente.fkAbbonamento;
 
         if (abbonamentoCorrente !== nuovoAbbonamento.idAbbonamento) {
             if (parseFloat(nuovoAbbonamento.prezzo) === 0.0) {
