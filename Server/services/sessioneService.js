@@ -7,6 +7,17 @@ const utils = require("../models/utils");
 const sessioneService = {};
 const requiredFields = ['idUtente', 'idContesto', 'titolo'];
 
+sessioneService.getById = async(id) => {
+    if (!utils.checkId(id))
+        return Promise.reject("ID sessione non valido!");
+
+    let result = await sessione.getById(id);
+    if (result == null)
+        return Promise.reject("Sessione non trovata!");
+
+    return result;
+}
+
 sessioneService.getByUtente = async (idUtente) => {
     if (!utils.checkId(idUtente))
         return Promise.reject("ID utente non valido!");
@@ -53,6 +64,43 @@ sessioneService.createSessione = async(data) => {
     }
 
     return sessioneCreata;
+}
+
+sessioneService.accessoSessione = async(data) => {
+    let isValid = await checkUtenteAndSessione(data);
+
+    if (isValid) {
+        let idSessione = data.idSessione;
+
+        await sessione.setUltimoAvvioToNow(idSessione);
+        return await sessioneService.getById(idSessione);
+    }
+}
+
+sessioneService.deleteById = async(data) => {
+    let isValid = await checkUtenteAndSessione(data);
+
+    if (isValid)
+         return await sessione.deleteById(data.idSessione);
+}
+
+async function checkUtenteAndSessione(data) {
+    if (!utils.checkId(data.idSessione))
+        return Promise.reject("ID sessione non valido!");
+
+    if (!utils.checkId(data.idUtente))
+        return Promise.reject("ID utente non valido!");
+
+    let sess = await sessioneService.getById(data.idSessione);
+
+    if (sess == null) {
+        return Promise.reject("Sessione non trovata!")
+    }
+
+    if (sess.fkUtente !== data.idUtente)
+        return Promise.reject("Non hai i permessi!");
+
+    return true;
 }
 
 module.exports = sessioneService;
