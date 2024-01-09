@@ -38,8 +38,8 @@ creazioneService.getById=async(dati)=>{
 
 creazioneService.DeleteById=async(dati)=>{
     if(dati.idCreazione>0) {
-        let creazione = await creazione.getById(dati.idCreazione);
-        if (creazione !== null) {
+        let creation = await creazione.getById(dati.idCreazione);
+        if (creation !== null) {
 
             if (dati.idRuolo === 2 || dati.idRuolo === 3) {
                 return creazione.deleteById(dati.idCreazione);
@@ -61,35 +61,25 @@ creazioneService.DeleteById=async(dati)=>{
 creazioneService.createCreazione = async (dati) =>{
     if(utils.checkParameters(dati, requiredFields)){
         if(utils.checkId(dati.fkUtente)){
-            let err = 0;
+
             dati.nome = dati.nome.trim();
             dati.descrizione = dati.descrizione.trim();
             dati.tipo = dati.tipo.trim();
 
             if (dati.nome.length > 0 && dati.nome.length < 51 ) {
+                if(dati.idUtente===dati.fkUtente)
+                {
+                    if (dati.descrizione.length > 0 && dati.descrizione.length < 513) {
+                        if (dati.tipo === 'Personaggio' || dati.tipo === 'Ambiente') {
 
+                        }
+                        else{
+                            return Promise.reject("Dati non validi");
+                        }
+                    }
                 }
-            else {
-                err = 1;
-            }
-            if(dati.idUtente!==dati.fkUtente)
-            {
-                err = 1;
-            }
-            if (dati.descrizione.length > 0 && dati.descrizione.length < 513) {
-
-            }
-            else{
-                err = 1;
-            }
-            if (dati.tipo !== 'Personaggio' || 'Ambiente') {
-                err = 1;
             }
 
-            if(err)
-            {
-                return Promise.reject("Dati non validi");
-            }
 
             let nuovaCreazione;
 
@@ -116,14 +106,14 @@ creazioneService.createCreazione = async (dati) =>{
                 nuovaCreazione.immagine = baseUrl + fotoUrl;
             }
 
-            return creazione.updateImg(nuovaCreazione);
+            return await creazione.updateImg(nuovaCreazione);
         }
         else{
             return Promise.reject("ID non valido");
         }
     }
     else{
-        return Promise.reject("Dati non validi");
+        return Promise.reject("Parametri non validi");
     }
 }
 
@@ -140,30 +130,12 @@ creazioneService.getByFilter = async (nome, tipo, page, dati)=>{
 
 
         if (!isNaN(tipo)) {
-            if (tipo === 'Personaggio' || 'Ambiente') {
+            if (tipo === 'Personaggio' || tipo === 'Ambiente') {
                 filters.tipo = tipo;
             }
-
         }
 
-        let result = await creazione.getByFilter(filters, page);
-
-        for (let i = 0; i < result.totalItems; i++) {
-            if (!result.creazioni[i].isPubblico) {
-
-                result.creazioni.splice(i, 1); //rimuove elemento dall'array
-                result.totalItems--;
-            }
-            else if (dati.idUtente !== result.creazioni[i].fkUtente || dati.idRuolo !== 2 || dati.idRuolo !== 3) {
-                result.creazioni.splice(i, 1); //rimuove elemento dall'array
-                result.totalItems--;
-            }
-        }
-
-        result.totalPages = (result.totalItems + result.pageSize - 1)/result.pageSize;
-
-        return result;
-
+        return creazione.getByFilter(filters, page,dati);
 
     }
     else{

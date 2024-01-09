@@ -68,4 +68,8 @@ utils.getCurrentDateTime = () => {
     return db.literal('CONVERT_TZ(NOW(), \'+00:00\', \'+01:00\')');
 }
 
+utils.checkGrants = (dati) => {
+
+}
+
 module.exports=utils;
