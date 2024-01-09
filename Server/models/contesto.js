@@ -1,6 +1,6 @@
 const db= require("./database");
 const DataTypes= require("sequelize").DataTypes;
-const utente = require("./utente"); //TODO Bisogna creare il model Utente
+const utente = require("./utente");
 const ambiente = require("./creazione");
 
 const contesto = {};
@@ -112,6 +112,62 @@ contesto.deleteContesto = async(idContesto) =>{
             idContesto: idContesto
         }
     })
+}
+
+/**
+ * Restituisce una lista di contesti filtrate
+ *
+ * @async
+ * @function
+ *
+ * @param {Object} filters - Oggetto contenente i criteri di filtraggio per la query
+ * @param {String} [filters.nome] - Nome del contesto da cercare (la ricerca avverrà in base ad una corrispondenza parziale)
+ * @param {Number} page - Numero di pagina desiderato per la visualizzazione dei risultati
+ * @param {Object} dati - Contiene ruolo e idUtente
+ * @return {Promise<{
+ *      totalItems: Number,
+ *      totalPages: Number,
+ *      currentPage: Number,
+ *      pageSize: Number,
+ *      contesti: Contesto[]
+ *      }>} - Promise che si risolve con un oggetto contenente informazioni sulla paginazione e la lista di contesti
+ */
+contesto.getByFilter = async (filters, page,dati) => {
+    const Op = require("sequelize").Op;
+    const offset = (page - 1) * pageSize;
+
+    if (filters.nome) {
+        filters.nome = {[Op.substring]: filters.nome}
+    }
+
+    let result = await Contesto.findAll({
+        where:
+        filters,
+    });
+
+    if (dati.idRuolo === 1) {
+        let contestiPubblici = result.filter(c => c.isPubblico === true);
+        for (let i = 0; i < result.length; i++) {
+            if (result[i].fkUtente === dati.idUtente && result[i].isPubblico === false) {
+                contestiPubblici.push(result[i]);
+            }
+        }
+        result = contestiPubblici;
+    }
+    let totalItems = result.length
+    result = result.slice(offset, (pageSize * page));
+
+    //Calcola il numero totale di pagine per visualizzare tutti i risultati (arrotondato per eccesso)
+    let totalPages = Math.ceil((result.length)/pageSize);
+
+
+    return {
+        totalItems: totalItems,
+        totalPages: totalPages,
+        currentPage: page,
+        pageSize: pageSize,
+        creazioni: result
+    };
 }
 
 contesto.Contesto=Contesto;
