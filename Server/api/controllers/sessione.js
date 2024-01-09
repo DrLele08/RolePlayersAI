@@ -16,7 +16,7 @@ exports.getByUtente = async(req, res) => {
     }).finally(() => res.json(json));
 }
 
-exports.createUtente = async(req, res) => {
+exports.createSessione = async(req, res) => {
     let json = {};
 
     let data = {

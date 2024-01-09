@@ -6,7 +6,7 @@ exports.InviaMessaggio = async(req, res) =>{
 
     const messaggio = req.body.messaggio;
     const idConversazione = req.body.idConversazione;
-    const idUtente = res.locals.idUtente;
+    const idUtente = req.idUtente;
 
     try{
         const risposta = await messaggioService.inviaMessaggio({
@@ -19,7 +19,7 @@ exports.InviaMessaggio = async(req, res) =>{
         res.json(json);
     }catch (error){
         json.Ris = 0;
-        json.Mess = error.message || "Errore Generico";
+        json.Mess = error || "Errore Generico";
         res.json(json)
     }
 };
@@ -27,8 +27,8 @@ exports.InviaMessaggio = async(req, res) =>{
 exports.GetById = async(req, res) =>{
     let json = {};
 
-    const idConversazione = res.params.idConversazione;
-    const idUtente = res.locals.idUtente;
+    const idConversazione = req.params.idConversazione;
+    const idUtente = req.idUtente;
 
     try{
         const conv = await conversazioneService.getById(idConversazione, idUtente);
@@ -37,7 +37,7 @@ exports.GetById = async(req, res) =>{
         res.json(json);
     }catch (error){
         json.Ris = 0;
-        json.Mess = error.message || "Errore Generico";
+        json.Mess = error || "Errore Generico";
         res.json(json)
     }
 };
@@ -45,8 +45,8 @@ exports.GetById = async(req, res) =>{
 exports.GetMessages = async(req, res) =>{
     let json = {};
 
-    const idConversazione = res.params.idConversazione;
-    const idUtente = res.locals.idUtente;
+    const idConversazione = req.params.idConversazione;
+    const idUtente = req.idUtente;
 
     try{
         const conv = await conversazioneService.getMessages(idConversazione, idUtente);
@@ -55,7 +55,7 @@ exports.GetMessages = async(req, res) =>{
         res.json(json);
     }catch (error){
         json.Ris = 0;
-        json.Mess = error.message || "Errore Generico";
+        json.Mess = error || "Errore Generico";
         res.json(json)
     }
 };

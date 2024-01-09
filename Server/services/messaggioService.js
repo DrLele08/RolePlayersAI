@@ -19,7 +19,6 @@ messaggioService.inviaMessaggio = async (dati)=>{
         return Promise.reject("ID non valido");
     }
 
-
     //Controllo appartenenza della sessione
     conv = await conversazione.getById(dati.idConversazione);
     sess = await conv.getSessione();
@@ -42,6 +41,7 @@ messaggioService.inviaMessaggio = async (dati)=>{
     //Costruisci lista messaggi
     let listMessaggi = [];
     listMessaggi = await buildListMessaggi(dati);
+
 
     //Salva messaggio inviato
     await messaggio.createMessaggio({

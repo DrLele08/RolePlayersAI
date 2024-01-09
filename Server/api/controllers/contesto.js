@@ -23,7 +23,7 @@ exports.CreateContesto = async (req,res) =>{
     }
     catch (error) {
         json.Ris = 0;
-        json.Mess = error.message || "Errore Generico";
+        json.Mess = error || "Errore Generico";
         res.json(json);
     }
 }
@@ -38,7 +38,7 @@ exports.GetContestoById= async (req,res)=> {
         res.json(json);
     } catch (error) {
         json.Ris = 0;
-        json.Mess = error.message || "Errore Generico";
+        json.Mess = error || "Errore Generico";
         res.json(json);
     }
 };
@@ -54,7 +54,7 @@ exports.GetAll = async (req,res) =>{
     }
     catch(error){
         json.Ris = 0;
-        json.Mess = error.message || "Errore Generico";
+        json.Mess = error || "Errore Generico";
         res.json(json);
     }
 }
@@ -69,7 +69,7 @@ exports.DeleteContesto= async (req,res)=> {
         res.json(json);
     } catch (error) {
         json.Ris = 0;
-        json.Mess = error.message || "Errore Generico";
+        json.Mess = error || "Errore Generico";
         res.json(json);
     }
 };

@@ -1,6 +1,7 @@
 const sessione = require("../models/sessione");
 const utente = require("../models/utente");
 const contesto = require("../models/contesto");
+const conversazioneService = require("../services/conversazioneService");
 const utils = require("../models/utils");
 
 const sessioneService = {};
@@ -35,7 +36,23 @@ sessioneService.createSessione = async(data) => {
     if (!data.titolo.match("^[a-zA-Z0-9\\s]{1,255}$"))
         return Promise.reject("Titolo non valido! Deve essere una stringa alfanumerica di massimo 255 caratteri.");
 
-    return await sessione.createSessione(data).catch(() => Promise.reject("Errore durante la creazione della Sessione!"));
+    const sessioneCreata = await sessione.createSessione(data)
+        .catch(() => Promise.reject("Errore durante la creazione della Sessione!"));
+
+    const idSessione = sessioneCreata.idSessione;
+
+    const contestoAssociato = await sessioneCreata.getContesto();
+    const personaggi = await contestoAssociato.getCreaziones();
+
+    for (const personaggio of personaggi) {
+        console.log(idSessione + ":" + personaggio.idCreazione);
+        await conversazioneService.createConversazione({
+            fkSessione: idSessione,
+            fkPersonaggio: personaggio.idCreazione
+        });
+    }
+
+    return sessioneCreata;
 }
 
 module.exports = sessioneService;
