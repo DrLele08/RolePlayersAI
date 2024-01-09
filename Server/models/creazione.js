@@ -1,7 +1,6 @@
 const db= require("./database");
 const DataTypes=require("sequelize").DataTypes;
 const utente = require("./utente");
-const {Op} = require("sequelize");
 
 const pageSize = 15;
 
@@ -255,20 +254,38 @@ creazione.getByFilter = async (filters, page,dati) => {
     };
 }
 
-creazione.getByUtenteAndFilters = async(idUtente, nome, tipo, pagina) => {
-    return await Creazione.findAll({
+creazione.getByUtenteAndFilters = async(idUtente, filters, page = 1, pageSize = 16) => {
+    const Op = require("sequelize").Op;
+
+    const result = await Creazione.findAndCountAll({
         where: {
             fkUtente: idUtente,
-            nome: {
-                [Op.like]: '%' + nome + '%'
-            },
-            tipo: tipo
-        }
-    })
+            nome: filters.nome ? {[Op.substring]: filters.nome} : {[Op.ne]: null},
+            tipo: filters.tipo ? filters.tipo : {[Op.ne]: null}
+        },
+        limit: pageSize,
+        offset: (page - 1) * pageSize,
+    });
+
+    let creazioni = [];
+    result.rows.forEach(row => {
+        creazioni.push(row.dataValues);
+    });
+
+    const totalCount = result.count;
+    const totalPages = Math.ceil(totalCount / pageSize);
+
+    // Ritorna l'oggetto con l'array di creazioni e le informazioni sulla paginazione
+    return {
+        creazioni,
+        pagination: {
+            page,
+            pageSize,
+            totalCount,
+            totalPages,
+        },
+    };
 }
-
-
-
 
 /**
  * Restituisce le creazioni più popolari in base ai parametri forniti

@@ -55,6 +55,7 @@ require("./api/routes/contesto.js")(app);
 require("./api/routes/conversazione.js")(app);
 require("./api/routes/registrazione")(app);
 require("./api/routes/sessione")(app);
+require("./api/routes/inventario")(app);
 
 require("./platform/routes/registrazione")(app);
 
