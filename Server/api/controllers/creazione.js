@@ -16,7 +16,7 @@ exports.GetById = async (req,res)=>{
         res.json(json);
     }catch (error){
         json.Ris = 0;
-        json.Mess = error.message || "Errore Generico";
+        json.Mess = error || "Errore Generico";
         res.json(json);
     }
 };
@@ -38,7 +38,7 @@ exports.DeleteById = async (req,res)=>{
         res.json(json);
     }catch (error){
         json.Ris = 0;
-        json.Mess = error.message || "Errore Generico";
+        json.Mess = error || "Errore Generico";
         res.json(json);
     }
 };
@@ -60,7 +60,7 @@ exports.GetByFilter = async (req,res)=>{
         res.json(json);
     }catch (error){
         json.Ris = 0;
-        json.Mess = error.message || "Errore Generico";
+        json.Mess = error || "Errore Generico";
         res.json(json);
     }
 };
@@ -76,6 +76,7 @@ exports.CreateCreazione = async (req, res)=>{
     const isPubblico = req.body.isPubblico;
     const tipo = req.body.tipo;
     const img = req.file;
+    const idUtente = req.idUtente;
 
     try{
         const nuovaCreazione = creazioneService.createCreazione({
@@ -85,13 +86,14 @@ exports.CreateCreazione = async (req, res)=>{
             isPubblico: isPubblico,
             tipo: tipo,
             descrizione: descrizione,
-            img:img
+            img:img,
+            idUtente: idUtente,
         });
         json.Ris = 1;
         json.NuovaCreazione = nuovaCreazione;
         res.json(json);
     }catch (error){
         json.Ris = 0;
-        json.Mess = error.message || "Errore Generico";
+        json.Mess = error || "Errore Generico";
     }
 }

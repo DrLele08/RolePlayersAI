@@ -16,7 +16,8 @@ const sequelize = new seq(
         query:{
             raw: false
         },
-        logging: process.env.DEBUG_DB>0
+        logging: process.env.DEBUG_DB>0,
+        timezone: '+01:00'
     },
 );
 

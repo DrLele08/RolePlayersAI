@@ -56,8 +56,8 @@ const Contesto = db.define('Contesto',{
  * @param {Number} idContesto - ID del Contesto
  * @returns {Promise<Contesto | null>} - Promise che si risolve con l`istanza di Contesto corrispondente all ID, o null se non trovato
  */
-contesto.getContestoById=(idContesto)=>{
-    return Contesto.findByPk(idContesto);
+contesto.getContestoById = async(idContesto)=> {
+    return await Contesto.findByPk(idContesto);
 }
 
 
@@ -67,8 +67,8 @@ contesto.getContestoById=(idContesto)=>{
  * @function
  * @returns {Promise<Array<Contesto>>} - Promise che si risolve con un array di istanze, oppure un array vuoto se non sono presenti
  */
-contesto.getAll = ()=> {
-    return Contesto.findAll();
+contesto.getAll = async()=> {
+    return await Contesto.findAll();
 };
 
 
@@ -87,8 +87,8 @@ contesto.getAll = ()=> {
  * @returns {Promise<Contesto>} - Promise che si risolve con l'istanza del contesto creato
  */
 
-contesto.createContesto = (dati) =>{
-    return Contesto.create({
+contesto.createContesto = async(dati) =>{
+    return await Contesto.create({
         fkUtente: dati.fkUtente,
         fKAmbiente: dati.fkAmbiente,
         nome: dati.nome,
@@ -106,8 +106,8 @@ contesto.createContesto = (dati) =>{
  *
  * @return {Promise<Number>}
  */
-contesto.deleteContesto = (idContesto) =>{
-     return Contesto.destroy({
+contesto.deleteContesto = async(idContesto) =>{
+     return await Contesto.destroy({
         where: {
             idContesto: idContesto
         }

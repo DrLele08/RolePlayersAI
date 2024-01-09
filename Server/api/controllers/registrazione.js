@@ -31,7 +31,7 @@ exports.createUtente = async(req, res) => {
         }).catch(error => {
             res.status(400);
             json.Ris = 0;
-            json.Mess = error || "Errore generico!";
+            json.Mess = error || "Errore generico";
         }).finally(() => res.json(json));
     }
 };

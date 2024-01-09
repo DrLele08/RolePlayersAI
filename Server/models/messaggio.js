@@ -2,7 +2,9 @@ const db= require("./database");
 const DataTypes=require("sequelize").DataTypes;
 const conversazione = require("./conversazione");
 
+const PAGE_SIZE = 16;
 const messaggio = {}
+
 
 const Messaggio = db.define('Messaggio', {
     idMessaggio: {
@@ -62,6 +64,43 @@ messaggio.getByConversazione = (idConversazione)=>{
         },
         order: [['dataInvio', 'ASC']]
     });
+};
+
+/**
+ * Restituisce i messaggi di una conversazione paginati e ordinati per data di invio
+ *
+ * @function
+ * @async
+ * @param {Number} idConversazione - ID della conversazione per cui ottenere i messaggi
+ * @param {Number} page - Numero di pagina desiderato
+ * @return {Promise<{
+ *      messaggi: Messaggio[],
+ *      totalMessages: Number,
+ *      totalPages: Number,
+ *      pageSize: Number,
+ *      currentPage: Number
+ *      }>} - Promise che si risolve con un oggetto contenente informazioni sulla paginazione e i messaggi della pagina richiesta
+ */
+messaggio.getByConversazionePaginated = async (idConversazione, page) => {
+    const offset = (page - 1) * PAGE_SIZE;
+
+    const result = await Messaggio.findAndCountAll({
+        where: {
+            fkConversazione: idConversazione
+        },
+        order: [['dataInvio', 'ASC']],
+        limit: PAGE_SIZE,
+        offset: offset
+    });
+
+    const totalPages = Math.ceil(result.count/PAGE_SIZE);
+    return {
+        totalMessages: result.count,
+        totalPages: totalPages,
+        currentPage: page,
+        pageSize: PAGE_SIZE,
+        messaggi: result.rows
+    };
 };
 
 

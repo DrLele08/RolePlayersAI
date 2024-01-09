@@ -59,13 +59,4 @@ utils.toMySQLDate = (date) => {
     return parts[2] + '-' + parts[1] + '-' + parts[0];
 }
 
-/**
- * Restituisce l'istante attuale regolato al fuso orario UTC+1.
- *
- * @returns {Literal} - Un'espressione rappresentante l'istante attuale (UTC+1) nel formato SQL.
- */
-utils.getCurrentDateTime = () => {
-    return db.literal('CONVERT_TZ(NOW(), \'+00:00\', \'+01:00\')');
-}
-
 module.exports=utils;

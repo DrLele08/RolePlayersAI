@@ -1,9 +1,8 @@
 const db= require("./database");
-const DataTypes=require("sequelize").DataTypes;
+const DataTypes= require("sequelize").DataTypes;
 const utente = require("./utente");
-const utils = require("../models/utils");
 const contesto = require("./contesto");
-const {Sequelize} = require("sequelize");
+const moment = require("moment-timezone");
 
 const sessione = {}
 
@@ -37,11 +36,19 @@ const Sessione = db.define('Sessione', {
     dataCreazione: {
         type: DataTypes.DATE,
         allowNull: false,
-        defaultValue: utils.getCurrentDateTime()
+        defaultValue: DataTypes.NOW,
+        get() {
+            const value = this.getDataValue('dataCreazione');
+            return moment(value).format();
+        }
     },
     ultimoAvvio: {
         type: DataTypes.DATE,
         allowNull: true,
+        get() {
+            const value = this.getDataValue('ultimoAvvio');
+            return moment(value).format();
+        }
     }
 },{
     freezeTableName: true,
@@ -79,17 +86,17 @@ sessione.getByUtente = async (idUtente) => {
  * Crea una nuova Sessione e la inserisce nel database.
  *
  * @param {Object} data - I dati della nuova sessione.
- * @param {Number} data.utente - ID del creatore della sessione.
- * @param {Number} data.contesto - ID del Contesto su cui viene avviata la sessione.
+ * @param {Number} data.idUtente - ID del creatore della sessione.
+ * @param {Number} data.idContesto - ID del Contesto su cui viene avviata la sessione.
  * @param {String} data.titolo - Nome della sessione.
  *
  * @returns {Promise<Sessione>} - Istanza della Sessione appena creata.
  */
 sessione.createSessione = async (data) => {
     return await Sessione.create({
-        fkUtente: data.utente,
-        fkContesto: data.contesto,
-        titolo: data.titolo,
+        fkUtente: data.idUtente,
+        fkContesto: data.idContesto,
+        titolo: data.titolo
     });
 }
 
@@ -101,7 +108,7 @@ sessione.createSessione = async (data) => {
  */
 sessione.setUltimoAvvioToNow = async (id) => {
     const result = await Sessione.update({
-        ultimoAvvio: utils.getCurrentDateTime()
+        ultimoAvvio: db.literal("NOW()")
     }, {
         where: {
             idSessione: id
@@ -112,20 +119,12 @@ sessione.setUltimoAvvioToNow = async (id) => {
     return result[0] === 1;
 }
 
-/**
- * Elimina una Sessione dal database.
- *
- * @param {Number} id - ID della sessione da eliminare.
- * @returns {Promise<Boolean>} - Promise che risolve a `true` se l'eliminazione ha avuto successo, altrimenti a `false`.
- */
 sessione.deleteById = async (id) => {
-    const result = await Sessione.destroy({
+    return await Sessione.destroy({
         where: {
             idSessione: id
         }
     });
-
-    return result === 1;
 }
 
 sessione.Sessione = Sessione;

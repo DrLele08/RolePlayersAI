@@ -24,9 +24,13 @@ conversazioneService.getById = async (idConversazione, idUtente) =>{
     }
 };
 
-conversazioneService.getMessaggiByConversazione = async (idConversazione, idUtente) =>{
+conversazioneService.getMessages = async (idConversazione, pagina, idUtente) =>{
     if(!utils.checkId(idConversazione) || !utils.checkId(idUtente)){
         return Promise.reject("ID non valido");
+    }
+
+    if(pagina < 1){
+        pagina = 1;
     }
 
     const conv = await conversazione.getById(idConversazione);
@@ -38,7 +42,7 @@ conversazioneService.getMessaggiByConversazione = async (idConversazione, idUten
         return Promise.reject("La conversazione appartiene ad un altro utente");
     }
 
-    return await messaggio.getByConversazione(idConversazione);
+    return await messaggio.getByConversazionePaginated(idConversazione, pagina);
 };
 
 conversazioneService.createConversazione = async (dati)=>{
@@ -52,7 +56,7 @@ conversazioneService.createConversazione = async (dati)=>{
 
     //Prima di crearla controlla se esiste già una conversazione con quel personaggio in quella sessione
     const conv = await conversazione.getBySessioneAndPersonaggio(dati.fkSessione, dati.fkPersonaggio);
-    if(conv !== null){
+    if(conv.length !== 0){
         return Promise.reject("Conversazione gia esistente");
     }
     else{
