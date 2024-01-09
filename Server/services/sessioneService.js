@@ -44,13 +44,13 @@ sessioneService.createSessione = async(data) => {
     const contestoAssociato = await sessioneCreata.getContesto();
     const personaggi = await contestoAssociato.getCreaziones();
 
-    /*for (const personaggio of personaggi) {
+    for (const personaggio of personaggi) {
         console.log(idSessione + ":" + personaggio.idCreazione);
         await conversazioneService.createConversazione({
             fkSessione: idSessione,
             fkPersonaggio: personaggio.idCreazione
         });
-    }*/
+    }
 
     return sessioneCreata;
 }
