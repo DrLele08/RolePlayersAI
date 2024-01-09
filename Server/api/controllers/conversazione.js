@@ -46,11 +46,13 @@ exports.GetById = async(req, res) =>{
 exports.GetMessages = async(req, res) =>{
     let json = {};
 
-    const idConversazione = req.params.idConversazione;
+    const idConversazione = req.query.idConversazione;
+    const pagina = req.query.pagina;
+    console.log(pagina);
     const idUtente = req.idUtente;
 
     try{
-        const conv = await conversazioneService.getMessages(idConversazione, idUtente);
+        const conv = await conversazioneService.getMessages(idConversazione, pagina, idUtente);
         json.Ris = 1;
         json.Conversazione = conv;
         res.json(json);
