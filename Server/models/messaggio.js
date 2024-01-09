@@ -1,6 +1,7 @@
 const db= require("./database");
 const DataTypes=require("sequelize").DataTypes;
 const conversazione = require("./conversazione");
+const moment = require("moment-timezone");
 
 const PAGE_SIZE = 16;
 const messaggio = {}
@@ -28,7 +29,11 @@ const Messaggio = db.define('Messaggio', {
     dataInvio: {
         type: DataTypes.DATE,
         allowNull: false,
-        defaultValue: db.literal('NOW()')
+        defaultValue: DataTypes.NOW,
+        get(){
+            const value = this.getDataValue('dataInvio');
+            return moment(value).format();
+        }
     },
     isUtente: {
         type: DataTypes.BOOLEAN,
@@ -118,7 +123,6 @@ messaggio.createMessaggio = (dati) =>{
     return Messaggio.create({
         fkConversazione: dati.fkConversazione,
         corpo: dati.corpo,
-        dataInvio: new Date(),
         isUtente: dati.isUtente
     });
 };

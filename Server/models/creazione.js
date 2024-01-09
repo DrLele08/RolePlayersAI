@@ -255,6 +255,18 @@ creazione.getByFilter = async (filters, page,dati) => {
     };
 }
 
+creazione.getByUtenteAndFilters = async(idUtente, nome, tipo, pagina) => {
+    return await Creazione.findAll({
+        where: {
+            fkUtente: idUtente,
+            nome: {
+                [Op.like]: '%' + nome + '%'
+            },
+            tipo: tipo
+        }
+    })
+}
+
 
 
 

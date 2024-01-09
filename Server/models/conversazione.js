@@ -2,6 +2,7 @@ const db= require("./database");
 const DataTypes=require("sequelize").DataTypes;
 const sessione = require("./sessione");
 const creazione = require("./creazione");
+const moment = require("moment-timezone");
 
 const conversazione = {}
 
@@ -32,11 +33,20 @@ const Conversazione = db.define('Conversazione', {
     dataAvvio: {
         type: DataTypes.DATE,
         allowNull: false,
-        defaultValue: db.literal('NOW()')
+        defaultValue: DataTypes.NOW,
+        get(){
+            const value = this.getDataValue('dataAvvio');
+            return moment(value).format();
+        }
     },
     ultimoAvvio: {
         type: DataTypes.DATE,
-        allowNull: false
+        allowNull: false,
+        defaultValue: DataTypes.NOW,
+        get(){
+            const value = this.getDataValue('ultimoAvvio');
+            return moment(value).format();
+        }
     }
 },{
     freezeTableName: true,
@@ -81,12 +91,9 @@ conversazione.getBySessioneAndPersonaggio = async(idSessione, idPersonaggio)=>{
  * @returns {Promise<Object>} Un oggetto rappresentante la conversazione appena creata.
  */
 conversazione.createConversazione = (dati) =>{
-    const currentDate = new Date();
     return Conversazione.create({
         fkSessione: dati.fkSessione,
         fkPersonaggio: dati.fkPersonaggio,
-        dataAvvio: currentDate,
-        ultimoAvvio: currentDate
     });
 };
 
