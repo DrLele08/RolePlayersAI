@@ -415,87 +415,49 @@
 							<!--begin::Body-->
 							<div class="card-body">
 
-								<!--begin::Tab Content-->
-								<div class="tab-content">
-
 									<!--begin::Personaggi-->
 									<div class="tab-pane fade show active" id="lib_cha">
-										<!--begin::Wrapper-->
-										<div class="d-flex flex-wrap d-grid gap-5 gap-xxl-9">
-											<!--begin::Card-->
-											<div class="card card-flush flex-row-fluid p-6 pb-5 mw-100">
-												<!--begin::Body-->
-												<div class="card-body text-center">
-													<!--begin::Food img-->
-													<img src="assets/media/stock/food/img-2.jpg" class="rounded-3 mb-4 w-150px h-150px w-xxl-200px h-xxl-200px" alt="" />
-													<!--end::Food img-->
-													<!--begin::Info-->
-													<div class="mb-2">
-														<!--begin::Title-->
-														<div class="text-center">
-															<span class="fw-bold text-gray-800 cursor-pointer text-hover-primary fs-3 fs-xl-1">T-Bone Stake</span>
-															<span class="text-gray-500 fw-semibold d-block fs-6 mt-n1">Creato da:
-																				<a href="#" class="ms-1 link-primary">FraIan</a>
-																			</span>
+										<!--begin::Messenger-->
+										<div class="card" id="kt_chat_messenger">
+											<!--begin::Card body-->
+											<div class="card-body h-500px" id="kt_chat_messenger_body">
+												<!--begin::Messages-->
+												<div class="scroll-y me-n5 pe-5 h-300px h-lg-auto" data-kt-element="messages" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_header, #kt_app_header, #kt_app_toolbar, #kt_toolbar, #kt_footer, #kt_app_footer, #kt_chat_messenger_header, #kt_chat_messenger_footer" data-kt-scroll-wrappers="#kt_content, #kt_app_content, #kt_chat_messenger_body" data-kt-scroll-offset="5px">
+													<!--begin::Message(in)-->
+													<div class="d-flex justify-content-start mb-10">
+														<!--begin::Wrapper-->
+														<div class="d-flex flex-column align-items-start">
+															<!--begin::Text-->
+															<div class="p-5 rounded bg-light-info text-gray-900 fw-semibold mw-lg-400px text-start" data-kt-element="message-text">Descrizione del personaggio</div>
+															<!--end::Text-->
 														</div>
-														<!--end::Title-->
+														<!--end::Wrapper-->
 													</div>
-													<!--end::Info-->
-													<!--begin::Button-->
-													<div class="d-grid mb-10">
-														<button type="submit" id="inv_add" class="btn btn-primary">
-															<!--begin::Indicator label-->
-															<span class="indicator-label">Aggiungi all'inventario</span>
-															<!--end::Indicator label-->
-															<!--begin::Indicator progress-->
-															<span class="indicator-progress">Attendi per favore...
-																			<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-															<!--end::Indicator progress-->
-														</button>
-													</div>
-													<!--end::Button-->
+													<!--end::Message(in)-->
 												</div>
-												<!--end::Body-->
+												<!--end::Messages-->
 											</div>
-											<!--end::Card-->
-											<!--begin::Card-->
-											<div class="card card-flush flex-row-fluid p-6 pb-5 mw-100">
-												<!--begin::Body-->
-												<div class="card-body text-center">
-													<!--begin::Food img-->
-													<img src="assets/media/stock/food/img-7.jpg" class="rounded-3 mb-4 w-150px h-150px w-xxl-200px h-xxl-200px" alt="" />
-													<!--end::Food img-->
-													<!--begin::Info-->
-													<div class="mb-2">
-														<!--begin::Title-->
-														<div class="text-center">
-															<span class="fw-bold text-gray-800 cursor-pointer text-hover-primary fs-3 fs-xl-1">Chef’s Salmon</span>
-															<span class="text-gray-500 fw-semibold d-block fs-6 mt-n1">Creato da:
-																				<a href="#" class="ms-1 link-primary">GeCav</a>
-																			</span>
-														</div>
-														<!--end::Title-->
-													</div>
-													<!--end::Info-->
-													<!--begin::Button-->
-													<div class="d-grid mb-10">
-														<button type="submit" id="remove_inv" class="btn btn-danger" style="background-color: #ff0000">
-															<!--begin::Indicator label-->
-															<span class="indicator-label">Rimuovi dall'inventario</span>
-															<!--end::Indicator label-->
-															<!--begin::Indicator progress-->
-															<span class="indicator-progress">Attendi per favore...
-																			<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-															<!--end::Indicator progress-->
-														</button>
-													</div>
-													<!--end::Button-->
+											<!--end::Card body-->
+
+											<!--begin::Card footer-->
+											<div class="d-flex align-items-center" id="kt_chat_messenger_footer">
+												<!--begin::Input-->
+												<textarea class="form-control form-control-flush mb-3" rows="1" data-kt-element="input" placeholder="Descrivi un personaggio"></textarea>
+												<!--end::Input-->
+												<!--begin:Toolbar-->
+												<div class="d-flex flex-stack">
+													<!--begin::Send-->
+													<button class="btn btn-primary" type="button" data-kt-element="send">
+														<img alt="Logo" src="assets/media/avatars/invia.png"/>
+													</button>
+													<!--end::Send-->
 												</div>
-												<!--end::Body-->
+												<!--end::Toolbar-->
 											</div>
-											<!--end::Card-->
+											<!--end::Card footer-->
+
 										</div>
-										<!--end::Wrapper-->
+										<!--end::Messenger-->
 									</div>
 									<!--end::Personaggi-->
 
@@ -613,8 +575,6 @@
 									</div>
 									<!--end::Contesti-->
 
-								</div>
-								<!--end::Tab Content-->
 							</div>
 							<!--end: Card Body-->
 						</div>
@@ -669,7 +629,18 @@
 	</i>
 </div>
 <!--end::Scrolltop-->
+
 <!--begin::Javascript-->
+
+<script>
+	function loadpage(nam)
+	{
+		document.getElementById("lib_cha").innerHTML = '<object type="text/html" data="' +nam+ '" width="99%" height="98%" style="overflow:auto; margin-top:1%; margin-left:1%;" ></object>';
+	}
+</script>
+
+
+
 <script>var hostUrl = "assets/";</script>
 <!--begin::Global Javascript Bundle(mandatory for all pages)-->
 <script src="assets/plugins/global/plugins.bundle.js"></script>
