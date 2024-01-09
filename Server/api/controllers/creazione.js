@@ -77,7 +77,7 @@ exports.CreateCreazione = async (req, res)=>{
     const descrizione = req.body.descrizione;
     const isPubblico = req.body.isPubblico;
     const tipo = req.body.tipo;
-    const img = req.file;
+    const img = req.file; //todo se non si passa un immagine si blocca
     const idUtente = req.idUtente;
 
 
