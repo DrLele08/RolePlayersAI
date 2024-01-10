@@ -9,7 +9,6 @@ contestoService.createContesto = async (dati) =>{
     if(utils.checkParameters(dati, requiredFields)){
         if(utils.checkId(dati.fkUtente)) {
             if (utils.checkId(dati.fkAmbiente)) {
-                //Verifica nome
                 dati.nome = dati.nome.trim();
                 dati.descrizione = dati.descrizione.trim();
 
@@ -27,8 +26,8 @@ contestoService.createContesto = async (dati) =>{
             return Promise.reject("Id Utente non valido");
         }
 
-        let nuovoContesto = await contesto.createContesto(dati);
-        return nuovoContesto;
+        return await contesto.createContesto(dati);
+
     }
 
     else{

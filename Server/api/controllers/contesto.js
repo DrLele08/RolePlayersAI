@@ -10,13 +10,14 @@ exports.CreateContesto = async (req,res) =>{
     const isPubblico = req.body.isPubblico;
 
     try{
-        const nuovoContesto = contestoService.createContesto({
+        const nuovoContesto = await contestoService.createContesto({
             nome: nome,
             fkUtente: fkUtente,
             fkAmbiente: fkAmbiente,
             descrizione: descrizione,
             isPubblico: isPubblico
         })
+
         json.Ris = 1;
         json.nuovoContesto = nuovoContesto;
         res.json(json);
