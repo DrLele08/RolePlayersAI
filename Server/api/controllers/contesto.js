@@ -1,5 +1,4 @@
 const contestoService = require("../../services/contestoService");
-const creazioneService = require("../../services/creazioneService");
 
 exports.CreateContesto = async (req,res) =>{
     let json = {};
@@ -52,9 +51,16 @@ exports.GetContestoById= async (req,res)=> {
 
 exports.DeleteContesto= async (req,res)=> {
     let json = {};
-    let idContesto = req.query.idContesto;
+    let idContesto = req.params.idContesto;
+    let idUtente = req.idUtente;
+    let idRuolo = req.idRuolo;
+
     try {
-        const contesto = await contestoService.deleteContesto(idContesto);
+        const contesto = await contestoService.deleteContesto({
+            idContesto: idContesto,
+            idUtente: idUtente,
+            idRuolo: idRuolo
+        });
         json.Ris = 1;
         json.Contesto = contesto;
         res.json(json);
@@ -74,12 +80,13 @@ exports.GetByFilter = async (req,res)=>{
 
 
     try{
-        const risContesto = await creazioneService.getByFilter(nome,pagina,{
+
+        const risContesto = await contestoService.getByFilter(nome,pagina,{
             idUtente: idUtente,
             idRuolo: idRuolo
         });
         json.Ris = 1;
-        json.Creazione = risContesto;
+        json.Contesto = risContesto;
         res.json(json);
     }catch (error){
         json.Ris = 0;

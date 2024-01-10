@@ -7,47 +7,50 @@ const requiredFields = ['nome','fkUtente', 'fkAmbiente','descrizione', 'isPubbli
 
 contestoService.createContesto = async (dati) =>{
     if(utils.checkParameters(dati, requiredFields)){
+        if(utils.checkId(dati.fkUtente)) {
+            if (utils.checkId(dati.fkAmbiente)) {
+                //Verifica nome
+                dati.nome = dati.nome.trim();
+                dati.descrizione = dati.descrizione.trim();
 
-        //Verifica nome
-        dati.nome = dati.nome.trim();
-        if(dati.nome < 1 || dati.nome > 50){
-             return Promise.reject("Nome non valido");
+                if (dati.nome.length < 1 || dati.nome.length > 50) {
+                    if (dati.descrizione.length < 20 || dati.descrizione.length > 512) {
+                        return Promise.reject("Dati non validi");
+                    }
+                }
+            }
+            else {
+                return Promise.reject("Id Ambiente non valido");
+            }
         }
-
-        //Verifica descrizione
-        dati.descrizione = dati.descrizione.trim();
-        if(dati.descrizione < 20 || dati.descrizione > 512){
-            return Promise.reject("Descrizione non valida");
-        }
-
-        //Verifica id Utente
-        if(!utils.checkId(dati.fkUtente)){
+        else{
             return Promise.reject("Id Utente non valido");
         }
 
-        //Verifica id Ambiente
-        if(!utils.checkId(dati.fkAmbiente)){
-            return Promise.reject("Id Ambiente non valido");
-        }
-
-        //Creazione Nuovo Contesto
         let nuovoContesto = await contesto.createContesto(dati);
-        if(nuovoContesto !== null){
-            return nuovoContesto;
-        }
+        return nuovoContesto;
     }
+
     else{
         return Promise.reject("Creazione Contesto fallita");
     }
 }
 
-contestoService.getContestoById = async(idContesto) =>{
-    if(utils.checkId(idContesto))
+contestoService.getContestoById = async(dati) =>{
+    if(dati.idContesto > 0)
     {
-        let contestoCercato = await contesto.getContestoById(idContesto);
+        let contestoCercato = await contesto.getContestoById(dati.idContesto);
         if(contestoCercato !== null)
         {
-            return contestoCercato;
+            if(contestoCercato.isPubblico){
+                return contestoCercato;
+            }
+            else if (contestoCercato.fkUtente===dati.idUtente || dati.idRuolo ===2 || dati.idRuolo===3){
+                return contestoCercato;
+            }
+            else {
+                return Promise.reject("Non hai i permessi");
+            }
         }
         else
         {
@@ -71,18 +74,39 @@ contestoService.getAll = async()=>{
     }
 }
 
-contestoService.deleteContesto = async(idContesto) =>{
-    if(utils.checkId(idContesto)) {
-        let contestoEliminata = await contesto.deleteContesto(idContesto);
+contestoService.deleteContesto = async(dati) =>{
+    if(dati.idContesto) {
+        let contestoEliminata = await contesto.deleteContesto(dati.idContesto);
 
         if (contestoEliminata !== null) {
-            return idContesto;
+            if (dati.idRuolo === 2 || dati.idRuolo === 3) {
+                return contesto.deleteContesto(dati.idContesto);
+            } else {
+                return Promise.reject("Non hai i permessi");
+            }
         } else {
             return Promise.reject("Contesto non trovato");
         }
     }
     else{
         return Promise.reject("ID minore di 0");
+    }
+}
+
+contestoService.getByFilter = async (nome, page, dati)=>{
+    if(page > 0) {
+        let filters = {};
+        if (nome !== undefined) {
+            nome = nome.trim();
+            if (nome.length > 0) {
+                filters.nome = nome;
+            }
+
+        }
+        return contesto.getByFilter(filters, page,dati);
+    }
+    else{
+        return Promise.reject("Pagina non valida");
     }
 }
 

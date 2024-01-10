@@ -3,6 +3,8 @@ const DataTypes= require("sequelize").DataTypes;
 const utente = require("./utente");
 const ambiente = require("./creazione");
 
+const pageSize = 15;
+
 const contesto = {};
 
 const Contesto = db.define('Contesto',{
@@ -166,7 +168,7 @@ contesto.getByFilter = async (filters, page,dati) => {
         totalPages: totalPages,
         currentPage: page,
         pageSize: pageSize,
-        creazioni: result
+        contesti: result
     };
 }
 
