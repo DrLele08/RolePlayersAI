@@ -12,10 +12,22 @@ contestoService.createContesto = async (dati) =>{
                 dati.nome = dati.nome.trim();
                 dati.descrizione = dati.descrizione.trim();
 
-                if (dati.nome.length < 1 || dati.nome.length > 50) {
-                    if (dati.descrizione.length < 20 || dati.descrizione.length > 512) {
-                        return Promise.reject("Dati non validi");
+                if (dati.nome.length > 1 && dati.nome.length < 50) {
+
+                    if (dati.descrizione.length > 20 && dati.descrizione.length < 512) {
+                        if(dati.isPubblico === 0 || dati.isPubblico === 1) {
+                            return await contesto.createContesto(dati);
+                        }
+                        else{
+                            return Promise.reject("Parametro isPubblico non valido");
+                        }
                     }
+                    else{
+                        return Promise.reject("Descrizione non valida");
+                    }
+                }
+                else{
+                    return Promise.reject("Nome non valido")
                 }
             }
             else {
@@ -25,9 +37,6 @@ contestoService.createContesto = async (dati) =>{
         else{
             return Promise.reject("Id Utente non valido");
         }
-
-        return await contesto.createContesto(dati);
-
     }
 
     else{
