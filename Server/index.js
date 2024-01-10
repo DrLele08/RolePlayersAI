@@ -58,6 +58,7 @@ require("./api/routes/sessione")(app);
 require("./api/routes/inventario")(app);
 
 require("./platform/routes/registrazione")(app);
+require("./platform/routes/dashboard")(app);
 
 
 //Avvio del server

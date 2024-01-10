@@ -176,7 +176,7 @@ creazioneService.getCreazioniPopolari = async (limit, tipo)=>{
     }
 
     if(tipo!==undefined && tipo!==null){
-        if(tipo !== "Personaggio" || tipo !== "Ambiente"){
+        if(tipo !== "Personaggio" && tipo !== "Ambiente"){
             tipo = null;
         }
     }
