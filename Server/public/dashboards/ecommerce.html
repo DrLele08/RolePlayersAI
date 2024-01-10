@@ -400,25 +400,13 @@
 	</div>
 	<!--end::Header-->
 
-	<!--begin::Content-->
-	<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-		<!--begin::Post-->
-		<div class="post d-flex flex-column-fluid" id="kt_post">
 			<!--begin::Container-->
-			<div id="kt_content_container" class="container-xxl">
-				<!--begin::Layout-->
-				<div class="d-flex flex-column flex-xl-row">
-					<!--begin::Content-->
-					<div class="d-flex flex-row-fluid me-xl-9 mb-10 mb-xl-0">
-						<!--begin::Pos food-->
-						<div class="card card-flush card-p-0 bg-transparent border-0">
-							<!--begin::Body-->
-							<div class="card-body">
+			<div id="kt_content_container" class="container-xxl d-flex flex-column flex-column-fluid">
 
 									<!--begin::Personaggi-->
-									<div class="tab-pane fade show active" id="lib_cha">
+									<div class="post d-flex flex-column-fluid" id="lib_cha">
 										<!--begin::Messenger-->
-										<div class="card" id="kt_chat_messenger">
+										<div class="card flex-column flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0" id="kt_chat_messenger">
 											<!--begin::Card body-->
 											<div class="card-body h-500px" id="kt_chat_messenger_body">
 												<!--begin::Messages-->
@@ -458,6 +446,39 @@
 
 										</div>
 										<!--end::Messenger-->
+
+										<!--begin::Sidebar-->
+										<div class="flex-column flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0 ms-lg-7 ms-xl-10">
+											<!--begin::Contacts-->
+											<div class="card card-flush">
+												<!--begin::Card header-->
+												<div class="card-header pt-7" id="kt_chat_contacts_header">
+													<!--begin::Form-->
+													<form class="w-100 position-relative" autocomplete="off">
+														<span>Nome personaggio</span>
+														<input type="text" class="form-control form-control-solid" name="search" value="" placeholder="Inserisci nome personaggio" />
+														<!--end::Input-->
+													</form>
+													<!--end::Form-->
+												</div>
+												<!--end::Card header-->
+												<!--begin::Card body-->
+												<div class="card-body pt-5" id="kt_chat_contacts_body">
+													<span>Scegli il genere<br></span>
+													<input type="radio" id="html" name="fav_language" value="HTML">
+													<label for="html">Uomo</label>
+													<span>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</span>
+													<input type="radio" id="css" name="fav_language" value="CSS">
+													<label for="css">Donna</label>
+													<span>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</span>
+													<input type="radio" id="javascript" name="fav_language" value="JavaScript">
+													<label for="javascript">Altro</label>
+												</div>
+												<!--end::Card body-->
+											</div>
+											<!--end::Contacts-->
+										</div>
+										<!--end::Sidebar-->
 									</div>
 									<!--end::Personaggi-->
 
@@ -575,20 +596,8 @@
 									</div>
 									<!--end::Contesti-->
 
-							</div>
-							<!--end: Card Body-->
-						</div>
-						<!--end::Pos food-->
-					</div>
-					<!--end::Content-->
-				</div>
-				<!--end::Layout-->
 			</div>
 			<!--end::Container-->
-		</div>
-		<!--end::Post-->
-	</div>
-	<!--end::Content-->
 
 	<!--begin::Footer-->
 	<div class="footer py-4 d-flex flex-lg-column" id="kt_footer">
