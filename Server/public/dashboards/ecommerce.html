@@ -400,25 +400,13 @@
 	</div>
 	<!--end::Header-->
 
-	<!--begin::Content-->
-	<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-		<!--begin::Post-->
-		<div class="post d-flex flex-column-fluid" id="kt_post">
 			<!--begin::Container-->
-			<div id="kt_content_container" class="container-xxl">
-				<!--begin::Layout-->
-				<div class="d-flex flex-column flex-xl-row">
-					<!--begin::Content-->
-					<div class="d-flex flex-row-fluid me-xl-9 mb-10 mb-xl-0">
-						<!--begin::Pos food-->
-						<div class="card card-flush card-p-0 bg-transparent border-0">
-							<!--begin::Body-->
-							<div class="card-body">
+			<div id="kt_content_container" class="container-xxl d-flex flex-column flex-column-fluid" style="margin-top:3%;">
 
 									<!--begin::Personaggi-->
-									<div class="tab-pane fade show active" id="lib_cha">
+									<div class="post d-flex flex-column-fluid " id="lib_cha">
 										<!--begin::Messenger-->
-										<div class="card" id="kt_chat_messenger">
+										<div class="card flex-column flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0" id="kt_chat_messenger">
 											<!--begin::Card body-->
 											<div class="card-body h-500px" id="kt_chat_messenger_body">
 												<!--begin::Messages-->
@@ -458,65 +446,156 @@
 
 										</div>
 										<!--end::Messenger-->
+
+										<div>
+										<!--begin::Sidebar-->
+										<div class="flex-column flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0 ms-lg-7 ms-xl-10">
+											<!--begin::Contacts-->
+											<div class="card card-flush">
+												<!--begin::Card header-->
+												<div class="card-header pt-7" id="kt_chat_contacts_header">
+													<!--begin::Form-->
+													<form class="w-100 position-relative" autocomplete="off">
+														<span>Nome personaggio</span>
+														<input type="text" class="form-control form-control-solid" name="search" value="" placeholder="Inserisci nome personaggio" />
+														<!--end::Input-->
+													</form>
+													<!--end::Form-->
+												</div>
+												<!--end::Card header-->
+												<!--begin::Card body-->
+												<div class="card-body pt-5" id="kt_chat_contacts_body">
+													<span>Scegli il genere<br></span>
+													<input type="radio" id="html" name="fav_language" value="uomo">
+													<label for="html">Uomo</label>
+													<span>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</span>
+													<input type="radio" id="css" name="fav_language" value="donna">
+													<label for="css">Donna</label>
+													<span>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</span>
+													<input type="radio" id="javascript" name="fav_language" value="altro">
+													<label for="javascript">Altro</label>
+												</div>
+												<!--end::Card body-->
+											</div>
+											<!--end::Contacts-->
+										</div>
+										<!--end::Sidebar-->
+
+										<!--begin::Sidebar-->
+										<div class="flex-row flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0 ms-lg-7 ms-xl-10" style="margin-top:5%;">
+											<!--begin::Contacts-->
+											<div class="card card-flush">
+												<!--begin::Card body-->
+												<div class="card-body pt-5">
+													<span>Privacy<br></span>
+													<div>
+													<input type="radio" id="privato" name="fav" value="privato">
+													<label for="privato">Privato &nbsp</label>
+														<span>Il personaggio sarà visibile solo nel tuo inventario.</span><br><br>
+													<input type="radio" id="pubblico" name="fav" value="pubblico">
+														<label for="pubblico">Pubblico &nbsp</label>
+														<span>Il personaggio sarà visibile a tutti nella libreria.</span>
+													</div>
+												</div>
+												<!--end::Card body-->
+											</div>
+											<!--end::Contacts-->
+										</div>
+										<!--end::Sidebar-->
+										</div>
 									</div>
 									<!--end::Personaggi-->
 
 									<!--begin::Ambienti-->
-									<div class="tab-pane fade" id="lib_loc">
-										<!--begin::Wrapper-->
-										<div class="d-flex flex-wrap d-grid gap-5 gap-xxl-9">
-											<!--begin::Card-->
-											<div class="card card-flush flex-row-fluid p-6 pb-5 mw-100">
-												<!--begin::Body-->
-												<div class="card-body text-center">
-													<!--begin::Food img-->
-													<img src="assets/media/stock/food/img-11.jpg" class="rounded-3 mb-4 w-150px h-150px w-xxl-200px h-xxl-200px" alt="" />
-													<!--end::Food img-->
-													<!--begin::Info-->
-													<div class="mb-2">
-														<!--begin::Title-->
-														<div class="text-center">
-															<span class="fw-bold text-gray-800 cursor-pointer text-hover-primary fs-3 fs-xl-1">Sweety</span>
-															<span class="text-gray-500 fw-semibold d-block fs-6 mt-n1">16 mins to cook</span>
-														</div>
-														<!--end::Title-->
-													</div>
-													<!--end::Info-->
-													<!--begin::Total-->
-													<span class="text-success text-end fw-bold fs-1">$11.40$</span>
-													<!--end::Total-->
-												</div>
-												<!--end::Body-->
-											</div>
-											<!--end::Card-->
-											<!--begin::Card-->
-											<div class="card card-flush flex-row-fluid p-6 pb-5 mw-100">
-												<!--begin::Body-->
-												<div class="card-body text-center">
-													<!--begin::Food img-->
-													<img src="assets/media/stock/food/img-5.jpg" class="rounded-3 mb-4 w-150px h-150px w-xxl-200px h-xxl-200px" alt="" />
-													<!--end::Food img-->
-													<!--begin::Info-->
-													<div class="mb-2">
-														<!--begin::Title-->
-														<div class="text-center">
-															<span class="fw-bold text-gray-800 cursor-pointer text-hover-primary fs-3 fs-xl-1">Breakfast</span>
-															<span class="text-gray-500 fw-semibold d-block fs-6 mt-n1">16 mins to cook</span>
-														</div>
-														<!--end::Title-->
-													</div>
-													<!--end::Info-->
-													<!--begin::Total-->
-													<span class="text-success text-end fw-bold fs-1">$8.20$</span>
-													<!--end::Total-->
-												</div>
-												<!--end::Body-->
-											</div>
-											<!--end::Card-->
-										</div>
-										<!--end::Wrapper-->
+				<div class="post d-flex flex-column-fluid ">
+					<!--begin::Messenger-->
+					<div class="card flex-column flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0">
+						<!--begin::Card body-->
+						<div class="card-body h-500px">
+							<!--begin::Messages-->
+							<div class="scroll-y me-n5 pe-5 h-300px h-lg-auto" data-kt-element="messages" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_header, #kt_app_header, #kt_app_toolbar, #kt_toolbar, #kt_footer, #kt_app_footer, #kt_chat_messenger_header, #kt_chat_messenger_footer" data-kt-scroll-wrappers="#kt_content, #kt_app_content, #kt_chat_messenger_body" data-kt-scroll-offset="5px">
+								<!--begin::Message(in)-->
+								<div class="d-flex justify-content-start mb-10">
+									<!--begin::Wrapper-->
+									<div class="d-flex flex-column align-items-start">
+										<!--begin::Text-->
+										<div class="p-5 rounded bg-light-info text-gray-900 fw-semibold mw-lg-400px text-start" data-kt-element="message-text">Descrizione dell'ambiente</div>
+										<!--end::Text-->
 									</div>
-									<!--end::Ambienti-->
+									<!--end::Wrapper-->
+								</div>
+								<!--end::Message(in)-->
+							</div>
+							<!--end::Messages-->
+						</div>
+						<!--end::Card body-->
+
+						<!--begin::Card footer-->
+						<div class="d-flex align-items-center">
+							<!--begin::Input-->
+							<textarea class="form-control form-control-flush mb-3" rows="1" data-kt-element="input" placeholder="Descrivi un'ambiente"></textarea>
+							<!--end::Input-->
+							<!--begin:Toolbar-->
+							<div class="d-flex flex-stack">
+								<!--begin::Send-->
+								<button class="btn btn-primary" type="button" data-kt-element="send">
+									<img alt="Logo" src="assets/media/avatars/invia.png"/>
+								</button>
+								<!--end::Send-->
+							</div>
+							<!--end::Toolbar-->
+						</div>
+						<!--end::Card footer-->
+
+					</div>
+					<!--end::Messenger-->
+
+					<div>
+						<!--begin::Sidebar-->
+						<div class="flex-column flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0 ms-lg-7 ms-xl-10">
+							<!--begin::Contacts-->
+							<div class="card card-flush">
+								<!--begin::Card header-->
+								<div class="card-header pt-7">
+									<!--begin::Form-->
+									<form class="w-100 position-relative" autocomplete="off">
+										<span>Nome dell'ambiente</span>
+										<input type="text" class="form-control form-control-solid" name="search" value="" placeholder="Inserisci nome personaggio" />
+										<!--end::Input-->
+										<span>&nbsp</span>
+									</form>
+									<!--end::Form-->
+								</div>
+								<!--end::Card header-->
+							</div>
+							<!--end::Contacts-->
+						</div>
+						<!--end::Sidebar-->
+
+						<!--begin::Sidebar-->
+						<div class="flex-row flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0 ms-lg-7 ms-xl-10" style="margin-top:5%;">
+							<!--begin::Contacts-->
+							<div class="card card-flush">
+								<!--begin::Card body-->
+								<div class="card-body pt-5">
+									<span>Privacy<br></span>
+									<div>
+										<input type="radio" id="priv"  name="fav" value="privato">
+										<label for="priv">Privato &nbsp</label>
+										<span>L'ambiente sarà visibile solo nel tuo inventario.</span><br><br>
+										<input type="radio" id="publ"  name="fav" value="pubblico">
+										<label for="publ">Pubblico &nbsp</label>
+										<span>L'ambiente sarà visibile a tutti nella libreria.</span>
+									</div>
+								</div>
+								<!--end::Card body-->
+							</div>
+							<!--end::Contacts-->
+						</div>
+						<!--end::Sidebar-->
+					</div>
+				</div>
+				<!--end::Ambienti-->
 
 									<!--begin::Contesti-->
 									<div class="tab-pane fade" id="lib_con">
@@ -575,20 +654,8 @@
 									</div>
 									<!--end::Contesti-->
 
-							</div>
-							<!--end: Card Body-->
-						</div>
-						<!--end::Pos food-->
-					</div>
-					<!--end::Content-->
-				</div>
-				<!--end::Layout-->
 			</div>
 			<!--end::Container-->
-		</div>
-		<!--end::Post-->
-	</div>
-	<!--end::Content-->
 
 	<!--begin::Footer-->
 	<div class="footer py-4 d-flex flex-lg-column" id="kt_footer">

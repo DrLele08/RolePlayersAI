@@ -150,45 +150,7 @@ creazione.deleteById = async (id) =>{
 });
 }
 
-/**
- * Ritorna una lista con le creazioni proprietarie
- *
- * @function
- * @param {Number} idUtente - ID dell'utente
- *
- * @returns {Promise<creazioni>} - Promise che si risolve con lista di creazioni
- */
-creazione.getOwnCreations = async (idUtente) =>
-{
-    return await Creazione.findAll({
-        where: {
-            fkUtente: idUtente
-        }
-    })
-}
 
-/**
- * Ritorna una lista con le creazioni pubbliche
- *
- * @function
- *
- * @returns {Promise<creazioni>} - Promise che si risolve con lista di creazioni
- */
-creazione.getCreationsGrants = async (dati) => {
-    if (dati.idRuolo !== 1) {
-        return await Creazione.findAll();
-    }
-    else {
-        return await Creazione.findAll({
-            where:{
-                [Op.or]:[
-                    {isPubblico: 1},
-                    {fkUtente: dati.idUtente},
-                ]
-            },
-        });
-    }
-}
 
 /**
  * Restituisce una lista di creazioni filtrate e paginate in base ai criteri specificati

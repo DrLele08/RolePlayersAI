@@ -76,8 +76,9 @@ exports.CreateCreazione = async (req, res)=>{
     const descrizione = req.body.descrizione;
     const isPubblico = req.body.isPubblico;
     const tipo = req.body.tipo;
-    const img = req.file; //todo se non si passa un img
+    const img = req.file;
     const idUtente = req.idUtente;
+    const sesso = req.body.sesso;
 
 
     try{
@@ -88,7 +89,8 @@ exports.CreateCreazione = async (req, res)=>{
             tipo: tipo,
             descrizione: descrizione,
             img:img,
-            idUtente: idUtente
+            idUtente: idUtente,
+            sesso: sesso
         });
         json.Ris = 1;
         json.NuovaCreazione = nuovaCreazione;

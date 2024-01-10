@@ -65,19 +65,38 @@ creazioneService.createCreazione = async (dati) =>{
             dati.nome = dati.nome.trim();
             dati.descrizione = dati.descrizione.trim();
             dati.tipo = dati.tipo.trim();
+            dati.sesso = dati.sesso.trim();
 
             if (dati.nome.length > 0 && dati.nome.length < 51 ) {
                 if(dati.idUtente===dati.fkUtente)
                 {
                     if (dati.descrizione.length > 0 && dati.descrizione.length < 513) {
                         if (dati.tipo === 'Personaggio' || dati.tipo === 'Ambiente') {
+                            if (dati.tipo === 'Personaggio')
+                             {
+                                if(dati.sesso === 'Uomo' || dati.sesso === 'Donna' || dati.sesso === 'Altro')
+                                {
 
+                                }
+                                else {
+                                    return Promise.reject("Dati non validi");
+                                }
+                             }
                         }
                         else{
                             return Promise.reject("Dati non validi");
                         }
                     }
+                    else{
+                        return Promise.reject("Dati non validi");
+                    }
                 }
+                else{
+                    return Promise.reject("Dati non validi");
+                }
+            }
+            else{
+                return Promise.reject("Dati non validi");
             }
 
 
@@ -93,7 +112,7 @@ creazioneService.createCreazione = async (dati) =>{
                 nuovaCreazione = await creazione.createAmbiente(dati);
             }
 
-            let fotoUrl="/img/creazione/default.jpeg"
+            let fotoUrl="/img/creazione/default.jpg"
             let baseUrl = process.env.BASE_URL;
 
             if(dati.img !== undefined)
@@ -157,7 +176,7 @@ creazioneService.getCreazioniPopolari = async (limit, tipo)=>{
     }
 
     if(tipo!==undefined && tipo!==null){
-        if(tipo !== "Personaggio" || tipo !== "Ambiente"){
+        if(tipo !== "Personaggio" && tipo !== "Ambiente"){
             tipo = null;
         }
     }
