@@ -15,11 +15,14 @@ contestoService.createContesto = async (dati) =>{
                 if (dati.nome.length > 1 && dati.nome.length < 50) {
 
                     if (dati.descrizione.length > 20 && dati.descrizione.length < 512) {
-                        if(dati.isPubblico === 0 || dati.isPubblico === 1) {
-                            return await contesto.createContesto(dati);
-                        }
-                        else{
-                            return Promise.reject("Parametro isPubblico non valido");
+
+                        if(dati.isPubblico.toString().length > 0 && !isNaN(dati.isPubblico)) {
+                            let isPubblico = parseInt(dati.isPubblico);
+                            if (isPubblico === 0 || isPubblico === 1) {
+                                return await contesto.createContesto(dati);
+                            } else {
+                                return Promise.reject("Parametro isPubblico non valido");
+                            }
                         }
                     }
                     else{
