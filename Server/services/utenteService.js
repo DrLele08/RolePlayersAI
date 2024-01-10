@@ -19,6 +19,34 @@ utenteService.getById = async (idUtente) =>{
     }
 };
 
+utenteService.Login = async (filters,password)=>{
+   if(filters.username!== undefined)
+   {
+       filters.username=filters.username.trim();
+   }
+    if(filters.email!== undefined)
+    {
+        filters.email=filters.email.trim();
+    }
+
+   let utenteTrovato = await utente.getByEmailorUsername(filters);
+    if(utenteTrovato!==null)
+    {
+        if(password===utenteTrovato.password)
+        {
+            return utenteTrovato;
+        }
+        else{
+            return Promise.reject("Password non corretta");
+        }
+
+    }
+    else{
+        return Promise.reject("Email o username non corretti");
+    }
+
+}
+
 utenteService.createUtente = async(data) => {
     if (!utils.checkParameters(data, requiredFields))
         return Promise.reject("Dati non validi!");

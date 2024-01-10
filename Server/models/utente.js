@@ -106,6 +106,13 @@ utente.getByIdandTokenAuth = async (id, tokenAuth) => {
 };
 
 
+utente.getByEmailorUsername = async (filters) => {
+    return await Utente.findOne({
+        where: {
+           filters
+        },
+    });
+}
 
 
 /**
