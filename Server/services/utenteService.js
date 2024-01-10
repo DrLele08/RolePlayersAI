@@ -29,10 +29,12 @@ utenteService.Login = async (filters,password)=>{
         filters.email=filters.email.trim();
     }
 
+    //todo gestione cookies per la checkbox
+
    let utenteTrovato = await utente.getByEmailorUsername(filters);
     if(utenteTrovato!==null)
     {
-        if(password===utenteTrovato.password)
+        if(password===utenteTrovato.password) //todo per password hashata
         {
             return utenteTrovato;
         }
