@@ -1,7 +1,7 @@
 const db= require("./database");
 const DataTypes= require("sequelize").DataTypes;
 const utente = require("./utente");
-const ambiente = require("./creazione");
+const creazione = require("./creazione");
 
 const pageSize = 15;
 
@@ -19,16 +19,15 @@ const Contesto = db.define('Contesto',{
         allowNull: false,
         references: {
             model: utente.Utente,
-            key: 'id'
+            key: 'idUtente'
         }
     },
-
     fkAmbiente: {
         type: DataTypes.BIGINT,
         allowNull: false,
         references: {
-            model: ambiente.Creazione,
-            key: 'id'
+            model: creazione.Creazione,
+            key: 'idCreazione'
         }
     },
     nome: {
@@ -92,7 +91,7 @@ contesto.getAll = async()=> {
 contesto.createContesto = async(dati) =>{
     return await Contesto.create({
         fkUtente: dati.fkUtente,
-        fKAmbiente: dati.fkAmbiente,
+        fkAmbiente: dati.fkAmbiente,
         nome: dati.nome,
         descrizione: dati.descrizione,
         isPubblico: dati.isPubblico
