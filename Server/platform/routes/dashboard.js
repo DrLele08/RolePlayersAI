@@ -4,7 +4,7 @@ module.exports=app=>{
     const dashboard=require("../controllers/dashboard");
 
 
-    router.get("/username",middlewareAuth([1,2,3]), dashboard.GetUsername);
+    router.get("/", middlewareAuth([1,2,3]), dashboard.GetDashboard);
 
     app.use("/dashboard",router);
 };
