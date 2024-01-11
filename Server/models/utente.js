@@ -2,8 +2,6 @@ const db= require("./database");
 const DataTypes= require("sequelize").DataTypes;
 const abbonamento = require("./abbonamento");
 const utils = require("../models/utils.js");
-const {Op} = require("sequelize");
-const stripe = require('stripe')('sk_test_51OURuIHOFfOlBPkf5Zoi0O0G9o3OmzAHZ3plZCPzBpa2C8PYevvdYc9DgAHKmG1dqHGvhEfAzihtwUc1zPjabuRb00i0nGIHy3');
 
 const utente = {};
 
@@ -130,6 +128,8 @@ utente.getByFilters = async(filters, page = 1, pageSize = 16) => {
 
     let utenti = [];
     result.rows.forEach(row => {
+        delete row.dataValues.password;
+        delete row.dataValues.authToken;
         utenti.push(row.dataValues);
     });
 

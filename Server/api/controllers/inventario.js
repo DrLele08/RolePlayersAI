@@ -14,7 +14,8 @@ exports.getInventario = async(req, res) => {
 
     await inventarioService.getInventario(data).then(result => {
         res.status(200);
-        json = result;
+        json.Ris = 1;
+        json.Inventario = result;
     }).catch(error => {
         res.status(400);
         json.Ris = 0;

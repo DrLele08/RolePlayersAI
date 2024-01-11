@@ -14,8 +14,8 @@ exports.getUtenti = async(req, res) => {
 
     await utenteService.getByFilters(data).then(result => {
         res.status(200);
-        json = result;
         json.Ris = 1;
+        json.Utenti = result.utenti;
     }).catch(error => {
         res.status(400);
         json.Ris = 0;

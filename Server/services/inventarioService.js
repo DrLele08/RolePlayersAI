@@ -16,7 +16,7 @@ inventarioService.getInventario = async(data) => {
     data.filters.tipo && (data.filters.tipo = data.filters.tipo.split(",").map(str => str.trim().toLowerCase()));
 
     // controlla se tutti i tipi inseriti siano validi
-    if (!data.filters.tipo.every(tipo => ["personaggio", "ambiente", "contesto"].includes(tipo)))
+    if (data.filters.tipo && !data.filters.tipo.every(tipo => ["personaggio", "ambiente", "contesto"].includes(tipo)))
         return Promise.reject("Filtro tipo non valido!");
 
     const u = await utente.getById(data.idUtente);
@@ -83,12 +83,13 @@ inventarioService.removeContenuto = async(data) => {
 async function getContesti(u, filters) {
     const contesti = await u.getContestos();
 
-    if (!filters.tipo.includes("contesto"))
+    if (filters.tipo && !filters.tipo.includes("contesto"))
         return [];
 
     return contesti.map(c => {
         const dataValues = c.dataValues;
         delete dataValues.InventarioContesto;
+        dataValues.tipo = "Contesto";
         return dataValues;
     }).filter(c => {
         if (filters.nome)
