@@ -70,7 +70,7 @@ creazioneService.createCreazione = async (dati) =>{
             if (dati.nome.length <= 0 || dati.nome.length >= 51) {
                 return Promise.reject("Dati non validi");
             }
-            if (dati.isPubblico !== 0 || dati.isPubblico !== 1) {
+            if (dati.isPubblico != 0 || dati.isPubblico != 1) {
                 return Promise.reject("Dati non validi");
             }
             if (dati.descrizione.length < 1 || dati.descrizione.length >= 513) {
