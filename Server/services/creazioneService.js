@@ -59,41 +59,36 @@ creazioneService.DeleteById=async(dati)=>{
 };
 
 creazioneService.createCreazione = async (dati) =>{
-    if(utils.checkParameters(dati, requiredFields)){
-        if(utils.checkId(dati.fkUtente)){
+    if(utils.checkParameters(dati, requiredFields)) {
+        if (utils.checkId(dati.fkUtente)) {
 
             dati.nome = dati.nome.trim();
             dati.descrizione = dati.descrizione.trim();
             dati.tipo = dati.tipo.trim();
 
 
-            if (dati.nome.length <= 0 || dati.nome.length >= 51 ) {
+            if (dati.nome.length <= 0 || dati.nome.length >= 51) {
+                return Promise.reject("Dati non validi");
+            }
+            if (dati.isPubblico !== 0 || dati.isPubblico !== 1) {
+                return Promise.reject("Dati non validi");
+            }
+            if (dati.descrizione.length < 1 || dati.descrizione.length >= 513) {
+                return Promise.reject("Dati non validi");
+            }
+            if (dati.tipo !== 'Personaggio' || dati.tipo !== 'Ambiente') {
+                return Promise.reject("Dati non validi");
+            }
+            if (dati.tipo === 'Personaggio' && dati.sesso !== undefined) {
+                dati.sesso = dati.sesso.trim();
+                if (dati.sesso !== 'Uomo' || dati.sesso !== 'Donna' || dati.sesso !== 'Altro') {
+                    return Promise.reject("Dati non validi");
+                }
+            } else if (dati.tipo === 'Personaggio' && dati.sesso === undefined) {
                 return Promise.reject("Dati non validi");
 
-                if(dati.isPubblico!==0 || dati.isPubblico!==1) {
-                    return Promise.reject("Dati non validi");
-
-                    if (dati.descrizione.length < 1 || dati.descrizione.length >= 513) {
-                        return Promise.reject("Dati non validi");
-
-                        if (dati.tipo !== 'Personaggio' || dati.tipo !== 'Ambiente') {
-                            return Promise.reject("Dati non validi");
-
-                            if (dati.tipo === 'Personaggio' && dati.sesso !== undefined)
-                            {
-                                dati.sesso=dati.sesso.trim();
-                                if(dati.sesso !== 'Uomo' || dati.sesso !== 'Donna' || dati.sesso !== 'Altro')
-                                {
-                                    return Promise.reject("Dati non validi");
-                                }
-                            }
-                            else if (dati.tipo === 'Personaggio' && dati.sesso === undefined) {
-                                return Promise.reject("Dati non validi");
-                            }
-                        }
-                    }
-                }
             }
+
 
 
             let nuovaCreazione;
