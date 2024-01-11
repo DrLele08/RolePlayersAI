@@ -29,7 +29,7 @@ app.engine('hbs', expressHbs.engine({
     defaultLayout:"main-layout",
     extname:"hbs",
     helpers: require('./models/handlebars-helpers.js'),
-    partialsDir: __dirname+"/platform/views/layouts/"
+    partialsDir: __dirname+"/platform/views/partials"
 }));
 app.set('view engine','hbs');
 app.set('views','./platform/views');

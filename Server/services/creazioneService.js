@@ -68,7 +68,7 @@ creazioneService.createCreazione = async (dati) =>{
             dati.sesso = dati.sesso.trim();
 
             if (dati.nome.length > 0 && dati.nome.length < 51 ) {
-                if(dati.idUtente===dati.fkUtente)
+                if(dati.isPubblico===0 || dati.isPubblico===1)
                 {
                     if (dati.descrizione.length > 0 && dati.descrizione.length < 513) {
                         if (dati.tipo === 'Personaggio' || dati.tipo === 'Ambiente') {

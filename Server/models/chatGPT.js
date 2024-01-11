@@ -4,15 +4,21 @@ const openai = new OpenAI({
     apiKey: process.env.CHAT_GPT_KEY
 });
 
+/**
+ * Oggetto che contiene le funzioni per interagire con l`API di OpenAI GPT
+ * @namespace
+ * @property {Function} inviaMessaggio - Funzione per inviare un messaggio a GPT e ricevere una risposta
+ */
 const chatGPT={};
 
 
 /**
- * Invia una richiesta di completamento chat ad OpenAI GPT-3.5 Turbo
+ * Invia una richiesta di completamento chat ad OpenAI GPT
  * @async
  * @function
  * @param {Array} listaMessaggi - Una lista di messaggi nella conversazione
- * @return {Promise<>} Una promise che si risolve con la risposta generata
+ * @return {Promise<String>} La risposta genarata da GPT
+ * @throws {Error} Se non è possibile ottenere una risposta da GPT
  *
  * @example
  * const messaggi = [
