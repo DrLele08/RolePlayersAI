@@ -5,6 +5,6 @@ module.exports = app => {
     const loginController = require("../controllers/login");
 
     router.get("/", loginController.PaginaLogin);
-    router.post("/", multer().any(), loginController.LoginControl);
+
     app.use("/login", router);
 }

@@ -46,6 +46,7 @@ app.use((req,ris,next)=>{
 require("./platform/routes/squadra.js")(app);
 require("./platform/routes/pagamento")(app);
 require("./platform/routes/pagamento.js")(app);
+require("./platform/routes/login.js")(app);
 
 require("./api/routes/squadra.js")(app);
 
