@@ -57,6 +57,7 @@ require("./api/routes/registrazione")(app);
 require("./api/routes/sessione")(app);
 require("./api/routes/inventario")(app);
 require("./api/routes/login")(app);
+require("./api/routes/admin")(app);
 require("./platform/routes/registrazione")(app);
 require("./platform/routes/dashboard")(app);
 

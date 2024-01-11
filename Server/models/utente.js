@@ -2,6 +2,7 @@ const db= require("./database");
 const DataTypes= require("sequelize").DataTypes;
 const abbonamento = require("./abbonamento");
 const utils = require("../models/utils.js");
+const {Op} = require("sequelize");
 const stripe = require('stripe')('sk_test_51OURuIHOFfOlBPkf5Zoi0O0G9o3OmzAHZ3plZCPzBpa2C8PYevvdYc9DgAHKmG1dqHGvhEfAzihtwUc1zPjabuRb00i0nGIHy3');
 
 const utente = {};
@@ -114,6 +115,38 @@ utente.getByEmailorUsername = async (filters) => {
     });
 }
 
+utente.getByFilters = async(filters, page = 1, pageSize = 16) => {
+    const Op = require("sequelize").Op;
+
+    const result = await Utente.findAndCountAll({
+        where: {
+            fkAbbonamento: filters.fkAbbonamento ? filters.fkAbbonamento : {[Op.ne]: null},
+            username: filters.username ? {[Op.substring]: filters.username} : {[Op.ne]: null},
+            ruolo: filters.ruolo ? filters.ruolo : {[Op.ne]: null}
+        },
+        limit: pageSize,
+        offset: (page - 1) * pageSize,
+    });
+
+    let utenti = [];
+    result.rows.forEach(row => {
+        utenti.push(row.dataValues);
+    });
+
+    const totalCount = result.count;
+    const totalPages = Math.ceil(totalCount / pageSize);
+
+    // Ritorna l'oggetto con l'array di utenti e le informazioni sulla paginazione
+    return {
+        utenti,
+        pagination: {
+            page,
+            pageSize,
+            totalCount,
+            totalPages,
+        },
+    };
+}
 
 /**
  *Restituisce l`abbonamento con l`ID dato in input.
@@ -164,6 +197,24 @@ utente.cambiaAbbonamento = async (idUtente, idAbbonamento) => {
             }
         });
     }
+}
+
+/**
+ * Aggiorna il ruolo di un utente nel database.
+ *
+ * @param {Number} idUtente - L'ID dell'utente da aggiornare.
+ * @param {String} ruolo - Il nuovo ruolo da assegnare all'utente.
+ *
+ * @returns {Promise} - Una promise che risolve quando l'aggiornamento è completato.
+ */
+utente.setRuolo = async (idUtente, ruolo) => {
+    return await Utente.update({
+        ruolo: ruolo
+    }, {
+        where: {
+            idUtente: idUtente
+        }
+    });
 }
 
 /**

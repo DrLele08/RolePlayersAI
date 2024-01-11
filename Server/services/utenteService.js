@@ -1,9 +1,11 @@
 const utils = require("../models/utils");
 const utente=require("../models/utente");
 const randomString = require("randomstring");
+const creazione = require("../models/creazione");
 
 const utenteService={};
 const requiredFields = ['username', 'nome', 'cognome', 'email', 'password', 'dataNascita', 'telefono'];
+const ruoliValidi = ['utente', 'moderatore', 'amministratore'];
 
 utenteService.getById = async (idUtente) =>{
     if(!utils.checkId(idUtente)){
@@ -102,6 +104,43 @@ utenteService.getActualAbbonamento = async (idUtente) =>{
         return Promise.reject("ID Utente non valido")
     }
 
+}
+
+utenteService.getByFilters = async(data) => {
+    let fkAbbonamento = data.filters.fkAbbonamento;
+    if (fkAbbonamento) {
+        if (isNaN(fkAbbonamento) || fkAbbonamento < 1 || fkAbbonamento > 3)
+            return Promise.reject("Filtro abbonamento non valido!");
+    }
+
+    if (data.filters.ruolo) {
+        data.filters.ruolo = data.filters.ruolo.trim().toLowerCase();
+        if (!ruoliValidi.includes(data.filters.ruolo))
+            return Promise.reject("Filtro ruolo non valido!");
+    }
+
+    data.filters.username && (data.filters.username = data.filters.username.trim());
+
+    return await utente.getByFilters(data.filters, data.pagina);
+}
+
+utenteService.setRuolo = async(data) => {
+    const fields = ['idUtente', 'ruolo'];
+    if (!utils.checkParameters(data, fields))
+        return Promise.reject("Dati non validi!");
+
+    if (!utils.checkId(data.idUtente))
+        return Promise.reject("ID utente non valido!");
+
+    let u = utente.getById(data.idUtente);
+    if (!u)
+        return Promise.reject("Utente non trovato!");
+
+    data.ruolo = data.ruolo.trim().toLowerCase();
+    if (!ruoliValidi.includes(data.ruolo))
+        return Promise.reject("Ruolo non valido!");
+
+    return await utente.setRuolo(data.idUtente, data.ruolo);
 }
 
 module.exports = utenteService;

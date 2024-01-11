@@ -17,7 +17,7 @@ inventarioService.getInventario = async(data) => {
     if (tipo != null) {
         tipo = tipo.toLowerCase();
         if (tipo !== 'ambiente' && tipo !== 'personaggio')
-            return Promise.reject("Tipo non valido!");
+            return Promise.reject("Filtro tipo non valido!");
     }
 
     return await creazione.getByUtenteAndFilters(data.idUtente, data.filters, data.pagina);
