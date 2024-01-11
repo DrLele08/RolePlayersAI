@@ -9,44 +9,21 @@ inventarioService.getInventario = async(data) => {
     if (!utils.checkId(data.idUtente))
         return Promise.reject("ID utente non valido!");
 
-    data.filters.nome && (data.filters.nome = data.filters.nome.trim());
+    // se è presente il filtro 'nome' ne effettua il trim
+    data.filters.nome && (data.filters.nome = data.filters.nome.trim().toLowerCase());
 
-    let contesti, creazioni;
+    // se è presente il filtro 'tipo' divide i valori in un array e effettua il trim di ciascuno di essi
+    data.filters.tipo && (data.filters.tipo = data.filters.tipo.split(",").map(str => str.trim().toLowerCase()));
 
-    if (data.filters.tipo) {
-        let tipi = data.filters.tipo.split(",").map(str => str.trim().toLowerCase());
-        if (!tipi.every(tipo => ["personaggio", "ambiente", "contesto"].includes(tipo)))
-            return Promise.reject("Filtro tipo non valido!");
+    // controlla se tutti i tipi inseriti siano validi
+    if (!data.filters.tipo.every(tipo => ["personaggio", "ambiente", "contesto"].includes(tipo)))
+        return Promise.reject("Filtro tipo non valido!");
 
-        if (tipi.includes("contesto")) {
-            contesti = await contesto.getByUtenteAndFilters(data.idUtente, data.filters, data.pagina);
-            tipi.filter(tipo => tipo !== 'contesto');
-            data.filters.tipo = tipi.join(",");
-        }
-        creazioni = await creazione.getByUtenteAndFilters(data.idUtente, data.filters, data.pagina);
-    } else {
-        contesti = await contesto.getByUtenteAndFilters(data.idUtente, data.filters, data.pagina);
-        creazioni = await creazione.getByUtenteAndFilters(data.idUtente, data.filters, data.pagina);
-    }
+    const u = await utente.getById(data.idUtente);
+    const contesti = await getContesti(u, data.filters);
+    const creazioni = await getCreazioni(u, data.filters);
 
-    const merge = {};
-    let pagination;
-
-    if (contesti) {
-        merge.contesti = contesti.contesti;
-        if (!creazioni)
-            pagination = contesti.pagination;
-    }
-
-    if (creazioni) {
-        merge.creazioni = creazioni.creazioni;
-        if (!contesti)
-            pagination = creazioni.pagination;
-    }
-
-    merge.pagination = pagination;
-
-    return merge;
+    return contesti.concat(creazioni);
 }
 
 inventarioService.addContenuto = async(data) => {
@@ -101,6 +78,40 @@ inventarioService.removeContenuto = async(data) => {
 
         return await u.removeContesto(c);
     }
+}
+
+async function getContesti(u, filters) {
+    const contesti = await u.getContestos();
+
+    if (!filters.tipo.includes("contesto"))
+        return [];
+
+    return contesti.map(c => {
+        const dataValues = c.dataValues;
+        delete dataValues.InventarioContesto;
+        return dataValues;
+    }).filter(c => {
+        if (filters.nome)
+            return c.nome.toLowerCase().includes(filters.nome);
+        return true;
+    })
+}
+
+async function getCreazioni(u, filters) {
+    const creazioni = await u.getCreaziones();
+    return creazioni.map(c => {
+        const dataValues = c.dataValues;
+        delete dataValues.InventarioCreazione;
+        return dataValues;
+    }).filter(c => {
+        if (filters.nome)
+            return c.nome.toLowerCase().includes(filters.nome);
+        return true;
+    }).filter(c => {
+        if (filters.tipo)
+            return filters.tipo.includes(c.tipo.toLowerCase());
+        return true;
+    })
 }
 
 async function checkUtenteAndCreazione(data) {
