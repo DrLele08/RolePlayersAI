@@ -1,6 +1,5 @@
 exports.PaginaLogin = (req, ris)=> {
     if (req.session.idUtente === undefined) {
-        {
             if(req.cookie.idUtente !== undefined)
             {
                let idCookie = req.cookie.idUtente;
@@ -12,7 +11,7 @@ exports.PaginaLogin = (req, ris)=> {
             else {
                 ris.render("login");
             }
-        }
+
     } else {
         ris.redirect(process.env.BASE_URL + "/dashboard");
     }
