@@ -71,6 +71,38 @@ contesto.getAll = async()=> {
     return await Contesto.findAll();
 };
 
+contesto.getByUtenteAndFilters = async(idUtente, filters, page = 1, pageSize = 16) => {
+    const Op = require("sequelize").Op;
+
+    const result = await Contesto.findAndCountAll({
+        where: {
+            fkUtente: idUtente,
+            nome: filters.nome ? {[Op.substring]: filters.nome} : {[Op.ne]: null}
+        },
+        limit: pageSize,
+        offset: (page - 1) * pageSize,
+    });
+
+    let contesti = [];
+    result.rows.forEach(row => {
+        contesti.push(row.dataValues);
+    });
+
+    const totalCount = result.count;
+    const totalPages = Math.ceil(totalCount / pageSize);
+
+    // Ritorna l'oggetto con l'array di creazioni e le informazioni sulla paginazione
+    return {
+        contesti,
+        pagination: {
+            page,
+            pageSize,
+            totalCount,
+            totalPages,
+        },
+    };
+}
+
 
 /**
  * Crea e inserisce un nuovo Contesto all'interno del DB
