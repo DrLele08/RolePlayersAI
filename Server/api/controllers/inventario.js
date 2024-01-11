@@ -15,7 +15,6 @@ exports.getInventario = async(req, res) => {
     await inventarioService.getInventario(data).then(result => {
         res.status(200);
         json = result;
-        json.Ris = 1;
     }).catch(error => {
         res.status(400);
         json.Ris = 0;
@@ -29,7 +28,8 @@ exports.addContenuto = async(req, res) => {
 
     let data = {
         idUtente: req.idUtente,
-        idCreazione: req.body.idCreazione
+        idCreazione: req.body.idCreazione,
+        idContesto: req.body.idContesto
     }
 
     await inventarioService.addContenuto(data).then(result => {
@@ -48,13 +48,14 @@ exports.removeContenuto = async(req, res) => {
 
     let data = {
         idUtente: req.idUtente,
-        idCreazione: req.body.idCreazione
+        idCreazione: req.body.idCreazione,
+        idContesto: req.body.idContesto
     }
 
     await inventarioService.removeContenuto(data).then(result => {
         res.status(200);
         json.Ris = 1;
-        json.CreazioniRimosse = result;
+        json.ContenutiRimossi = result;
     }).catch(error => {
         res.status(400);
         json.Ris = 0;
