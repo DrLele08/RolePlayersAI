@@ -46,6 +46,7 @@ app.use((req,ris,next)=>{
 require("./platform/routes/squadra.js")(app);
 require("./platform/routes/pagamento")(app);
 require("./platform/routes/pagamento.js")(app);
+require("./platform/routes/login.js")(app);
 
 require("./api/routes/squadra.js")(app);
 
@@ -60,6 +61,7 @@ require("./api/routes/login")(app);
 require("./api/routes/admin")(app);
 require("./platform/routes/registrazione")(app);
 require("./platform/routes/dashboard")(app);
+require("./platform/routes/profilo")(app);
 
 
 //Avvio del server

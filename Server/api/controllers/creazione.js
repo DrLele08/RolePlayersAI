@@ -96,5 +96,6 @@ exports.CreateCreazione = async (req, res)=>{
     }catch (error){
         json.Ris = 0;
         json.Mess = error || "Errore Generico";
+        res.json(json);
     }
 }
