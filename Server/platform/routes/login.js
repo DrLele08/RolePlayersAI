@@ -1,5 +1,3 @@
-const multer = require("multer");
-const loginController = require("../../api/controllers/login");
 module.exports = app => {
     const router = require("express").Router();
     const loginController = require("../controllers/login");
