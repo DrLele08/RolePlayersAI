@@ -2,7 +2,6 @@ const utenteService = require("../../services/utenteService");
 
 exports.LoginControl = async(req, res) => {
     let json = {};
-    console.log(req.session.idUtente);
     if (req.session.idUtente !== undefined)
      {
         res.status(400);
@@ -19,7 +18,7 @@ exports.LoginControl = async(req, res) => {
         let password = req.body.password;
         try {
             let u = await utenteService.Login(filters, password);
-            console.log(u);
+
             // salva ID e auth-token dell'utente nella sessione
             req.session.idUtente = u.idUtente;
             req.session.authToken = u.authToken;

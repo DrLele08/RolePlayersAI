@@ -106,7 +106,6 @@ utente.getByIdandTokenAuth = async (id, tokenAuth) => {
 
 
 utente.getByEmailorUsername = async (filters) => {
-    console.log(filters)
     return await Utente.findOne({
         where:
            filters

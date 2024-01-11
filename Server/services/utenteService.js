@@ -43,8 +43,6 @@ utenteService.Login = async (filters,password)=>{
         return Promise.reject("Formato password non valido!");
 
     let utenteTrovato = await utente.getByEmailorUsername(filters);
-    console.log(utenteTrovato.password);
-    console.log(utils.sha256('Password1!'));
 
     if(utenteTrovato!==undefined)
     {
