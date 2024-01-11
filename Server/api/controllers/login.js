@@ -2,21 +2,19 @@ const utenteService = require("../../services/utenteService");
 
 exports.LoginControl = async(req, res) => {
     let json = {};
-  /*
 
-    Non devo fare nessun controllo visto che posso accedere con un nuovo account?
+    if (req.session && req.session.idUtente !== undefined) {
+        delete req.session.idUtente;
+        delete req.session.authToken;
+    }
 
-     if (req.session.idUtente !== undefined)
-     {
-         let r = req.body.ricordami;
-        json.Ris = 0;
-        json.Mess = "Hai già effettuato l'accesso!";
-        res.json(json);
-     }
-     else {
+    if (req.cookies && req.cookies.idUtente !== undefined) {
+        res.clearCookie('idUtente');
+        res.clearCookie('tokenAuth');
+    }
 
+    else {
 
- */
         let filters = {
             username: req.body.username,
             email: req.body.email,
@@ -36,6 +34,7 @@ exports.LoginControl = async(req, res) => {
             }
 
             json.Ris = 1;
+            delete json.password;
             json.Utente = u;
             res.json(json);
         } catch (error){
@@ -43,5 +42,5 @@ exports.LoginControl = async(req, res) => {
             json.Mess = error
             res.json(json);
         }
-    //}
+    }
 }
