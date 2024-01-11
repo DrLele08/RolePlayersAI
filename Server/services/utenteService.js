@@ -22,21 +22,33 @@ utenteService.getById = async (idUtente) =>{
 };
 
 utenteService.Login = async (filters,password)=>{
-   if(filters.username!== undefined)
-   {
+    if(filters.username!== undefined)
+    {
        filters.username=filters.username.trim();
-   }
+       delete filters.email;
+        if (!filters.username.match("^[a-zA-Z0-9]{4,25}$"))
+            return Promise.reject("Formato username non valido!");
+    }
     if(filters.email!== undefined)
     {
+        delete filters.username;
         filters.email=filters.email.trim();
+      if(!filters.email.match("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"))
+      {
+          return Promise.reject("Formato email non valido!");
+      }
     }
 
-    //todo gestione cookies per la checkbox
+    if (password.match("^(?=.[A-Za-z])(?=.\d)(?=.[@$!%#?&])[A-Za-z\d@$!%*#?&]{8,}$"))
+        return Promise.reject("Formato password non valido!");
 
-   let utenteTrovato = await utente.getByEmailorUsername(filters);
-    if(utenteTrovato!==null)
+    let utenteTrovato = await utente.getByEmailorUsername(filters);
+    console.log(utenteTrovato.password);
+    console.log(utils.sha256('Password1!'));
+
+    if(utenteTrovato!==undefined)
     {
-        if(password===utenteTrovato.password) //todo per password hashata
+        if(utils.verify(password,utenteTrovato.password))
         {
             return utenteTrovato;
         }

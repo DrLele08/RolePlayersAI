@@ -2,8 +2,8 @@ const utenteService = require("../../services/utenteService");
 
 exports.LoginControl = async(req, res) => {
     let json = {};
-
-    if (req.session.idUtente != null)
+    console.log(req.session.idUtente);
+    if (req.session.idUtente !== undefined)
      {
         res.status(400);
         json.Ris = 0;
@@ -11,22 +11,32 @@ exports.LoginControl = async(req, res) => {
         res.json(json);
      }
      else {
+
         let filters = {
             username: req.body.username,
             email: req.body.email,
         };
         let password = req.body.password;
+        try {
+            let u = await utenteService.Login(filters, password);
+            console.log(u);
+            // salva ID e auth-token dell'utente nella sessione
+            req.session.idUtente = u.idUtente;
+            req.session.authToken = u.authToken;
 
-        let u = await utenteService.Login(filters,password);
+            let ricordami = req.body.ricordami;
+            if (ricordami === 1) {
+                res.cookie('idUtente', u.idUtente, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true});
+                res.cookie('tokenAuth', u.authToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true});
+            }
 
-        res.status(201)
-
-        // salva ID e auth-token dell'utente nella sessione
-        req.session.idUtente = u.idUtente;
-        req.session.authToken = u.authToken;
-
-        json.Ris = 1;
-        json.Utente = u;
-
+            json.Ris = 1;
+            json.Utente = u;
+            res.json(json);
+        } catch (error){
+            json.Ris = 0;
+            json.Mess = error
+            res.json(json);
+        }
     }
 }
