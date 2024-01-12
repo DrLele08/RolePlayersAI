@@ -33,7 +33,6 @@ exports.LoginControl = async(req, res) => {
             }
 
             json.Ris = 1;
-            delete json.password;
             json.Utente = u;
             res.json(json);
         } catch (error){
