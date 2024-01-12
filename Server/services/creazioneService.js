@@ -161,6 +161,13 @@ creazioneService.getByFilter = async (nome, tipo, page, dati)=>{
     }
 }
 
+/**
+ * Ottiene un elenco di creazioni popolari.
+ *
+ * @param {number} limit - Limite di creazioni da ottenere (deve essere un numero positivo).
+ * @param {string} tipo - Tipo di creazione ("Personaggio" o "Ambiente"). Se non specificato o non valido, otterrà entrambi i tipi.
+ * @returns {Promise<Array>} Una Promise che si risolve con un array di creazioni popolari.
+ */
 creazioneService.getCreazioniPopolari = async (limit, tipo)=>{
     const DEFAULT_LIMIT = 8;
     if(limit < 1){
