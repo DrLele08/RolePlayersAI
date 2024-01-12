@@ -48,7 +48,7 @@ utenteService.Login = async (filters,password)=>{
     {
         if(utils.verify(password,utenteTrovato.password))
         {
-            delete utenteTrovato.password;
+            delete utenteTrovato.dataValues.password;
             return utenteTrovato;
         }
         else{

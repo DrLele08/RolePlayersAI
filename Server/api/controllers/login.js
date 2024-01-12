@@ -28,8 +28,8 @@ exports.LoginControl = async(req, res) => {
 
             let ricordami = req.body.ricordami;
             if (ricordami === 1) {
-                res.cookies('idUtente', u.idUtente, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true});
-                res.cookies('tokenAuth', u.authToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true});
+                res.cookie('idUtente', u.idUtente, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true});
+                res.cookie('tokenAuth', u.authToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true});
             }
 
             json.Ris = 1;
