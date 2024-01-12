@@ -66,11 +66,17 @@ creazioneService.createCreazione = async (dati) =>{
             dati.descrizione = dati.descrizione.trim();
             dati.tipo = dati.tipo.trim();
 
-            console.log(dati);
             if (dati.nome.length <= 0 || dati.nome.length >= 51) {
                 return Promise.reject("Dati non validi");
             }
-            if ( 0 != dati.isPubblico && 1 != dati.isPubblico){
+            if(isNaN(dati.isPubblico))
+            {
+                return Promise.reject("Dati non validi");
+            }
+
+            dati.isPubblico = parseInt(dati.isPubblico);
+
+            if ( 0 !== dati.isPubblico && 1 !== dati.isPubblico){
                 return Promise.reject("Dati non validi");
             }
             if (dati.descrizione.length < 1 || dati.descrizione.length >= 513) {

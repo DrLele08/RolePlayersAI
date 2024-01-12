@@ -1,10 +1,10 @@
 
 module.exports=  (ruoli)=> {
     return (req, res, next) => {
-        let idUtenteCookie=req.cookie.idUtente;
+        let idUtenteCookie=req.cookies.idUtente;
         if(idUtenteCookie !== undefined)
         {
-            let tokenAuthCookie=req.cookie.tokenAuth;
+            let tokenAuthCookie=req.cookies.tokenAuth;
             req.session.idUtente=idUtenteCookie;
             req.session.tokenAuth=tokenAuthCookie;
         }

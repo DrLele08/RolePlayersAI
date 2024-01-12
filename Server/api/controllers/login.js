@@ -13,7 +13,6 @@ exports.LoginControl = async(req, res) => {
         res.clearCookie('tokenAuth');
     }
 
-    else {
 
         let filters = {
             username: req.body.username,
@@ -29,8 +28,8 @@ exports.LoginControl = async(req, res) => {
 
             let ricordami = req.body.ricordami;
             if (ricordami === 1) {
-                res.cookie('idUtente', u.idUtente, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true});
-                res.cookie('tokenAuth', u.authToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true});
+                res.cookies('idUtente', u.idUtente, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true});
+                res.cookies('tokenAuth', u.authToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true});
             }
 
             json.Ris = 1;
@@ -39,8 +38,7 @@ exports.LoginControl = async(req, res) => {
             res.json(json);
         } catch (error){
             json.Ris = 0;
-            json.Mess = error
+            json.Mess = error.message
             res.json(json);
         }
-    }
 }
