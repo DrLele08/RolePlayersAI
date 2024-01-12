@@ -1,9 +1,9 @@
 exports.PaginaLogin = (req, ris)=> {
     if (req.session.idUtente === undefined) {
-            if(req.cookie.idUtente !== undefined)
+            if(req.cookies.idUtente !== undefined)
             {
-               let idCookie = req.cookie.idUtente;
-               let tokenCookie = req.cookie.tokenAuth;
+               let idCookie = req.cookies.idUtente;
+               let tokenCookie = req.cookies.tokenAuth;
                req.session.idUtente = idCookie;
                req.session.authToken = tokenCookie;
                ris.redirect(process.env.BASE_URL + "/dashboard");

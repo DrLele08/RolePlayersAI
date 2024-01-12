@@ -1,6 +1,7 @@
 const express=require('express');
 const app=express();
 let session = require('express-session')
+let cookieParser = require('cookie-parser')
 
 //Gestione directory statica accessibile
 app.use(express.static('public'));
@@ -41,12 +42,15 @@ app.use((req,ris,next)=>{
     next();
 });
 
+//cookies
+app.use(cookieParser());
 
 //Attivazione routes per chiamate HTTP
 require("./platform/routes/squadra.js")(app);
 require("./platform/routes/pagamento")(app);
 require("./platform/routes/pagamento.js")(app);
 require("./platform/routes/login.js")(app);
+
 
 require("./api/routes/squadra.js")(app);
 
