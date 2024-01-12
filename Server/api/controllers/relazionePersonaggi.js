@@ -1,5 +1,14 @@
 const relazionePersonaggi = require("../../services/relazionePersonaggiService");
 
+/**
+ * Controller per ottenere una relazione tra personaggi dato l`id
+ * @async
+ * @function
+ * @param {Object} req - Oggetto della richiesta HTTP.
+ * @param {Number} req.params.idRelazionePersonaggi - ID della relazione
+ * @param {Object} res - Oggetto della risposta HTTP.
+ * @throws {Error} Viene lanciato un errore se le informazioni richieste non sono fornite correttamente nella richiesta.
+ */
 exports.GetById = async (req,res)=>{
     let json = {};
     let idRelazionePersonaggi = req.params.idRelazionePersonaggi;
@@ -16,6 +25,15 @@ exports.GetById = async (req,res)=>{
     }
 };
 
+/**
+ * Controller per ottenere le relazioni tra personaggi in un contesto
+ * @async
+ * @function
+ * @param {Object} req - Oggetto della richiesta HTTP.
+ * @param {Number} req.params.idContesto - ID del contesto
+ * @param {Object} res - Oggetto della risposta HTTP.
+ * @throws {Error} Viene lanciato un errore se le informazioni richieste non sono fornite correttamente nella richiesta.
+ */
 exports.GetByContesto = async (req,res)=>{
     let json = {};
     let idContesto = req.params.idContesto;
@@ -32,6 +50,18 @@ exports.GetByContesto = async (req,res)=>{
     }
 };
 
+/**
+ * Controller per creare una nuova relazione
+ * @async
+ * @function
+ * @param {Object} req - Oggetto della richiesta HTTP.
+ * @param {String} req.body.descrizione - descrizione della relazione
+ * @param {Number} req.body.fkContesto - ID del contesto
+ * @param {Number} req.body.fkPersonaggio1 - ID del primo personaggio
+ * @param {Number} req.body.fkPersonaggio2 - ID del secondo personaggio
+ * @param {Object} res - Oggetto della risposta HTTP.
+ * @throws {Error} Viene lanciato un errore se le informazioni richieste non sono fornite correttamente nella richiesta.
+ */
 exports.CreateRelazionePersonaggi = async (req, res)=>{
     let json = {};
 
