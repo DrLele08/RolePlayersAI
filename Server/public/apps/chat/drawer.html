@@ -422,7 +422,7 @@
 		<!--begin::Post-->
 		<div class="post d-flex flex-column-fluid" id="kt_post">
 			<!--begin::Container-->
-			<div id="kt_content_container" class="container-xxl">
+			<div class="container-xxl">
 				<!--begin::Layout-->
 				<div class="d-flex flex-column flex-lg-row">
 
@@ -674,6 +674,28 @@
 					<div class="flex-row flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0 ms-lg-7 ms-xl-10" style="margin-top:5%;">
 						<!--begin::Contacts-->
 						<div class="card card-flush">
+							<!--begin::Card header-->
+							<div class="card-header pt-7">
+								<!--begin::Form-->
+								<form class="w-100 position-relative" autocomplete="off">
+									<span>Seleziona foto per il tuo personaggio<br></span>
+									<span>&nbsp<br></span>
+									<label for="pers">Scegli una foto:</label>
+									<input type="file" id="pers" name="pers" accept="image/png, image/jpeg" />
+								</form>
+								<span><br>&nbsp<br></span>
+								<!--end::Form-->
+							</div>
+							<!--end::Card header-->
+						</div>
+						<!--end::Contacts-->
+					</div>
+					<!--end::Sidebar-->
+
+					<!--begin::Sidebar-->
+					<div class="flex-row flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0 ms-lg-7 ms-xl-10" style="margin-top:5%;">
+						<!--begin::Contacts-->
+						<div class="card card-flush">
 							<!--begin::Card body-->
 							<div class="card-body pt-5">
 								<span>Privacy<br></span>
@@ -687,6 +709,32 @@
 								</div>
 							</div>
 							<!--end::Card body-->
+						</div>
+						<!--end::Contacts-->
+					</div>
+					<!--end::Sidebar-->
+
+					<!--begin::Sidebar-->
+					<div class="flex-row flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0 ms-lg-7 ms-xl-10" style="margin-top:5%;">
+						<!--begin::Contacts-->
+						<div class="card card-flush">
+							<!--begin::Card header-->
+							<div class="card-header pt-7">
+								<!--begin::Form-->
+								<form class="w-100 position-relative align-center" autocomplete="off">
+									<span>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</span>
+									<button class="btn btn-sm btn-light btn-active-light-primary me-3 align-bottom" onclick="">
+										<span class="menu-title">Crea</span>
+									</button>
+									<span>&nbsp &nbsp &nbsp &nbsp</span>
+									<button class="btn btn-sm btn-light btn-active-light-primary me-3 align-bottom" onclick="">
+										<span class="menu-title">Elimina</span>
+									</button>
+								</form>
+								<span>&nbsp</span>
+								<!--end::Form-->
+							</div>
+							<!--end::Card header-->
 						</div>
 						<!--end::Contacts-->
 					</div>
@@ -765,6 +813,28 @@
 					<div class="flex-row flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0 ms-lg-7 ms-xl-10" style="margin-top:5%;">
 						<!--begin::Contacts-->
 						<div class="card card-flush">
+							<!--begin::Card header-->
+							<div class="card-header pt-7">
+								<!--begin::Form-->
+								<form class="w-100 position-relative" autocomplete="off">
+									<span>Seleziona foto per il tuo ambiente<br></span>
+									<span>&nbsp<br></span>
+									<label for="ambiente">Scegli una foto:</label>
+									<input type="file" id="ambiente" name="ambiente" accept="image/png, image/jpeg" />
+								</form>
+								<span><br>&nbsp<br></span>
+								<!--end::Form-->
+							</div>
+							<!--end::Card header-->
+						</div>
+						<!--end::Contacts-->
+					</div>
+					<!--end::Sidebar-->
+
+					<!--begin::Sidebar-->
+					<div class="flex-row flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0 ms-lg-7 ms-xl-10" style="margin-top:5%;">
+						<!--begin::Contacts-->
+						<div class="card card-flush">
 							<!--begin::Card body-->
 							<div class="card-body pt-5">
 								<span>Privacy<br></span>
@@ -782,6 +852,33 @@
 						<!--end::Contacts-->
 					</div>
 					<!--end::Sidebar-->
+
+					<!--begin::Sidebar-->
+					<div class="flex-row flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0 ms-lg-7 ms-xl-10" style="margin-top:5%;">
+						<!--begin::Contacts-->
+						<div class="card card-flush">
+							<!--begin::Card header-->
+							<div class="card-header pt-7">
+								<!--begin::Form-->
+								<form class="w-100 position-relative align-center" autocomplete="off">
+									<span>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</span>
+									<button class="btn btn-sm btn-light btn-active-light-primary me-3 align-bottom" onclick="">
+										<span class="menu-title">Crea</span>
+									</button>
+									<span>&nbsp &nbsp &nbsp &nbsp</span>
+									<button class="btn btn-sm btn-light btn-active-light-primary me-3 align-bottom" onclick="">
+										<span class="menu-title">Elimina</span>
+									</button>
+								</form>
+								<span>&nbsp</span>
+								<!--end::Form-->
+							</div>
+							<!--end::Card header-->
+						</div>
+						<!--end::Contacts-->
+					</div>
+					<!--end::Sidebar-->
+
 				</div>
 			</div>
 			<!--end::Ambienti-->
@@ -856,6 +953,60 @@
 					<div class="flex-row flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0 ms-lg-7 ms-xl-10" style="margin-top:5%;">
 						<!--begin::Contacts-->
 						<div class="card card-flush">
+							<!--begin::Card header-->
+							<div class="card-header pt-7">
+								<!--begin::Form-->
+								<form class="w-100 position-relative" autocomplete="off">
+									<span>Seleziona ambiente</span>
+									<input type="text" class="form-control form-control-solid" name="search" value="" placeholder="Seleziona ambiente" />
+									<!--end::Input-->
+									<span>&nbsp</span>
+								</form>
+								<!--end::Form-->
+							</div>
+							<!--end::Card header-->
+						</div>
+						<!--end::Contacts-->
+					</div>
+					<!--end::Sidebar-->
+
+					<!--begin::Sidebar-->
+					<div class="flex-row flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0 ms-lg-7 ms-xl-10" style="margin-top:5%;">
+						<!--begin::Contacts-->
+						<div class="card card-flush">
+							<!--begin::Card header-->
+							<div class="card-header pt-7">
+								<!--begin::Form-->
+								<form class="w-100 position-relative" autocomplete="off">
+									<span>Crea le relazioni tra personaggi<br></span>
+									<span>&nbsp<br></span>
+									<label for="p1">Scegli il primo personaggio:</label><span>&nbsp &nbsp &nbsp</span>
+
+									<select name="p1" id="p1" >
+
+									</select>
+									<span><br>&nbsp<br></span>
+									<label for="p2">Scegli il secondo personaggio:</label>
+
+									<select name="p2" id="p2" >
+
+									</select>
+									<span>&nbsp<br></span>
+									<!--end::Input-->
+									<span>&nbsp</span>
+								</form>
+								<!--end::Form-->
+							</div>
+							<!--end::Card header-->
+						</div>
+						<!--end::Contacts-->
+					</div>
+					<!--end::Sidebar-->
+
+					<!--begin::Sidebar-->
+					<div class="flex-row flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0 ms-lg-7 ms-xl-10" style="margin-top:5%;">
+						<!--begin::Contacts-->
+						<div class="card card-flush">
 							<!--begin::Card body-->
 							<div class="card-body pt-5">
 								<span>Privacy<br></span>
@@ -873,6 +1024,33 @@
 						<!--end::Contacts-->
 					</div>
 					<!--end::Sidebar-->
+
+					<!--begin::Sidebar-->
+					<div class="flex-row flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0 ms-lg-7 ms-xl-10" style="margin-top:5%;">
+						<!--begin::Contacts-->
+						<div class="card card-flush">
+							<!--begin::Card header-->
+							<div class="card-header pt-7">
+								<!--begin::Form-->
+								<form class="w-100 position-relative align-center" autocomplete="off">
+									<span>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</span>
+									<button class="btn btn-sm btn-light btn-active-light-primary me-3 align-bottom" onclick="">
+										<span class="menu-title">Crea</span>
+									</button>
+									<span>&nbsp &nbsp &nbsp &nbsp</span>
+									<button class="btn btn-sm btn-light btn-active-light-primary me-3 align-bottom" onclick="">
+										<span class="menu-title">Elimina</span>
+									</button>
+								</form>
+								<span>&nbsp</span>
+								<!--end::Form-->
+							</div>
+							<!--end::Card header-->
+						</div>
+						<!--end::Contacts-->
+					</div>
+					<!--end::Sidebar-->
+
 				</div>
 			</div>
 			<!--end::Contesti-->
