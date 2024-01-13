@@ -73,4 +73,14 @@ utils.toMySQLDate = (date) => {
     return parts[2] + '-' + parts[1] + '-' + parts[0];
 }
 
+/**
+ * Converte un oggetto JavaScript Raw in un oggetto normal.
+ *
+ * @param {Object} object - L'oggetto JavaScript da convertire.
+ * @returns {Object} Una copia normale dell'oggetto
+ */
+utils.convertToNormalObject = (object)=> {
+    return JSON.parse(JSON.stringify(object));
+}
+
 module.exports=utils;
