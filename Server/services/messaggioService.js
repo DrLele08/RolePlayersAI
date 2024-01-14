@@ -40,7 +40,7 @@ messaggioService.inviaMessaggio = async (dati)=>{
 
     //Costruisci lista messaggi
     let listMessaggi = [];
-    listMessaggi = await buildListMessaggi(dati);
+    listMessaggi = await messaggioService.buildListMessaggi(dati);
 
 
     //Salva messaggio inviato
@@ -72,21 +72,20 @@ messaggioService.inviaMessaggio = async (dati)=>{
 };
 
 //Funzione che costruisce la lista di messaggi da dare in input a ChatGPT
-async function buildListMessaggi(dati) {
+messaggioService.buildListMessaggi = async (dati) => {
     //Inserisce tutti i messaggi system nella lista
     let listMessaggi = [];
     listMessaggi = await buildSystemListMessaggi(dati);
 
     //Recupera i messaggi dal DB e li inserisce nella lista
     const messaggi = await messaggio.getByConversazione(dati.idConversazione);
-    for(let i=0; i<messaggi.length; i++){
-        if(messaggi[i].isUtente){
+    for (let i = 0; i < messaggi.length; i++) {
+        if (messaggi[i].isUtente) {
             listMessaggi.push({
                 "role": "user",
                 "content": messaggi[i].corpo
             });
-        }
-        else{
+        } else {
             listMessaggi.push({
                 "role": "assistant",
                 "content": messaggi[i].corpo
