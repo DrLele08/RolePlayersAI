@@ -1,5 +1,3 @@
-const middlewareAuth = require("../../middleware/authPlatform");
-const dashboard = require("../controllers/dashboard");
 module.exports=app=>{
     const router=require("express").Router();
     const middlewareAuth=require("../../middleware/authPlatform");
@@ -17,7 +15,7 @@ module.exports=app=>{
      * @controller dashboard.GetDashboard - Il controller responsabile di gestire la richiesta.
      * @function
      */
-    //router.get("/dashboard", middlewareAuth([1,2,3]), dashboard.GetDashboard);
+    router.get("/dashboard", middlewareAuth([1,2,3]), dashboard.GetDashboard);
 
     app.use("/",router);
 };
