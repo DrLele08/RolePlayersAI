@@ -1,0 +1,9 @@
+process.env.DB_HOST = "localhost"
+process.env.DB_USER = "root"
+process.env.DB_PWD= "1234"
+process.env.DB_NAME = "RolePlayersAI"
+process.env.DEBUG_DB = 0
+process.env.BASE_URL = "http://localhost:3000"
+process.env.PORT = 3000
+process.env.CHAT_GPT_KEY = "KEY"
+process.env.SESSION_KEY = "rpai"
