@@ -4370,10 +4370,11 @@ License: For each use you must have a valid license purchased only from above li
                                     </tr>
                                     </thead>
                                     <tbody class="fw-semibold text-gray-600">
+                                    {{#each utente}}
                                     <tr>
-                                        <td>{{username}}</td>
+                                        <td>{{this.username}}</td>
                                         <td>
-                                            <a class="badge badge-light-danger fs-7 m-1">Amministratore</a>
+                                            <a class="badge badge-light-danger fs-7 m-1">{{this.ruolo}}</a>
                                         </td>
                                         <td>
                                             <a>-</a>
