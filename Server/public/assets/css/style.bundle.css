@@ -49041,7 +49041,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #ffffff;
+    background-color: #292d3a;
 }
 @media (min-width: 992px) {
     .header {
