@@ -454,7 +454,7 @@ License: For each use you must have a valid license purchased only from above li
                                             <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                                 <!--begin::Number-->
                                                 <div class="d-flex align-items-center">
-                                                    <div class="fs-2 fw-bold">3</div>
+                                                    <div class="fs-2 fw-bold">{{this.numeroPersonaggi}}</div>
                                                 </div>
                                                 <!--end::Number-->
                                                 <!--begin::Label-->
@@ -466,7 +466,7 @@ License: For each use you must have a valid license purchased only from above li
                                             <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                                 <!--begin::Number-->
                                                 <div class="d-flex align-items-center">
-                                                    <div class="fs-2 fw-bold">3</div>
+                                                    <div class="fs-2 fw-bold">{{this.numeroAmbienti}}</div>
                                                 </div>
                                                 <!--end::Number-->
                                                 <!--begin::Label-->
@@ -478,7 +478,7 @@ License: For each use you must have a valid license purchased only from above li
                                             <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                                 <!--begin::Number-->
                                                 <div class="d-flex align-items-center">
-                                                    <div class="fs-2 fw-bold">3</div>
+                                                    <div class="fs-2 fw-bold">{{this.numeroSessioni}}</div>
                                                 </div>
                                                 <!--end::Number-->
                                                 <!--begin::Label-->
@@ -629,6 +629,7 @@ License: For each use you must have a valid license purchased only from above li
                     </div>
                     <!--end::Menu Header-->
                     <!--begin::Col-->
+                    {{#each ambienti}}
                     <div class="col-md-6 col-xl-4">
                         <!--begin::Card-->
                         <a href="apps/projects/project.html" class="card border-hover-primary">
@@ -638,7 +639,7 @@ License: For each use you must have a valid license purchased only from above li
                                 <div class="card-title m-0">
                                     <!--begin::Avatar-->
                                     <div class="symbol symbol-50px w-50px bg-light">
-                                        <img src="{{envImg}}" alt="image" class="p-3" />
+                                        <img src="{{this.immagine}}" alt="image" class="p-3" />
                                     </div>
                                     <!--end::Avatar-->
                                 </div>
@@ -648,22 +649,11 @@ License: For each use you must have a valid license purchased only from above li
                             <!--begin:: Card body-->
                             <div class="card-body p-9">
                                 <!--begin::Name-->
-                                <div class="fs-3 fw-bold text-gray-900">{{envName}}</div>
+                                <div class="fs-3 fw-bold text-gray-900">{{this.nome}}</div>
                                 <!--end::Name-->
                                 <!--begin::Description-->
-                                <p class="text-gray-500 fw-semibold fs-5 mt-1 mb-7">{{envDesc}}</p>
-                                <p class="text-gray-500 fw-semibold fs-5 mt-1 mb-7">{{envTags}}</p>
+                                <p class="text-gray-500 fw-semibold fs-5 mt-1 mb-7">{{this.descrizione}}</p>
                                 <!--end::Description-->
-                                <!--begin::Info-->
-                                <div class="d-flex flex-wrap mb-5">
-                                    <!--begin::Due-->
-                                    <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-7 mb-3">
-                                        <div class="fs-6 text-gray-800 fw-bold">{{envDate}}</div>
-                                        <div class="fw-semibold text-gray-500">Creazione</div>
-                                    </div>
-                                    <!--end::Due-->
-                                </div>
-                                <!--end::Info-->
                             </div>
                             <!--end:: Card body-->
                         </a>
