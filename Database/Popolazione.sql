@@ -5,9 +5,10 @@ VALUES ('Free', 0, 100),
        ('Base', 19.99, 500),
        ('Enterprise', 29.99, 1000);
 
+-- password: Password@1
 INSERT INTO Utente(fkAbbonamento, username, nome, cognome, email, `password`, dataNascita, telefono, ruolo, msgRimanenti, scadenzaAbbonamento, authToken)
-VALUES (1, 'utente1', 'Mario', 'Rossi', 'mario.rossi@example.com', 'hashed_password_1', '1990-01-01', '1234567890', 'Utente', 100, null, 'auth_token_1'),
-       (2, 'utente2', 'Luca', 'Bianchi', 'luca.bianchi@example.com', 'hashed_password_2', '1985-05-15', '9876543210', 'Moderatore', 500, '2024-01-30', 'auth_token_2');
+VALUES (1, 'utente1', 'Mario', 'Rossi', 'mario.rossi@example.com', 'nMPlq9+u4Zimt0uX6pHjBuF0Td9Jh209z2y5Nt/Vydc=', '1990-01-01', '1234567890', 'Utente', 100, null, 'auth_token_1'),
+       (2, 'utente2', 'Luca', 'Bianchi', 'luca.bianchi@example.com', 'nMPlq9+u4Zimt0uX6pHjBuF0Td9Jh209z2y5Nt/Vydc=', '1985-05-15', '9876543210', 'Moderatore', 500, '2024-01-30', 'auth_token_2');
 
 INSERT INTO Creazione(fkUtente, nome, immagine, descrizione, isPubblico, tipo, sesso)
 VALUES (1, 'Mago', 'percorso/a/mago_immagine', 'Un potente personaggio magico...', true, 'Personaggio', 'Altro'),

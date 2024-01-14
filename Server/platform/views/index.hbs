@@ -36,10 +36,10 @@
 <!--begin::Main-->
 <!--begin::Root-->
 <div class="d-flex flex-column flex-root">
-    {{> barraLaterale}}
+    {{> barraLaterale nome=Utente.nome cognome=Utente.cognome abbonamento=Abbonamento.nomeTier}}
 <!--begin::Wrapper-->
 <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
-    {{> header}}
+    {{> header titolo="Benvenuto nella tua Home" username=Utente.username}}
     <!--begin::Content-->
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
         <!--begin::Post-->
@@ -83,29 +83,29 @@
                                     <div class="text-gray-900 fw-bold fs-2 mb-2 mt-5">Personaggi popolari</div>
                                     <div class="text-gray-900 fs-2 mb-20 mt-5">
 
-                                        <!--begin::Wrapper-->
-                                        <div class="d-flex align-items-center">
-                                            <!--begin::Icon-->
-                                            <img src="{{BASE_URL}}/assets/media/svg/card-logos/american-express.svg" alt="" class="me-4" />
-                                            <!--end::Icon-->
-                                            <!--begin::Details-->
-                                            <div>
-                                                <div class="fs-4 fw-bold">Zio Pasquale</div>
-                                                <div class="fs-6 fw-semibold text-gray-500">Calvo, impegnato, ...</div>
-                                                <button class="btn btn-sm btn-light btn-active-light-primary me-3" data-kt-billing-action="card-delete">
-                                                    <!--begin::Indicator label-->
-                                                    <span class="indicator-label">Aggiungi all'inventario</span>
-                                                    <!--end::Indicator label-->
-                                                    <!--begin::Indicator progress-->
-                                                    <span class="indicator-progress">Please wait...
+                                            {{#each PersonaggiPopolari}}
+                                                <!--begin::Wrapper-->
+                                                <div class="d-flex align-items-center">
+                                                    <!--begin::Icon-->
+                                                    <img src="{{BASE_URL}}{{this.immagine}}" alt="" class="me-4" />
+                                                    <!--end::Icon-->
+                                                    <!--begin::Details-->
+                                                    <div>
+                                                        <div class="fs-4 fw-bold">{{this.nome}}</div>
+                                                        <button class="btn btn-sm btn-light btn-active-light-primary me-3" data-kt-billing-action="card-delete">
+                                                            <!--begin::Indicator label-->
+                                                            <span class="indicator-label">Aggiungi all'inventario</span>
+                                                            <!--end::Indicator label-->
+                                                            <!--begin::Indicator progress-->
+                                                            <span class="indicator-progress">Please wait...
 																<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                                    <!--end::Indicator progress-->
-                                                </button>
-                                            </div>
-                                            <!--end::Details-->
-                                        </div>
-                                        <!--end::Wrapper-->
-
+                                                            <!--end::Indicator progress-->
+                                                        </button>
+                                                    </div>
+                                                    <!--end::Details-->
+                                                </div>
+                                                <!--end::Wrapper-->
+                                            {{/each}}
                                     </div>
                                 </div>
                             </div>
@@ -121,15 +121,15 @@
                                     <div class="text-gray-900 fw-bold fs-2 mb-2 mt-5">Ambienti popolari</div>
                                     <div class="text-gray-900 fs-2 mb-20 mt-5">
 
+                                        {{#each AmbientiPopolari}}
                                         <!--begin::Wrapper-->
                                         <div class="d-flex align-items-center">
                                             <!--begin::Icon-->
-                                            <img src="{{BASE_URL}}/assets/media/svg/card-logos/american-express.svg" alt="" class="me-4" />
+                                            <img src="{{BASE_URL}}{{this.immagine}}" alt="" class="me-4" />
                                             <!--end::Icon-->
                                             <!--begin::Details-->
                                             <div>
-                                                <div class="fs-4 fw-bold">Banca Mediolanum</div>
-                                                <div class="fs-6 fw-semibold text-gray-500">Costruita intirno a te</div>
+                                                <div class="fs-4 fw-bold">{{this.nome}}</div>
                                                 <button class="btn btn-sm btn-light btn-active-light-primary me-3" data-kt-billing-action="card-delete">
                                                     <!--begin::Indicator label-->
                                                     <span class="indicator-label">Aggiungi all'inventario</span>
@@ -143,6 +143,7 @@
                                             <!--end::Details-->
                                         </div>
                                         <!--end::Wrapper-->
+                                        {{/each}}
 
                                     </div>
                                 </div>
@@ -169,12 +170,12 @@
 <!--begin::Javascript-->
 <script>var hostUrl = "assets/";</script>
 <!--begin::Global Javascript Bundle(mandatory for all pages)-->
-<script src="assets/plugins/global/plugins.bundle.js"></script>
-<script src="assets/js/scripts.bundle.js"></script>
+<script src="{{BASE_URL}}/assets/plugins/global/plugins.bundle.js"></script>
+<script src="{{BASE_URL}}/assets/js/scripts.bundle.js"></script>
 <!--end::Global Javascript Bundle-->
 
 <!--begin::Vendors Javascript(used for this page only)-->
-<script src="assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
+<script src="{{BASE_URL}}/assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
 <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
 <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
 <script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
@@ -186,13 +187,13 @@
 <script src="https://cdn.amcharts.com/lib/5/geodata/usaLow.js"></script>
 <script src="https://cdn.amcharts.com/lib/5/geodata/worldTimeZonesLow.js"></script>
 <script src="https://cdn.amcharts.com/lib/5/geodata/worldTimeZoneAreasLow.js"></script>
-<script src="assets/plugins/custom/datatables/datatables.bundle.js"></script>
+<script src="{{BASE_URL}}/assets/plugins/custom/datatables/datatables.bundle.js"></script>
 <!--end::Vendors Javascript-->
 <!--begin::Custom Javascript(used for this page only)-->
-<script src="assets/js/widgets.bundle.js"></script>
-<script src="assets/js/custom/widgets.js"></script>
-<script src="assets/js/custom/apps/chat/chat.js"></script>
-<script src="assets/js/custom/utilities/modals/users-search.js"></script>
+<script src="{{BASE_URL}}/assets/js/widgets.bundle.js"></script>
+<script src="{{BASE_URL}}/assets/js/custom/widgets.js"></script>
+<script src="{{BASE_URL}}/assets/js/custom/apps/chat/chat.js"></script>
+<script src="{{BASE_URL}}/assets/js/custom/utilities/modals/users-search.js"></script>
 <!--end::Custom Javascript-->
 <!--end::Javascript-->
 </body>

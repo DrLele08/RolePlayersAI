@@ -20,7 +20,7 @@
                         <!--begin::Info-->
                         <div class="flex-grow-1 me-2">
                             <!--begin::Username-->
-                            <span class="text-white fs-6 fw-bold">Francesco Iantosca</span>
+                            <span class="text-white fs-6 fw-bold">{{nome}}{{cognome}}</span>
                             <!--end::Username-->
                         </div>
                         <!--end::Info-->
@@ -46,8 +46,8 @@
                                         <!--end::Avatar-->
                                         <!--begin::Username-->
                                         <div class="d-flex flex-column">
-                                            <div class="fw-bold d-flex align-items-center fs-5">Francesco Iantosca
-                                                <span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">Pro</span></div>
+                                            <div class="fw-bold d-flex align-items-center fs-5">{{nome}}{{cognome}}
+                                                <span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">{{abbonamento}}</span></div>
                                         </div>
                                         <!--end::Username-->
                                     </div>
@@ -285,5 +285,33 @@
 
     document.getElementById("divRicerca").innerHTML=html;
 
-
 </script>
+<!--begin::Javascript-->
+<script>var hostUrl = "assets/";</script>
+<!--begin::Global Javascript Bundle(mandatory for all pages)-->
+<script src="{{BASE_URL}}/assets/plugins/global/plugins.bundle.js"></script>
+<script src="{{BASE_URL}}/assets/js/scripts.bundle.js"></script>
+<!--end::Global Javascript Bundle-->
+
+<!--begin::Vendors Javascript(used for this page only)-->
+<script src="{{BASE_URL}}/assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/radar.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/map.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/geodata/worldLow.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/geodata/continentsLow.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/geodata/usaLow.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/geodata/worldTimeZonesLow.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/geodata/worldTimeZoneAreasLow.js"></script>
+<script src="{{BASE_URL}}/assets/plugins/custom/datatables/datatables.bundle.js"></script>
+<!--end::Vendors Javascript-->
+<!--begin::Custom Javascript(used for this page only)-->
+<script src="{{BASE_URL}}/assets/js/widgets.bundle.js"></script>
+<script src="{{BASE_URL}}/assets/js/custom/widgets.js"></script>
+<script src="{{BASE_URL}}/assets/js/custom/apps/chat/chat.js"></script>
+<script src="{{BASE_URL}}/assets/js/custom/utilities/modals/users-search.js"></script>
+<!--end::Custom Javascript-->
+<!--end::Javascript-->

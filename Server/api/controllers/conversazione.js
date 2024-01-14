@@ -1,6 +1,18 @@
 const messaggioService = require("../../services/messaggioService");
 const conversazioneService = require("../../services/conversazioneService");
 
+
+/**
+ * Controller per l'invio di un messaggio in una conversazione.
+ * @async
+ * @function
+ * @param {Object} req - Oggetto della richiesta HTTP.
+ * @param {String} req.body.messaggio - Testo del messaggio
+ * @param {Number} req.body.idConversazione - ID della conversazione a cui appartiene il messaggio
+ * @param {Number} req.idUtente - ID dell`utente
+ * @param {Object} res - Oggetto della risposta HTTP.
+ * @throws {Error} Viene lanciato un errore se le informazioni richieste non sono fornite correttamente nella richiesta.
+ */
 exports.InviaMessaggio = async(req, res) =>{
     let json = {};
 
@@ -25,6 +37,16 @@ exports.InviaMessaggio = async(req, res) =>{
     }
 };
 
+/**
+ * Controller per ottenere una conversazione dato l`ID.
+ * @async
+ * @function
+ * @param {Object} req - Oggetto della richiesta HTTP.
+ * @param {Number} req.params.idConversazione - ID della conversazione
+ * @param {Number} req.idUtente - ID dell`utente
+ * @param {Object} res - Oggetto della risposta HTTP.
+ * @throws {Error} Viene lanciato un errore se le informazioni richieste non sono fornite correttamente nella richiesta.
+ */
 exports.GetById = async(req, res) =>{
     let json = {};
 
@@ -43,6 +65,17 @@ exports.GetById = async(req, res) =>{
     }
 };
 
+/**
+ * Controller per ottenere i messaggi (paginati) di una conversazione.
+ * @async
+ * @function
+ * @param {Object} req - Oggetto della richiesta HTTP.
+ * @param {Number} req.query.idConversazione - ID della conversazione
+ * @param {Number} req.query.pagina - pagina richiesta
+ * @param {Number} req.idUtente - ID dell`utente
+ * @param {Object} res - Oggetto della risposta HTTP.
+ * @throws {Error} Viene lanciato un errore se le informazioni richieste non sono fornite correttamente nella richiesta.
+ */
 exports.GetMessages = async(req, res) =>{
     let json = {};
 

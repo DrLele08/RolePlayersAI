@@ -56,7 +56,6 @@ sessioneService.createSessione = async(data) => {
     const personaggi = await contestoAssociato.getCreaziones();
 
     for (const personaggio of personaggi) {
-        console.log(idSessione + ":" + personaggio.idCreazione);
         await conversazioneService.createConversazione({
             fkSessione: idSessione,
             fkPersonaggio: personaggio.idCreazione

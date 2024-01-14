@@ -216,11 +216,13 @@ creazione.getByFilter = async (filters, page,dati) => {
 creazione.getByUtenteAndFilters = async(idUtente, filters, page = 1, pageSize = 16) => {
     const Op = require("sequelize").Op;
 
+    const tipiFiltrati = filters.tipo ? filters.tipo.split(',').map(tipo => tipo.trim()) : ['ambiente', 'personaggio'];
+
     const result = await Creazione.findAndCountAll({
         where: {
             fkUtente: idUtente,
-            nome: filters.nome ? {[Op.substring]: filters.nome} : {[Op.ne]: null},
-            tipo: filters.tipo ? filters.tipo : {[Op.ne]: null}
+            nome: filters.nome ? { [Op.substring]: filters.nome } : { [Op.ne]: null },
+            [Op.or]: tipiFiltrati ? tipiFiltrati.map(tipo => ({ tipo })) : { [Op.ne]: null }
         },
         limit: pageSize,
         offset: (page - 1) * pageSize,

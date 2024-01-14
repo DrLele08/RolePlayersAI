@@ -1,6 +1,7 @@
 const express=require('express');
 const app=express();
 let session = require('express-session')
+let cookieParser = require('cookie-parser')
 
 //Gestione directory statica accessibile
 app.use(express.static('public'));
@@ -29,7 +30,7 @@ app.engine('hbs', expressHbs.engine({
     defaultLayout:"main-layout",
     extname:"hbs",
     helpers: require('./models/handlebars-helpers.js'),
-    partialsDir: __dirname+"/platform/views/layouts/"
+    partialsDir: __dirname+"/platform/views/partials"
 }));
 app.set('view engine','hbs');
 app.set('views','./platform/views');
@@ -41,11 +42,15 @@ app.use((req,ris,next)=>{
     next();
 });
 
+//cookies
+app.use(cookieParser());
 
 //Attivazione routes per chiamate HTTP
 require("./platform/routes/squadra.js")(app);
 require("./platform/routes/pagamento")(app);
 require("./platform/routes/pagamento.js")(app);
+require("./platform/routes/login.js")(app);
+
 
 require("./api/routes/squadra.js")(app);
 
@@ -56,9 +61,11 @@ require("./api/routes/conversazione.js")(app);
 require("./api/routes/registrazione")(app);
 require("./api/routes/sessione")(app);
 require("./api/routes/inventario")(app);
-
+require("./api/routes/login")(app);
+require("./api/routes/admin")(app);
 require("./platform/routes/registrazione")(app);
 require("./platform/routes/dashboard")(app);
+require("./platform/routes/profilo")(app);
 
 
 //Avvio del server

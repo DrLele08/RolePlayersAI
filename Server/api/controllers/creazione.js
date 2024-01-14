@@ -71,13 +71,12 @@ exports.GetByFilter = async (req,res)=>{
 exports.CreateCreazione = async (req, res)=>{
     let json = {};
 
-    const fkUtente = req.body.fkUtente;
     const nome = req.body.nome;
     const descrizione = req.body.descrizione;
     const isPubblico = req.body.isPubblico;
     const tipo = req.body.tipo;
     const img = req.file;
-    const idUtente = req.idUtente;
+    const fkUtente = req.idUtente;
     const sesso = req.body.sesso;
 
 
@@ -89,7 +88,6 @@ exports.CreateCreazione = async (req, res)=>{
             tipo: tipo,
             descrizione: descrizione,
             img:img,
-            idUtente: idUtente,
             sesso: sesso
         });
         json.Ris = 1;
@@ -98,5 +96,6 @@ exports.CreateCreazione = async (req, res)=>{
     }catch (error){
         json.Ris = 0;
         json.Mess = error || "Errore Generico";
+        res.json(json);
     }
 }

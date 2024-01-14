@@ -48,6 +48,20 @@ utils.sha256 = (pwd) => {
 }
 
 /**
+ * Verifica
+ *
+ * @param {String} inputPassword - La stringa della password data
+ * @param {String} storedHash - Stringa della passsword salvata nel database e criptata
+ *
+ * @returns {Boolean} True se la password corrisponde
+ */
+utils.verify=(inputPassword, storedHash)=>{
+    const crypto = require('crypto');
+    const hash = crypto.createHash('sha256').update(inputPassword).digest('base64');
+    return hash === storedHash;
+}
+
+/**
  * Converte una data dal formato "dd-mm-yyyy" nel formato "yyyy-mm-dd".
  *
  * @param {Date} date - Data da convertire, sotto forma di stringa.
@@ -57,6 +71,16 @@ utils.sha256 = (pwd) => {
 utils.toMySQLDate = (date) => {
     const parts = date.toString().split("-");
     return parts[2] + '-' + parts[1] + '-' + parts[0];
+}
+
+/**
+ * Converte un oggetto JavaScript Raw in un oggetto normal.
+ *
+ * @param {Object} object - L'oggetto JavaScript da convertire.
+ * @returns {Object} Una copia normale dell'oggetto
+ */
+utils.convertToNormalObject = (object)=> {
+    return JSON.parse(JSON.stringify(object));
 }
 
 module.exports=utils;

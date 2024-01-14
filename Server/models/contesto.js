@@ -1,7 +1,9 @@
 const db= require("./database");
 const DataTypes= require("sequelize").DataTypes;
 const utente = require("./utente");
-const ambiente = require("./creazione");
+const creazione = require("./creazione");
+
+const pageSize = 15;
 
 const contesto = {};
 
@@ -17,16 +19,15 @@ const Contesto = db.define('Contesto',{
         allowNull: false,
         references: {
             model: utente.Utente,
-            key: 'id'
+            key: 'idUtente'
         }
     },
-
     fkAmbiente: {
         type: DataTypes.BIGINT,
         allowNull: false,
         references: {
-            model: ambiente.Creazione,
-            key: 'id'
+            model: creazione.Creazione,
+            key: 'idCreazione'
         }
     },
     nome: {
@@ -71,6 +72,38 @@ contesto.getAll = async()=> {
     return await Contesto.findAll();
 };
 
+contesto.getByUtenteAndFilters = async(idUtente, filters, page = 1, pageSize = 16) => {
+    const Op = require("sequelize").Op;
+
+    const result = await Contesto.findAndCountAll({
+        where: {
+            fkUtente: idUtente,
+            nome: filters.nome ? {[Op.substring]: filters.nome} : {[Op.ne]: null}
+        },
+        limit: pageSize,
+        offset: (page - 1) * pageSize,
+    });
+
+    let contesti = [];
+    result.rows.forEach(row => {
+        contesti.push(row.dataValues);
+    });
+
+    const totalCount = result.count;
+    const totalPages = Math.ceil(totalCount / pageSize);
+
+    // Ritorna l'oggetto con l'array di creazioni e le informazioni sulla paginazione
+    return {
+        contesti,
+        pagination: {
+            page,
+            pageSize,
+            totalCount,
+            totalPages,
+        },
+    };
+}
+
 
 /**
  * Crea e inserisce un nuovo Contesto all'interno del DB
@@ -90,7 +123,7 @@ contesto.getAll = async()=> {
 contesto.createContesto = async(dati) =>{
     return await Contesto.create({
         fkUtente: dati.fkUtente,
-        fKAmbiente: dati.fkAmbiente,
+        fkAmbiente: dati.fkAmbiente,
         nome: dati.nome,
         descrizione: dati.descrizione,
         isPubblico: dati.isPubblico
@@ -166,7 +199,7 @@ contesto.getByFilter = async (filters, page,dati) => {
         totalPages: totalPages,
         currentPage: page,
         pageSize: pageSize,
-        creazioni: result
+        contesti: result
     };
 }
 

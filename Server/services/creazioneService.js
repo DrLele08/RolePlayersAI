@@ -59,45 +59,43 @@ creazioneService.DeleteById=async(dati)=>{
 };
 
 creazioneService.createCreazione = async (dati) =>{
-    if(utils.checkParameters(dati, requiredFields)){
-        if(utils.checkId(dati.fkUtente)){
+    if(utils.checkParameters(dati, requiredFields)) {
+        if (utils.checkId(dati.fkUtente)) {
 
             dati.nome = dati.nome.trim();
             dati.descrizione = dati.descrizione.trim();
             dati.tipo = dati.tipo.trim();
-            dati.sesso = dati.sesso.trim();
 
-            if (dati.nome.length > 0 && dati.nome.length < 51 ) {
-                if(dati.idUtente===dati.fkUtente)
-                {
-                    if (dati.descrizione.length > 0 && dati.descrizione.length < 513) {
-                        if (dati.tipo === 'Personaggio' || dati.tipo === 'Ambiente') {
-                            if (dati.tipo === 'Personaggio')
-                             {
-                                if(dati.sesso === 'Uomo' || dati.sesso === 'Donna' || dati.sesso === 'Altro')
-                                {
-
-                                }
-                                else {
-                                    return Promise.reject("Dati non validi");
-                                }
-                             }
-                        }
-                        else{
-                            return Promise.reject("Dati non validi");
-                        }
-                    }
-                    else{
-                        return Promise.reject("Dati non validi");
-                    }
-                }
-                else{
-                    return Promise.reject("Dati non validi");
-                }
-            }
-            else{
+            if (dati.nome.length <= 0 || dati.nome.length >= 51) {
                 return Promise.reject("Dati non validi");
             }
+            if(isNaN(dati.isPubblico))
+            {
+                return Promise.reject("Dati non validi");
+            }
+
+            dati.isPubblico = parseInt(dati.isPubblico);
+
+            if ( 0 !== dati.isPubblico && 1 !== dati.isPubblico){
+                return Promise.reject("Dati non validi");
+            }
+            if (dati.descrizione.length < 1 || dati.descrizione.length >= 513) {
+
+                return Promise.reject("Dati non validi");
+            }
+            if (dati.tipo !== 'Personaggio' && dati.tipo !== 'Ambiente') {
+                return Promise.reject("Dati non validi");
+            }
+            if (dati.tipo === 'Personaggio' && dati.sesso !== undefined) {
+                dati.sesso = dati.sesso.trim();
+                if (dati.sesso !== 'Uomo' && dati.sesso !== 'Donna' && dati.sesso !== 'Altro') {
+                    return Promise.reject("Dati non validi");
+                }
+            } else if (dati.tipo === 'Personaggio' && dati.sesso === undefined) {
+                return Promise.reject("Dati non validi");
+
+            }
+
 
 
             let nuovaCreazione;
@@ -169,6 +167,13 @@ creazioneService.getByFilter = async (nome, tipo, page, dati)=>{
     }
 }
 
+/**
+ * Ottiene un elenco di creazioni popolari.
+ *
+ * @param {number} limit - Limite di creazioni da ottenere (deve essere un numero positivo).
+ * @param {string} tipo - Tipo di creazione ("Personaggio" o "Ambiente"). Se non specificato o non valido, otterrà entrambi i tipi.
+ * @returns {Promise<Array>} Una Promise che si risolve con un array di creazioni popolari.
+ */
 creazioneService.getCreazioniPopolari = async (limit, tipo)=>{
     const DEFAULT_LIMIT = 8;
     if(limit < 1){

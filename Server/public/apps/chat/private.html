@@ -20,6 +20,11 @@
 	<!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
 	<link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
 	<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+	<style>
+		.Ceck{
+			display: none !important;
+		}
+	</style>
 	<!--end::Global Stylesheets Bundle-->
 	<script>// Frame-busting to prevent site from being loaded within a frame without permission (click-jacking) if (window.top != window.self) { window.top.location.replace(window.self.location.href); }</script>
 </head>
@@ -481,10 +486,88 @@
 							<!--begin::Body-->
 							<div class="card-body">
 								<div class="p-5 rounded text-gray-900 fw-semibold text-center">
-									<button class="btn btn-sm btn-light btn-active-light-primary me-3 align-bottom" type="button" data-kt-element="send">
+									<button class="btn btn-sm btn-light btn-active-light-primary me-3 align-bottom" onclick="CambiaDiv('divSessione')">
 										<span class="menu-title">Crea la tua sessione</span>
 									</button>
 								</div>
+								<!--begin::Sessione-->
+								<div class="post d-flex flex-column-fluid Ceck" id="divSessione">
+									<div>
+									<!--begin::Sidebar-->
+									<div class="flex-column flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0 ms-lg-7 ms-xl-10">
+										<!--begin::Contacts-->
+										<div class="card card-flush">
+											<!--begin::Card header-->
+											<div class="card-header pt-7">
+												<!--begin::Form-->
+												<form class="w-100 position-relative" autocomplete="off">
+													<span>Nome della sessione</span>
+													<input type="text" class="form-control form-control-solid" name="search" value="" placeholder="Inserisci nome della sessione" />
+													<!--end::Input-->
+												</form>
+												<!--end::Form-->
+												<span>&nbsp</span>
+											</div>
+											<!--end::Card header-->
+										</div>
+										<!--end::Contacts-->
+									</div>
+									<!--end::Sidebar-->
+
+										<!--begin::Sidebar-->
+										<div class="flex-row flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0 ms-lg-7 ms-xl-10" style="margin-top:5%;">
+											<!--begin::Contacts-->
+											<div class="card card-flush">
+												<!--begin::Card header-->
+												<div class="card-header pt-7">
+													<!--begin::Form-->
+													<form class="w-100 position-relative" autocomplete="off">
+														<span>Seleziona il contesto della sessione<br></span>
+														<span>&nbsp<br></span>
+														<label for="cont">Scegli il contesto:</label><span>&nbsp &nbsp &nbsp</span>
+
+														<select name="cont" id="cont" >
+
+														</select>
+														<span><br>&nbsp<br></span>
+														<!--end::Input-->
+													</form>
+													<!--end::Form-->
+												</div>
+												<!--end::Card header-->
+											</div>
+											<!--end::Contacts-->
+										</div>
+										<!--end::Sidebar-->
+
+										<!--begin::Sidebar-->
+										<div class="flex-row flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0 ms-lg-7 ms-xl-10" style="margin-top:5%;">
+											<!--begin::Contacts-->
+											<div class="card card-flush">
+												<!--begin::Card header-->
+												<div class="card-header pt-7">
+													<!--begin::Form-->
+													<form class="w-100 position-relative align-center" autocomplete="off">
+														<span>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</span>
+														<button class="btn btn-sm btn-light btn-active-light-primary me-3 align-bottom" onclick="">
+															<span class="menu-title">Crea</span>
+														</button>
+														<span>&nbsp &nbsp &nbsp &nbsp</span>
+														<button class="btn btn-sm btn-light btn-active-light-primary me-3 align-bottom" onclick="">
+															<span class="menu-title">Elimina</span>
+														</button>
+													</form>
+													<span>&nbsp</span>
+													<!--end::Form-->
+												</div>
+												<!--end::Card header-->
+											</div>
+											<!--end::Contacts-->
+										</div>
+										<!--end::Sidebar-->
+									</div>
+								</div>
+								<!--end::Sessione-->
 							</div>
 							<!--end::Body-->
 						</div>
@@ -590,6 +673,21 @@
 <script src="assets/js/custom/widgets.js"></script>
 <script src="assets/js/custom/apps/chat/chat.js"></script>
 <script src="assets/js/custom/utilities/modals/users-search.js"></script>
+
+<script>
+	let actualDiv="";
+	function CambiaDiv(idDiv)
+	{
+		if(actualDiv !== "")
+		{
+			document.getElementById(actualDiv).classList.add("Ceck");
+		}
+
+		document.getElementById(idDiv).classList.remove("Ceck");
+		actualDiv=idDiv;
+	}
+</script>
+
 <!--end::Custom Javascript-->
 <!--end::Javascript-->
 </body>

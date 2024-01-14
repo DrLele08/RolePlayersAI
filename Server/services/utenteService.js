@@ -1,9 +1,11 @@
 const utils = require("../models/utils");
 const utente=require("../models/utente");
 const randomString = require("randomstring");
+const creazione = require("../models/creazione");
 
 const utenteService={};
 const requiredFields = ['username', 'nome', 'cognome', 'email', 'password', 'dataNascita', 'telefono'];
+const ruoliValidi = ['utente', 'moderatore', 'amministratore'];
 
 utenteService.getById = async (idUtente) =>{
     if(!utils.checkId(idUtente)){
@@ -18,6 +20,47 @@ utenteService.getById = async (idUtente) =>{
         return Promise.reject("Utente non trovato");
     }
 };
+
+utenteService.Login = async (filters,password)=>{
+    if(filters.username!== undefined)
+    {
+       filters.username=filters.username.trim();
+       delete filters.email;
+        if (!filters.username.match("^[a-zA-Z0-9]{4,25}$"))
+            return Promise.reject("Formato username non valido!");
+    }
+    if(filters.email!== undefined)
+    {
+        delete filters.username;
+        filters.email=filters.email.trim();
+      if(!filters.email.match("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"))
+      {
+          return Promise.reject("Formato email non valido!");
+      }
+    }
+
+    if (password.match("^(?=.[A-Za-z])(?=.\d)(?=.[@$!%#?&])[A-Za-z\d@$!%*#?&]{8,}$"))
+        return Promise.reject("Formato password non valido!");
+
+    let utenteTrovato = await utente.getByEmailorUsername(filters);
+
+    if(utenteTrovato!==undefined)
+    {
+        if(utils.verify(password,utenteTrovato.password))
+        {
+            delete utenteTrovato.dataValues.password;
+            return utenteTrovato;
+        }
+        else{
+            return Promise.reject("Password non corretta");
+        }
+
+    }
+    else{
+        return Promise.reject("Email o username non corretti");
+    }
+
+}
 
 utenteService.createUtente = async(data) => {
     if (!utils.checkParameters(data, requiredFields))
@@ -72,6 +115,43 @@ utenteService.getActualAbbonamento = async (idUtente) =>{
         return Promise.reject("ID Utente non valido")
     }
 
+}
+
+utenteService.getByFilters = async(data) => {
+    let fkAbbonamento = data.filters.fkAbbonamento;
+    if (fkAbbonamento) {
+        if (isNaN(fkAbbonamento) || fkAbbonamento < 1 || fkAbbonamento > 3)
+            return Promise.reject("Filtro abbonamento non valido!");
+    }
+
+    if (data.filters.ruolo) {
+        data.filters.ruolo = data.filters.ruolo.trim().toLowerCase();
+        if (!ruoliValidi.includes(data.filters.ruolo))
+            return Promise.reject("Filtro ruolo non valido!");
+    }
+
+    data.filters.username && (data.filters.username = data.filters.username.trim());
+
+    return await utente.getByFilters(data.filters, data.pagina);
+}
+
+utenteService.setRuolo = async(data) => {
+    const fields = ['idUtente', 'ruolo'];
+    if (!utils.checkParameters(data, fields))
+        return Promise.reject("Dati non validi!");
+
+    if (!utils.checkId(data.idUtente))
+        return Promise.reject("ID utente non valido!");
+
+    let u = utente.getById(data.idUtente);
+    if (!u)
+        return Promise.reject("Utente non trovato!");
+
+    data.ruolo = data.ruolo.trim().toLowerCase();
+    if (!ruoliValidi.includes(data.ruolo))
+        return Promise.reject("Ruolo non valido!");
+
+    return await utente.setRuolo(data.idUtente, data.ruolo);
 }
 
 module.exports = utenteService;

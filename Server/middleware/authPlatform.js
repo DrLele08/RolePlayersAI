@@ -1,14 +1,18 @@
 
 module.exports=  (ruoli)=> {
     return (req, res, next) => {
-        //let authPlatoform = req.session;
-        let authPlatoform={
-            idUtente:1,
-            tokenAuth:"auth_token_1"
-        };
-        if (authPlatoform !== undefined) {
-            let id = authPlatoform.idUtente;
-            let token = authPlatoform.tokenAuth;
+        let idUtenteCookie=req.cookies.idUtente;
+        if(idUtenteCookie !== undefined)
+        {
+            let tokenAuthCookie=req.cookies.tokenAuth;
+            req.session.idUtente=idUtenteCookie;
+            req.session.tokenAuth=tokenAuthCookie;
+        }
+
+        let id = req.session.idUtente;
+
+        if (id !== undefined) {
+            let token = req.session.tokenAuth;
             const utenteModel = require("../models/utente");
             utenteModel.getByIdandTokenAuth(id, token).then((utente) => {
                 let idRuolo = 0;
