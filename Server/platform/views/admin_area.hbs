@@ -4403,12 +4403,10 @@ License: For each use you must have a valid license purchased only from above li
                                     <tr>
                                         <td>Content Management</td>
                                         <td>
-                                            <a class="badge badge-light-primary fs-7 m-1">Utente</a>
+                                            <a class="badge badge-light-primary fs-7 m-1">{{this.ruolo}}</a>
                                         </td>
                                         <td>
-                                            <a class="badge badge-light-success fs-7 m-1">Free</a>
-                                            <a class="badge badge-light-warning fs-7 m-1">Base</a>
-                                            <a class="badge badge-light-info fs-7 m-1">Enterprise</a>
+                                            <a class="badge badge-light-success fs-7 m-1">{{this.fkAbbonamento}}</a>
                                         </td>
                                         <td class="text-end">
                                             <button class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_update_permission">
@@ -4431,6 +4429,7 @@ License: For each use you must have a valid license purchased only from above li
                                             </button>
                                         </td>
                                     </tr>
+                                    {{/each}}
                                     <tr>
                                         <td>Financial Management</td>
                                         <td>
