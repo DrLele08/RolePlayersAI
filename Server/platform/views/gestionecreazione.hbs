@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--begin::Head-->
+<head>
+    <base href="../../" />
+    <title> RoleplayersAI</title>
+    <meta charset="utf-8" />
+    <meta name="description" content="Il miglior sito per fare roleplay con dei bot" />
+    <meta name="keywords" content="Node.js, web design, figma, roleplay, AI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:locale" content="it_Ita" />
+    <link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
+    <link rel="shortcut icon" href="{{BASE_URL}}/assets/media/logos/favicon.ico"/>
+    <!--begin::Fonts(mandatory for all pages)-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
+    <!--end::Fonts-->
+    <!--begin::Vendor Stylesheets(used for this page only)-->
+    <link href="{{BASE_URL}}/assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
+    <!--end::Vendor Stylesheets-->
+    <!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
+    <link href="{{BASE_URL}}/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="{{BASE_URL}}/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+    <style>
+        .Ceck{
+            display: none !important;
+        }
+    </style>
+    <!--end::Global Stylesheets Bundle-->
+    <script>// Frame-busting to prevent site from being loaded within a frame without permission (click-jacking) if (window.top != window.self) { window.top.location.replace(window.self.location.href); }</script>
+</head>
+<!--end::Head-->
+<!--begin::Body-->
+<body id="kt_body" class="aside-enabled">
+<!--begin::Theme mode setup on page load-->
+<script>var defaultThemeMode = "light"; var themeMode; if ( document.documentElement ) { if ( document.documentElement.hasAttribute("data-bs-theme-mode")) { themeMode = document.documentElement.getAttribute("data-bs-theme-mode"); } else { if ( localStorage.getItem("data-bs-theme") !== null ) { themeMode = localStorage.getItem("data-bs-theme"); } else { themeMode = defaultThemeMode; } } if (themeMode === "system") { themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; } document.documentElement.setAttribute("data-bs-theme", themeMode); }</script>
+<!--end::Theme mode setup on page load-->
+<!--begin::Main-->
+<!--begin::Root-->
+<div class="d-flex flex-column flex-root">
+    {{> barraLaterale nome=Utente.nome cognome=Utente.cognome abbonamento=Abbonamento.nomeTier}}
+<!--begin::Wrapper-->
+<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+    {{> header titolo="Cosa vuoi creare oggi?"}}
+    <!--begin::Content-->
+    <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+        <!--begin::Post-->
+        <div class="post d-flex flex-column-fluid" id="kt_post">
+            <!--begin::Container-->
+            <div class="container-xxl">
+                <!--begin::Layout-->
+                <div class="d-flex flex-column flex-lg-row">
+
+                    <!--begin::Contacts-->
+                    <div class="card card-flush">
+                        <!--begin::Card body-->
+                        <div class="card-body pt-5">
+                            <!--begin::List-->
+                            <div class="scroll-y me-n5 pe-5 h-200px h-lg-auto" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_header, #kt_app_header, #kt_toolbar, #kt_app_toolbar, #kt_footer, #kt_app_footer, #kt_chat_contacts_header" data-kt-scroll-wrappers="#kt_content, #kt_app_content, #kt_chat_contacts_body" data-kt-scroll-offset="5px">
+                                <!--begin::User-->
+                                <div class="d-flex flex-stack py-4">
+                                    <!--begin::Details-->
+                                    <div class="d-flex align-items-center">
+                                        <!--begin::Details-->
+                                        <div class="ms-5 text-center">
+                                            <span class="fs-5 fw-bold text-gray-900">CREA PERSONAGGIO</span>
+                                            <div>
+                                                <img alt="Logo" src="{{BASE_URL}}/assets/media/logos/persSaluta.png" class="h-100px h-lg-100px" />
+                                            </div>
+                                            <!--begin::Crea-->
+                                            <div class="me-3">
+													<span class="menu-title">
+														Crea il tuo personaggio fornendo <br>
+														alla nostra intelligenza artificiale <br>
+														una descrizione dettagliata di ciò <br>
+														che vuoi creare.</span>
+                                            </div>
+                                            <!--end::Crea-->
+                                            <div class="p-5 rounded text-gray-900 fw-semibold text-center">
+                                                <button class="btn btn-sm btn-light btn-active-light-primary me-3 align-bottom" onclick="CambiaDiv('divPersonaggi')">
+                                                    <span class="menu-title">Crea il tuo personaggio</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <!--end::Details-->
+                                    </div>
+                                    <!--end::Details-->
+                                </div>
+                                <!--end::User-->
+                            </div>
+                            <!--end::List-->
+                        </div>
+                        <!--end::Card body-->
+                    </div>
+                    <!--end::Contacts-->
+
+                    <!--begin::Contacts-->
+                    <div class="card card-flush" style="margin-left:10%;">
+                        <!--begin::Card body-->
+                        <div class="card-body pt-5">
+                            <!--begin::List-->
+                            <div class="scroll-y me-n5 pe-5 h-200px h-lg-auto" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_header, #kt_app_header, #kt_toolbar, #kt_app_toolbar, #kt_footer, #kt_app_footer, #kt_chat_contacts_header" data-kt-scroll-wrappers="#kt_content, #kt_app_content, #kt_chat_contacts_body" data-kt-scroll-offset="5px">
+                                <!--begin::User-->
+                                <div class="d-flex flex-stack py-4">
+                                    <!--begin::Details-->
+                                    <div class="d-flex align-items-center">
+                                        <!--begin::Details-->
+                                        <div class="ms-5 text-center">
+                                            <span class="fs-5 fw-bold text-gray-900">CREA AMBIENTE</span>
+                                            <div>
+                                                <br>
+                                                <img alt="Logo" src="{{BASE_URL}}/assets/media/logos/ambiente.png" class="h-70px h-lg-70px" />
+                                            </div>
+                                            <!--begin::Crea-->
+                                            <div class="me-3">
+													<span class="menu-title"><br>
+														Crea il tuo ambiente fornendo alla <br>
+														nostra intelligenza artificiale una <br>
+														descrizione dettagliata di ciò che vuoi <br>
+														creare.</span>
+                                            </div>
+                                            <!--end::Crea-->
+                                            <div class="p-5 rounded text-gray-900 fw-semibold text-center" onclick="CambiaDiv('divAmbienti')">
+                                                <a href="javascript:void(0)" class="btn btn-sm btn-light btn-active-light-primary me-3 align-bottom">
+                                                    <span class="menu-title">Crea il tuo ambiente</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end::Details-->
+                                </div>
+                                <!--end::Details-->
+                            </div>
+                            <!--end::User-->
+                        </div>
+                        <!--end::List-->
+                    </div>
+                    <!--end::Contacts-->
+
+                    <!--begin::Contacts-->
+                    <div class="card card-flush" style="margin-left:10%;">
+                        <!--begin::Card body-->
+                        <div class="card-body pt-5">
+                            <!--begin::List-->
+                            <div class="scroll-y me-n5 pe-5 h-200px h-lg-auto" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_header, #kt_app_header, #kt_toolbar, #kt_app_toolbar, #kt_footer, #kt_app_footer, #kt_chat_contacts_header" data-kt-scroll-wrappers="#kt_content, #kt_app_content, #kt_chat_contacts_body" data-kt-scroll-offset="5px">
+                                <!--begin::User-->
+                                <div class="d-flex flex-stack py-4">
+                                    <!--begin::Details-->
+                                    <div class="d-flex align-items-center">
+                                        <!--begin::Details-->
+                                        <div class="ms-5 text-center">
+                                            <span class="fs-5 fw-bold text-gray-900">CREA CONTESTO</span>
+                                            <div>
+                                                <img alt="Logo" src="{{BASE_URL}}/assets/media/logos/relazione.png" class="h-100px h-lg-100px" />
+                                            </div>
+                                            <!--begin::Crea-->
+                                            <div class="me-3">
+													<span class="menu-title">
+														Crea il tuo contesto, i legami <br>
+														e le relazioni tra personaggi ed <br>
+														ambienti tramite la nostra <br>
+														intelligenza artificiale. <br>
+														</span>
+                                            </div>
+                                            <!--end::Crea-->
+                                            <div class="p-5 rounded text-gray-900 fw-semibold text-center" onclick="CambiaDiv('divContesti')">
+                                                <a href="javascript:void(0)" class="btn btn-sm btn-light btn-active-light-primary me-3 align-bottom">
+                                                    <span class="menu-title">Crea il tuo contesto</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <!--end::Card body-->
+                                    </div>
+                                    <!--end::Details-->
+                                </div>
+                                <!--end::Details-->
+                            </div>
+                            <!--end::User-->
+                        </div>
+                        <!--end::List-->
+                    </div>
+                    <!--end::Contacts-->
+
+                </div>
+                <!--end::Layout-->
+                <!--begin::Modals-->
+                <!--begin::Modal - View Users-->
+                <div class="modal fade" id="kt_modal_view_users" tabindex="-1" aria-hidden="true">
+                    <!--begin::Modal dialog-->
+                    <div class="modal-dialog mw-650px">
+                        <!--begin::Modal content-->
+                        <div class="modal-content">
+                            <!--begin::Modal header-->
+                            <div class="modal-header pb-0 border-0 justify-content-end">
+                                <!--begin::Close-->
+                                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                                    <i class="ki-duotone ki-cross fs-1">
+                                        <span class="path1"></span>
+                                        <span class="path2"></span>
+                                    </i>
+                                </div>
+                                <!--end::Close-->
+                            </div>
+                            <!--begin::Modal header-->
+                        </div>
+                        <!--end::Modal content-->
+                    </div>
+                    <!--end::Modal dialog-->
+                </div>
+                <!--end::Modal - View Users-->
+                <!--end::Modals-->
+            </div>
+            <!--end::Container-->
+        </div>
+        <!--end::Post-->
+
+        <!--begin::Container-->
+        <div id="kt_content_container" class="container-xxl d-flex flex-column flex-column-fluid" style="margin-top:3%;">
+
+            <!--begin::Personaggi-->
+            <div class="post d-flex flex-column-fluid Ceck" id="divPersonaggi">
+                <!--begin::Messenger-->
+                <div class="card flex-column flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0" id="kt_chat_messenger">
+                    <!--begin::Card body-->
+                    <div class="card-body h-500px" id="kt_chat_messenger_body">
+                        <!--begin::Messages-->
+                        <div class="scroll-y me-n5 pe-5 h-300px h-lg-auto" data-kt-element="messages" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_header, #kt_app_header, #kt_app_toolbar, #kt_toolbar, #kt_footer, #kt_app_footer, #kt_chat_messenger_header, #kt_chat_messenger_footer" data-kt-scroll-wrappers="#kt_content, #kt_app_content, #kt_chat_messenger_body" data-kt-scroll-offset="5px">
+                            <!--begin::Message(in)-->
+                            <div class="d-flex justify-content-start mb-10">
+                                <!--begin::Wrapper-->
+                                <div class="d-flex flex-column align-items-start">
+                                    <!--begin::Text-->
+                                    <div class="p-5 rounded bg-light-info text-gray-900 fw-semibold mw-lg-400px text-start" data-kt-element="message-text">Descrizione del personaggio</div>
+                                    <!--end::Text-->
+                                </div>
+                                <!--end::Wrapper-->
+                            </div>
+                            <!--end::Message(in)-->
+                        </div>
+                        <!--end::Messages-->
+                    </div>
+                    <!--end::Card body-->
+
+                    <!--begin::Card footer-->
+                    <div class="d-flex align-items-center" id="kt_chat_messenger_footer">
+                        <!--begin::Input-->
+                        <textarea class="form-control form-control-flush mb-3" rows="1" data-kt-element="input" placeholder="Descrivi un personaggio"></textarea>
+                        <!--end::Input-->
+                        <!--begin:Toolbar-->
+                        <div class="d-flex flex-stack">
+                            <!--begin::Send-->
+                            <button class="btn btn-primary" type="button" data-kt-element="send">
+                                <img alt="Logo" src="{{BASE_URL}}/assets/media/avatars/invia.png"/>
+                            </button>
+                            <!--end::Send-->
+                        </div>
+                        <!--end::Toolbar-->
+                    </div>
+                    <!--end::Card footer-->
+
+                </div>
+                <!--end::Messenger-->
+
+                <div>
+                    <!--begin::Sidebar-->
+                    <div class="flex-column flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0 ms-lg-7 ms-xl-10">
+                        <!--begin::Contacts-->
+                        <div class="card card-flush">
+                            <!--begin::Card header-->
+                            <div class="card-header pt-7" id="kt_chat_contacts_header">
+                                <!--begin::Form-->
+                                <form class="w-100 position-relative" autocomplete="off">
+                                    <span>Nome personaggio</span>
+                                    <input type="text" class="form-control form-control-solid" name="search" value="" placeholder="Inserisci nome personaggio" />
+                                    <!--end::Input-->
+                                </form>
+                                <!--end::Form-->
+                            </div>
+                            <!--end::Card header-->
+                            <!--begin::Card body-->
+                            <div class="card-body pt-5" id="kt_chat_contacts_body">
+                                <span>Scegli il genere<br></span>
+                                <input type="radio" id="html" name="fav_language" value="uomo">
+                                <label for="html">Uomo</label>
+                                <span>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</span>
+                                <input type="radio" id="css" name="fav_language" value="donna">
+                                <label for="css">Donna</label>
+                                <span>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</span>
+                                <input type="radio" id="javascript" name="fav_language" value="altro">
+                                <label for="javascript">Altro</label>
+                            </div>
+                            <!--end::Card body-->
+                        </div>
+                        <!--end::Contacts-->
+                    </div>
+                    <!--end::Sidebar-->
+
+                    <!--begin::Sidebar-->
+                    <div class="flex-row flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0 ms-lg-7 ms-xl-10" style="margin-top:5%;">
+                        <!--begin::Contacts-->
+                        <div class="card card-flush">
+                            <!--begin::Card header-->
+                            <div class="card-header pt-7">
+                                <!--begin::Form-->
+                                <form class="w-100 position-relative" autocomplete="off">
+                                    <span>Seleziona foto per il tuo personaggio<br></span>
+                                    <span>&nbsp<br></span>
+                                    <label for="pers">Scegli una foto:</label>
+                                    <input type="file" id="pers" name="pers" accept="image/png, image/jpeg" />
+                                </form>
+                                <span><br>&nbsp<br></span>
+                                <!--end::Form-->
+                            </div>
+                            <!--end::Card header-->
+                        </div>
+                        <!--end::Contacts-->
+                    </div>
+                    <!--end::Sidebar-->
+
+                    <!--begin::Sidebar-->
+                    <div class="flex-row flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0 ms-lg-7 ms-xl-10" style="margin-top:5%;">
+                        <!--begin::Contacts-->
+                        <div class="card card-flush">
+                            <!--begin::Card body-->
+                            <div class="card-body pt-5">
+                                <span>Privacy<br></span>
+                                <div>
+                                    <input type="radio" id="privato" name="fav" value="privato">
+                                    <label for="privato">Privato &nbsp</label>
+                                    <span>Il personaggio sarà visibile solo nel tuo inventario.</span><br><br>
+                                    <input type="radio" id="pubblico" name="fav" value="pubblico">
+                                    <label for="pubblico">Pubblico &nbsp</label>
+                                    <span>Il personaggio sarà visibile a tutti nella libreria.</span>
+                                </div>
+                            </div>
+                            <!--end::Card body-->
+                        </div>
+                        <!--end::Contacts-->
+                    </div>
+                    <!--end::Sidebar-->
+
+                    <!--begin::Sidebar-->
+                    <div class="flex-row flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0 ms-lg-7 ms-xl-10" style="margin-top:5%;">
+                        <!--begin::Contacts-->
+                        <div class="card card-flush">
+                            <!--begin::Card header-->
+                            <div class="card-header pt-7">
+                                <!--begin::Form-->
+                                <form class="w-100 position-relative align-center" autocomplete="off">
+                                    <span>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</span>
+                                    <button class="btn btn-sm btn-light btn-active-light-primary me-3 align-bottom" onclick="">
+                                        <span class="menu-title">Crea</span>
+                                    </button>
+                                    <span>&nbsp &nbsp &nbsp &nbsp</span>
+                                    <button class="btn btn-sm btn-light btn-active-light-primary me-3 align-bottom" onclick="">
+                                        <span class="menu-title">Elimina</span>
+                                    </button>
+                                </form>
+                                <span>&nbsp</span>
+                                <!--end::Form-->
+                            </div>
+                            <!--end::Card header-->
+                        </div>
+                        <!--end::Contacts-->
+                    </div>
+                    <!--end::Sidebar-->
+                </div>
+            </div>
+            <!--end::Personaggi-->
+
+            <!--begin::Ambienti-->
+            <div class="post d-flex flex-column-fluid Ceck" id="divAmbienti">
+                <!--begin::Messenger-->
+                <div class="card flex-column flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0">
+                    <!--begin::Card body-->
+                    <div class="card-body h-500px">
+                        <!--begin::Messages-->
+                        <div class="scroll-y me-n5 pe-5 h-300px h-lg-auto" data-kt-element="messages" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_header, #kt_app_header, #kt_app_toolbar, #kt_toolbar, #kt_footer, #kt_app_footer, #kt_chat_messenger_header, #kt_chat_messenger_footer" data-kt-scroll-wrappers="#kt_content, #kt_app_content, #kt_chat_messenger_body" data-kt-scroll-offset="5px">
+                            <!--begin::Message(in)-->
+                            <div class="d-flex justify-content-start mb-10">
+                                <!--begin::Wrapper-->
+                                <div class="d-flex flex-column align-items-start">
+                                    <!--begin::Text-->
+                                    <div class="p-5 rounded bg-light-info text-gray-900 fw-semibold mw-lg-400px text-start" data-kt-element="message-text">Descrizione dell'ambiente</div>
+                                    <!--end::Text-->
+                                </div>
+                                <!--end::Wrapper-->
+                            </div>
+                            <!--end::Message(in)-->
+                        </div>
+                        <!--end::Messages-->
+                    </div>
+                    <!--end::Card body-->
+
+                    <!--begin::Card footer-->
+                    <div class="d-flex align-items-center">
+                        <!--begin::Input-->
+                        <textarea class="form-control form-control-flush mb-3" rows="1" data-kt-element="input" placeholder="Descrivi un'ambiente"></textarea>
+                        <!--end::Input-->
+                        <!--begin:Toolbar-->
+                        <div class="d-flex flex-stack">
+                            <!--begin::Send-->
+                            <button class="btn btn-primary" type="button" data-kt-element="send">
+                                <img alt="Logo" src="{{BASE_URL}}/assets/media/avatars/invia.png"/>
+                            </button>
+                            <!--end::Send-->
+                        </div>
+                        <!--end::Toolbar-->
+                    </div>
+                    <!--end::Card footer-->
+
+                </div>
+                <!--end::Messenger-->
+
+                <div>
+                    <!--begin::Sidebar-->
+                    <div class="flex-column flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0 ms-lg-7 ms-xl-10">
+                        <!--begin::Contacts-->
+                        <div class="card card-flush">
+                            <!--begin::Card header-->
+                            <div class="card-header pt-7">
+                                <!--begin::Form-->
+                                <form class="w-100 position-relative" autocomplete="off">
+                                    <span>Nome dell'ambiente</span>
+                                    <input type="text" class="form-control form-control-solid" name="search" value="" placeholder="Inserisci nome ambiente" />
+                                    <!--end::Input-->
+                                    <span>&nbsp</span>
+                                </form>
+                                <!--end::Form-->
+                            </div>
+                            <!--end::Card header-->
+                        </div>
+                        <!--end::Contacts-->
+                    </div>
+                    <!--end::Sidebar-->
+
+                    <!--begin::Sidebar-->
+                    <div class="flex-row flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0 ms-lg-7 ms-xl-10" style="margin-top:5%;">
+                        <!--begin::Contacts-->
+                        <div class="card card-flush">
+                            <!--begin::Card header-->
+                            <div class="card-header pt-7">
+                                <!--begin::Form-->
+                                <form class="w-100 position-relative" autocomplete="off">
+                                    <span>Seleziona foto per il tuo ambiente<br></span>
+                                    <span>&nbsp<br></span>
+                                    <label for="ambiente">Scegli una foto:</label>
+                                    <input type="file" id="ambiente" name="ambiente" accept="image/png, image/jpeg" />
+                                </form>
+                                <span><br>&nbsp<br></span>
+                                <!--end::Form-->
+                            </div>
+                            <!--end::Card header-->
+                        </div>
+                        <!--end::Contacts-->
+                    </div>
+                    <!--end::Sidebar-->
+
+                    <!--begin::Sidebar-->
+                    <div class="flex-row flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0 ms-lg-7 ms-xl-10" style="margin-top:5%;">
+                        <!--begin::Contacts-->
+                        <div class="card card-flush">
+                            <!--begin::Card body-->
+                            <div class="card-body pt-5">
+                                <span>Privacy<br></span>
+                                <div>
+                                    <input type="radio" id="priva"  name="far" value="privato">
+                                    <label for="priva">Privato &nbsp</label>
+                                    <span>L'ambiente sarà visibile solo nel tuo inventario.</span><br><br>
+                                    <input type="radio" id="publl"  name="far" value="pubblico">
+                                    <label for="publl">Pubblico &nbsp</label>
+                                    <span>L'ambiente sarà visibile a tutti nella libreria.</span>
+                                </div>
+                            </div>
+                            <!--end::Card body-->
+                        </div>
+                        <!--end::Contacts-->
+                    </div>
+                    <!--end::Sidebar-->
+
+                    <!--begin::Sidebar-->
+                    <div class="flex-row flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0 ms-lg-7 ms-xl-10" style="margin-top:5%;">
+                        <!--begin::Contacts-->
+                        <div class="card card-flush">
+                            <!--begin::Card header-->
+                            <div class="card-header pt-7">
+                                <!--begin::Form-->
+                                <form class="w-100 position-relative align-center" autocomplete="off">
+                                    <span>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</span>
+                                    <button class="btn btn-sm btn-light btn-active-light-primary me-3 align-bottom" onclick="">
+                                        <span class="menu-title">Crea</span>
+                                    </button>
+                                    <span>&nbsp &nbsp &nbsp &nbsp</span>
+                                    <button class="btn btn-sm btn-light btn-active-light-primary me-3 align-bottom" onclick="">
+                                        <span class="menu-title">Elimina</span>
+                                    </button>
+                                </form>
+                                <span>&nbsp</span>
+                                <!--end::Form-->
+                            </div>
+                            <!--end::Card header-->
+                        </div>
+                        <!--end::Contacts-->
+                    </div>
+                    <!--end::Sidebar-->
+
+                </div>
+            </div>
+            <!--end::Ambienti-->
+
+            <!--begin::Contesti-->
+            <div class="post d-flex flex-column-fluid Ceck" id="divContesti">
+                <!--begin::Messenger-->
+                <div class="card flex-column flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0">
+                    <!--begin::Card body-->
+                    <div class="card-body h-500px">
+                        <!--begin::Messages-->
+                        <div class="scroll-y me-n5 pe-5 h-300px h-lg-auto" data-kt-element="messages" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_header, #kt_app_header, #kt_app_toolbar, #kt_toolbar, #kt_footer, #kt_app_footer, #kt_chat_messenger_header, #kt_chat_messenger_footer" data-kt-scroll-wrappers="#kt_content, #kt_app_content, #kt_chat_messenger_body" data-kt-scroll-offset="5px">
+                            <!--begin::Message(in)-->
+                            <div class="d-flex justify-content-start mb-10">
+                                <!--begin::Wrapper-->
+                                <div class="d-flex flex-column align-items-start">
+                                    <!--begin::Text-->
+                                    <div class="p-5 rounded bg-light-info text-gray-900 fw-semibold mw-lg-400px text-start" data-kt-element="message-text">Descrizione del contesto</div>
+                                    <!--end::Text-->
+                                </div>
+                                <!--end::Wrapper-->
+                            </div>
+                            <!--end::Message(in)-->
+                        </div>
+                        <!--end::Messages-->
+                    </div>
+                    <!--end::Card body-->
+
+                    <!--begin::Card footer-->
+                    <div class="d-flex align-items-center">
+                        <!--begin::Input-->
+                        <textarea class="form-control form-control-flush mb-3" rows="1" data-kt-element="input" placeholder="Descrivi un contesto"></textarea>
+                        <!--end::Input-->
+                        <!--begin:Toolbar-->
+                        <div class="d-flex flex-stack">
+                            <!--begin::Send-->
+                            <button class="btn btn-primary" type="button" data-kt-element="send">
+                                <img alt="Logo" src="{{BASE_URL}}/assets/media/avatars/invia.png"/>
+                            </button>
+                            <!--end::Send-->
+                        </div>
+                        <!--end::Toolbar-->
+                    </div>
+                    <!--end::Card footer-->
+
+                </div>
+                <!--end::Messenger-->
+
+                <div>
+                    <!--begin::Sidebar-->
+                    <div class="flex-column flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0 ms-lg-7 ms-xl-10">
+                        <!--begin::Contacts-->
+                        <div class="card card-flush">
+                            <!--begin::Card header-->
+                            <div class="card-header pt-7">
+                                <!--begin::Form-->
+                                <form class="w-100 position-relative" autocomplete="off">
+                                    <span>Nome del contesto</span>
+                                    <input type="text" class="form-control form-control-solid" name="search" value="" placeholder="Inserisci nome contesto" />
+                                    <!--end::Input-->
+                                    <span>&nbsp</span>
+                                </form>
+                                <!--end::Form-->
+                            </div>
+                            <!--end::Card header-->
+                        </div>
+                        <!--end::Contacts-->
+                    </div>
+                    <!--end::Sidebar-->
+
+                    <!--begin::Sidebar-->
+                    <div class="flex-row flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0 ms-lg-7 ms-xl-10" style="margin-top:5%;">
+                        <!--begin::Contacts-->
+                        <div class="card card-flush">
+                            <!--begin::Card header-->
+                            <div class="card-header pt-7">
+                                <!--begin::Form-->
+                                <form class="w-100 position-relative" autocomplete="off">
+                                    <span>Seleziona ambiente</span>
+                                    <input type="text" class="form-control form-control-solid" name="search" value="" placeholder="Seleziona ambiente" />
+                                    <!--end::Input-->
+                                    <span>&nbsp</span>
+                                </form>
+                                <!--end::Form-->
+                            </div>
+                            <!--end::Card header-->
+                        </div>
+                        <!--end::Contacts-->
+                    </div>
+                    <!--end::Sidebar-->
+
+                    <!--begin::Sidebar-->
+                    <div class="flex-row flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0 ms-lg-7 ms-xl-10" style="margin-top:5%;">
+                        <!--begin::Contacts-->
+                        <div class="card card-flush">
+                            <!--begin::Card header-->
+                            <div class="card-header pt-7">
+                                <!--begin::Form-->
+                                <form class="w-100 position-relative" autocomplete="off">
+                                    <span>Crea le relazioni tra personaggi<br></span>
+                                    <span>&nbsp<br></span>
+                                    <label for="p1">Scegli il primo personaggio:</label><span>&nbsp &nbsp &nbsp</span>
+
+                                    <select name="p1" id="p1" >
+
+                                    </select>
+                                    <span><br>&nbsp<br></span>
+                                    <label for="p2">Scegli il secondo personaggio:</label>
+
+                                    <select name="p2" id="p2" >
+
+                                    </select>
+                                    <span>&nbsp<br></span>
+                                    <!--end::Input-->
+                                    <span>&nbsp</span>
+                                </form>
+                                <!--end::Form-->
+                            </div>
+                            <!--end::Card header-->
+                        </div>
+                        <!--end::Contacts-->
+                    </div>
+                    <!--end::Sidebar-->
+
+                    <!--begin::Sidebar-->
+                    <div class="flex-row flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0 ms-lg-7 ms-xl-10" style="margin-top:5%;">
+                        <!--begin::Contacts-->
+                        <div class="card card-flush">
+                            <!--begin::Card body-->
+                            <div class="card-body pt-5">
+                                <span>Privacy<br></span>
+                                <div>
+                                    <input type="radio" id="priv"  name="fas" value="privato">
+                                    <label for="priv">Privato &nbsp</label>
+                                    <span>Il contesto sarà visibile solo nel tuo inventario.</span><br><br>
+                                    <input type="radio" id="publ"  name="fas" value="pubblico">
+                                    <label for="publ">Pubblico &nbsp</label>
+                                    <span>Il contesto sarà visibile a tutti nella libreria.</span>
+                                </div>
+                            </div>
+                            <!--end::Card body-->
+                        </div>
+                        <!--end::Contacts-->
+                    </div>
+                    <!--end::Sidebar-->
+
+                    <!--begin::Sidebar-->
+                    <div class="flex-row flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0 ms-lg-7 ms-xl-10" style="margin-top:5%;">
+                        <!--begin::Contacts-->
+                        <div class="card card-flush">
+                            <!--begin::Card header-->
+                            <div class="card-header pt-7">
+                                <!--begin::Form-->
+                                <form class="w-100 position-relative align-center" autocomplete="off">
+                                    <span>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</span>
+                                    <button class="btn btn-sm btn-light btn-active-light-primary me-3 align-bottom" onclick="">
+                                        <span class="menu-title">Crea</span>
+                                    </button>
+                                    <span>&nbsp &nbsp &nbsp &nbsp</span>
+                                    <button class="btn btn-sm btn-light btn-active-light-primary me-3 align-bottom" onclick="">
+                                        <span class="menu-title">Elimina</span>
+                                    </button>
+                                </form>
+                                <span>&nbsp</span>
+                                <!--end::Form-->
+                            </div>
+                            <!--end::Card header-->
+                        </div>
+                        <!--end::Contacts-->
+                    </div>
+                    <!--end::Sidebar-->
+
+                </div>
+            </div>
+            <!--end::Contesti-->
+
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Content-->
+    {{> footer}}
+ </div>
+</div>
+<!--end::Main-->
+
+<!--begin::Javascript-->
+<script>var hostUrl = "{{BASE_URL}}/assets/";</script>
+<!--begin::Global Javascript Bundle(mandatory for all pages)-->
+<script src="{{BASE_URL}}/assets/plugins/global/plugins.bundle.js"></script>
+<script src="{{BASE_URL}}/assets/js/scripts.bundle.js"></script>
+<!--end::Global Javascript Bundle-->
+<!--begin::Vendors Javascript(used for this page only)-->
+<script src="{{BASE_URL}}/assets/plugins/custom/datatables/datatables.bundle.js"></script>
+<!--end::Vendors Javascript-->
+<!--begin::Custom Javascript(used for this page only)-->
+<script src="{{BASE_URL}}/assets/js/widgets.bundle.js"></script>
+<script src="{{BASE_URL}}/assets/js/custom/widgets.js"></script>
+<script src="{{BASE_URL}}/assets/js/custom/apps/chat/chat.js"></script>
+<script src="{{BASE_URL}}/assets/js/custom/utilities/modals/users-search.js"></script>
+
+<script>
+    let actualDiv="";
+    function CambiaDiv(idDiv)
+    {
+        if(actualDiv !== "")
+        {
+            document.getElementById(actualDiv).classList.add("Ceck");
+        }
+
+        document.getElementById(idDiv).classList.remove("Ceck");
+        actualDiv=idDiv;
+    }
+</script>
+<!--end::Custom Javascript-->
+<!--end::Javascript-->
+</body>
+<!--end::Body-->
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--begin::Head-->
+<head>
+    <base href="../../" />
+    <title> RoleplayersAI</title>
+    <meta charset="utf-8" />
+    <meta name="description" content="Il miglior sito per fare roleplay con dei bot" />
+    <meta name="keywords" content="Node.js, web design, figma, roleplay, AI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:locale" content="it_Ita" />
+    <link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
+    <link rel="shortcut icon" href="{{BASE_URL}}/assets/media/logos/favicon.ico"/>
+    <!--begin::Fonts(mandatory for all pages)-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
+    <!--end::Fonts-->
+    <!--begin::Vendor Stylesheets(used for this page only)-->
+    <link href="{{BASE_URL}}/assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
+    <!--end::Vendor Stylesheets-->
+    <!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
+    <link href="{{BASE_URL}}/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="{{BASE_URL}}/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+    <!--end::Global Stylesheets Bundle-->
+    <script>// Frame-busting to prevent site from being loaded within a frame without permission (click-jacking) if (window.top != window.self) { window.top.location.replace(window.self.location.href); }</script>
+</head>
+<!--end::Head-->
+<!--begin::Body-->
+<body id="kt_body" class="aside-enabled">
+<!--begin::Theme mode setup on page load-->
+<script>var defaultThemeMode = "light"; var themeMode; if ( document.documentElement ) { if ( document.documentElement.hasAttribute("data-bs-theme-mode")) { themeMode = document.documentElement.getAttribute("data-bs-theme-mode"); } else { if ( localStorage.getItem("data-bs-theme") !== null ) { themeMode = localStorage.getItem("data-bs-theme"); } else { themeMode = defaultThemeMode; } } if (themeMode === "system") { themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; } document.documentElement.setAttribute("data-bs-theme", themeMode); }</script>
+<!--end::Theme mode setup on page load-->
+<!--begin::Main-->
+<!--begin::Root-->
+<div class="d-flex flex-column flex-root">
+    {{> barraLaterale nome=Utente.nome cognome=Utente.cognome abbonamento=Abbonamento.nomeTier}}
+<!--begin::Wrapper-->
+<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+    {{> header titolo="Converzione"}} <!-- ci vuole il nome della sessione-->
+    <!--begin::Content-->
+    <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+        <!--begin::Post-->
+        <div class="post d-flex flex-column-fluid" id="kt_post">
+            <!--begin::Container-->
+            <div id="kt_content_container" class="container-xxl">
+                <!--begin::Layout-->
+                <div class="d-flex flex-column flex-lg-row">
+                    <!--begin::Sidebar-->
+                    <div class="flex-column flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0">
+                        <!--begin::Contacts-->
+                        <div class="card card-flush">
+                            <!--begin::Card header-->
+                            <div class="card-header pt-7" id="kt_chat_contacts_header">
+                                <!--begin::Form-->
+                                <form class="w-100 position-relative" autocomplete="off">
+                                    <!--begin::Icon-->
+                                    <i class="ki-duotone ki-magnifier fs-3 text-gray-500 position-absolute top-50 ms-5 translate-middle-y">
+                                        <span class="path1"></span>
+                                        <span class="path2"></span>
+                                    </i>
+                                    <!--end::Icon-->
+                                    <!--begin::Input-->
+                                    <input type="text" class="form-control form-control-solid px-13" name="search" value="" placeholder="Cerca il personaggio..." />
+                                    <!--end::Input-->
+                                </form>
+                                <!--end::Form-->
+                            </div>
+                            <!--end::Card header-->
+                            <!--begin::Card body-->
+                            <div class="card-body pt-5" id="kt_chat_contacts_body">
+                                <!--begin::List-->
+                                <div class="scroll-y me-n5 pe-5 h-200px h-lg-auto" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_header, #kt_app_header, #kt_toolbar, #kt_app_toolbar, #kt_footer, #kt_app_footer, #kt_chat_contacts_header" data-kt-scroll-wrappers="#kt_content, #kt_app_content, #kt_chat_contacts_body" data-kt-scroll-offset="5px">
+                                    <!--begin::User-->
+                                    <div class="d-flex flex-stack py-4">
+                                        <!--begin::Details-->
+                                        <div class="d-flex align-items-center">
+                                            <!--begin::Avatar-->
+                                            <div class="symbol symbol-45px symbol-circle">
+                                                <img alt="Pic" src="{{BASE_URL}}/assets/media/avatars/300-1.jpg" />
+                                            </div>
+                                            <!--end::Avatar-->
+                                            <!--begin::Details-->
+                                            <div class="ms-5">
+                                                <span class="fs-5 fw-bold text-gray-900">(nome personaggio)</span>
+                                                <button class="btn btn-sm btn-light btn-active-light-primary me-3" type="button" data-kt-element="send">
+                                                    <span class="menu-title">Conversa</span>
+                                                </button>
+                                            </div>
+                                            <!--end::Details-->
+                                        </div>
+                                        <!--end::Details-->
+                                    </div>
+                                    <!--end::User-->
+                                    <!--begin::Separator-->
+                                    <div class="separator separator-dashed d-none"></div>
+                                    <!--end::Separator-->
+                                </div>
+                                <!--end::List-->
+                            </div>
+                            <!--end::Card body-->
+                        </div>
+                        <!--end::Contacts-->
+                    </div>
+                    <!--end::Sidebar-->
+
+                    <!--begin::Content-->
+                    <div class="flex-lg-row-fluid ms-lg-7 ms-xl-10">
+                        <!--begin::Messenger-->
+                        <div class="card" id="kt_chat_messenger">
+                            <!--begin::Card header-->
+                            <div class="card-header" id="kt_chat_messenger_header">
+                                <!--begin::Title-->
+                                <div class="card-title">
+                                    <!--begin::Avatar-->
+                                    <div class="symbol symbol-45px symbol-circle">
+                                        <img alt="Pic" src="{{BASE_URL}}/assets/media/avatars/300-1.jpg" />
+                                    </div>
+                                    <!--end::Avatar-->
+                                    <!--begin::Users-->
+                                    <div class="symbol-group symbol-hover">
+
+                                        <span class="fs-5 fw-bold text-gray-900">Chat con (nome personaggio)</span>
+                                    </div>
+                                    <!--end::Users-->
+                                </div>
+                                <!--end::Title-->
+                            </div>
+                            <!--end::Card header-->
+
+                            <!--begin::Card body-->
+                            <div class="card-body" id="kt_chat_messenger_body">
+                                <!--begin::Messages-->
+                                <div class="scroll-y me-n5 pe-5 h-300px h-lg-auto" data-kt-element="messages" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_header, #kt_app_header, #kt_app_toolbar, #kt_toolbar, #kt_footer, #kt_app_footer, #kt_chat_messenger_header, #kt_chat_messenger_footer" data-kt-scroll-wrappers="#kt_content, #kt_app_content, #kt_chat_messenger_body" data-kt-scroll-offset="5px">
+                                    <!--begin::Message(in)-->
+                                    <div class="d-flex justify-content-start mb-10">
+                                        <!--begin::Wrapper-->
+                                        <div class="d-flex flex-column align-items-start">
+                                            <!--begin::User-->
+                                            <div class="d-flex align-items-center mb-2">
+                                                <!--begin::Details-->
+                                                <div class="ms-3">
+                                                    <span class="fs-5 fw-bold text-gray-900">(personaggio)</span>
+                                                </div>
+                                                <!--end::Details-->
+                                            </div>
+                                            <!--end::User-->
+                                            <!--begin::Text-->
+                                            <div class="p-5 rounded bg-light-info text-gray-900 fw-semibold mw-lg-400px text-start" data-kt-element="message-text">Messaggio Bot</div>
+                                            <!--end::Text-->
+                                        </div>
+                                        <!--end::Wrapper-->
+                                    </div>
+                                    <!--end::Message(in)-->
+                                    <!--begin::Message(out)-->
+                                    <div class="d-flex justify-content-end mb-10">
+                                        <!--begin::Wrapper-->
+                                        <div class="d-flex flex-column align-items-end">
+                                            <!--begin::User-->
+                                            <div class="d-flex align-items-center mb-2">
+                                                <!--begin::Details-->
+                                                <div class="me-3">
+                                                    <span class="fs-5 fw-bold text-gray-900">(nome utente)</span>
+                                                </div>
+                                                <!--end::Details-->
+                                            </div>
+                                            <!--end::User-->
+                                            <!--begin::Text-->
+                                            <div class="p-5 rounded bg-light-primary text-gray-900 fw-semibold mw-lg-400px text-end" data-kt-element="message-text">Messaggio utente</div>
+                                            <!--end::Text-->
+                                        </div>
+                                        <!--end::Wrapper-->
+                                    </div>
+                                    <!--end::Message(out)-->
+                                </div>
+                                <!--end::Messages-->
+                            </div>
+                            <!--end::Card body-->
+
+                            <!--begin::Card footer-->
+                            <div class="d-flex align-items-center" id="kt_chat_messenger_footer">
+                                <!--begin::Input-->
+                                <textarea class="form-control form-control-flush mb-3" rows="1" data-kt-element="input" placeholder="Scrivi un messaggio a (nome personaggio)"></textarea>
+                                <!--end::Input-->
+                                <!--begin:Toolbar-->
+                                <div class="d-flex flex-stack">
+                                    <!--begin::Send-->
+                                    <button class="btn btn-primary" type="button" data-kt-element="send">
+                                        <img alt="Logo" src="{{BASE_URL}}/assets/media/avatars/invia.png"/>
+                                    </button>
+                                    <!--end::Send-->
+                                </div>
+                                <!--end::Toolbar-->
+                            </div>
+                            <!--end::Card footer-->
+
+                        </div>
+                        <!--end::Messenger-->
+                    </div>
+                    <!--end::Content-->
+                </div>
+                <!--end::Layout-->
+                <!--begin::Modals-->
+                <!--begin::Modal - View Users-->
+                <div class="modal fade" id="kt_modal_view_users" tabindex="-1" aria-hidden="true">
+                    <!--begin::Modal dialog-->
+                    <div class="modal-dialog mw-650px">
+                        <!--begin::Modal content-->
+                        <div class="modal-content">
+                            <!--begin::Modal header-->
+                            <div class="modal-header pb-0 border-0 justify-content-end">
+                                <!--begin::Close-->
+                                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                                    <i class="ki-duotone ki-cross fs-1">
+                                        <span class="path1"></span>
+                                        <span class="path2"></span>
+                                    </i>
+                                </div>
+                                <!--end::Close-->
+                            </div>
+                            <!--begin::Modal header-->
+                        </div>
+                        <!--end::Modal content-->
+                    </div>
+                    <!--end::Modal dialog-->
+                </div>
+                <!--end::Modal - View Users-->
+                <!--end::Modals-->
+            </div>
+            <!--end::Container-->
+        </div>
+        <!--end::Post-->
+    </div>
+    <!--end::Content-->
+    {{> footer}}
+</div>
+<!--end::Wrapper-->
+</div>
+
+<!--end::Root-->
+<!--end::Main-->
+
+<!--begin::Javascript-->
+<script>var hostUrl = "{{BASE_URL}}/assets/";</script>
+<!--begin::Global Javascript Bundle(mandatory for all pages)-->
+<script src="{{BASE_URL}}/assets/plugins/global/plugins.bundle.js"></script>
+<script src="{{BASE_URL}}/assets/js/scripts.bundle.js"></script>
+<!--end::Global Javascript Bundle-->
+<!--begin::Vendors Javascript(used for this page only)-->
+<script src="{{BASE_URL}}/assets/plugins/custom/datatables/datatables.bundle.js"></script>
+<!--end::Vendors Javascript-->
+<!--begin::Custom Javascript(used for this page only)-->
+<script src="{{BASE_URL}}/assets/js/widgets.bundle.js"></script>
+<script src="{{BASE_URL}}/assets/js/custom/widgets.js"></script>
+<script src="{{BASE_URL}}/assets/js/custom/apps/chat/chat.js"></script>
+<script src="{{BASE_URL}}/assets/js/custom/utilities/modals/users-search.js"></script>
+<!--end::Custom Javascript-->
+<!--end::Javascript-->
+</body>
+<!--end::Body-->
+</html>
