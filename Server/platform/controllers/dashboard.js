@@ -30,3 +30,7 @@ exports.GetDashboard = async (req, ris) => {
     }
 };
 
+exports.GetHome = async (req, ris) => {
+    ris.render("landing");
+};
+

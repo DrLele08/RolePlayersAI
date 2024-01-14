@@ -1,8 +1,11 @@
+const middlewareAuth = require("../../middleware/authPlatform");
+const dashboard = require("../controllers/dashboard");
 module.exports=app=>{
     const router=require("express").Router();
     const middlewareAuth=require("../../middleware/authPlatform");
     const dashboard=require("../controllers/dashboard");
 
+    router.get("/", dashboard.GetHome);
 
     /**
      * Ottiene le informazioni necessarie per renderizzare la dashboard.
@@ -14,7 +17,7 @@ module.exports=app=>{
      * @controller dashboard.GetDashboard - Il controller responsabile di gestire la richiesta.
      * @function
      */
-    router.get("/", middlewareAuth([1,2,3]), dashboard.GetDashboard);
+    //router.get("/dashboard", middlewareAuth([1,2,3]), dashboard.GetDashboard);
 
-    app.use("/dashboard",router);
+    app.use("/",router);
 };
