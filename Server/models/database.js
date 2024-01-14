@@ -21,12 +21,14 @@ const sequelize = new seq(
     },
 );
 
-sequelize.authenticate().then(() => {
-    console.log('Connessione con il DB riuscita.');
-    utilsDB.SetRelationships();
-    console.log('Associazioni create.');
-}).catch((error) => {
-    console.error("Errore durante il collegamento con il DB: "+error);
-});
+if(process.env.NODE_ENV === "PROD"){
+    sequelize.authenticate().then(() => {
+        console.log('Connessione con il DB riuscita.');
+        utilsDB.SetRelationships();
+        console.log('Associazioni create.');
+    }).catch((error) => {
+        console.error("Errore durante il collegamento con il DB: "+error);
+    });
+}
 
 module.exports=sequelize;

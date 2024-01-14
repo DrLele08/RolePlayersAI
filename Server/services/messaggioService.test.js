@@ -3,7 +3,6 @@ jest.mock("../models/conversazione");
 jest.mock("../models/utente");
 jest.mock("../models/chatGPT");
 
-
 const messaggio = require("../models/messaggio");
 const chatGPT = require("../models/chatGPT");
 const utente = require("../models/utente");

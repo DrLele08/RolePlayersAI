@@ -7,3 +7,4 @@ process.env.BASE_URL = "http://localhost:3000"
 process.env.PORT = 3000
 process.env.CHAT_GPT_KEY = "KEY"
 process.env.SESSION_KEY = "rpai"
+process.env.NODE_ENV = "TEST"
