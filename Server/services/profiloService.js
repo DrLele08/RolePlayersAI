@@ -10,14 +10,14 @@ profiloService.getInfoProfilo = async(idUtente) =>{
 
             const user = await utente.getById(idUtente);
             const session = await sessione.getByUtente(idUtente);
-            const personaggi = await creazione.getByUtenteAndFilters(idUtente, 1,1);
-            const ambienti = await creazione.getByUtenteAndFilters(idUtente, 2,1);
+            const personaggi = await creazione.getByUtenteAndFilters(idUtente, {tipo:"Personaggio"},1);
+            const ambienti = await creazione.getByUtenteAndFilters(idUtente, {tipo:"Ambiente"},1);
 
             return {
-                name: user.name,
+                name: user.nome,
                 username: user.username,
-                numeroPersonaggi: personaggi.totalItems,
-                numeroAmbienti: ambienti.totalItems,
+                numeroPersonaggi: personaggi.pagination.totalCount,
+                numeroAmbienti: ambienti.pagination.totalCount,
                 numeroSessioni: session.length,
                 personaggi: personaggi,
                 ambienti: ambienti

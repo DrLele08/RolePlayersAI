@@ -8,6 +8,9 @@ module.exports=  (ruoli)=> {
             req.session.idUtente=idUtenteCookie;
             req.session.tokenAuth=tokenAuthCookie;
         }
+        //TODO DA TOGLIERE
+        req.session.idUtente = 1;
+        req.session.tokenAuth = "auth_token_1"
 
         let id = req.session.idUtente;
 
@@ -29,8 +32,8 @@ module.exports=  (ruoli)=> {
                     if (ruoli.includes(idRuolo)) {
                         req.idUtente = utente[0].idUtente;
                         req.idRuolo = idRuolo;
-                        res.locals.idUtente=authPlatoform.idUtente;
-                        res.locals.tokenAuth=authPlatoform.tokenAuth
+                        res.locals.idUtente=req.session.idUtente;
+                        res.locals.tokenAuth=req.session.tokenAuth;
                         next();
                     } else {
                         res.render("error", {errore: "Non hai i permessi"});

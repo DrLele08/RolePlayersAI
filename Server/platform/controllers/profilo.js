@@ -6,7 +6,7 @@ exports.GetAreaProfilo = async(req,ris)=>{
 
     try{
         let infoProfilo = await profilo.getInfoProfilo(idUtente);
-        ris.render("user-profile", infoProfilo);
+        ris.render("personal_area", infoProfilo);
     }
     catch(error){
         ris.render("error", {errore: error});
