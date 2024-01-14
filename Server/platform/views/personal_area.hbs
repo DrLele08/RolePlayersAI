@@ -434,10 +434,10 @@ License: For each use you must have a valid license purchased only from above li
                                     <div class="d-flex flex-column">
                                         <!--begin::Name-->
                                         <div class="d-flex align-items-center mb-2">
-                                            <a href="#" class="text-gray-900 text-hover-primary fs-2 fw-bold me-1">Jeremy</a>
+                                            <a href="#" class="text-gray-900 text-hover-primary fs-2 fw-bold me-1">{{this.name}}</a>
                                         </div>
                                         <div class="d-flex align-items-center mb-2">
-                                            <a class="fw-semibold fs-6 text-gray-500">@Jerma985</a>
+                                            <a class="fw-semibold fs-6 text-gray-500">{{this.username}}</a>
                                         </div>
                                         <!--end::Name-->
                                     </div>
@@ -507,6 +507,7 @@ License: For each use you must have a valid license purchased only from above li
                     </div>
                     <!--end::Menu Header-->
                     <!--begin::Col-->
+                    {{#each personaggi}}
                     <div class="col-md-6 col-xl-4">
                         <!--begin::Card-->
                         <a href="apps/projects/project.html" class="card border-hover-primary">
@@ -516,7 +517,7 @@ License: For each use you must have a valid license purchased only from above li
                                 <div class="card-title m-0">
                                     <!--begin::Avatar-->
                                     <div class="symbol symbol-50px w-50px bg-light">
-                                        <img src="assets/media/svg/brand-logos/plurk.svg" alt="image" class="p-3" />
+                                        <img src="{{this.immagine}}" alt="image" class="p-3" />
                                     </div>
                                     <!--end::Avatar-->
                                 </div>
@@ -526,27 +527,17 @@ License: For each use you must have a valid license purchased only from above li
                             <!--begin:: Card body-->
                             <div class="card-body p-9">
                                 <!--begin::Name-->
-                                <div class="fs-3 fw-bold text-gray-900">Mario</div>
+                                <div class="fs-3 fw-bold text-gray-900">{{this.nome}}</div>
                                 <!--end::Name-->
                                 <!--begin::Description-->
-                                <p class="text-gray-500 fw-semibold fs-5 mt-1 mb-7">L'iconico idraulico protagonista della popolare saga platform</p>
-                                <p class="text-gray-500 fw-semibold fs-5 mt-1 mb-7">Tag: amichevole, simpatico, eroico</p>
+                                <p class="text-gray-500 fw-semibold fs-5 mt-1 mb-7">{{this.descrizione}}</p>
                                 <!--end::Description-->
-                                <!--begin::Info-->
-                                <div class="d-flex flex-wrap mb-5">
-                                    <!--begin::Due-->
-                                    <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-7 mb-3">
-                                        <div class="fs-6 text-gray-800 fw-bold">10 Marzo 2024</div>
-                                        <div class="fw-semibold text-gray-500">Creazione</div>
-                                    </div>
-                                    <!--end::Due-->
-                                </div>
-                                <!--end::Info-->
                             </div>
                             <!--end:: Card body-->
                         </a>
                         <!--end::Card-->
                     </div>
+                    {{/each}}
                     <!--end::Col-->
                     <!--begin::Col-->
                     <div class="col-md-6 col-xl-4">
@@ -647,7 +638,7 @@ License: For each use you must have a valid license purchased only from above li
                                 <div class="card-title m-0">
                                     <!--begin::Avatar-->
                                     <div class="symbol symbol-50px w-50px bg-light">
-                                        <img src="assets/media/svg/brand-logos/sentry-3.svg" alt="image" class="p-3" />
+                                        <img src="{{envImg}}" alt="image" class="p-3" />
                                     </div>
                                     <!--end::Avatar-->
                                 </div>
@@ -657,17 +648,17 @@ License: For each use you must have a valid license purchased only from above li
                             <!--begin:: Card body-->
                             <div class="card-body p-9">
                                 <!--begin::Name-->
-                                <div class="fs-3 fw-bold text-gray-900">Stazione sulla Luna</div>
+                                <div class="fs-3 fw-bold text-gray-900">{{envName}}</div>
                                 <!--end::Name-->
                                 <!--begin::Description-->
-                                <p class="text-gray-500 fw-semibold fs-5 mt-1 mb-7">Una stazione spaziale sulla Luna</p>
-                                <p class="text-gray-500 fw-semibold fs-5 mt-1 mb-7">Tag: fantascienza, spazio, astronomia</p>
+                                <p class="text-gray-500 fw-semibold fs-5 mt-1 mb-7">{{envDesc}}</p>
+                                <p class="text-gray-500 fw-semibold fs-5 mt-1 mb-7">{{envTags}}</p>
                                 <!--end::Description-->
                                 <!--begin::Info-->
                                 <div class="d-flex flex-wrap mb-5">
                                     <!--begin::Due-->
                                     <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-7 mb-3">
-                                        <div class="fs-6 text-gray-800 fw-bold">21 Feb 2026</div>
+                                        <div class="fs-6 text-gray-800 fw-bold">{{envDate}}</div>
                                         <div class="fw-semibold text-gray-500">Creazione</div>
                                     </div>
                                     <!--end::Due-->
