@@ -22,6 +22,7 @@
     <link href="{{BASE_URL}}/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
     <!--end::Global Stylesheets Bundle-->
     <script>// Frame-busting to prevent site from being loaded within a frame without permission (click-jacking) if (window.top != window.self) { window.top.location.replace(window.self.location.href); }</script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -35,7 +36,7 @@
     {{> barraLaterale nome=Utente.nome cognome=Utente.cognome abbonamento=Abbonamento.nomeTier}}
 <!--begin::Wrapper-->
 <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
-    {{> header titolo="Converzione"}} <!-- ci vuole il nome della sessione-->
+    {{> header titolo="Converzione - " messaggio=Sessione.titolo}}
     <!--begin::Content-->
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
         <!--begin::Post-->
@@ -65,6 +66,8 @@
                                 <!--end::Form-->
                             </div>
                             <!--end::Card header-->
+
+                            {{#each Conversazioni}}
                             <!--begin::Card body-->
                             <div class="card-body pt-5" id="kt_chat_contacts_body">
                                 <!--begin::List-->
@@ -75,13 +78,13 @@
                                         <div class="d-flex align-items-center">
                                             <!--begin::Avatar-->
                                             <div class="symbol symbol-45px symbol-circle">
-                                                <img alt="Pic" src="{{BASE_URL}}/assets/media/avatars/300-1.jpg" />
+                                                <img alt="Pic" src="{{this.personaggio.immagine}}" />
                                             </div>
                                             <!--end::Avatar-->
                                             <!--begin::Details-->
                                             <div class="ms-5">
-                                                <span class="fs-5 fw-bold text-gray-900">(nome personaggio)</span>
-                                                <button class="btn btn-sm btn-light btn-active-light-primary me-3" type="button" data-kt-element="send">
+                                                <span class="fs-5 fw-bold text-gray-900">{{this.personaggio.nome}}</span>
+                                                <button class="btn btn-sm btn-light btn-active-light-primary me-3" type="button" data-kt-element="send" onclick="getbyId({{this.idConversazione}})">
                                                     <span class="menu-title">Conversa</span>
                                                 </button>
                                             </div>
@@ -97,6 +100,7 @@
                                 <!--end::List-->
                             </div>
                             <!--end::Card body-->
+                            {{/each}}
                         </div>
                         <!--end::Contacts-->
                     </div>
@@ -239,6 +243,32 @@
 <!--end::Main-->
 
 <!--begin::Javascript-->
+
+<!--begin::GetMessage-->
+<script>
+    function getbyId(id)
+    {
+    // URL dell'API di esempio (JSONPlaceholder)
+    const apiUrl = '{{BASE_URL}}/api/conversazione/getMessaggi?idConversazione='+ id +'&pagina=0'
+
+    // Effettua una richiesta GET all'API
+    axios.get(apiUrl,{
+        headers:{
+            "Authorization":"{{idUtente}}.{{tokenAuth}}"
+        }
+    })
+            .then(response => {
+                // Gestisci la risposta qui
+                console.log('Risposta API:', response.data);
+            })
+            .catch(error => {
+                // Gestisci gli errori qui
+                console.error('Errore nella richiesta API:', error.message);
+            });
+    }
+</script>
+
+
 <script>var hostUrl = "{{BASE_URL}}/assets/";</script>
 <!--begin::Global Javascript Bundle(mandatory for all pages)-->
 <script src="{{BASE_URL}}/assets/plugins/global/plugins.bundle.js"></script>
