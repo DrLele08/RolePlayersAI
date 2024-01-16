@@ -245,7 +245,15 @@
                 }
                 else{
                     const mess = response.data.Mess;
-                    alert(mess);
+                    Swal.fire({
+                        text: mess,
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok",
+                        customClass: {
+                            confirmButton: "btn fw-bold btn-primary",
+                        }
+                    });
                 }
             })
             .catch(error => {
