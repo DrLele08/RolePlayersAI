@@ -61,47 +61,39 @@ var KTSigninGeneral = function () {
                     submitButton.disabled = true;
 
 
-                    // Simulate ajax request
-                    setTimeout(function () {
-                        // Hide loading indication
-                        submitButton.removeAttribute('data-kt-indicator');
+                    const urlLogin= "http://localhost:3000/api/login"
 
-                        // Enable button
-                        submitButton.disabled = false;
-
-                        // Show message popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                    axios.post(urlLogin,{
+                        email: document.getElementById("inEmail").value.trim(),
+                        password: document.getElementById("inPass").value.trim(),
+                        remember: document.getElementById("remember").checked()
+                    }).then((result)=>{
+                        const ris=result.data.Ris;
+                        if (ris==1)
+                        {
+                            Swal.fire({
+                                text: "Login effettuato!",
+                                icon: "success",
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok",
+                                customClass: {
+                                    confirmButton: "btn btn-primary"
+                                }
+                            })
+                        }
+                    }).catch((error)=> {
                         Swal.fire({
-                            text: "Accesso eseguito!",
-                            icon: "success",
+                            text: error.message,
+                            icon: "error",
                             buttonsStyling: false,
                             confirmButtonText: "Ok",
                             customClass: {
                                 confirmButton: "btn btn-primary"
                             }
-                        }).then(function (result) {
-                            if (result.isConfirmed) {
-                                form.querySelector('[name="email"]').value = "";
-                                form.querySelector('[name="password"]').value = "";
+                        })
+                    })
 
-                                //form.submit(); // submit form
-                                var redirectUrl = form.getAttribute('data-kt-redirect-url');
-                                if (redirectUrl) {
-                                    location.href = redirectUrl;
-                                }
-                            }
-                        });
-                    }, 2000);
-                } else {
-                    // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
-                    Swal.fire({
-                        text: "Rilevati degli errori, riprovare.",
-                        icon: "error",
-                        buttonsStyling: false,
-                        confirmButtonText: "Ok",
-                        customClass: {
-                            confirmButton: "btn btn-primary"
-                        }
-                    });
+
                 }
             });
         });
@@ -206,11 +198,8 @@ var KTSigninGeneral = function () {
 
             handleValidation();
 
-            if (isValidUrl(submitButton.closest('form').getAttribute('action'))) {
-                handleSubmitAjax(); // use for ajax submit
-            } else {
                 handleSubmitDemo(); // used for demo purposes only
-            }
+
         }
     };
 }();

@@ -125,51 +125,43 @@ var KTSignupGeneral = function () {
                     // Disable button to avoid multiple click
                     submitButton.disabled = true;
 
-                    // Simulate ajax request
-                    setTimeout(function () {
-                        // Hide loading indication
-                        submitButton.removeAttribute('data-kt-indicator');
+                    const urlLogin = "http://localhost:3000/api/login"
 
-                        // Enable button
-                        submitButton.disabled = false;
-
-                        // Show message popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                    axios.post(urlLogin, {
+                        name: document.getElementById("upName").value.trim(),
+                        surname: document.getElementById("upSur").value.trim(),
+                        username: document.getElementById("upUser").value.trim(),
+                        birthday: document.getElementById("upBday").value,
+                        phone: document.getElementById("upPhone").value.trim(),
+                        email: document.getElementById("upEmail").value.trim(),
+                        password: document.getElementById("upPass").value.trim(),
+                    }).then((result) => {
+                        const ris = result.data.Ris;
+                        if (ris == 1) {
+                            Swal.fire({
+                                text: "Registrazione effettuata!",
+                                icon: "success",
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok",
+                                customClass: {
+                                    confirmButton: "btn btn-primary"
+                                }
+                            })
+                        }
+                    }).catch((error) => {
                         Swal.fire({
-                            text: "You have successfully reset your password!",
-                            icon: "success",
+                            text: error.message,
+                            icon: "error",
                             buttonsStyling: false,
-                            confirmButtonText: "Ok, got it!",
+                            confirmButtonText: "Ok",
                             customClass: {
                                 confirmButton: "btn btn-primary"
                             }
-                        }).then(function (result) {
-                            if (result.isConfirmed) {
-                                form.reset();  // reset form
-                                passwordMeter.reset();  // reset password meter
-                                //form.submit();
-
-                                //form.submit(); // submit form
-                                var redirectUrl = form.getAttribute('data-kt-redirect-url');
-                                if (redirectUrl) {
-                                    location.href = redirectUrl;
-                                }
-                            }
-                        });
-                    }, 1500);
-                } else {
-                    // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
-                    Swal.fire({
-                        text: "Sono stati rilevati degli errori, riprova.",
-                        icon: "error",
-                        buttonsStyling: false,
-                        confirmButtonText: "Ok",
-                        customClass: {
-                            confirmButton: "btn btn-primary"
-                        }
-                    });
+                        })
+                    })
                 }
-            });
-        });
+            })
+        })
 
         // Handle password input
         form.querySelector('input[name="password"]').addEventListener('input', function () {

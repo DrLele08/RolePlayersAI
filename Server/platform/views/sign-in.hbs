@@ -21,6 +21,7 @@
 		<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
 		<!--end::Global Stylesheets Bundle-->
 		<script>// Frame-busting to prevent site from being loaded within a frame without permission (click-jacking) if (window.top != window.self) { window.top.location.replace(window.self.location.href); }</script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	</head>
 	<!--end::Head-->
 	<!--begin::Body-->
@@ -54,13 +55,13 @@
 								<!--begin::Input group=-->
 								<div class="fv-row mb-8">
 									<!--begin::Email-->
-									<input type="text" placeholder="Email" name="email" autocomplete="off" class="form-control bg-transparent" />
+									<input type="text" placeholder="Email" name="email" id="inEmail" autocomplete="off" class="form-control bg-transparent" />
 									<!--end::Email-->
 								</div>
 								<!--end::Input group=-->
 								<div class="fv-row mb-3">
 									<!--begin::Password-->
-									<input type="password" placeholder="Password" name="password" autocomplete="off" class="form-control bg-transparent" />
+									<input type="password" placeholder="Password" name="password" id="inPass" autocomplete="off" class="form-control bg-transparent" />
 									<!--end::Password-->
 								</div>
 								<!--end::Input group=-->
@@ -142,7 +143,7 @@
 		<script src="assets/js/scripts.bundle.js"></script>
 		<!--end::Global Javascript Bundle-->
 		<!--begin::Custom Javascript(used for this page only)-->
-		<script src="assets/js/custom/authentication/sign-in/general.js"></script>
+		<script src="src/js/custom/authentication/sign-in/general.js"></script>
 		<!--end::Custom Javascript-->
 		<!--end::Javascript-->
 	</body>
