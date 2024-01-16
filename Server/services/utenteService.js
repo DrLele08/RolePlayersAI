@@ -154,4 +154,9 @@ utenteService.setRuolo = async(data) => {
     return await utente.setRuolo(data.idUtente, data.ruolo);
 }
 
+utenteService.getAll = async() =>{
+    const utenti = await utente.getAll();
+    return utenti;
+}
+
 module.exports = utenteService;

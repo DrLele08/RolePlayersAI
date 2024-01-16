@@ -67,6 +67,7 @@ require("./platform/routes/registrazione")(app);
 require("./platform/routes/dashboard")(app);
 require("./platform/routes/profilo")(app);
 require("./platform/routes/sessione.js")(app);
+require("./platform/routes/admin")(app);
 
 
 //Avvio del server
