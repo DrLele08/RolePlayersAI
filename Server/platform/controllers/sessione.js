@@ -3,8 +3,13 @@ const utils = require("../../models/utils");
 
 exports.GetConversazione = async (req, ris) => {
     try{
+        const idUtente = req.idUtente;
         const idSessione = req.params.idSessione;
-        const session = await sessione.getById(idSessione);
+        let data = {
+            idUtente: idUtente,
+            idSessione: idSessione
+        }
+        const session = await sessione.accessoSessione(data);
         const conversazioni = await session.getConversazioni();
 
         let conversazioniPersonaggi = [];
