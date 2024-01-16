@@ -6,16 +6,13 @@ module.exports=  (ruoli)=> {
         {
             let tokenAuthCookie=req.cookies.tokenAuth;
             req.session.idUtente=idUtenteCookie;
-            req.session.tokenAuth=tokenAuthCookie;
+            req.session.authToken=tokenAuthCookie;
         }
-        //TODO DA TOGLIERE
-        req.session.idUtente = 1;
-        req.session.tokenAuth = "auth_token_1"
 
         let id = req.session.idUtente;
 
         if (id !== undefined) {
-            let token = req.session.tokenAuth;
+            let token = req.session.authToken;
             const utenteModel = require("../models/utente");
             utenteModel.getByIdandTokenAuth(id, token).then((utente) => {
                 let idRuolo = 0;
@@ -33,7 +30,7 @@ module.exports=  (ruoli)=> {
                         req.idUtente = utente[0].idUtente;
                         req.idRuolo = idRuolo;
                         res.locals.idUtente=req.session.idUtente;
-                        res.locals.tokenAuth=req.session.tokenAuth;
+                        res.locals.authToken=req.session.authToken;
                         next();
                     } else {
                         res.render("error", {errore: "Non hai i permessi"});
