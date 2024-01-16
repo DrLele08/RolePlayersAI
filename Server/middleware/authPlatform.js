@@ -8,9 +8,7 @@ module.exports=  (ruoli)=> {
             req.session.idUtente=idUtenteCookie;
             req.session.authToken=tokenAuthCookie;
         }
-        //Todo da togliere
-        req.session.idUtente = 1;
-        req.session.authToken = "auth_token_1";
+
         let id = req.session.idUtente;
 
         if (id !== undefined) {

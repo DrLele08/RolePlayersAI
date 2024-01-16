@@ -66,14 +66,28 @@ var KTSigninGeneral = function () {
                     axios.post(urlLogin,{
                         email: document.getElementById("inEmail").value.trim(),
                         password: document.getElementById("inPass").value.trim(),
-                        remember: document.getElementById("remember").checked()
+                        remember: document.getElementById("remember").checked
                     }).then((result)=>{
                         const ris=result.data.Ris;
-                        if (ris==1)
+                        if (ris===1)
                         {
                             Swal.fire({
                                 text: "Login effettuato!",
                                 icon: "success",
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok",
+                                customClass: {
+                                    confirmButton: "btn btn-primary"
+                                }
+                            }).then(()=>{
+                                window.location="http://localhost:3000/dashboards"
+                            })
+                        }
+                        else {
+                            const mess = result.data.Mess;
+                            Swal.fire({
+                                text: mess,
+                                icon: "error",
                                 buttonsStyling: false,
                                 confirmButtonText: "Ok",
                                 customClass: {

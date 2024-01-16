@@ -146,9 +146,23 @@ var KTSignupGeneral = function () {
                                 customClass: {
                                     confirmButton: "btn btn-primary"
                                 }
+                            }).then(()=>{
+                                window.location="http://localhost:3000/dashboards"
                             })
                         }
-                    }).catch((error) => {
+                        else {
+                            const mess = result.data.Mess;
+                            Swal.fire({
+                                text: mess,
+                                icon: "error",
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok",
+                                customClass: {
+                                    confirmButton: "btn btn-primary"
+                                }
+                            })
+                        }
+                    }).catch((error)=> {
                         Swal.fire({
                             text: error.message,
                             icon: "error",
