@@ -37,7 +37,6 @@ exports.LoginControl = async(req, res) => {
             res.json(json);
         } catch (error){
             json.Ris = 0;
-            json.Mess = error.message
             res.json(json);
         }
 }

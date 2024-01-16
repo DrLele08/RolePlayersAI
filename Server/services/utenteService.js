@@ -44,7 +44,7 @@ utenteService.Login = async (filters,password)=>{
 
     let utenteTrovato = await utente.getByEmailorUsername(filters);
 
-    if(utenteTrovato!==undefined)
+    if(utenteTrovato!==null)
     {
         if(utils.verify(password,utenteTrovato.password))
         {
