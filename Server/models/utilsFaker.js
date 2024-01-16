@@ -2,7 +2,7 @@ const faker = require('@faker-js/faker').faker;
 
 const utilsFaker={};
 
-utilsFaker.generaNome = (min = 0, max= 10) => {
+utilsFaker.generaNome = (min = 2, max= 10) => {
     let nome;
     do {
         nome = faker.person.firstName();
@@ -10,7 +10,7 @@ utilsFaker.generaNome = (min = 0, max= 10) => {
     return nome;
 }
 
-utilsFaker.generaCognome = (min = 0, max= 10) => {
+utilsFaker.generaCognome = (min = 2, max= 10) => {
     let cognome;
     do {
         cognome = faker.person.lastName();
