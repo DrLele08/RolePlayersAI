@@ -53,23 +53,8 @@
                     <div class="flex-column flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0">
                         <!--begin::Contacts-->
                         <div class="card card-flush">
-                            <!--begin::Card header-->
-                            <div class="card-header pt-7" id="kt_chat_contacts_header">
-                                <!--begin::Form-->
-                                <form class="w-100 position-relative" autocomplete="off">
-                                    <!--begin::Icon-->
-                                    <i class="ki-duotone ki-magnifier fs-3 text-gray-500 position-absolute top-50 ms-5 translate-middle-y">
-                                        <span class="path1"></span>
-                                        <span class="path2"></span>
-                                    </i>
-                                    <!--end::Icon-->
-                                    <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid px-13" name="search" value="" placeholder="Cerca la tua sessione..." />
-                                    <!--end::Input-->
-                                </form>
-                                <!--end::Form-->
-                            </div>
-                            <!--end::Card header-->
+
+                            {{#each Sessioni}}
                             <!--begin::Card body-->
                             <div class="card-body pt-5" id="kt_chat_contacts_body">
                                 <!--begin::List-->
@@ -78,16 +63,11 @@
                                     <div class="d-flex flex-stack py-4">
                                         <!--begin::Details-->
                                         <div class="d-flex align-items-center">
-                                            <!--begin::Avatar-->
-                                            <div class="symbol symbol-45px symbol-circle">
-                                                <img alt="Pic" src="{{BASE_URL}}/assets/media/avatars/blank.png" />
-                                            </div>
-                                            <!--end::Avatar-->
                                             <!--begin::Details-->
                                             <div class="ms-5">
-                                                <span class="fs-5 fw-bold text-gray-900">(nome sessione)</span>
+                                                <span class="fs-5 fw-bold text-gray-900">{{this.titolo}}</span>
                                                 <!--begin::Crea-->
-                                                <button class="btn btn-sm btn-light btn-active-light-primary me-3" type="button" data-kt-element="send">
+                                                <button class="btn btn-sm btn-light btn-active-light-primary me-3" type="button" data-kt-element="send" onclick="getbyId({{this.idSessione}})">
                                                     <span class="menu-title">Partecipa</span>
                                                 </button>
                                                 <!--end::Crea-->
@@ -104,6 +84,7 @@
                                 <!--end::List-->
                             </div>
                             <!--end::Card body-->
+                                {{/each}}
                         </div>
                         <!--begin::Card body-->
                         <div class="card-body">
@@ -273,6 +254,54 @@
 <script src="{{BASE_URL}}/assets/js/custom/widgets.js"></script>
 <script src="{{BASE_URL}}/assets/js/custom/apps/chat/chat.js"></script>
 <script src="{{BASE_URL}}/assets/js/custom/utilities/modals/users-search.js"></script>
+
+<script>
+    let sessioneCorrente = -1;
+    function getbyId(id)
+    {
+        // URL dell'API di esempio (JSONPlaceholder)
+        const apiUrl = '{{BASE_URL}}/api/sessione/74
+
+        // Effettua una richiesta GET all'API
+        axios.get(apiUrl,{
+            headers:{
+                "Authorization":"{{idUtente}}.{{tokenAuth}}"
+            }
+        })
+                .then(response => {
+                    const ris = response.data.Ris;
+                    if(ris === 1) {
+                        sessioneCorrente = id;
+                        const listaMess = response.data.Conversazione.messaggi.reverse();
+                        let html = "{{BASE_URL}}/sessione/";
+                        document.getElementById("divMessaggi").innerHTML = html + sessioneCorrente;
+                    }
+                    else{
+                        const mess = response.data.Mess;
+                        Swal.fire({
+                            text: mess,
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "Ok",
+                            customClass: {
+                                confirmButton: "btn fw-bold btn-primary",
+                            }
+                        });
+                    }
+                })
+                .catch(error => {
+                    Swal.fire({
+                        text: "Sei già nella sessione",
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok",
+                        customClass: {
+                            confirmButton: "btn fw-bold btn-primary",
+                        }
+                    });
+                });
+    }
+</script>
 
 <script>
     let actualDiv="";
