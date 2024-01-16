@@ -38,199 +38,196 @@
 <!--begin::Root-->
 <div class="d-flex flex-column flex-root">
     {{> barraLaterale nome=Utente.nome cognome=Utente.cognome abbonamento=Abbonamento.nomeTier ruolo=Utente.ruolo}}
-<!--begin::Wrapper-->
-<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
-    {{> header titolo="Le tue sessioni"}}
-    <!--begin::Content-->
-    <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-        <!--begin::Post-->
-        <div class="post d-flex flex-column-fluid" id="kt_post">
-            <!--begin::Container-->
-            <div id="kt_content_container" class="container-xxl">
-                <!--begin::Layout-->
-                <div class="d-flex flex-column flex-lg-row">
-                    <!--begin::Sidebar-->
-                    <div class="flex-column flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0">
-                        <!--begin::Contacts-->
-                        <div class="card card-flush">
+    <!--begin::Wrapper-->
+    <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+        {{> header titolo="Le tue sessioni"}}
+        <!--begin::Content-->
+        <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+            <!--begin::Post-->
+            <div class="post d-flex flex-column-fluid" id="kt_post">
+                <!--begin::Container-->
+                <div id="kt_content_container" class="container-xxl">
+                    <!--begin::Layout-->
+                    <div class="d-flex flex-column flex-lg-row">
+                        <!--begin::Sidebar-->
+                        <div class="flex-column flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0">
+                            <!--begin::Contacts-->
+                            <div class="card card-flush">
 
-                            {{#each Sessioni}}
-                            <!--begin::Card body-->
-                            <div class="card-body pt-5" id="kt_chat_contacts_body">
-                                <!--begin::List-->
-                                <div class="scroll-y me-n5 pe-5 h-200px h-lg-auto" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_header, #kt_app_header, #kt_toolbar, #kt_app_toolbar, #kt_footer, #kt_app_footer, #kt_chat_contacts_header" data-kt-scroll-wrappers="#kt_content, #kt_app_content, #kt_chat_contacts_body" data-kt-scroll-offset="5px">
-                                    <!--begin::User-->
-                                    <div class="d-flex flex-stack py-4">
-                                        <!--begin::Details-->
-                                        <div class="d-flex align-items-center">
-                                            <!--begin::Details-->
-                                            <div class="ms-5">
-                                                <span class="fs-5 fw-bold text-gray-900">{{this.titolo}}</span>
-                                                <!--begin::Crea-->
-                                                <button class="btn btn-sm btn-light btn-active-light-primary me-3" type="button" data-kt-element="send" onclick="cambiaSessione({{this.idSessione}})">
-                                                    <span class="menu-title">Partecipa</span>
-                                                </button>
-                                                <!--end::Crea-->
-                                            </div>
-                                            <!--end::Details-->
-                                        </div>
-                                        <!--end::Details-->
-                                    </div>
-                                    <!--end::User-->
-                                    <!--begin::Separator-->
-                                    <div class="separator separator-dashed d-none"></div>
-                                    <!--end::Separator-->
-                                </div>
-                                <!--end::List-->
-                            </div>
-                            <!--end::Card body-->
-                                {{/each}}
-                        </div>
-                        <!--begin::Card body-->
-                        <div class="card-body">
-                            <!--begin::Body-->
-                            <div class="card-body">
-                                <div class="p-5 rounded text-gray-900 fw-semibold text-center">
-                                    <button class="btn btn-sm btn-light btn-active-light-primary me-3 align-bottom" onclick="CambiaDiv('divSessione')">
-                                        <span class="menu-title">Crea la tua sessione</span>
-                                    </button>
-                                </div>
-                                <!--begin::Sessione-->
-                                <div class="post d-flex flex-column-fluid Ceck" id="divSessione">
-                                    <div>
-                                        <!--begin::Sidebar-->
-                                        <div class="flex-column flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0 ms-lg-7 ms-xl-10">
-                                            <!--begin::Contacts-->
-                                            <div class="card card-flush">
-                                                <!--begin::Card header-->
-                                                <div class="card-header pt-7">
-                                                    <!--begin::Form-->
-                                                    <form class="w-100 position-relative" autocomplete="off">
-                                                        <span>Nome della sessione</span>
-                                                        <input type="text" class="form-control form-control-solid" name="textNome" id="textNome" value="" placeholder="Inserisci nome della sessione" />
-                                                        <!--end::Input-->
-                                                    </form>
-                                                    <!--end::Form-->
-                                                    <span>&nbsp</span>
-                                                </div>
-                                                <!--end::Card header-->
-                                            </div>
-                                            <!--end::Contacts-->
-                                        </div>
-                                        <!--end::Sidebar-->
-
-                                        <!--begin::Sidebar-->
-                                        <div class="flex-row flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0 ms-lg-7 ms-xl-10" style="margin-top:5%;">
-                                            <!--begin::Contacts-->
-                                            <div class="card card-flush">
-                                                <!--begin::Card header-->
-                                                <div class="card-header pt-7">
-                                                    <!--begin::Form-->
-                                                    <form class="w-100 position-relative" autocomplete="off">
-                                                        <span>Seleziona il contesto della sessione<br></span>
-                                                        <span>&nbsp<br></span>
-                                                        <label for="cont">Scegli il contesto:</label><span>&nbsp &nbsp &nbsp</span>
-
-                                                        <select id="selContesto" name="selContesto" onchange="create()">
-
-
-                                                        </select>
-                                                        <span><br>&nbsp<br></span>
-                                                        <!--end::Input-->
-                                                    </form>
-                                                    <!--end::Form-->
-                                                </div>
-                                                <!--end::Card header-->
-                                            </div>
-                                            <!--end::Contacts-->
-                                        </div>
-                                        <!--end::Sidebar-->
-
-                                        <!--begin::Sidebar-->
-                                        <div class="flex-row flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0 ms-lg-7 ms-xl-10" style="margin-top:5%;">
-                                            <!--begin::Contacts-->
-                                            <div class="card card-flush">
-                                                <!--begin::Card header-->
-                                                <div class="card-header pt-7">
-                                                    <!--begin::Form-->
-                                                    <form class="w-100 position-relative align-center" autocomplete="off">
-                                                        <span>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</span>
-                                                        <button id="creaBottone" class="btn btn-sm btn-light btn-active-light-primary me-3 align-bottom" onclick="">
-                                                            <span class="menu-title">Crea</span>
+                                {{#each Sessioni}}
+                                    <!--begin::Card body-->
+                                    <div class="card-body pt-5" id="kt_chat_contacts_body">
+                                        <!--begin::List-->
+                                        <div class="scroll-y me-n5 pe-5 h-200px h-lg-auto" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_header, #kt_app_header, #kt_toolbar, #kt_app_toolbar, #kt_footer, #kt_app_footer, #kt_chat_contacts_header" data-kt-scroll-wrappers="#kt_content, #kt_app_content, #kt_chat_contacts_body" data-kt-scroll-offset="5px">
+                                            <!--begin::User-->
+                                            <div class="d-flex flex-stack py-4">
+                                                <!--begin::Details-->
+                                                <div class="d-flex align-items-center">
+                                                    <!--begin::Details-->
+                                                    <div class="ms-5">
+                                                        <span class="fs-5 fw-bold text-gray-900">{{this.titolo}}</span>
+                                                        <!--begin::Crea-->
+                                                        <button class="btn btn-sm btn-light btn-active-light-primary me-3" type="button" data-kt-element="send" onclick="cambiaSessione({{this.idSessione}})">
+                                                            <span class="menu-title">Partecipa</span>
                                                         </button>
-                                                    </form>
-                                                    <span>&nbsp</span>
-                                                    <!--end::Form-->
+                                                        <!--end::Crea-->
+                                                    </div>
+                                                    <!--end::Details-->
                                                 </div>
-                                                <!--end::Card header-->
+                                                <!--end::Details-->
                                             </div>
-                                            <!--end::Contacts-->
+                                            <!--end::User-->
+                                            <!--begin::Separator-->
+                                            <div class="separator separator-dashed d-none"></div>
+                                            <!--end::Separator-->
                                         </div>
-                                        <!--end::Sidebar-->
+                                        <!--end::List-->
                                     </div>
-                                </div>
-                                <!--end::Sessione-->
+                                    <!--end::Card body-->
+                                {{/each}}
                             </div>
-                            <!--end::Body-->
-                        </div>
-                        <!--end::Card body-->
-                        <!--end::Contacts-->
-                    </div>
-                    <!--end::Sidebar-->
-                    <!--begin::Content-->
-                    <div class="flex-lg-row-fluid ms-lg-7 ms-xl-10">
-                        <!--begin::Messenger-->
-                        <div class="card" id="kt_chat_messenger">
                             <!--begin::Card body-->
-                            <div class="card-body" id="kt_chat_messenger_body">
+                            <div class="card-body">
                                 <!--begin::Body-->
                                 <div class="card-body">
-                                    <div class="p-5 rounded bg-light-primary text-gray-900 fw-semibold text-center">Seleziona una sessione per aprirla</div>
+                                    <div class="p-5 rounded text-gray-900 fw-semibold text-center">
+                                        <button class="btn btn-sm btn-light btn-active-light-primary me-3 align-bottom" onclick="CambiaDiv('divSessione')">
+                                            <span class="menu-title">Crea la tua sessione</span>
+                                        </button>
+                                    </div>
+                                    <!--begin::Sessione-->
+                                    <div class="post d-flex flex-column-fluid Ceck" id="divSessione">
+                                        <div>
+                                            <!--begin::Sidebar-->
+                                            <div class="flex-column flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0 ms-lg-7 ms-xl-10">
+                                                <!--begin::Contacts-->
+                                                <div class="card card-flush">
+                                                    <!--begin::Card header-->
+                                                    <div class="card-header pt-7">
+                                                        <!--begin::Form-->
+                                                        <form class="w-100 position-relative" autocomplete="off">
+                                                            <span>Nome della sessione</span>
+                                                            <input type="text" class="form-control form-control-solid" name="textNome" id="textNome" value="" placeholder="Inserisci nome della sessione" />
+                                                            <!--end::Input-->
+                                                        </form>
+                                                        <!--end::Form-->
+                                                        <span>&nbsp</span>
+                                                    </div>
+                                                    <!--end::Card header-->
+                                                </div>
+                                                <!--end::Contacts-->
+                                            </div>
+                                            <!--end::Sidebar-->
+
+                                            <!--begin::Sidebar-->
+                                            <div class="flex-row flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0 ms-lg-7 ms-xl-10" style="margin-top:5%;">
+                                                <!--begin::Contacts-->
+                                                <div class="card card-flush">
+                                                    <!--begin::Card header-->
+                                                    <div class="card-header pt-7">
+                                                        <!--begin::Form-->
+                                                        <form class="w-100 position-relative" autocomplete="off">
+                                                            <span>Seleziona il contesto della sessione<br></span>
+                                                            <span>&nbsp<br></span>
+                                                            <select class="form-select" id="selContesto" name="selContesto">
+
+                                                            </select>
+                                                            <span><br>&nbsp<br></span>
+                                                            <!--end::Input-->
+                                                        </form>
+                                                        <!--end::Form-->
+                                                    </div>
+                                                    <!--end::Card header-->
+                                                </div>
+                                                <!--end::Contacts-->
+                                            </div>
+                                            <!--end::Sidebar-->
+
+                                            <!--begin::Sidebar-->
+                                            <div class="flex-row flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0 ms-lg-7 ms-xl-10" style="margin-top:5%;">
+                                                <!--begin::Contacts-->
+                                                <div class="card card-flush">
+                                                    <!--begin::Card header-->
+                                                    <div class="card-header pt-7">
+                                                        <!--begin::Form-->
+                                                        <form class="w-100 position-relative align-center" autocomplete="off">
+                                                            <span>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</span>
+                                                            <button id="creaBottone" type="button" class="btn btn-sm btn-light btn-active-light-primary me-3 align-bottom" onclick="CreaSessione()">
+                                                                <span class="menu-title">Crea</span>
+                                                            </button>
+                                                        </form>
+                                                        <span>&nbsp</span>
+                                                        <!--end::Form-->
+                                                    </div>
+                                                    <!--end::Card header-->
+                                                </div>
+                                                <!--end::Contacts-->
+                                            </div>
+                                            <!--end::Sidebar-->
+                                        </div>
+                                    </div>
+                                    <!--end::Sessione-->
                                 </div>
                                 <!--end::Body-->
                             </div>
                             <!--end::Card body-->
+                            <!--end::Contacts-->
                         </div>
-                        <!--end::Messenger-->
-                    </div>
-                    <!--end::Content-->
-                </div>
-                <!--end::Layout-->
-                <!--begin::Modals-->
-                <!--begin::Modal - View Users-->
-                <div class="modal fade" id="kt_modal_view_users" tabindex="-1" aria-hidden="true">
-                    <!--begin::Modal dialog-->
-                    <div class="modal-dialog mw-650px">
-                        <!--begin::Modal content-->
-                        <div class="modal-content">
-                            <!--begin::Modal header-->
-                            <div class="modal-header pb-0 border-0 justify-content-end">
-                                <!--begin::Close-->
-                                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                                    <i class="ki-duotone ki-cross fs-1">
-                                        <span class="path1"></span>
-                                        <span class="path2"></span>
-                                    </i>
+                        <!--end::Sidebar-->
+                        <!--begin::Content-->
+                        <div class="flex-lg-row-fluid ms-lg-7 ms-xl-10">
+                            <!--begin::Messenger-->
+                            <div class="card" id="kt_chat_messenger">
+                                <!--begin::Card body-->
+                                <div class="card-body" id="kt_chat_messenger_body">
+                                    <!--begin::Body-->
+                                    <div class="card-body">
+                                        <div class="p-5 rounded bg-light-primary text-gray-900 fw-semibold text-center">Seleziona una sessione per aprirla</div>
+                                    </div>
+                                    <!--end::Body-->
                                 </div>
-                                <!--end::Close-->
+                                <!--end::Card body-->
                             </div>
-                            <!--begin::Modal header-->
+                            <!--end::Messenger-->
                         </div>
-                        <!--end::Modal content-->
+                        <!--end::Content-->
                     </div>
-                    <!--end::Modal dialog-->
+                    <!--end::Layout-->
+                    <!--begin::Modals-->
+                    <!--begin::Modal - View Users-->
+                    <div class="modal fade" id="kt_modal_view_users" tabindex="-1" aria-hidden="true">
+                        <!--begin::Modal dialog-->
+                        <div class="modal-dialog mw-650px">
+                            <!--begin::Modal content-->
+                            <div class="modal-content">
+                                <!--begin::Modal header-->
+                                <div class="modal-header pb-0 border-0 justify-content-end">
+                                    <!--begin::Close-->
+                                    <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                                        <i class="ki-duotone ki-cross fs-1">
+                                            <span class="path1"></span>
+                                            <span class="path2"></span>
+                                        </i>
+                                    </div>
+                                    <!--end::Close-->
+                                </div>
+                                <!--begin::Modal header-->
+                            </div>
+                            <!--end::Modal content-->
+                        </div>
+                        <!--end::Modal dialog-->
+                    </div>
+                    <!--end::Modal - View Users-->
+                    <!--end::Modals-->
                 </div>
-                <!--end::Modal - View Users-->
-                <!--end::Modals-->
+                <!--end::Container-->
             </div>
-            <!--end::Container-->
+            <!--end::Post-->
         </div>
-        <!--end::Post-->
+        <!--end::Content-->
+        {{> footer}}
     </div>
-    <!--end::Content-->
-    {{> footer}}
-</div>
-<!--end::Wrapper-->
+    <!--end::Wrapper-->
 </div>
 <!--end::Page-->
 </div>
@@ -253,50 +250,32 @@
 <script src="{{BASE_URL}}/assets/js/custom/utilities/modals/users-search.js"></script>
 
 <script>
+    const apiUrl = '{{BASE_URL}}/api/contesto/cercaContesto?Pagina=1'
 
-    function cambiaSessione(idSessione){
-window.location.href="{{BASE_URL}}/sessione/" + idSessione;
-    }
-
-    function create()
-    {
-        // URL dell'API di esempio (JSONPlaceholder)
-        const apiUrl = '{{BASE_URL}}/api/contesto/cercaContesto'
-
-        // Effettua una richiesta GET all'API
-        axios.get(apiUrl,{
-            headers:{
-                "Authorization":"{{idUtente}}.{{tokenAuth}}"
-            }
-        })
-                .then(response => {
-                    const ris = response.data.Ris;
-                    if(ris === 1) {
-                        const data = response.data.Contesto;
-                        var selezione = document.getElementById("selContesto");
-                        // Aggiungi una nuova opzione per ogni elemento nel tuo array
-                        data.forEach(contesti => {
-                            const optionElement = document.createElement('option');
-                            optionElement.value = contesti.titolo;
-                            optionElement.innerText = contesti.titolo;
-                            selectElement.appendChild(optionElement);
-                    }
-                    else{
-                        const mess = response.data.Mess;
-                        Swal.fire({
-                            text: mess,
-                            icon: "error",
-                            buttonsStyling: false,
-                            confirmButtonText: "Ok",
-                            customClass: {
-                                confirmButton: "btn fw-bold btn-primary",
-                            }
-                        });
-                    }
-                })
-                .catch(error => {
+    // Effettua una richiesta GET all'API
+    axios.get(apiUrl,{
+        headers:{
+            "Authorization":"{{idUtente}}.{{tokenAuth}}"
+        }
+    })
+            .then(response => {
+                const ris = response.data.Ris;
+                console.log(response);
+                if(ris === 1) {
+                    const data = response.data.Contesto.contesti;
+                    const selectElement = document.getElementById("selContesto");
+                    // Aggiungi una nuova opzione per ogni elemento nel tuo array
+                    data.forEach(contesto => {
+                        const optionElement = document.createElement('option');
+                        optionElement.value = contesto.idContesto;
+                        optionElement.innerText = contesto.nome;
+                        selectElement.appendChild(optionElement);
+                    });
+                }
+                else{
+                    const mess = response.data.Mess;
                     Swal.fire({
-                        text: "Sessione già selezionata",
+                        text: mess,
                         icon: "error",
                         buttonsStyling: false,
                         confirmButtonText: "Ok",
@@ -304,7 +283,91 @@ window.location.href="{{BASE_URL}}/sessione/" + idSessione;
                             confirmButton: "btn fw-bold btn-primary",
                         }
                     });
+                }
+            })
+            .catch(error => {
+                Swal.fire({
+                    text: error.message,
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok",
+                    customClass: {
+                        confirmButton: "btn fw-bold btn-primary",
+                    }
                 });
+            });
+
+    function cambiaSessione(idSessione){
+        window.location.href="{{BASE_URL}}/sessione/" + idSessione;
+    }
+
+    function CreaSessione(){
+        const nome=document.getElementById("textNome").value.trim();
+        const idContesto=document.getElementById("selContesto").value;
+
+        if(nome.length>0){
+            const formData = new FormData();
+            formData.append('idContesto',idContesto);
+            formData.append('titolo',nome);
+            const config = {
+                headers: {
+                    Authorization: "{{idUtente}}.{{tokenAuth}}"
+                }
+            };
+
+            const urlApi="{{BASE_URL}}/api/sessione/create";
+            axios.post(urlApi, formData, config)
+                    .then(response => {
+                        const ris=response.data.Ris;
+                        if(ris===1) {
+                            Swal.fire({
+                                text: "Sessione creata!",
+                                icon: "success",
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok",
+                                customClass: {
+                                    confirmButton: "btn fw-bold btn-primary",
+                                }
+                            }).then(function() {
+                                window.location = "{{BASE_URL}}/sessione";
+                            });
+                        }
+                        else{
+                            const mess=response.data.Mess;
+                            Swal.fire({
+                                text: mess,
+                                icon: "error",
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok",
+                                customClass: {
+                                    confirmButton: "btn fw-bold btn-primary",
+                                }
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        Swal.fire({
+                            text: error.message,
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "Ok",
+                            customClass: {
+                                confirmButton: "btn fw-bold btn-primary",
+                            }
+                        });
+                    });
+        }
+        else{
+            Swal.fire({
+                text: "Nome richiesto",
+                icon: "error",
+                buttonsStyling: false,
+                confirmButtonText: "Ok",
+                customClass: {
+                    confirmButton: "btn fw-bold btn-primary",
+                }
+            });
+        }
     }
 </script>
 
