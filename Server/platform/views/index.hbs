@@ -36,52 +36,52 @@
 <!--begin::Main-->
 <!--begin::Root-->
 <div class="d-flex flex-column flex-root">
-    {{> barraLaterale nome=Utente.nome cognome=Utente.cognome abbonamento=Abbonamento.nomeTier}}
-<!--begin::Wrapper-->
-<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
-    {{> header titolo="Benvenuto nella tua Home" messaggio=Utente.username}}
-    <!--begin::Content-->
-    <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-        <!--begin::Post-->
-        <div class="post d-flex flex-column-fluid" id="kt_post">
-            <!--begin::Container-->
-            <div id="kt_content_container" class="container-xxl">
-                <!--begin::Row-->
-                <div class="row g-5 g-xl-8">
-                    <div class="col-xl-4">
-                        <!--begin::Statistics Widget 5-->
-                        <a href="#" class="card bg-body-white hoverable card-xl-stretch mb-xl-8">
-                            <!--begin::Body-->
-                            <div class="card-body">
-                                <div class="text-gray-900 fw-bold fs-2 mb-2 mt-5">Scopri i vantaggi</div>
-                                <div class="text-gray-900 fs-2 mb-20 mt-5">Scopri i vantaggi dei nostri abbonamenti Base e Enterprise, Cosa aspetti? Clicca su questo pannello per scoprire di più.</div>
-                            </div>
-                            <!--end::Body-->
-                        </a>
-                        <!--end::Statistics Widget 5-->
-                    </div>
-                    <div class="col-xl-4">
-                        <!--begin::Statistics Widget 5-->
-                        <!--begin::Body-->
-                        <div class="card bg-body-white hoverable card-xl-stretch mb-xl-8">
-                            <div class="card-body">
-                                <div class="text-gray-900 fw-bold fs-2 mb-2 mt-5">Note sugli aggiornamenti</div>
-                                <div class="text-gray-900 fs-2 mb-20 mt-5">Abbiamo risolto alcune...</div>
-                            </div>
-                        </div>
-                        <!--end::Body-->
-                        <!--end::Statistics Widget 5-->
-                    </div>
-                    <!--end::Row-->
+    {{> barraLaterale nome=Utente.nome cognome=Utente.cognome abbonamento=Abbonamento.nomeTier ruolo=Utente.ruolo}}
+    <!--begin::Wrapper-->
+    <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+        {{> header titolo="Benvenuto nella tua Home" messaggio=Utente.username}}
+        <!--begin::Content-->
+        <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+            <!--begin::Post-->
+            <div class="post d-flex flex-column-fluid" id="kt_post">
+                <!--begin::Container-->
+                <div id="kt_content_container" class="container-xxl">
                     <!--begin::Row-->
                     <div class="row g-5 g-xl-8">
+                        <div class="col-xl-4">
+                            <!--begin::Statistics Widget 5-->
+                            <a href="#" class="card bg-body-white hoverable card-xl-stretch mb-xl-8">
+                                <!--begin::Body-->
+                                <div class="card-body">
+                                    <div class="text-gray-900 fw-bold fs-2 mb-2 mt-5">Scopri i vantaggi</div>
+                                    <div class="text-gray-900 fs-2 mb-20 mt-5">Scopri i vantaggi dei nostri abbonamenti Base e Enterprise, Cosa aspetti? Clicca su questo pannello per scoprire di piÃ¹.</div>
+                                </div>
+                                <!--end::Body-->
+                            </a>
+                            <!--end::Statistics Widget 5-->
+                        </div>
                         <div class="col-xl-4">
                             <!--begin::Statistics Widget 5-->
                             <!--begin::Body-->
                             <div class="card bg-body-white hoverable card-xl-stretch mb-xl-8">
                                 <div class="card-body">
-                                    <div class="text-gray-900 fw-bold fs-2 mb-2 mt-5">Personaggi popolari</div>
-                                    <div class="text-gray-900 fs-2 mb-20 mt-5">
+                                    <div class="text-gray-900 fw-bold fs-2 mb-2 mt-5">Note sugli aggiornamenti</div>
+                                    <div class="text-gray-900 fs-2 mb-20 mt-5">Abbiamo risolto alcune...</div>
+                                </div>
+                            </div>
+                            <!--end::Body-->
+                            <!--end::Statistics Widget 5-->
+                        </div>
+                        <!--end::Row-->
+                        <!--begin::Row-->
+                        <div class="row g-5 g-xl-8">
+                            <div class="col-xl-4">
+                                <!--begin::Statistics Widget 5-->
+                                <!--begin::Body-->
+                                <div class="card bg-body-white hoverable card-xl-stretch mb-xl-8">
+                                    <div class="card-body">
+                                        <div class="text-gray-900 fw-bold fs-2 mb-2 mt-5">Personaggi popolari</div>
+                                        <div class="text-gray-900 fs-2 mb-20 mt-5">
 
                                             {{#each PersonaggiPopolari}}
                                                 <!--begin::Wrapper-->
@@ -92,7 +92,7 @@
                                                     <!--begin::Details-->
                                                     <div>
                                                         <div class="fs-4 fw-bold">{{this.nome}}</div>
-                                                        <button class="btn btn-sm btn-light btn-active-light-primary me-3" data-kt-billing-action="card-delete">
+                                                        <button class="btn btn-sm btn-light btn-active-light-primary me-3" id="btnAdd{{this.idCreazione}}" data-kt-billing-action="card-delete" onclick="addToInventario({{this.idCreazione}})">
                                                             <!--begin::Indicator label-->
                                                             <span class="indicator-label">Aggiungi all'inventario</span>
                                                             <!--end::Indicator label-->
@@ -106,69 +106,122 @@
                                                 </div>
                                                 <!--end::Wrapper-->
                                             {{/each}}
-                                    </div>
-                                </div>
-                            </div>
-                            <!--end::Body-->
-                            <!--end::Statistics Widget 5-->
-                        </div>
-
-                        <div class="col-xl-4">
-                            <!--begin::Statistics Widget 5-->
-                            <!--begin::Body-->
-                            <div class="card bg-body-white hoverable card-xl-stretch mb-xl-8">
-                                <div class="card-body">
-                                    <div class="text-gray-900 fw-bold fs-2 mb-2 mt-5">Ambienti popolari</div>
-                                    <div class="text-gray-900 fs-2 mb-20 mt-5">
-
-                                        {{#each AmbientiPopolari}}
-                                        <!--begin::Wrapper-->
-                                        <div class="d-flex align-items-center">
-                                            <!--begin::Icon-->
-                                            <img src="{{this.immagine}}" alt="" class="me-4 h-50px h-lg-50px" />
-                                            <!--end::Icon-->
-                                            <!--begin::Details-->
-                                            <div>
-                                                <div class="fs-4 fw-bold">{{this.nome}}</div>
-                                                <button class="btn btn-sm btn-light btn-active-light-primary me-3" data-kt-billing-action="card-delete">
-                                                    <!--begin::Indicator label-->
-                                                    <span class="indicator-label">Aggiungi all'inventario</span>
-                                                    <!--end::Indicator label-->
-                                                    <!--begin::Indicator progress-->
-                                                    <span class="indicator-progress">Please wait...
-																<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                                    <!--end::Indicator progress-->
-                                                </button>
-                                            </div>
-                                            <!--end::Details-->
                                         </div>
-                                        <!--end::Wrapper-->
-                                        {{/each}}
-
                                     </div>
                                 </div>
+                                <!--end::Body-->
+                                <!--end::Statistics Widget 5-->
                             </div>
-                            <!--end::Body-->
-                            <!--end::Statistics Widget 5-->
+
+                            <div class="col-xl-4">
+                                <!--begin::Statistics Widget 5-->
+                                <!--begin::Body-->
+                                <div class="card bg-body-white hoverable card-xl-stretch mb-xl-8">
+                                    <div class="card-body">
+                                        <div class="text-gray-900 fw-bold fs-2 mb-2 mt-5">Ambienti popolari</div>
+                                        <div class="text-gray-900 fs-2 mb-20 mt-5">
+
+                                            {{#each AmbientiPopolari}}
+                                                <!--begin::Wrapper-->
+                                                <div class="d-flex align-items-center">
+                                                    <!--begin::Icon-->
+                                                    <img src="{{this.immagine}}" alt="" class="me-4 h-50px h-lg-50px" />
+                                                    <!--end::Icon-->
+                                                    <!--begin::Details-->
+                                                    <div>
+                                                        <div class="fs-4 fw-bold">{{this.nome}}</div>
+                                                        <button class="btn btn-sm btn-light btn-active-light-primary me-3" id="btnAdd{{this.idCreazione}}" data-kt-billing-action="card-delete" onclick="addToInventario({{this.idCreazione}})">
+                                                            <!--begin::Indicator label-->
+                                                            <span class="indicator-label">Aggiungi all'inventario</span>
+                                                            <!--end::Indicator label-->
+                                                            <!--begin::Indicator progress-->
+                                                            <span class="indicator-progress">Please wait...
+																<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                                            <!--end::Indicator progress-->
+                                                        </button>
+                                                    </div>
+                                                    <!--end::Details-->
+                                                </div>
+                                                <!--end::Wrapper-->
+                                            {{/each}}
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end::Body-->
+                                <!--end::Statistics Widget 5-->
+                            </div>
                         </div>
+                        <!--end::Row-->
                     </div>
-                    <!--end::Row-->
+                    <!--end::Container-->
                 </div>
-                <!--end::Container-->
+                <!--end::Post-->
             </div>
-            <!--end::Post-->
+            <!--end::Content-->
+            {{> footer}}
         </div>
-        <!--end::Content-->
-        {{> footer}}
+        <!--end::Wrapper-->
     </div>
-    <!--end::Wrapper-->
-</div>
-<!--end::Page-->
+    <!--end::Page-->
 </div>
 <!--end::Root-->
 
 <!--begin::Javascript-->
 <script>var hostUrl = "{{BASE_URL}}/assets/";</script>
+
+<script>
+    function addToInventario(idContenuto){
+        let url="{{BASE_URL}}/api/inventario/add";
+
+        axios.post(url,{
+            idCreazione:idContenuto
+        },{
+            headers:{
+                "Authorization": "{{idUtente}}.{{tokenAuth}}"
+            }
+        }).then((result)=>{
+            let ris=result.data.Ris;
+            console.log(ris);
+            if(ris===1){
+                Swal.fire({
+                    text: "Contenuto aggiunto all'inventario",
+                    icon: "success",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok",
+                    customClass: {
+                        confirmButton: "btn fw-bold btn-primary",
+                    }
+                });
+                document.getElementById("btnAdd"+idContenuto).classList.add("invisible");
+            }
+            else{
+                let mess=result.data.Mess;
+                Swal.fire({
+                    text: mess,
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok",
+                    customClass: {
+                        confirmButton: "btn fw-bold btn-primary",
+                    }
+                });
+            }
+        }).catch((_)=>{
+            Swal.fire({
+                text: "Creazione giÃ  presente nell'inventario",
+                icon: "error",
+                buttonsStyling: false,
+                confirmButtonText: "Ok",
+                customClass: {
+                    confirmButton: "btn fw-bold btn-primary",
+                }
+            });
+            document.getElementById("btnAdd"+idContenuto).classList.add("invisible");
+        });
+    }
+</script>
+
 <!--begin::Global Javascript Bundle(mandatory for all pages)-->
 <script src="{{BASE_URL}}/assets/plugins/global/plugins.bundle.js"></script>
 <script src="{{BASE_URL}}/assets/js/scripts.bundle.js"></script>

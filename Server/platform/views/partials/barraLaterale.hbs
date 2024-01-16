@@ -58,9 +58,17 @@
                                 <!--end::Menu separator-->
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-5">
-                                    <a href="{{BASE_URL}}/platform/views/personal_area.hbs" class="menu-link px-5">Profilo Utente</a>
+                                    <a href="{{BASE_URL}}/profilo" class="menu-link px-5">Profilo Utente</a>
                                 </div>
                                 <!--end::Menu item-->
+
+                                {{#equal ruolo "Amministratore"}}
+                                    <!--begin::Menu item-->
+                                    <div class="menu-item px-5">
+                                        <a href="{{BASE_URL}}/admin" class="menu-link px-5">Area Admin</a>
+                                    </div>
+                                    <!--end::Menu item-->
+                                {{/equal}}
 
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-5">
