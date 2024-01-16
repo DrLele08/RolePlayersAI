@@ -50,10 +50,12 @@ License: For each use you must have a valid license purchased only from above li
 <!--begin::Root-->
 <div class="d-flex flex-column flex-root">
     <!--begin::Page-->
-    <div class="page d-flex flex-row flex-column-fluid">
         <!--begin::Aside-->
         {{> barraLaterale nome=Utente.nome cognome=Utente.cognome abbonamento=Abbonamento.nomeTier}}
         <!--end::Aside-->
+<!--begin::Wrapper-->
+<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+    <!--begin::Header-->
         {{> header titolo="Area personale" username=Utente.username}}
     <!--end::Header-->
     <!--begin::Content-->
