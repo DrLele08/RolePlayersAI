@@ -38,10 +38,6 @@ var KTSignupGeneral = function () {
                     },
                     'birthday': {
                         validators: {
-                            regexp: {
-                                regexp: /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/,
-                                message: 'Data di nascita non valida',
-                            },
                             notEmpty: {
                                 message: 'Data di nascita richiesta'
                             }
@@ -125,19 +121,19 @@ var KTSignupGeneral = function () {
                     // Disable button to avoid multiple click
                     submitButton.disabled = true;
 
-                    const urlLogin = "http://localhost:3000/api/login"
+                    const urlLogin = "http://localhost:3000/api/registrazione"
 
                     axios.post(urlLogin, {
-                        name: document.getElementById("upName").value.trim(),
-                        surname: document.getElementById("upSur").value.trim(),
+                        nome: document.getElementById("upName").value.trim(),
+                        cognome: document.getElementById("upSur").value.trim(),
                         username: document.getElementById("upUser").value.trim(),
-                        birthday: document.getElementById("upBday").value,
-                        phone: document.getElementById("upPhone").value.trim(),
+                        dataNascita: document.getElementById("upBday").value,
+                        telefono: document.getElementById("upPhone").value.trim(),
                         email: document.getElementById("upEmail").value.trim(),
                         password: document.getElementById("upPass").value.trim(),
                     }).then((result) => {
                         const ris = result.data.Ris;
-                        if (ris == 1) {
+                        if (ris === 1) {
                             Swal.fire({
                                 text: "Registrazione effettuata!",
                                 icon: "success",
