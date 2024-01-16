@@ -108,7 +108,7 @@ messaggio.getByConversazionePaginated = async (idConversazione, page) => {
         where: {
             fkConversazione: idConversazione
         },
-        order: [['dataInvio', 'ASC']],
+        order: [['dataInvio', 'DESC']],
         limit: PAGE_SIZE,
         offset: offset
     });
