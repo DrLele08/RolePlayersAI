@@ -80,7 +80,7 @@ var KTSigninGeneral = function () {
                                     confirmButton: "btn btn-primary"
                                 }
                             }).then(()=>{
-                                window.location="http://localhost:3000/dashboards"
+                                window.location="http://localhost:3000/dashboard"
                             })
                         }
                         else {
