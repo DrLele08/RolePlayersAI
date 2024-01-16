@@ -107,7 +107,7 @@
                     <!--end::Sidebar-->
 
                     <!--begin::Content-->
-                    <div class="flex-lg-row-fluid ms-lg-7 ms-xl-10">
+                    <div class="flex-lg-row-fluid ms-lg-7 ms-xl-10 invisible" id="divChat">
                         <!--begin::Messenger-->
                         <div class="card" id="kt_chat_messenger">
                             <!--begin::Card header-->
@@ -133,47 +133,8 @@
                             <!--begin::Card body-->
                             <div class="card-body" id="kt_chat_messenger_body">
                                 <!--begin::Messages-->
-                                <div class="scroll-y me-n5 pe-5 h-300px h-lg-auto" data-kt-element="messages" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_header, #kt_app_header, #kt_app_toolbar, #kt_toolbar, #kt_footer, #kt_app_footer, #kt_chat_messenger_header, #kt_chat_messenger_footer" data-kt-scroll-wrappers="#kt_content, #kt_app_content, #kt_chat_messenger_body" data-kt-scroll-offset="5px">
-                                    <!--begin::Message(in)-->
-                                    <div class="d-flex justify-content-start mb-10">
-                                        <!--begin::Wrapper-->
-                                        <div class="d-flex flex-column align-items-start">
-                                            <!--begin::User-->
-                                            <div class="d-flex align-items-center mb-2">
-                                                <!--begin::Details-->
-                                                <div class="ms-3">
-                                                    <span class="fs-5 fw-bold text-gray-900">(personaggio)</span>
-                                                </div>
-                                                <!--end::Details-->
-                                            </div>
-                                            <!--end::User-->
-                                            <!--begin::Text-->
-                                            <div class="p-5 rounded bg-light-info text-gray-900 fw-semibold mw-lg-400px text-start" data-kt-element="message-text">Messaggio Bot</div>
-                                            <!--end::Text-->
-                                        </div>
-                                        <!--end::Wrapper-->
-                                    </div>
-                                    <!--end::Message(in)-->
-                                    <!--begin::Message(out)-->
-                                    <div class="d-flex justify-content-end mb-10">
-                                        <!--begin::Wrapper-->
-                                        <div class="d-flex flex-column align-items-end">
-                                            <!--begin::User-->
-                                            <div class="d-flex align-items-center mb-2">
-                                                <!--begin::Details-->
-                                                <div class="me-3">
-                                                    <span class="fs-5 fw-bold text-gray-900">(nome utente)</span>
-                                                </div>
-                                                <!--end::Details-->
-                                            </div>
-                                            <!--end::User-->
-                                            <!--begin::Text-->
-                                            <div class="p-5 rounded bg-light-primary text-gray-900 fw-semibold mw-lg-400px text-end" data-kt-element="message-text">Messaggio utente</div>
-                                            <!--end::Text-->
-                                        </div>
-                                        <!--end::Wrapper-->
-                                    </div>
-                                    <!--end::Message(out)-->
+                                <div id="divMessaggi" class="scroll-y me-n5 pe-5 h-300px h-lg-auto" data-kt-element="messages" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_header, #kt_app_header, #kt_app_toolbar, #kt_toolbar, #kt_footer, #kt_app_footer, #kt_chat_messenger_header, #kt_chat_messenger_footer" data-kt-scroll-wrappers="#kt_content, #kt_app_content, #kt_chat_messenger_body" data-kt-scroll-offset="5px">
+
                                 </div>
                                 <!--end::Messages-->
                             </div>
@@ -182,15 +143,17 @@
                             <!--begin::Card footer-->
                             <div class="d-flex align-items-center" id="kt_chat_messenger_footer">
                                 <!--begin::Input-->
-                                <textarea class="form-control form-control-flush mb-3" rows="1" data-kt-element="input" placeholder="Scrivi un messaggio a (nome personaggio)"></textarea>
+                                <textarea id="inviaMessa" class="form-control form-control-flush mb-3" rows="1" data-kt-element="input" placeholder="Scrivi un messaggio a (nome personaggio)"></textarea>
                                 <!--end::Input-->
                                 <!--begin:Toolbar-->
                                 <div class="d-flex flex-stack">
+
                                     <!--begin::Send-->
-                                    <button class="btn btn-primary" type="button" data-kt-element="send">
+                                    <button class="btn btn-primary" type="button" onclick="invia()">
                                         <img alt="Logo" src="{{BASE_URL}}/assets/media/avatars/invia.png"/>
                                     </button>
                                     <!--end::Send-->
+
                                 </div>
                                 <!--end::Toolbar-->
                             </div>
@@ -246,6 +209,7 @@
 
 <!--begin::GetMessage-->
 <script>
+    let conversazioneCorrente = -1;
     function getbyId(id)
     {
     // URL dell'API di esempio (JSONPlaceholder)
@@ -258,16 +222,86 @@
         }
     })
             .then(response => {
-                // Gestisci la risposta qui
-                console.log('Risposta API:', response.data);
+                const ris = response.data.Ris;
+                if(ris === 1) {
+                    conversazioneCorrente = id;
+                   const listaMess = response.data.Conversazione.messaggi;
+                   let html = "";
+                   for(const mess of listaMess){
+                    if(!mess.isUtente){
+                        html += `
+                                <div class="d-flex justify-content-start mb-10">
+                                <div class="d-flex flex-column align-items-start">
+                        <div class="p-5 rounded bg-light-info text-gray-900 fw-semibold mw-lg-400px text-start" data-kt-element="message-text">${mess.corpo}</div>
+
+                    </div>`
+                    }
+                    else{
+                        html += `<!--begin::Message(out)-->
+                                <div class="d-flex justify-content-end mb-10">
+                                    <!--begin::Wrapper-->
+                                    <div class="d-flex flex-column align-items-end">
+                                        <!--begin::Text-->
+                                        <div class="p-5 rounded bg-light-primary text-gray-900 fw-semibold mw-lg-400px text-end" data-kt-element="message-text">${mess.corpo}</div>
+                                        <!--end::Text-->
+                                    </div>
+                                    <!--end::Wrapper-->
+                                </div>
+                        <!--end::Message(out)-->`
+                    }
+                   }
+                   document.getElementById("divMessaggi").innerHTML = html;
+                    document.getElementById("divChat").classList.remove("invisible");
+                }
+                else{
+                    const mess = response.data.Mess;
+                    alert(mess);
+                }
             })
             .catch(error => {
-                // Gestisci gli errori qui
-                console.error('Errore nella richiesta API:', error.message);
+               alert(error.message);
             });
     }
 </script>
 
+<script>
+    function invia(){
+        const messaggioUtente = document.getElementById("inviaMessa").value.trim();
+        if (!messaggioUtente) {
+            alert("Il messaggio non può essere vuoto.");
+        }
+        else{
+            // URL dell'API di esempio (JSONPlaceholder)
+            const apiUrl = '{{BASE_URL}}/api/conversazione/inviaMessaggio'
+
+            // Effettua una richiesta POST all'API
+            axios.post(apiUrl, {
+                idConversazione: conversazioneCorrente,
+                messaggio: messaggioUtente
+            }, {
+                headers: {
+                    "Authorization": "{{idUtente}}.{{tokenAuth}}"
+                }
+            })
+                    .then(response => {
+                        const ris = response.data.Ris;
+                        if (ris === 1) {
+                            // Pulisci l'input e ricarica i messaggi
+                            document.getElementById("inviaMessa").value = "";
+                            getbyId(conversazioneCorrente);
+                            alert("messaggio")
+                        } else {
+                            const mess = response.data.Mess;
+                            alert(mess);
+                        }
+                    })
+                    .catch(error => {
+                        alert("errore");
+                    });
+        }
+    }
+
+</script>
 
 <script>var hostUrl = "{{BASE_URL}}/assets/";</script>
 <!--begin::Global Javascript Bundle(mandatory for all pages)-->
@@ -280,7 +314,7 @@
 <!--begin::Custom Javascript(used for this page only)-->
 <script src="{{BASE_URL}}/assets/js/widgets.bundle.js"></script>
 <script src="{{BASE_URL}}/assets/js/custom/widgets.js"></script>
-<script src="{{BASE_URL}}/assets/js/custom/apps/chat/chat.js"></script>
+<!--<script src="{{BASE_URL}}/assets/js/custom/apps/chat/chat.js"></script>-->
 <script src="{{BASE_URL}}/assets/js/custom/utilities/modals/users-search.js"></script>
 <!--end::Custom Javascript-->
 <!--end::Javascript-->
