@@ -1,5 +1,6 @@
 const sessione = require("../../services/sessioneService");
 const utils = require("../../models/utils");
+const utente = require("../../services/utenteService");
 
 exports.GetConversazione = async (req, ris) => {
     try{
@@ -11,6 +12,8 @@ exports.GetConversazione = async (req, ris) => {
         }
         const session = await sessione.accessoSessione(data);
         const conversazioni = await session.getConversazioni();
+        const user = await utente.getById(idUtente);
+        const abbonamento = await user.getAbbonamento();
 
         let conversazioniPersonaggi = [];
 
@@ -24,6 +27,8 @@ exports.GetConversazione = async (req, ris) => {
         }
 
         ris.render("conversazione", {
+            Utente: utils.convertToNormalObject(user),
+            Abbonamento: utils.convertToNormalObject(abbonamento),
             Sessione: utils.convertToNormalObject(session),
             Conversazioni: utils.convertToNormalObject(conversazioniPersonaggi)
         });
