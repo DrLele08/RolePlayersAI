@@ -8,7 +8,6 @@ module.exports=  (ruoli)=> {
             req.session.idUtente=idUtenteCookie;
             req.session.authToken=tokenAuthCookie;
         }
-
         let id = req.session.idUtente;
 
         if (id !== undefined) {

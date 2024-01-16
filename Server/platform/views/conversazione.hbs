@@ -84,7 +84,7 @@
                                             <!--begin::Details-->
                                             <div class="ms-5">
                                                 <span class="fs-5 fw-bold text-gray-900">{{this.personaggio.nome}}</span>
-                                                <button class="btn btn-sm btn-light btn-active-light-primary me-3" type="button" data-kt-element="send" onclick="getbyId({{this.idConversazione}})">
+                                                <button class="btn btn-sm btn-light btn-active-light-primary me-3" type="button" data-kt-element="send" onclick="getbyId({{this.idConversazione}},'{{this.personaggio.nome}}','{{this.personaggio.immagine}}')">
                                                     <span class="menu-title">Conversa</span>
                                                 </button>
                                             </div>
@@ -113,16 +113,16 @@
                             <!--begin::Card header-->
                             <div class="card-header" id="kt_chat_messenger_header">
                                 <!--begin::Title-->
-                                <div class="card-title">
+                                <div id="infoBot" class="card-title">
                                     <!--begin::Avatar-->
                                     <div class="symbol symbol-45px symbol-circle">
-                                        <img alt="Pic" src="{{BASE_URL}}/assets/media/avatars/300-1.jpg" />
+                                        <img id="immaginePers" alt="Pic" src="" />
                                     </div>
                                     <!--end::Avatar-->
                                     <!--begin::Users-->
                                     <div class="symbol-group symbol-hover">
 
-                                        <span class="fs-5 fw-bold text-gray-900">Chat con (nome personaggio)</span>
+                                        <span id="nomePers" class="fs-5 fw-bold text-gray-900">Chat con (nome personaggio)</span>
                                     </div>
                                     <!--end::Users-->
                                 </div>
@@ -210,10 +210,14 @@
 <!--begin::GetMessage-->
 <script>
     let conversazioneCorrente = -1;
-    function getbyId(id)
+    function getbyId(id, nome, immagine)
     {
+        if(nome !== undefined && immagine !== undefined) {
+            document.getElementById("immaginePers").src = immagine;
+            document.getElementById("nomePers").innerHTML = "Chat con " + nome;
+        }
     // URL dell'API di esempio (JSONPlaceholder)
-    const apiUrl = '{{BASE_URL}}/api/conversazione/getMessaggi?idConversazione='+ id +'&pagina=0'
+    const apiUrl = '{{BASE_URL}}/api/conversazione/getMessaggi?idConversazione='+ id +'&pagina=1'
 
     // Effettua una richiesta GET all'API
     axios.get(apiUrl,{
@@ -230,7 +234,7 @@
                    for(const mess of listaMess){
                     if(!mess.isUtente){
                         html += `
-                                <div class="d-flex justify-content-start mb-10">
+                                <div class="d-flex justify-content-start mb-10" style="display: flex; flex-direction: column;">
                                 <div class="d-flex flex-column align-items-start">
                         <div class="p-5 rounded bg-light-info text-gray-900 fw-semibold mw-lg-400px text-start" data-kt-element="message-text">${mess.corpo}</div>
 
@@ -262,9 +266,7 @@
                alert(error.message);
             });
     }
-</script>
 
-<script>
     function invia(){
         const messaggioUtente = document.getElementById("inviaMessa").value.trim();
         if (!messaggioUtente) {
@@ -284,19 +286,35 @@
                 }
             })
                     .then(response => {
+                        console.log("la risposta è " + JSON.stringify(response))
                         const ris = response.data.Ris;
                         if (ris === 1) {
                             // Pulisci l'input e ricarica i messaggi
                             document.getElementById("inviaMessa").value = "";
-                            getbyId(conversazioneCorrente);
-                            alert("messaggio")
+                            getbyId(conversazioneCorrente, undefined, undefined);
                         } else {
                             const mess = response.data.Mess;
-                            alert(mess);
+                            Swal.fire({
+                                text: mess,
+                                icon: "error",
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok",
+                                customClass: {
+                                    confirmButton: "btn btn-primary"
+                                }
+                            });
                         }
                     })
                     .catch(error => {
-                        alert("errore");
+                        Swal.fire({
+                            text: error.message,
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "Ok",
+                            customClass: {
+                                confirmButton: "btn btn-primary"
+                            }
+                        });
                     });
         }
     }
