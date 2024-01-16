@@ -160,7 +160,7 @@ License: For each use you must have a valid license purchased only from above li
                     {{#each personaggi.creazioni}}
                     <div class="col-md-6 col-xl-4">
                         <!--begin::Card-->
-                        <a href="apps/projects/project.html" class="card border-hover-primary">
+                        <a class="card border-hover-primary">
                             <!--begin::Card header-->
                             <div class="card-header border-0 pt-9">
                                 <!--begin::Card Title-->
@@ -198,7 +198,7 @@ License: For each use you must have a valid license purchased only from above li
                     {{#each ambienti.creazioni}}
                     <div class="col-md-6 col-xl-4">
                         <!--begin::Card-->
-                        <a href="apps/projects/project.html" class="card border-hover-primary">
+                        <a class="card border-hover-primary">
                             <!--begin::Card header-->
                             <div class="card-header border-0 pt-9">
                                 <!--begin::Card Title-->
@@ -226,6 +226,28 @@ License: For each use you must have a valid license purchased only from above li
                         <!--end::Card-->
                     </div>
                     {{/each}}
+
+                    <!-- JavaScript for truncating description -->
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function () {
+                            // Select all elements with class 'fs-5' (assuming this is the class of your description)
+                            var descriptions = document.querySelectorAll('.fs-5');
+
+                            descriptions.forEach(function (description) {
+                                var text = description.textContent;
+
+                                // Check if the text length is greater than 100 characters
+                                if (text.length > 100) {
+                                    // Truncate the text to 100 characters and add an ellipsis
+                                    var truncatedText = text.substring(0, 100) + '...';
+
+                                    // Update the description with the truncated text
+                                    description.textContent = truncatedText;
+                                }
+                            });
+                        });
+                    </script>
+
                     <!--end::Col-->
                 </div>
                 <!--end::Row-->
