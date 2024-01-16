@@ -30,7 +30,7 @@ module.exports=  (ruoli)=> {
                         req.idUtente = utente[0].idUtente;
                         req.idRuolo = idRuolo;
                         res.locals.idUtente=req.session.idUtente;
-                        res.locals.authToken=req.session.authToken;
+                        res.locals.tokenAuth=req.session.authToken;
                         next();
                     } else {
                         res.render("error", {errore: "Non hai i permessi"});
