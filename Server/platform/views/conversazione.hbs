@@ -36,7 +36,7 @@
     {{> barraLaterale nome=Utente.nome cognome=Utente.cognome abbonamento=Abbonamento.nomeTier}}
 <!--begin::Wrapper-->
 <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
-    {{> header titolo="Converzione - " messaggio=Sessione.titolo}}
+    {{> header titolo="Conversazione - " messaggio=Sessione.titolo}}
     <!--begin::Content-->
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
         <!--begin::Post-->
@@ -215,6 +215,7 @@
         if(nome !== undefined && immagine !== undefined) {
             document.getElementById("immaginePers").src = immagine;
             document.getElementById("nomePers").innerHTML = "Chat con " + nome;
+            document.getElementById("inviaMessa").placeholder = "Scrivi un messagio a " + nome;
         }
     // URL dell'API di esempio (JSONPlaceholder)
     const apiUrl = '{{BASE_URL}}/api/conversazione/getMessaggi?idConversazione='+ id +'&pagina=1'
