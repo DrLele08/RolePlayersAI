@@ -68,6 +68,7 @@ require("./platform/routes/dashboard")(app);
 require("./platform/routes/profilo")(app);
 require("./platform/routes/sessione.js")(app);
 require("./platform/routes/admin")(app);
+require("./platform/routes/logout")(app);
 
 
 //Avvio del server
