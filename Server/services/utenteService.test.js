@@ -4,6 +4,8 @@ jest.mock("../models/creazione");
 
 const utente=require("../models/utente");
 const utenteService = require('./utenteService');
+const chatGPT = require("../models/chatGPT");
+const messaggioService = require("./messaggioService");
 
 const faker = require('@faker-js/faker').faker;
 
@@ -101,6 +103,20 @@ describe('utenteService', () => {
         }
         it('dovrebbe fallire se il formato del numero telefonico non è valido', async () => {
             await expect(utenteService.createUtente(mockJsonTelephoneNotValid)).rejects.toBe("Formato numero di telefono non valido!");
+        });
+
+
+        let mockJsonValid={
+            username: "stefanoguida",
+            nome: faker.person.firstName(),
+            cognome: faker.person.lastName(),
+            email: faker.internet.email(),
+            password: "Password@1",
+            dataNascita: "17-07-2002",
+            telefono: "+393392801490"
+        };
+        it('Dovrebbe creare correttamente un utente ', async () => {
+            await expect(utenteService.createUtente(mockJsonValid)).resolves.toBeDefined();
         });
     })
 })
