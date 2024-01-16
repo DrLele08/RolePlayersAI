@@ -266,6 +266,12 @@ utente.updateMsgRimanenti = async (idUtente, msgAggiornati)=>{
 };
 
 
+utente.getAll = async () => {
+    return await Utente.findAll({
+        attributes: {exclude: ['password', 'authToken']}
+    });
+};
+
 utente.Utente = Utente;
 
 module.exports = utente;
