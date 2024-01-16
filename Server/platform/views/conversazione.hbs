@@ -49,24 +49,6 @@
                     <div class="flex-column flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0">
                         <!--begin::Contacts-->
                         <div class="card card-flush">
-                            <!--begin::Card header-->
-                            <div class="card-header pt-7" id="kt_chat_contacts_header">
-                                <!--begin::Form-->
-                                <form class="w-100 position-relative" autocomplete="off">
-                                    <!--begin::Icon-->
-                                    <i class="ki-duotone ki-magnifier fs-3 text-gray-500 position-absolute top-50 ms-5 translate-middle-y">
-                                        <span class="path1"></span>
-                                        <span class="path2"></span>
-                                    </i>
-                                    <!--end::Icon-->
-                                    <!--begin::Input-->
-                                    <input type="text" class="form-control form-control-solid px-13" name="search" value="" placeholder="Cerca il personaggio..." />
-                                    <!--end::Input-->
-                                </form>
-                                <!--end::Form-->
-                            </div>
-                            <!--end::Card header-->
-
                             {{#each Conversazioni}}
                             <!--begin::Card body-->
                             <div class="card-body pt-5" id="kt_chat_contacts_body">
@@ -230,7 +212,7 @@
                 const ris = response.data.Ris;
                 if(ris === 1) {
                     conversazioneCorrente = id;
-                   const listaMess = response.data.Conversazione.messaggi;
+                   const listaMess = response.data.Conversazione.messaggi.reverse();
                    let html = "";
                    for(const mess of listaMess){
                     if(!mess.isUtente){
@@ -239,7 +221,8 @@
                                 <div class="d-flex flex-column align-items-start">
                         <div class="p-5 rounded bg-light-info text-gray-900 fw-semibold mw-lg-400px text-start" data-kt-element="message-text">${mess.corpo}</div>
 
-                    </div>`
+                    </div>
+                </div>`
                     }
                     else{
                         html += `<!--begin::Message(out)-->
@@ -256,6 +239,8 @@
                     }
                    }
                    document.getElementById("divMessaggi").innerHTML = html;
+                    const divMessaggi = document.getElementById("divMessaggi");
+                    divMessaggi.scrollTop = divMessaggi.scrollHeight
                     document.getElementById("divChat").classList.remove("invisible");
                 }
                 else{
