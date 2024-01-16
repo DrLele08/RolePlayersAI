@@ -21,7 +21,7 @@ describe('utenteService', () => {
         let mockJsonUsernameNotValid = {
             username: faker.lorem.words(25),
             nome: faker.person.firstName(),
-            cognome: faker.person.lastName(),
+            cognome: faker.lorem.word({ length: { min: 2, max: 25 }}),
             email: faker.internet.email(),
             password: "Password@1",
             dataNascita: "17-07-2002",
@@ -33,7 +33,7 @@ describe('utenteService', () => {
         let mockJsonNameNotValid = {
             username: "stefanoguida",
             nome: faker.lorem.words(25),
-            cognome: faker.person.lastName(),
+            cognome: faker.lorem.word({ length: { min: 2, max: 25 }}),
             email: faker.internet.email(),
             password: "Password@1",
             dataNascita: "17-07-2002",
@@ -57,7 +57,7 @@ describe('utenteService', () => {
         let mockJsonEmailNotValid = {
             username: "stefanoguida",
             nome: faker.person.firstName(),
-            cognome: faker.person.lastName(),
+            cognome: faker.lorem.word({ length: { min: 2, max: 25 }}),
             email: "stefanoguidagmail.com",
             password: "Password@1",
             dataNascita: "17-07-2002",
@@ -69,7 +69,7 @@ describe('utenteService', () => {
         let mockJsonPasswordNotValid = {
             username: "stefanoguida",
             nome: faker.person.firstName(),
-            cognome: faker.person.lastName(),
+            cognome: faker.lorem.word({ length: { min: 2, max: 25 }}),
             email: faker.internet.email(),
             password: "Password",
             dataNascita: "17-07-2002",
@@ -81,7 +81,7 @@ describe('utenteService', () => {
         let mockJsonDateNateNotValid = {
             username: "stefanoguida",
             nome: faker.person.firstName(),
-            cognome: faker.person.lastName(),
+            cognome: faker.lorem.word({ length: { min: 2, max: 25 }}),
             email: faker.internet.email(),
             password: "Password@1",
             dataNascita: "17-078-2002",
@@ -93,7 +93,7 @@ describe('utenteService', () => {
         let mockJsonTelephoneNotValid = {
             username: "stefanoguida",
             nome: faker.person.firstName(),
-            cognome: faker.person.lastName(),
+            cognome: faker.lorem.word({ length: { min: 2, max: 25 }}),
             email: faker.internet.email(),
             password: "Password@1",
             dataNascita: "17-07-2002",
@@ -107,7 +107,7 @@ describe('utenteService', () => {
         let mockJsonValid={
             username: "stefanoguida",
             nome: faker.person.firstName(),
-            cognome: faker.person.lastName(),
+            cognome: faker.lorem.word({ length: { min: 2, max: 25 }}),
             email: faker.internet.email(),
             password: "Password@1",
             dataNascita: "17-07-2002",
