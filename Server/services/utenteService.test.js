@@ -4,8 +4,6 @@ jest.mock("../models/creazione");
 
 const utente=require("../models/utente");
 const utenteService = require('./utenteService');
-const chatGPT = require("../models/chatGPT");
-const messaggioService = require("./messaggioService");
 
 const faker = require('@faker-js/faker').faker;
 
