@@ -67,7 +67,7 @@
                                             <div class="ms-5">
                                                 <span class="fs-5 fw-bold text-gray-900">{{this.titolo}}</span>
                                                 <!--begin::Crea-->
-                                                <button class="btn btn-sm btn-light btn-active-light-primary me-3" type="button" data-kt-element="send" onclick="getbyId({{this.idSessione}})">
+                                                <button class="btn btn-sm btn-light btn-active-light-primary me-3" type="button" data-kt-element="send" onclick="cambiaSessione({{this.idSessione}})">
                                                     <span class="menu-title">Partecipa</span>
                                                 </button>
                                                 <!--end::Crea-->
@@ -107,7 +107,7 @@
                                                     <!--begin::Form-->
                                                     <form class="w-100 position-relative" autocomplete="off">
                                                         <span>Nome della sessione</span>
-                                                        <input type="text" class="form-control form-control-solid" name="search" value="" placeholder="Inserisci nome della sessione" />
+                                                        <input type="text" class="form-control form-control-solid" name="textNome" id="textNome" value="" placeholder="Inserisci nome della sessione" />
                                                         <!--end::Input-->
                                                     </form>
                                                     <!--end::Form-->
@@ -131,7 +131,8 @@
                                                         <span>&nbsp<br></span>
                                                         <label for="cont">Scegli il contesto:</label><span>&nbsp &nbsp &nbsp</span>
 
-                                                        <select name="cont" id="cont" >
+                                                        <select id="selContesto" name="selContesto" onchange="create()">
+
 
                                                         </select>
                                                         <span><br>&nbsp<br></span>
@@ -153,13 +154,9 @@
                                                 <div class="card-header pt-7">
                                                     <!--begin::Form-->
                                                     <form class="w-100 position-relative align-center" autocomplete="off">
-                                                        <span>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</span>
-                                                        <button class="btn btn-sm btn-light btn-active-light-primary me-3 align-bottom" onclick="">
+                                                        <span>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</span>
+                                                        <button id="creaBottone" class="btn btn-sm btn-light btn-active-light-primary me-3 align-bottom" onclick="">
                                                             <span class="menu-title">Crea</span>
-                                                        </button>
-                                                        <span>&nbsp &nbsp &nbsp &nbsp</span>
-                                                        <button class="btn btn-sm btn-light btn-active-light-primary me-3 align-bottom" onclick="">
-                                                            <span class="menu-title">Elimina</span>
                                                         </button>
                                                     </form>
                                                     <span>&nbsp</span>
@@ -256,11 +253,15 @@
 <script src="{{BASE_URL}}/assets/js/custom/utilities/modals/users-search.js"></script>
 
 <script>
-    let sessioneCorrente = -1;
-    function getbyId(id)
+
+    function cambiaSessione(idSessione){
+window.location.href="{{BASE_URL}}/sessione/" + idSessione;
+    }
+
+    function create()
     {
         // URL dell'API di esempio (JSONPlaceholder)
-        const apiUrl = '{{BASE_URL}}/api/sessione/74
+        const apiUrl = '{{BASE_URL}}/api/contesto/cercaContesto'
 
         // Effettua una richiesta GET all'API
         axios.get(apiUrl,{
@@ -271,10 +272,14 @@
                 .then(response => {
                     const ris = response.data.Ris;
                     if(ris === 1) {
-                        sessioneCorrente = id;
-                        const listaMess = response.data.Conversazione.messaggi.reverse();
-                        let html = "{{BASE_URL}}/sessione/";
-                        document.getElementById("divMessaggi").innerHTML = html + sessioneCorrente;
+                        const data = response.data.Contesto;
+                        var selezione = document.getElementById("selContesto");
+                        // Aggiungi una nuova opzione per ogni elemento nel tuo array
+                        data.forEach(contesti => {
+                            const optionElement = document.createElement('option');
+                            optionElement.value = contesti.titolo;
+                            optionElement.innerText = contesti.titolo;
+                            selectElement.appendChild(optionElement);
                     }
                     else{
                         const mess = response.data.Mess;
@@ -291,7 +296,7 @@
                 })
                 .catch(error => {
                     Swal.fire({
-                        text: "Sei già nella sessione",
+                        text: "Sessione già selezionata",
                         icon: "error",
                         buttonsStyling: false,
                         confirmButtonText: "Ok",
