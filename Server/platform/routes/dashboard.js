@@ -17,7 +17,5 @@ module.exports=app=>{
      */
     router.get("/dashboard", middlewareAuth([1,2,3]), dashboard.GetDashboard);
 
-    router.get("/conversazione/:idSessione", middlewareAuth([1,2,3]), dashboard.GetConversazione);
-
     app.use("/",router);
 };
