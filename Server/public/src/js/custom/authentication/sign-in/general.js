@@ -94,6 +94,8 @@ var KTSigninGeneral = function () {
                                     confirmButton: "btn btn-primary"
                                 }
                             })
+                            submitButton.setAttribute('data-kt-indicator', 'off');
+                            submitButton.disabled = false;
                         }
                     }).catch((error)=> {
                         Swal.fire({
@@ -105,6 +107,8 @@ var KTSigninGeneral = function () {
                                 confirmButton: "btn btn-primary"
                             }
                         })
+                        submitButton.setAttribute('data-kt-indicator', 'off');
+                        submitButton.disabled = false;
                     })
 
 

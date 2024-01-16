@@ -161,6 +161,8 @@ var KTSignupGeneral = function () {
                                     confirmButton: "btn btn-primary"
                                 }
                             })
+                            submitButton.setAttribute('data-kt-indicator', 'off');
+                            submitButton.disabled = false;
                         }
                     }).catch((error)=> {
                         Swal.fire({
@@ -172,6 +174,8 @@ var KTSignupGeneral = function () {
                                 confirmButton: "btn btn-primary"
                             }
                         })
+                        submitButton.setAttribute('data-kt-indicator', 'off');
+                        submitButton.disabled = false;
                     })
                 }
             })
