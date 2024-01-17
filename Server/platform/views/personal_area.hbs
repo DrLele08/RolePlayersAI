@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <!--
 Author: Keenthemes
@@ -50,218 +49,226 @@ License: For each use you must have a valid license purchased only from above li
 <!--begin::Root-->
 <div class="d-flex flex-column flex-root">
     <!--begin::Page-->
-        <!--begin::Aside-->
-        {{> barraLaterale nome=Utente.nome cognome=Utente.cognome abbonamento=Abbonamento.nomeTier ruolo=Utente.ruolo}}
-        <!--end::Aside-->
-        <!--begin::Wrapper-->
-        <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+    <!--begin::Aside-->
+    {{> barraLaterale nome=Utente.nome cognome=Utente.cognome abbonamento=Abbonamento.nomeTier ruolo=Utente.ruolo}}
+    <!--end::Aside-->
+    <!--begin::Wrapper-->
+    <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
         <!--begin::Header-->
         {{> header titolo="Area personale" username=Utente.username}}
-    <!--end::Header-->
-    <!--begin::Content-->
-    <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-        <!--begin::Post-->
-        <div class="post d-flex flex-column-fluid" id="kt_post">
-            <!--begin::Container-->
-            <div id="kt_content_container" class="container-xxl">
-                <!--begin::Navbar-->
-                <div class="card mb-5 mb-xxl-8">
-                    <div class="card-body pt-9 pb-0">
-                        <!--begin::Details-->
-                        <div class="d-flex flex-wrap flex-sm-nowrap">
-                            <!--begin: Pic-->
-                            <div class="me-7 mb-4">
-                                <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
-                                    <img src="assets/media/avatars/default_pfp.png" alt="image" />
-                                </div>
-                            </div>
-                            <!--end::Pic-->
-                            <!--begin::Info-->
-                            <div class="flex-grow-1">
-                                <!--begin::Title-->
-                                <div class="d-flex justify-content-between align-items-start flex-wrap mb-2">
-                                    <!--begin::User-->
-                                    <div class="d-flex flex-column">
-                                        <!--begin::Name-->
-                                        <div class="d-flex align-items-center mb-2">
-                                            <a href="javascript:void(0)" class="text-gray-900 text-hover-primary fs-2 fw-bold me-1">{{infoProfilo.name}}</a>
-                                        </div>
-                                        <div class="d-flex align-items-center mb-2">
-                                            <a class="fw-semibold fs-6 text-gray-500">{{infoProfilo.username}}</a>
-                                        </div>
-                                        <!--end::Name-->
+        <!--end::Header-->
+        <!--begin::Content-->
+        <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+            <!--begin::Post-->
+            <div class="post d-flex flex-column-fluid" id="kt_post">
+                <!--begin::Container-->
+                <div id="kt_content_container" class="container-xxl">
+                    <!--begin::Navbar-->
+                    <div class="card mb-5 mb-xxl-8">
+                        <div class="card-body pt-9 pb-0">
+                            <!--begin::Details-->
+                            <div class="d-flex flex-wrap flex-sm-nowrap">
+                                <!--begin: Pic-->
+                                <div class="me-7 mb-4">
+                                    <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
+                                        <img src="assets/media/avatars/default_pfp.png" alt="image" />
                                     </div>
-                                    <!--end::User-->
                                 </div>
-                                <!--end::Title-->
-                                <!--begin::Stats-->
-                                <div class="d-flex flex-wrap flex-stack">
-                                    <!--begin::Wrapper-->
-                                    <div class="d-flex flex-column flex-grow-1 pe-8">
-                                        <!--begin::Stats-->
-                                        <div class="d-flex flex-wrap">
-                                            <!--begin::Stat-->
-                                            <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
-                                                <!--begin::Number-->
-                                                <div class="d-flex align-items-center">
-                                                    <div class="fs-2 fw-bold">{{infoProfilo.numeroPersonaggi}}</div>
-                                                </div>
-                                                <!--end::Number-->
-                                                <!--begin::Label-->
-                                                <div class="fw-semibold fs-6 text-gray-500">Personaggi</div>
-                                                <!--end::Label-->
+                                <!--end::Pic-->
+                                <!--begin::Info-->
+                                <div class="flex-grow-1">
+                                    <!--begin::Title-->
+                                    <div class="d-flex justify-content-between align-items-start flex-wrap mb-2">
+                                        <!--begin::User-->
+                                        <div class="d-flex flex-column">
+                                            <!--begin::Name-->
+                                            <div class="d-flex align-items-center mb-2">
+                                                <p class="text-gray-900 text-hover-primary fs-2 fw-bold me-1">{{infoProfilo.name}}</p>
                                             </div>
-                                            <!--end::Stat-->
-                                            <!--begin::Stat-->
-                                            <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
-                                                <!--begin::Number-->
-                                                <div class="d-flex align-items-center">
-                                                    <div class="fs-2 fw-bold">{{infoProfilo.numeroAmbienti}}</div>
-                                                </div>
-                                                <!--end::Number-->
-                                                <!--begin::Label-->
-                                                <div class="fw-semibold fs-6 text-gray-500">Ambienti</div>
-                                                <!--end::Label-->
+                                            <div class="d-flex align-items-center mb-2">
+                                                <a class="fw-semibold fs-6 text-gray-500">{{infoProfilo.username}}</a>
                                             </div>
-                                            <!--end::Stat-->
-                                            <!--begin::Stat-->
-                                            <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
-                                                <!--begin::Number-->
-                                                <div class="d-flex align-items-center">
-                                                    <div class="fs-2 fw-bold">{{infoProfilo.numeroSessioni}}</div>
-                                                </div>
-                                                <!--end::Number-->
-                                                <!--begin::Label-->
-                                                <div class="fw-semibold fs-6 text-gray-500">Sessioni in corso</div>
-                                                <!--end::Label-->
-                                            </div>
-                                            <!--end::Stat-->
+                                            <!--end::Name-->
                                         </div>
-                                        <!--end::Stats-->
+                                        <!--end::User-->
                                     </div>
-                                    <!--end::Wrapper-->
+                                    <!--end::Title-->
+                                    <!--begin::Stats-->
+                                    <div class="d-flex flex-wrap flex-stack">
+                                        <!--begin::Wrapper-->
+                                        <div class="d-flex flex-column flex-grow-1 pe-8">
+                                            <!--begin::Stats-->
+                                            <div class="d-flex flex-wrap">
+                                                <!--begin::Stat-->
+                                                <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
+                                                    <!--begin::Number-->
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="fs-2 fw-bold">{{infoProfilo.numeroPersonaggi}}</div>
+                                                    </div>
+                                                    <!--end::Number-->
+                                                    <!--begin::Label-->
+                                                    <div class="fw-semibold fs-6 text-gray-500">Personaggi</div>
+                                                    <!--end::Label-->
+                                                </div>
+                                                <!--end::Stat-->
+                                                <!--begin::Stat-->
+                                                <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
+                                                    <!--begin::Number-->
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="fs-2 fw-bold">{{infoProfilo.numeroAmbienti}}</div>
+                                                    </div>
+                                                    <!--end::Number-->
+                                                    <!--begin::Label-->
+                                                    <div class="fw-semibold fs-6 text-gray-500">Ambienti</div>
+                                                    <!--end::Label-->
+                                                </div>
+                                                <!--end::Stat-->
+                                                <!--begin::Stat-->
+                                                <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
+                                                    <!--begin::Number-->
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="fs-2 fw-bold">{{infoProfilo.numeroSessioni}}</div>
+                                                    </div>
+                                                    <!--end::Number-->
+                                                    <!--begin::Label-->
+                                                    <div class="fw-semibold fs-6 text-gray-500">Sessioni in corso</div>
+                                                    <!--end::Label-->
+                                                </div>
+                                                <div class="d-grid mb-10">
+                                                    <a type="button" id="kt_sign_in_submit" class="btn btn-primary" href="{{BASE_URL}}/abbonamento">
+                                                        <!--begin::Indicator label-->
+                                                        <span class="indicator-label">Gestisci Abbonamento</span>
+                                                        <!--end::Indicator label-->
+                                                    </a>
+                                                </div>
+                                                <!--end::Stat-->
+                                            </div>
+
+                                            <!--end::Stats-->
+                                        </div>
+                                        <!--end::Wrapper-->
+                                    </div>
+                                    <!--end::Stats-->
                                 </div>
-                                <!--end::Stats-->
+                                <!--end::Info-->
                             </div>
-                            <!--end::Info-->
+                            <!--end::Details-->
                         </div>
-                        <!--end::Details-->
                     </div>
-                </div>
-                <!--end::Navbar-->
-                <!--begin::Row-->
-                <div class="row g-6 g-xl-9">
-                    <!--begin::Menu Header-->
-                    <div>
-                        <h3  class="fw-bold my-2">Personaggi</h3>
-                    </div>
-                    <!--end::Menu Header-->
-                    <!--begin::Col-->
-                    {{#each infoProfilo.personaggi.creazioni}}
-                    <div class="col-md-6 col-xl-4">
-                        <!--begin::Card-->
-                        <a class="card border-hover-primary">
-                            <!--begin::Card header-->
-                            <div class="card-header border-0 pt-9">
-                                <!--begin::Card Title-->
-                                <div class="card-title m-0">
-                                    <!--begin::Avatar-->
-                                    <div class="symbol symbol-50px w-50px bg-light">
-                                        <img src="{{this.immagine}}" alt="image" class="p-3" />
+                    <!--end::Navbar-->
+                    <!--begin::Row-->
+                    <div class="row g-6 g-xl-9">
+                        <!--begin::Menu Header-->
+                        <div>
+                            <h3  class="fw-bold my-2">Personaggi</h3>
+                        </div>
+                        <!--end::Menu Header-->
+                        <!--begin::Col-->
+                        {{#each infoProfilo.personaggi.creazioni}}
+                            <div class="col-md-6 col-xl-4">
+                                <!--begin::Card-->
+                                <a class="card border-hover-primary">
+                                    <!--begin::Card header-->
+                                    <div class="card-header border-0 pt-9">
+                                        <!--begin::Card Title-->
+                                        <div class="card-title m-0">
+                                            <!--begin::Avatar-->
+                                            <div class="symbol symbol-50px w-50px bg-light">
+                                                <img src="{{this.immagine}}" alt="image" class="p-3" />
+                                            </div>
+                                            <!--end::Avatar-->
+                                        </div>
+                                        <!--end::Car Title-->
                                     </div>
-                                    <!--end::Avatar-->
-                                </div>
-                                <!--end::Car Title-->
-                            </div>
-                            <!--end:: Card header-->
-                            <!--begin:: Card body-->
-                            <div class="card-body p-9">
-                                <!--begin::Name-->
-                                <div class="fs-3 fw-bold text-gray-900">{{this.nome}}</div>
-                                <!--end::Name-->
-                                <!--begin::Description-->
-                                <p class="text-gray-500 fw-semibold fs-5 mt-1 mb-7">{{this.descrizione}}</p>
-                                <!--end::Description-->
-                            </div>
-                            <!--end:: Card body-->
-                        </a>
-                        <!--end::Card-->
-                    </div>
-                    {{/each}}
-                    <!--end::Col-->
-                    <!--begin::Menu Header-->
-                    <div>
-                        <h3 class="fw-bold my-2">Ambienti</h3>
-                    </div>
-                    <!--end::Menu Header-->
-                    <!--begin::Col-->
-                    {{#each infoProfilo.ambienti.creazioni}}
-                    <div class="col-md-6 col-xl-4">
-                        <!--begin::Card-->
-                        <a class="card border-hover-primary">
-                            <!--begin::Card header-->
-                            <div class="card-header border-0 pt-9">
-                                <!--begin::Card Title-->
-                                <div class="card-title m-0">
-                                    <!--begin::Avatar-->
-                                    <div class="symbol symbol-50px w-50px bg-light">
-                                        <img src="{{this.immagine}}" alt="image" class="p-3" />
+                                    <!--end:: Card header-->
+                                    <!--begin:: Card body-->
+                                    <div class="card-body p-9">
+                                        <!--begin::Name-->
+                                        <div class="fs-3 fw-bold text-gray-900">{{this.nome}}</div>
+                                        <!--end::Name-->
+                                        <!--begin::Description-->
+                                        <p class="text-gray-500 fw-semibold fs-5 mt-1 mb-7">{{this.descrizione}}</p>
+                                        <!--end::Description-->
                                     </div>
-                                    <!--end::Avatar-->
-                                </div>
-                                <!--end::Car Title-->
+                                    <!--end:: Card body-->
+                                </a>
+                                <!--end::Card-->
                             </div>
-                            <!--end:: Card header-->
-                            <!--begin:: Card body-->
-                            <div class="card-body p-9">
-                                <!--begin::Name-->
-                                <div class="fs-3 fw-bold text-gray-900">{{this.nome}}</div>
-                                <!--end::Name-->
-                                <!--begin::Description-->
-                                <p class="text-gray-500 fw-semibold fs-5 mt-1 mb-7">{{this.descrizione}}</p>
-                                <!--end::Description-->
+                        {{/each}}
+                        <!--end::Col-->
+                        <!--begin::Menu Header-->
+                        <div>
+                            <h3 class="fw-bold my-2">Ambienti</h3>
+                        </div>
+                        <!--end::Menu Header-->
+                        <!--begin::Col-->
+                        {{#each infoProfilo.ambienti.creazioni}}
+                            <div class="col-md-6 col-xl-4">
+                                <!--begin::Card-->
+                                <a class="card border-hover-primary">
+                                    <!--begin::Card header-->
+                                    <div class="card-header border-0 pt-9">
+                                        <!--begin::Card Title-->
+                                        <div class="card-title m-0">
+                                            <!--begin::Avatar-->
+                                            <div class="symbol symbol-50px w-50px bg-light">
+                                                <img src="{{this.immagine}}" alt="image" class="p-3" />
+                                            </div>
+                                            <!--end::Avatar-->
+                                        </div>
+                                        <!--end::Car Title-->
+                                    </div>
+                                    <!--end:: Card header-->
+                                    <!--begin:: Card body-->
+                                    <div class="card-body p-9">
+                                        <!--begin::Name-->
+                                        <div class="fs-3 fw-bold text-gray-900">{{this.nome}}</div>
+                                        <!--end::Name-->
+                                        <!--begin::Description-->
+                                        <p class="text-gray-500 fw-semibold fs-5 mt-1 mb-7">{{this.descrizione}}</p>
+                                        <!--end::Description-->
+                                    </div>
+                                    <!--end:: Card body-->
+                                </a>
+                                <!--end::Card-->
                             </div>
-                            <!--end:: Card body-->
-                        </a>
-                        <!--end::Card-->
-                    </div>
-                    {{/each}}
+                        {{/each}}
 
-                    <!-- JavaScript for truncating description -->
-                    <script>
-                        document.addEventListener("DOMContentLoaded", function () {
-                            // Select all elements with class 'fs-5' (assuming this is the class of your description)
-                            var descriptions = document.querySelectorAll('.fs-5');
+                        <!-- JavaScript for truncating description -->
+                        <script>
+                            document.addEventListener("DOMContentLoaded", function () {
+                                // Select all elements with class 'fs-5' (assuming this is the class of your description)
+                                var descriptions = document.querySelectorAll('.fs-5');
 
-                            descriptions.forEach(function (description) {
-                                var text = description.textContent;
+                                descriptions.forEach(function (description) {
+                                    var text = description.textContent;
 
-                                // Check if the text length is greater than 100 characters
-                                if (text.length > 100) {
-                                    // Truncate the text to 100 characters and add an ellipsis
-                                    var truncatedText = text.substring(0, 100) + '...';
+                                    // Check if the text length is greater than 100 characters
+                                    if (text.length > 100) {
+                                        // Truncate the text to 100 characters and add an ellipsis
+                                        var truncatedText = text.substring(0, 100) + '...';
 
-                                    // Update the description with the truncated text
-                                    description.textContent = truncatedText;
-                                }
+                                        // Update the description with the truncated text
+                                        description.textContent = truncatedText;
+                                    }
+                                });
                             });
-                        });
-                    </script>
+                        </script>
 
-                    <!--end::Col-->
+                        <!--end::Col-->
+                    </div>
+                    <!--end::Row-->
                 </div>
-                <!--end::Row-->
+                <!--end::Container-->
             </div>
-            <!--end::Container-->
+            <!--end::Post-->
         </div>
-        <!--end::Post-->
-    </div>
-    <!--end::Content-->
-    <!--begin::Footer-->
+        <!--end::Content-->
+        <!--begin::Footer-->
         {{> footer}}
-    <!--end::Footer-->
-</div>
-<!--end::Wrapper-->
+        <!--end::Footer-->
+    </div>
+    <!--end::Wrapper-->
 </div>
 <!--end::Page-->
 </div>
