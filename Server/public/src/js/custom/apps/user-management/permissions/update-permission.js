@@ -41,12 +41,12 @@ var KTUsersUpdatePermission = function () {
             e.preventDefault();
 
             Swal.fire({
-                text: "Are you sure you would like to close?",
+                text: "Sei sicuro di voler chiudere?",
                 icon: "warning",
                 showCancelButton: true,
                 buttonsStyling: false,
-                confirmButtonText: "Yes, close it!",
-                cancelButtonText: "No, return",
+                confirmButtonText: "Si!",
+                cancelButtonText: "No",
                 customClass: {
                     confirmButton: "btn btn-primary",
                     cancelButton: "btn btn-active-light"
@@ -68,12 +68,12 @@ var KTUsersUpdatePermission = function () {
             e.preventDefault();
 
             Swal.fire({
-                text: "Sei sicuro?",
+                text: "Sei sicuro di voler chiudere?",
                 icon: "warning",
                 showCancelButton: true,
                 buttonsStyling: false,
-                confirmButtonText: "Yes, cancel it!",
-                cancelButtonText: "No, return",
+                confirmButtonText: "Si!",
+                cancelButtonText: "No",
                 customClass: {
                     confirmButton: "btn btn-primary",
                     cancelButton: "btn btn-active-light"
@@ -86,16 +86,6 @@ var KTUsersUpdatePermission = function () {
                         el.parentNode.removeChild(el);
                     });
                     modal.hide();
-                } else if (result.dismiss === 'cancel') {
-                    Swal.fire({
-                        text: "Your form has not been cancelled!.",
-                        icon: "error",
-                        buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
-                        customClass: {
-                            confirmButton: "btn btn-primary",
-                        }
-                    });
                 }
             });
         });
@@ -118,31 +108,8 @@ var KTUsersUpdatePermission = function () {
                         // Disable button to avoid multiple click
                         submitButton.disabled = true;
 
-                        // Simulate form submission. For more info check the plugin's official documentation: https://sweetalert2.github.io/
-                        setTimeout(function () {
-                            // Remove loading indication
-                            submitButton.removeAttribute('data-kt-indicator');
+                        CambioRuolo();
 
-                            // Enable button
-                            submitButton.disabled = false;
-
-                            // Show popup confirmation
-                            Swal.fire({
-                                text: "Form has been successfully submitted!",
-                                icon: "success",
-                                buttonsStyling: false,
-                                confirmButtonText: "Ok, got it!",
-                                customClass: {
-                                    confirmButton: "btn btn-primary"
-                                }
-                            }).then(function (result) {
-                                if (result.isConfirmed) {
-                                    modal.hide();
-                                }
-                            });
-
-                            //form.submit(); // Submit form
-                        }, 2000);
                     } else {
                         // Show popup warning. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                         Swal.fire({
