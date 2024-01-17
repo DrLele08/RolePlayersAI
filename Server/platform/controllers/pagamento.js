@@ -22,7 +22,7 @@ exports.VerificaPagamento = async (req, ris) => {
 
     // Invia la risposta al chiamante (client)
     if (result.success) {
-        ris.render("home", { utente: idUtente });
+        ris.redirect(process.env.BASE_URL + "/dashboard");
     } else {
         ris.render("error", { errore: result.message });
     }

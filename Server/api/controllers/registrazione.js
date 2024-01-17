@@ -26,6 +26,14 @@ exports.createUtente = async(req, res) => {
             req.session.idUtente = utente.idUtente;
             req.session.authToken = utente.authToken;
 
+            res.cookie('idUtente', utente.idUtente, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true});
+            res.cookie('tokenAuth', utente.authToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true});
+
+            if (req.cookies && req.cookies.idUtente !== undefined) {
+                res.clearCookie('idUtente');
+                res.clearCookie('tokenAuth');
+            }
+
             json.Ris = 1;
             json.Utente = utente;
         }).catch(error => {
