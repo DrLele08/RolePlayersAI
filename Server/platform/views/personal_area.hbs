@@ -53,9 +53,9 @@ License: For each use you must have a valid license purchased only from above li
         <!--begin::Aside-->
         {{> barraLaterale nome=Utente.nome cognome=Utente.cognome abbonamento=Abbonamento.nomeTier ruolo=Utente.ruolo}}
         <!--end::Aside-->
-<!--begin::Wrapper-->
-<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
-    <!--begin::Header-->
+        <!--begin::Wrapper-->
+        <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+        <!--begin::Header-->
         {{> header titolo="Area personale" username=Utente.username}}
     <!--end::Header-->
     <!--begin::Content-->
@@ -84,10 +84,10 @@ License: For each use you must have a valid license purchased only from above li
                                     <div class="d-flex flex-column">
                                         <!--begin::Name-->
                                         <div class="d-flex align-items-center mb-2">
-                                            <a href="javascript:void(0)" class="text-gray-900 text-hover-primary fs-2 fw-bold me-1">{{this.name}}</a>
+                                            <a href="javascript:void(0)" class="text-gray-900 text-hover-primary fs-2 fw-bold me-1">{{infoProfilo.name}}</a>
                                         </div>
                                         <div class="d-flex align-items-center mb-2">
-                                            <a class="fw-semibold fs-6 text-gray-500">{{this.username}}</a>
+                                            <a class="fw-semibold fs-6 text-gray-500">{{infoProfilo.username}}</a>
                                         </div>
                                         <!--end::Name-->
                                     </div>
@@ -104,7 +104,7 @@ License: For each use you must have a valid license purchased only from above li
                                             <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                                 <!--begin::Number-->
                                                 <div class="d-flex align-items-center">
-                                                    <div class="fs-2 fw-bold">{{this.numeroPersonaggi}}</div>
+                                                    <div class="fs-2 fw-bold">{{infoProfilo.numeroPersonaggi}}</div>
                                                 </div>
                                                 <!--end::Number-->
                                                 <!--begin::Label-->
@@ -116,7 +116,7 @@ License: For each use you must have a valid license purchased only from above li
                                             <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                                 <!--begin::Number-->
                                                 <div class="d-flex align-items-center">
-                                                    <div class="fs-2 fw-bold">{{this.numeroAmbienti}}</div>
+                                                    <div class="fs-2 fw-bold">{{infoProfilo.numeroAmbienti}}</div>
                                                 </div>
                                                 <!--end::Number-->
                                                 <!--begin::Label-->
@@ -128,7 +128,7 @@ License: For each use you must have a valid license purchased only from above li
                                             <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                                 <!--begin::Number-->
                                                 <div class="d-flex align-items-center">
-                                                    <div class="fs-2 fw-bold">{{this.numeroSessioni}}</div>
+                                                    <div class="fs-2 fw-bold">{{infoProfilo.numeroSessioni}}</div>
                                                 </div>
                                                 <!--end::Number-->
                                                 <!--begin::Label-->
@@ -157,7 +157,7 @@ License: For each use you must have a valid license purchased only from above li
                     </div>
                     <!--end::Menu Header-->
                     <!--begin::Col-->
-                    {{#each personaggi.creazioni}}
+                    {{#each infoProfilo.personaggi.creazioni}}
                     <div class="col-md-6 col-xl-4">
                         <!--begin::Card-->
                         <a class="card border-hover-primary">
@@ -195,7 +195,7 @@ License: For each use you must have a valid license purchased only from above li
                     </div>
                     <!--end::Menu Header-->
                     <!--begin::Col-->
-                    {{#each ambienti.creazioni}}
+                    {{#each infoProfilo.ambienti.creazioni}}
                     <div class="col-md-6 col-xl-4">
                         <!--begin::Card-->
                         <a class="card border-hover-primary">

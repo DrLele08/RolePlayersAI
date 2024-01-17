@@ -51,7 +51,7 @@ License: For each use you must have a valid license purchased only from above li
 <div class="d-flex flex-column flex-root">
     <!--begin::Page-->
     <!--begin::Aside-->
-    {{> barraLaterale nome=Utente.nome cognome=Utente.cognome abbonamento=Abbonamento.nomeTier}}
+    {{> barraLaterale nome=Utente.nome cognome=Utente.cognome abbonamento=Abbonamento.nomeTier ruolo=Utente.ruolo}}
     <!--end::Aside-->
     <!--begin::Wrapper-->
     <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
@@ -267,6 +267,31 @@ License: For each use you must have a valid license purchased only from above li
                                         <!--end::Actions-->
                                     </form>
                                     <!--end::Form-->
+
+                                    <!--begin::Radio script-->
+                                    <script>
+                                        // Assuming you have a variable named 'userRole' with the user's role from the database
+                                        var userRole = 'admin'; // Replace this with the actual user role retrieved from the database
+
+                                        // Function to set the radio button based on the user's role
+                                        function setRadioBasedOnUserRole() {
+                                            var radioButtons = document.getElementsByName('role');
+
+                                            for (var i = 0; i < radioButtons.length; i++) {
+                                                if (radioButtons[i].value === userRole) {
+                                                    radioButtons[i].checked = true;
+                                                    break; // Once found and set, exit the loop
+                                                }
+                                            }
+                                        }
+
+                                        // Call the function when the document is ready
+                                        document.addEventListener('DOMContentLoaded', function () {
+                                            setRadioBasedOnUserRole();
+                                        });
+                                    </script>
+                                    <!--end::Radio script-->
+
                                 </div>
                                 <!--end::Modal body-->
                             </div>
