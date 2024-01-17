@@ -27,6 +27,7 @@
     "stripe": "^14.10.0"
   },
   "devDependencies": {
-    "jest": "^29.7.0"
+    "jest": "^29.7.0",
+    "jest-html-reporter": "^3.10.2"
   }
 }
