@@ -219,47 +219,6 @@
 
                 <!--begin::Personaggi-->
                 <div class="post d-flex flex-column-fluid Ceck" id="divPersonaggi">
-                    <!--begin::Messenger-->
-                    <div class="card flex-column flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0" id="kt_chat_messenger">
-                        <!--begin::Card body-->
-                        <div class="card-body h-500px" id="kt_chat_messenger_body">
-                            <!--begin::Messages-->
-                            <div class="scroll-y me-n5 pe-5 h-300px h-lg-auto" data-kt-element="messages" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_header, #kt_app_header, #kt_app_toolbar, #kt_toolbar, #kt_footer, #kt_app_footer, #kt_chat_messenger_header, #kt_chat_messenger_footer" data-kt-scroll-wrappers="#kt_content, #kt_app_content, #kt_chat_messenger_body" data-kt-scroll-offset="5px">
-                                <!--begin::Message(in)-->
-                                <div class="d-flex justify-content-start mb-10">
-                                    <!--begin::Wrapper-->
-                                    <div class="d-flex flex-column align-items-start">
-                                        <!--begin::Text-->
-                                        <div class="p-5 rounded bg-light-info text-gray-900 fw-semibold mw-lg-400px text-start" data-kt-element="message-text">Descrizione del personaggio</div>
-                                        <!--end::Text-->
-                                    </div>
-                                    <!--end::Wrapper-->
-                                </div>
-                                <!--end::Message(in)-->
-                            </div>
-                            <!--end::Messages-->
-                        </div>
-                        <!--end::Card body-->
-
-                        <!--begin::Card footer-->
-                        <div class="d-flex align-items-center" id="kt_chat_messenger_footer">
-                            <!--begin::Input-->
-                            <textarea class="form-control form-control-flush mb-3" rows="1" data-kt-element="input" placeholder="Descrivi un personaggio"></textarea>
-                            <!--end::Input-->
-                            <!--begin:Toolbar-->
-                            <div class="d-flex flex-stack">
-                                <!--begin::Send-->
-                                <button class="btn btn-primary" type="button" data-kt-element="send">
-                                    <img alt="Logo" src="{{BASE_URL}}/assets/media/avatars/invia.png"/>
-                                </button>
-                                <!--end::Send-->
-                            </div>
-                            <!--end::Toolbar-->
-                        </div>
-                        <!--end::Card footer-->
-
-                    </div>
-                    <!--end::Messenger-->
 
                     <div>
                         <!--begin::Sidebar-->
@@ -271,22 +230,36 @@
                                     <!--begin::Form-->
                                     <form class="w-100 position-relative" autocomplete="off">
                                         <span>Nome personaggio</span>
-                                        <input type="text" class="form-control form-control-solid" name="search" value="" placeholder="Inserisci nome personaggio" />
+                                        <input type="text" class="form-control form-control-solid" id="charName" value="" placeholder="Inserisci nome personaggio" />
                                         <!--end::Input-->
                                     </form>
                                     <!--end::Form-->
+                                </div>
+                                <div class="card card-flush">
+                                    <!--begin::Card header-->
+                                    <div class="card-header pt-7">
+                                        <!--begin::Form-->
+                                        <form class="w-100 position-relative" autocomplete="off">
+                                            <span>Descrizione del personaggio</span>
+                                            <input type="text" class="form-control form-control-solid" id="charDesc" value="" placeholder="Inserisci descrizione" />
+                                            <!--end::Input-->
+                                            <span>&nbsp</span>
+                                        </form>
+                                        <!--end::Form-->
+                                    </div>
+                                    <!--end::Card header-->
                                 </div>
                                 <!--end::Card header-->
                                 <!--begin::Card body-->
                                 <div class="card-body pt-5" id="kt_chat_contacts_body">
                                     <span>Scegli il genere<br></span>
-                                    <input type="radio" id="html" name="fav_language" value="uomo">
+                                    <input type="radio" id="genere_uomo" name="fav_language" value="uomo">
                                     <label for="html">Uomo</label>
                                     <span>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</span>
-                                    <input type="radio" id="css" name="fav_language" value="donna">
+                                    <input type="radio" id="genere_donna" name="fav_language" value="donna">
                                     <label for="css">Donna</label>
                                     <span>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</span>
-                                    <input type="radio" id="javascript" name="fav_language" value="altro">
+                                    <input type="radio" id="genere_altro" name="fav_language" value="altro">
                                     <label for="javascript">Altro</label>
                                 </div>
                                 <!--end::Card body-->
@@ -325,10 +298,10 @@
                                 <div class="card-body pt-5">
                                     <span>Privacy<br></span>
                                     <div>
-                                        <input type="radio" id="privato" name="fav" value="privato">
+                                        <input type="radio" id="privato_pers" name="fav" value="privato">
                                         <label for="privato">Privato &nbsp</label>
                                         <span>Il personaggio sarà visibile solo nel tuo inventario.</span><br><br>
-                                        <input type="radio" id="pubblico" name="fav" value="pubblico">
+                                        <input type="radio" id="pubblico_pers" name="fav" value="pubblico">
                                         <label for="pubblico">Pubblico &nbsp</label>
                                         <span>Il personaggio sarà visibile a tutti nella libreria.</span>
                                     </div>
@@ -348,7 +321,7 @@
                                     <!--begin::Form-->
                                     <form class="w-100 position-relative align-center" autocomplete="off">
                                         <span>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</span>
-                                        <button type="button" class="btn btn-sm btn-light btn-active-light-primary me-3 align-bottom" onclick="">
+                                        <button type="button" class="btn btn-sm btn-light btn-active-light-primary me-3 align-bottom" onclick="CreaPersonaggio()">
                                             <span class="menu-title">Crea</span>
                                         </button>
                                         <span>&nbsp &nbsp &nbsp &nbsp</span>
@@ -1053,83 +1026,77 @@
 
     // Funzione Crea Personaggio
     function CreaPersonaggio(){
-        const apiUrl = '{{BASE_URL}}/api/creazione/'
+        const nome = document.getElementById("charName").value.trim();
+        const descrizione=document.getElementById("charDesc").value.trim();
+        const foto=document.getElementById("pers").files;
+        const radioUomo=document.getElementById("genere_uomo").checked;
+        const radioDonna=document.getElementById("genere_donna").checked;
+        const radioAltro=document.getElementById("genere_altro").checked;
 
-        // Effettua una richiesta GET all'API
-        axios.post(apiUrl,{
-            headers:{
-                "Authorization":"{{idUtente}}.{{tokenAuth}}"
-            }
-        })
-                .then(response => {
-                    const nome = document.getElementById("charName").value.trim();
-                    const tipo="Personaggio";
-                    const descrizione=document.getElementById("charDesc").value.trim();
-                    const foto=document.getElementById("personaggio").value;
-                    const sesso=document.getElementById("sesso").value;
-                    const controllo = document.querySelector('input[name="publl"]:checked');
-                    const controllo2 = document.querySelector('input[name="priva"]:checked');
-                    if(nome.length>0){
+        const checkPrivato = document.getElementById("privato_pers").checked;
+        const checkPubblico = document.getElementById("pubblico_pers").checked;
+
+        if(nome.length>2 && nome.length<=50){
+            if(descrizione.length>0 && descrizione.length<=512){
+                if(radioUomo || radioDonna || radioAltro){
+                    if(checkPrivato || checkPubblico){
+                        let sesso="Uomo";
+                        if(radioDonna){
+                            sesso="Donna";
+                        }
+                        else if(radioAltro){
+                            sesso="Altro";
+                        }
+                        let isPubblico=1;
+                        if(checkPrivato){
+                            isPubblico=0;
+                        }
+
                         const formData = new FormData();
                         formData.append('nome',nome);
-                        formData.append('tipo', tipo)
+                        formData.append("isPubblico",isPubblico);
+                        formData.append('tipo', "Personaggio");
                         formData.append('descrizione', descrizione);
-                        formData.append('sesso', sesso);
-                        formData.append('foto', foto)
-                        if(controllo || controllo2) {
-
-
-                            const config = {
-                                headers: {
-                                    Authorization: "{{idUtente}}.{{tokenAuth}}"
-                                }
-                            };
-
-                            const urlApi="{{BASE_URL}}/api/creazione/";
-                            axios.post(urlApi, formData, config)
-                                    .then(response => {
-                                        const ris=response.data.Ris;
-                                        if(ris===1) {
-                                            Swal.fire({
-                                                text: "Personaggio creato!",
-                                                icon: "success",
-                                                buttonsStyling: false,
-                                                confirmButtonText: "Ok",
-                                                customClass: {
-                                                    confirmButton: "btn fw-bold btn-primary",
-                                                }
-                                            }).then(function() {
-                                                window.location = "{{BASE_URL}}/sessione";
-                                            });
-                                        }
-                                        else{
-                                            const mess=response.data.Mess;
-                                            Swal.fire({
-                                                text: mess,
-                                                icon: "error",
-                                                buttonsStyling: false,
-                                                confirmButtonText: "Ok",
-                                                customClass: {
-                                                    confirmButton: "btn fw-bold btn-primary",
-                                                }
-                                            });
-                                        }
-                                    })
-                                    .catch(error => {
-                                        Swal.fire({
-                                            text: error.message,
-                                            icon: "error",
-                                            buttonsStyling: false,
-                                            confirmButtonText: "Ok",
-                                            customClass: {
-                                                confirmButton: "btn fw-bold btn-primary",
-                                            }
-                                        });
-                                    });
+                        if(foto.length>0){
+                            formData.append('foto', foto[0])
                         }
-                        else{
+                        formData.append('sesso', sesso);
+
+                        const apiUrl = '{{BASE_URL}}/api/creazione/'
+                        axios.post(apiUrl,formData,{
+                            headers:{
+                                Authorization: "{{idUtente}}.{{tokenAuth}}"
+                            }
+                        }).then((result)=>{
+                            let ris=result.data.Ris;
+                            if(ris===1){
+                                Swal.fire({
+                                    text: "Personaggio creato!",
+                                    icon: "success",
+                                    buttonsStyling: false,
+                                    confirmButtonText: "Ok",
+                                    customClass: {
+                                        confirmButton: "btn fw-bold btn-primary",
+                                    }
+                                }).then(()=>{
+                                    window.location.href = "{{BASE_URL}}/contenuto";
+                                });
+                            }
+                            else{
+                                let mess=result.data.Mess;
+                                Swal.fire({
+                                    text: mess,
+                                    icon: "error",
+                                    buttonsStyling: false,
+                                    confirmButtonText: "Ok",
+                                    customClass: {
+                                        confirmButton: "btn fw-bold btn-primary",
+                                    }
+                                });
+                            }
+                        }).catch((error)=>{
                             Swal.fire({
-                                text: "Nome richiesto",
+                                text: error.message,
                                 icon: "error",
                                 buttonsStyling: false,
                                 confirmButtonText: "Ok",
@@ -1137,12 +1104,11 @@
                                     confirmButton: "btn fw-bold btn-primary",
                                 }
                             });
-                        }
-
+                        });
                     }
                     else{
                         Swal.fire({
-                            text: "Nome richiesto",
+                            text: "Deve selezionare la privacy del personaggio",
                             icon: "error",
                             buttonsStyling: false,
                             confirmButtonText: "Ok",
@@ -1151,10 +1117,10 @@
                             }
                         });
                     }
-                })
-                .catch(error => {
+                }
+                else{
                     Swal.fire({
-                        text: error.message,
+                        text: "Deve selezionare il genere del personaggio",
                         icon: "error",
                         buttonsStyling: false,
                         confirmButtonText: "Ok",
@@ -1162,7 +1128,31 @@
                             confirmButton: "btn fw-bold btn-primary",
                         }
                     });
+                }
+            }
+            else{
+                Swal.fire({
+                    text: "La descrizione deve essere compresa tra 1 e 512 caratteri",
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok",
+                    customClass: {
+                        confirmButton: "btn fw-bold btn-primary",
+                    }
                 });
+            }
+        }
+        else{
+            Swal.fire({
+                text: "Devi inserire un nome compreso tra 2 e 50 caratteri",
+                icon: "error",
+                buttonsStyling: false,
+                confirmButtonText: "Ok",
+                customClass: {
+                    confirmButton: "btn fw-bold btn-primary",
+                }
+            });
+        }
     }
 </script>
 
