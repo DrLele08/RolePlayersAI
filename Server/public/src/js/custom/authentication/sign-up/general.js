@@ -49,6 +49,15 @@ var KTSignupGeneral = function () {
                         }
                     },
                     'phone': {
+                        validators: {
+                            regexp: {
+                                regexp: /^\+?[0-9]{1,3}?[-. ]?(\([0-9]{1,4}\)|[0-9]{1,4})?[-. ]?[0-9]{1,4}[-. ]?[0-9]{1,4}$/,
+                                message: 'Telefono non valido',
+                            },
+                            notEmpty: {
+                                message: 'Telefono non valido'
+                            }
+                        }
                     },
                     'email': {
                         validators: {
@@ -194,197 +203,6 @@ var KTSignupGeneral = function () {
     }
 
 
-    // Handle form ajax
-    var handleFormAjax = function (e) {
-        // Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
-        validator = FormValidation.formValidation(
-            form,
-            {
-                fields: {
-                    'name': {
-                        validators: {
-                            notEmpty: {
-                                message: 'Nome richiesto'
-                            }
-                        }
-                    },
-                    'surname': {
-                        validators: {
-                            notEmpty: {
-                                message: 'Cognome richiesto'
-                            }
-                        }
-                    },
-                    'username': {
-                        validators: {
-                            notEmpty: {
-                                message: 'Username richiesto'
-                            }
-                        }
-                    },
-                    'birthday': {
-                        validators: {
-                            regexp: {
-                                regexp: /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/,
-                                message: 'Data di nascita non valida',
-                            },
-                            notEmpty: {
-                                message: 'Data di nascita richiesta'
-                            }
-                        }
-                    },
-                    'phone': {
-                        validators: {
-                            regexp: {
-                                regexp: /^+?[0-9]{1,3}?[-. ]?(([0-9]{1,4})|[0-9]{1,4})?[-. ]?[0-9]{1,4}[-. ]?[0-9]{1,4}$/,
-                                message: 'Cellulare non valido',
-                            },
-                            notEmpty: {
-                                message: 'Cellulare non valido'
-                            }
-                        }
-                    },
-                    'email': {
-                        validators: {
-                            regexp: {
-                                regexp: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                                message: 'E-mail non valida',
-                            },
-                            notEmpty: {
-                                message: 'E-mail richiesta'
-                            }
-                        }
-                    },
-                    'password': {
-                        validators: {
-                            notEmpty: {
-                                message: 'Password richiesta'
-                            },
-                            callback: {
-                                message: 'Password non valida',
-                                callback: function (input) {
-                                    if (input.value.length > 0) {
-                                        return validatePassword();
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    'password_confirmation': {
-                        validators: {
-                            notEmpty: {
-                                message: 'Conferma della password richiesta'
-                            },
-                            identical: {
-                                compare: function () {
-                                    return form.querySelector('[name="password"]').value;
-                                },
-                                message: 'Le due password non sono uguali'
-                            }
-                        }
-                    },
-                    'toc': {
-                        validators: {
-                            notEmpty: {
-                                message: 'Devi accettare i termini e le condizioni'
-                            }
-                        }
-                    }
-                },
-                plugins: {
-                    trigger: new FormValidation.plugins.Trigger({
-                        event: {
-                            password: false
-                        }
-                    }),
-                    bootstrap: new FormValidation.plugins.Bootstrap5({
-                        rowSelector: '.fv-row',
-                        eleInvalidClass: '',  // comment to enable invalid state icons
-                        eleValidClass: '' // comment to enable valid state icons
-                    })
-                }
-            }
-        );
-
-        // Handle form submit
-        submitButton.addEventListener('click', function (e) {
-            e.preventDefault();
-
-            validator.revalidateField('password');
-
-            validator.validate().then(function (status) {
-                if (status == 'Valid') {
-                    // Show loading indication
-                    submitButton.setAttribute('data-kt-indicator', 'on');
-
-                    // Disable button to avoid multiple click
-                    submitButton.disabled = true;
-
-
-                    // Check axios library docs: https://axios-http.com/docs/intro
-                    axios.post(submitButton.closest('form').getAttribute('action'), new FormData(form)).then(function (response) {
-                        if (response) {
-                            form.reset();
-
-                            const redirectUrl = form.getAttribute('data-kt-redirect-url');
-
-                            if (redirectUrl) {
-                                location.href = redirectUrl;
-                            }
-                        } else {
-                            // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
-                            Swal.fire({
-                                text: "Sono stati rilevati degli errori, riprova.",
-                                icon: "error",
-                                buttonsStyling: false,
-                                confirmButtonText: "Ok!",
-                                customClass: {
-                                    confirmButton: "btn btn-primary"
-                                }
-                            });
-                        }
-                    }).catch(function (error) {
-                        Swal.fire({
-                            text: "Sono stati rilevati degli errori, riprova.",
-                            icon: "error",
-                            buttonsStyling: false,
-                            confirmButtonText: "Ok!",
-                            customClass: {
-                                confirmButton: "btn btn-primary"
-                            }
-                        });
-                    }).then(() => {
-                        // Hide loading indication
-                        submitButton.removeAttribute('data-kt-indicator');
-
-                        // Enable button
-                        submitButton.disabled = false;
-                    });
-
-                } else {
-                    // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
-                    Swal.fire({
-                        text: "Sono stati rilevati degli errori, riprova.",
-                        icon: "error",
-                        buttonsStyling: false,
-                        confirmButtonText: "Ok!",
-                        customClass: {
-                            confirmButton: "btn btn-primary"
-                        }
-                    });
-                }
-            });
-        });
-
-        // Handle password input
-        form.querySelector('input[name="password"]').addEventListener('input', function () {
-            if (this.value.length > 0) {
-                validator.updateFieldStatus('password', 'NotValidated');
-            }
-        });
-    }
-
-
     // Password input validation
     var validatePassword = function () {
         return (passwordMeter.getScore() > 50);
@@ -408,11 +226,7 @@ var KTSignupGeneral = function () {
             submitButton = document.querySelector('#kt_sign_up_submit');
             passwordMeter = KTPasswordMeter.getInstance(form.querySelector('[data-kt-password-meter="true"]'));
 
-            if (isValidUrl(submitButton.closest('form').getAttribute('action'))) {
-                handleFormAjax();
-            } else {
-                handleForm();
-            }
+            handleForm();
         }
     };
 }();
