@@ -234,6 +234,15 @@ var KTSignupGeneral = function () {
                         }
                     },
                     'phone': {
+                        validators: {
+                            regexp: {
+                                regexp: /^+?[0-9]{1,3}?[-. ]?(([0-9]{1,4})|[0-9]{1,4})?[-. ]?[0-9]{1,4}[-. ]?[0-9]{1,4}$/,
+                                message: 'Cellulare non valido',
+                            },
+                            notEmpty: {
+                                message: 'Cellulare non valido'
+                            }
+                        }
                     },
                     'email': {
                         validators: {
