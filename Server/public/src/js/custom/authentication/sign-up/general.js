@@ -1,5 +1,10 @@
 "use strict";
 
+function convertiData(data) {
+    var partiData = data.split('-'); // Divide la data in [anno, mese, giorno]
+    return partiData[2] + '-' + partiData[1] + '-' + partiData[0]; // Riordina e unisce
+}
+
 // Class definition
 var KTSignupGeneral = function () {
     // Elements
@@ -123,12 +128,15 @@ var KTSignupGeneral = function () {
 
                     const urlLogin = "http://localhost:3000/api/registrazione"
 
+                    let dataNascita=document.getElementById("upBday").value
+                    let dataConvertita=convertiData(dataNascita)
+
                     axios.post(urlLogin, {
                         nome: document.getElementById("upName").value.trim(),
                         cognome: document.getElementById("upSur").value.trim(),
                         username: document.getElementById("upUser").value.trim(),
-                        dataNascita: document.getElementById("upBday").value,
-                        telefono: document.getElementById("upPhone").value.trim(),
+                        dataNascita: dataConvertita,
+                        telefono: "+39"+document.getElementById("upPhone").value.trim(),
                         email: document.getElementById("upEmail").value.trim(),
                         password: document.getElementById("upPass").value.trim(),
                     }).then((result) => {
