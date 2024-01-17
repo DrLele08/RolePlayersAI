@@ -352,9 +352,6 @@
                                         <span class="menu-title">Crea</span>
                                     </button>
                                     <span>&nbsp &nbsp &nbsp &nbsp</span>
-                                    <button class="btn btn-sm btn-light btn-active-light-primary me-3 align-bottom" onclick="">
-                                        <span class="menu-title">Elimina</span>
-                                    </button>
                                 </form>
                                 <span>&nbsp</span>
                                 <!--end::Form-->
@@ -370,48 +367,6 @@
 
             <!--begin::Ambienti-->
             <div class="post d-flex flex-column-fluid Ceck" id="divAmbienti">
-                <!--begin::Messenger-->
-                <div class="card flex-column flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0">
-                    <!--begin::Card body-->
-                    <div class="card-body h-500px">
-                        <!--begin::Messages-->
-                        <div class="scroll-y me-n5 pe-5 h-300px h-lg-auto" data-kt-element="messages" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_header, #kt_app_header, #kt_app_toolbar, #kt_toolbar, #kt_footer, #kt_app_footer, #kt_chat_messenger_header, #kt_chat_messenger_footer" data-kt-scroll-wrappers="#kt_content, #kt_app_content, #kt_chat_messenger_body" data-kt-scroll-offset="5px">
-                            <!--begin::Message(in)-->
-                            <div class="d-flex justify-content-start mb-10">
-                                <!--begin::Wrapper-->
-                                <div class="d-flex flex-column align-items-start">
-                                    <!--begin::Text-->
-                                    <div class="p-5 rounded bg-light-info text-gray-900 fw-semibold mw-lg-400px text-start" data-kt-element="message-text">Descrizione dell'ambiente</div>
-                                    <!--end::Text-->
-                                </div>
-                                <!--end::Wrapper-->
-                            </div>
-                            <!--end::Message(in)-->
-                        </div>
-                        <!--end::Messages-->
-                    </div>
-                    <!--end::Card body-->
-
-                    <!--begin::Card footer-->
-                    <div class="d-flex align-items-center">
-                        <!--begin::Input-->
-                        <textarea class="form-control form-control-flush mb-3" rows="1" data-kt-element="input" placeholder="Descrivi un'ambiente"></textarea>
-                        <!--end::Input-->
-                        <!--begin:Toolbar-->
-                        <div class="d-flex flex-stack">
-                            <!--begin::Send-->
-                            <button class="btn btn-primary" type="button" data-kt-element="send">
-                                <img alt="Logo" src="{{BASE_URL}}/assets/media/avatars/invia.png"/>
-                            </button>
-                            <!--end::Send-->
-                        </div>
-                        <!--end::Toolbar-->
-                    </div>
-                    <!--end::Card footer-->
-
-                </div>
-                <!--end::Messenger-->
-
                 <div>
                     <!--begin::Sidebar-->
                     <div class="flex-column flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0 ms-lg-7 ms-xl-10">
@@ -422,7 +377,7 @@
                                 <!--begin::Form-->
                                 <form class="w-100 position-relative" autocomplete="off">
                                     <span>Nome dell'ambiente</span>
-                                    <input type="text" class="form-control form-control-solid" name="search" value="" placeholder="Inserisci nome ambiente" />
+                                    <input type="text" class="form-control form-control-solid" name="nameEnv" id="nameEnv" value="" placeholder="Inserisci nome ambiente" />
                                     <!--end::Input-->
                                     <span>&nbsp</span>
                                 </form>
@@ -433,7 +388,26 @@
                         <!--end::Contacts-->
                     </div>
                     <!--end::Sidebar-->
-
+                    <!--begin::Sidebar-->
+                    <div class="flex-column flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0 ms-lg-7 ms-xl-10">
+                        <!--begin::Contacts-->
+                        <div class="card card-flush">
+                            <!--begin::Card header-->
+                            <div class="card-header pt-7">
+                                <!--begin::Form-->
+                                <form class="w-100 position-relative" autocomplete="off">
+                                    <span>Descrizione del contesto</span>
+                                    <input type="text" class="form-control form-control-solid" name="dexEnv" id="dexEnv" value="" placeholder="Inserisci descrizione" />
+                                    <!--end::Input-->
+                                    <span>&nbsp</span>
+                                </form>
+                                <!--end::Form-->
+                            </div>
+                            <!--end::Card header-->
+                        </div>
+                        <!--end::Contacts-->
+                    </div>
+                    <!--end::Sidebar-->
                     <!--begin::Sidebar-->
                     <div class="flex-row flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0 ms-lg-7 ms-xl-10" style="margin-top:5%;">
                         <!--begin::Contacts-->
@@ -464,10 +438,10 @@
                             <div class="card-body pt-5">
                                 <span>Privacy<br></span>
                                 <div>
-                                    <input type="radio" id="priva"  name="far" value="privato">
+                                    <input type="radio" id="priva"  name="priva" value="privato">
                                     <label for="priva">Privato &nbsp</label>
                                     <span>L'ambiente sarà visibile solo nel tuo inventario.</span><br><br>
-                                    <input type="radio" id="publl"  name="far" value="pubblico">
+                                    <input type="radio" id="publl"  name="publl" value="pubblico">
                                     <label for="publl">Pubblico &nbsp</label>
                                     <span>L'ambiente sarà visibile a tutti nella libreria.</span>
                                 </div>
@@ -487,13 +461,10 @@
                                 <!--begin::Form-->
                                 <form class="w-100 position-relative align-center" autocomplete="off">
                                     <span>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</span>
-                                    <button class="btn btn-sm btn-light btn-active-light-primary me-3 align-bottom" onclick="">
+                                    <button class="btn btn-sm btn-light btn-active-light-primary me-3 align-bottom" onclick="CreaAmbiente()">
                                         <span class="menu-title">Crea</span>
                                     </button>
                                     <span>&nbsp &nbsp &nbsp &nbsp</span>
-                                    <button class="btn btn-sm btn-light btn-active-light-primary me-3 align-bottom" onclick="">
-                                        <span class="menu-title">Elimina</span>
-                                    </button>
                                 </form>
                                 <span>&nbsp</span>
                                 <!--end::Form-->
@@ -893,6 +864,117 @@
                 });
     }
 
+    // Funzione Crea Ambiente
+    function CreaAmbiente(){
+        const apiUrl = '{{BASE_URL}}/api/creazione/'
+
+        // Effettua una richiesta GET all'API
+        axios.post(apiUrl,{
+            headers:{
+                "Authorization":"{{idUtente}}.{{tokenAuth}}"
+            }
+        })
+                .then(response => {
+                    const nome = document.getElementById("nameEnv").value.trim();
+                    const tipo="Ambiente";
+                    const descrizione=document.getElementById("dexEnv").value.trim();
+                    const foto=document.getElementById("ambiente").value;
+                    const controllo = document.querySelector('input[name="publl"]:checked');
+                    const controllo2 = document.querySelector('input[name="priva"]:checked');
+                    if(nome.length>0){
+                        const formData = new FormData();
+                        formData.append('nome',nome);
+                        formData.append('tipo', tipo)
+                        formData.append('descrizione', descrizione);
+                        formData.append('foto', foto)
+                        if(controllo || controllo2) {
+
+
+                            const config = {
+                                headers: {
+                                    Authorization: "{{idUtente}}.{{tokenAuth}}"
+                                }
+                            };
+
+                            const urlApi="{{BASE_URL}}/api/creazione/";
+                            axios.post(urlApi, formData, config)
+                                    .then(response => {
+                                        const ris=response.data.Ris;
+                                        if(ris===1) {
+                                            Swal.fire({
+                                                text: "Ambiente creato!",
+                                                icon: "success",
+                                                buttonsStyling: false,
+                                                confirmButtonText: "Ok",
+                                                customClass: {
+                                                    confirmButton: "btn fw-bold btn-primary",
+                                                }
+                                            }).then(function() {
+                                                window.location = "{{BASE_URL}}/sessione";
+                                            });
+                                        }
+                                        else{
+                                            const mess=response.data.Mess;
+                                            Swal.fire({
+                                                text: mess,
+                                                icon: "error",
+                                                buttonsStyling: false,
+                                                confirmButtonText: "Ok",
+                                                customClass: {
+                                                    confirmButton: "btn fw-bold btn-primary",
+                                                }
+                                            });
+                                        }
+                                    })
+                                    .catch(error => {
+                                        Swal.fire({
+                                            text: error.message,
+                                            icon: "error",
+                                            buttonsStyling: false,
+                                            confirmButtonText: "Ok",
+                                            customClass: {
+                                                confirmButton: "btn fw-bold btn-primary",
+                                            }
+                                        });
+                                    });
+                        }
+                        else{
+                            Swal.fire({
+                                text: "Nome richiesto",
+                                icon: "error",
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok",
+                                customClass: {
+                                    confirmButton: "btn fw-bold btn-primary",
+                                }
+                            });
+                        }
+
+                    }
+                    else{
+                        Swal.fire({
+                            text: "Nome richiesto",
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "Ok",
+                            customClass: {
+                                confirmButton: "btn fw-bold btn-primary",
+                            }
+                        });
+                    }
+                })
+                .catch(error => {
+                    Swal.fire({
+                        text: error.message,
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok",
+                        customClass: {
+                            confirmButton: "btn fw-bold btn-primary",
+                        }
+                    });
+                });
+    }
 </script>
 
 <script>
