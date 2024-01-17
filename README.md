@@ -68,3 +68,13 @@ node index.js
 STEP Finale: Aprire il Browser alla pagina [http://localhost:3000](http://localhost:3000) e dare un`occhiata in giro!
 
 
+# Testing
+RolePlayers AI utilizza il framework Jest per effettuare il testing di unità. Per avviare i test basterà 
+posizionarsi nella cartella Server e avviare il seguente script:
+
+```bash
+npm test
+```
+Non appena il testing sarà terminato, verrà creato automaticamente un file HTML chiamato
+```test-report.html``` all`interno della cartella Server, il quale conterrà il report di tutti 
+i test eseguiti.
