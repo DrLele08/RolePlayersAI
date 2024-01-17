@@ -92,7 +92,7 @@ License: For each use you must have a valid license purchased only from above li
                                     <th class="min-w-125px">Nome utente</th>
                                     <th class="min-w-250px">Ruolo</th>
                                     <th class="min-w-125px">Abbonamento</th>
-                                    <th class="text-end min-w-100px">Azioni</th>
+                                    <th class="text-end min-w-100px">Cambia ruolo</th>
                                 </tr>
                                 </thead>
                                 <tbody class="fw-semibold text-gray-600">
@@ -114,7 +114,7 @@ License: For each use you must have a valid license purchased only from above li
                                             <a>{{this.tierAbbonamento}}</a>
                                         </td>
                                         <td class="text-end">
-                                            <button class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_update_permission" onclick="SetRuolo('{{this.ruolo}}')">
+                                            <button class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_update_permission" onclick="SetRuolo({{this.idUtente}},'{{this.ruolo}}')">
                                                 <i class="ki-duotone ki-setting-3 fs-3">
                                                     <span class="path1"></span>
                                                     <span class="path2"></span>
@@ -199,8 +199,93 @@ License: For each use you must have a valid license purchased only from above li
 
                                     <!--begin::Radio script-->
                                     <script>
-                                        function SetRuolo(nomeRuolo){
-                                            alert(nomeRuolo);
+                                        let idUtenteDaCambiare = -1;
+
+                                        function CambioRuolo(){
+                                            let nuovoRuolo="Utente";
+                                            let checkAdmin=document.getElementById("adminRole");
+                                            let checkModeratore=document.getElementById("modRole");
+
+                                            if(checkAdmin.checked){
+                                                nuovoRuolo="Amministratore";
+                                            }
+                                            else if(checkModeratore.checked){
+                                                nuovoRuolo="Moderatore";
+                                            }
+
+                                            const url="http://localhost:3000/api/admin/setRuolo";
+
+                                            let obj={
+                                                "idUtente": idUtenteDaCambiare,
+                                                "ruolo": nuovoRuolo
+                                            };
+
+                                            let headers={
+                                                headers:{
+                                                    Authorization: "{{idUtente}}.{{tokenAuth}}"
+                                                }
+                                            }
+                                            axios.post(url,obj,headers).then((result)=>{
+                                                let ris=result.data.Ris;
+                                                if(ris===1){
+                                                    Swal.fire({
+                                                        text: "Ruolo modificato con successo!",
+                                                        icon: "success",
+                                                        buttonsStyling: false,
+                                                        confirmButtonText: "Ok",
+                                                        customClass: {
+                                                            confirmButton: "btn btn-primary"
+                                                        }
+                                                    }).then(()=>{
+                                                        window.location.replace("http://localhost:3000/admin");
+                                                    });
+                                                }
+                                                else{
+                                                    let mess=result.data.Mess;
+                                                    Swal.fire({
+                                                        text: mess,
+                                                        icon: "error",
+                                                        buttonsStyling: false,
+                                                        confirmButtonText: "Ok, got it!",
+                                                        customClass: {
+                                                            confirmButton: "btn btn-primary"
+                                                        }
+                                                    });
+                                                }
+                                            }).catch((error)=>{
+                                                Swal.fire({
+                                                    text: error.message,
+                                                    icon: "error",
+                                                    buttonsStyling: false,
+                                                    confirmButtonText: "Ok, got it!",
+                                                    customClass: {
+                                                        confirmButton: "btn btn-primary"
+                                                    }
+                                                });
+                                            });
+                                        }
+
+                                        function SetRuolo(idUtente,nomeRuolo){
+                                            idUtenteDaCambiare=idUtente;
+                                            let checkAdmin=document.getElementById("adminRole");
+                                            let checkModeratore=document.getElementById("modRole");
+                                            let checkUtente=document.getElementById("userRole");
+
+                                            if(nomeRuolo === "Amministratore"){
+                                                checkAdmin.checked = true;
+                                                checkModeratore.checked = false;
+                                                checkUtente.checked = false;
+                                            }
+                                            else if(nomeRuolo === "Moderatore"){
+                                                checkAdmin.checked = false;
+                                                checkModeratore.checked = true;
+                                                checkUtente.checked = false;
+                                            }
+                                            else{
+                                                checkAdmin.checked = false;
+                                                checkModeratore.checked = false;
+                                                checkUtente.checked = true;
+                                            }
                                         }
                                     </script>
                                     <!--end::Radio script-->
