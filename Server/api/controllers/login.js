@@ -26,7 +26,7 @@ exports.LoginControl = async(req, res) => {
             req.session.idUtente = u.idUtente;
             req.session.authToken = u.authToken;
 
-            let ricordami = req.body.ricordami;
+            let ricordami = req.body.remember;
             if (ricordami) {
                 res.cookie('idUtente', u.idUtente, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true});
                 res.cookie('tokenAuth', u.authToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true});
