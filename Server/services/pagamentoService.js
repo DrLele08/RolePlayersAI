@@ -21,7 +21,7 @@ pagamentoService.effettuaPagamento = async(idUtente, idAbbonamento) => {
         if (abbonamentoCorrente !== nuovoAbbonamento.idAbbonamento) {
             if (parseFloat(nuovoAbbonamento.prezzo) === 0.0) {
                 await utente.cambiaAbbonamento(idUtente, idAbbonamento);
-                return {success: true, sessionUrl: "conferma.html"};
+                return {success: true, sessionUrl: process.env.BASE_URL + "/dashboard"};
             }
 
             if (nuovoAbbonamento.prezzo > 0) {
