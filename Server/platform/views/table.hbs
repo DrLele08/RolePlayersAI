@@ -24,6 +24,12 @@
 		<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
 		<!--end::Global Stylesheets Bundle-->
 		<script>// Frame-busting to prevent site from being loaded within a frame without permission (click-jacking) if (window.top != window.self) { window.top.location.replace(window.self.location.href); }</script>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<style>
+			.Ceck{
+				display: none !important;
+			}
+		</style>
 	</head>
 	<!--end::Head-->
 	<!--begin::Body-->
@@ -392,7 +398,7 @@
 					</div>
 					<!--end::Header-->
 					<!--begin::Content-->
-					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+					<div class="content d-flex flex-column flex-column-fluid" id="kt_content" onload="CambiaDiv">
 						<!--begin::Post-->
 						<div class="post d-flex flex-column-fluid" id="kt_post">
 							<!--begin::Container-->
@@ -408,13 +414,31 @@
 												<!--begin::Table head-->
 												<thead class="">
 													<tr id="kt_pricing">
-														<th class="text-center min-w-200px">
+														<th class="text-center min-w-200px" id="FreeSub">
 															<div class="min-w-200px mb-15">
-																<div class="text fs-3hx fw-bold mb-7">Abbonamento attuale</div>
+																<div class="text-primary fs-3 fw-bold mb-3">Free</div>
+																<div class="fs-5x d-flex justify-content-center">
+																	<span class="lh-sm fw-semibold" data-kt-plan-price-month="0">Gratis</span>
+																</div>
+																<div class="text-muted fw-bold mb-10">&nbsp</div>
+															</div>
+														</th>
+														<th class="text-center min-w-200px" id="BaseSub">
+															<div class="min-w-200px mb-15">
 																<div class="text-primary fs-3 fw-bold mb-3">Base</div>
 																<div class="fs-5x d-flex justify-content-center">
 																	<span class="fs-2 mt-3">€</span>
 																	<span class="lh-sm fw-semibold" data-kt-plan-price-month="19,99">19,99</span>
+																</div>
+																<div class="text-muted fw-bold mb-10">Mensile</div>
+															</div>
+														</th>
+														<th class="text-center min-w-200px" id="EntSub">
+															<div class="min-w-200px mb-15">
+																<div class="text-primary fs-3 fw-bold mb-3">Enterprise</div>
+																<div class="fs-5x d-flex justify-content-center">
+																	<span class="fs-2 mt-3">€</span>
+																	<span class="lh-sm fw-semibold" data-kt-plan-price-month="29,99">29,99</span>
 																</div>
 																<div class="text-muted fw-bold mb-10">Mensile</div>
 															</div>
@@ -426,55 +450,61 @@
 												<tbody>
 													<tr>
 														<th class="card-rounded-start">
-															<div class="fw-bold d-flex align-items-center ps-9 fs-3">Fino a 5000 richieste al mese</div>
+															<div class="fw-bold d-flex align-items-center ps-9 fs-3">Richieste al mese</div>
 														</th>
 														<td>
-															<div class="flex-root d-flex justify-content-center">
-																<span class="h-40px w-40px d-flex flex-center d-block">
-																	<i class="ki-duotone ki-check fs-2x text-success"></i>
-																</span>
-																<span class="h-40px w-40px d-flex flex-center d-none">
-																	<i class="ki-duotone ki-cross fs-2x text-0">
-																		<span class="path1"></span>
-																		<span class="path2"></span>
-																	</i>
-																</span>
+															<div class="flex-root d-flex justify-content-center fw-bold fs-3" id="FreeReq">
+																<span class="h-40px w-40px d-flex flex-center d-block">100</span>
+															</div>
+														</td>
+														<td>
+															<div class="flex-root d-flex justify-content-center fw-bold fs-3" id="BaseReq">
+																<span class="h-40px w-40px d-flex flex-center d-block">5000</span>
+															</div>
+														</td>
+														<td>
+															<div class="flex-root d-flex justify-content-center fw-bold fs-3" id="EntReq">
+																<span class="h-40px w-40px d-flex flex-center d-block">Illimitate</span>
 															</div>
 														</td>
 													</tr>
 													<tr>
 														<th class="card-rounded-start">
-															<div class="fw-bold d-flex align-items-center ps-9 fs-3">Priorità standard</div>
+															<div class="fw-bold d-flex align-items-center ps-9 fs-3">Priorità</div>
 														</th>
 														<td>
-															<div class="flex-root d-flex justify-content-center">
-																<span class="h-40px w-40px d-flex flex-center d-block">
-																	<i class="ki-duotone ki-check fs-2x text-success"></i>
-																</span>
-																<span class="h-40px w-40px d-flex flex-center d-none">
-																	<i class="ki-duotone ki-cross fs-2x text-0">
-																		<span class="path1"></span>
-																		<span class="path2"></span>
-																	</i>
-																</span>
+															<div class="flex-root d-flex justify-content-center fw-bold fs-3" id="FreePrio">
+																<span class="h-40px w-40px d-flex flex-center d-block">Bassa</span>
+															</div>
+														</td>
+														<td>
+															<div class="flex-root d-flex justify-content-center fw-bold fs-3" id="BasePrio">
+																<span class="h-40px w-40px d-flex flex-center d-block">Standard</span>
+															</div>
+														</td>
+														<td>
+															<div class="flex-root d-flex justify-content-center fw-bold fs-3" id="EntPrio">
+																<span class="h-40px w-40px d-flex flex-center d-block">Massima</span>
 															</div>
 														</td>
 													</tr>
 													<tr>
 														<th class="card-rounded-start">
-															<div class="fw-bold d-flex align-items-center ps-9 fs-3">Precisione standard</div>
+															<div class="fw-bold d-flex align-items-center ps-9 fs-3">Precisione</div>
 														</th>
 														<td>
-															<div class="flex-root d-flex justify-content-center">
-																<span class="h-40px w-40px d-flex flex-center d-block">
-																	<i class="ki-duotone ki-check fs-2x text-success"></i>
-																</span>
-																<span class="h-40px w-40px d-flex flex-center d-none">
-																	<i class="ki-duotone ki-cross fs-2x text-0">
-																		<span class="path1"></span>
-																		<span class="path2"></span>
-																	</i>
-																</span>
+															<div class="flex-root d-flex justify-content-center fw-bold fs-3" id="FreePrec">
+																<span class="h-40px w-40px d-flex flex-center d-block">Bassa</span>
+															</div>
+														</td>
+														<td>
+															<div class="flex-root d-flex justify-content-center fw-bold fs-3" id="BasePrec">
+																<span class="h-40px w-40px d-flex flex-center d-block">Standard</span>
+															</div>
+														</td>
+														<td>
+															<div class="flex-root d-flex justify-content-center fw-bold fs-3" id="EntPrec">
+																<span class="h-40px w-40px d-flex flex-center d-block">Massima</span>
 															</div>
 														</td>
 													</tr>
@@ -483,12 +513,38 @@
 															<div class="fw-bold d-flex align-items-center ps-9 fs-3">Richieste web + API</div>
 														</th>
 														<td>
-															<div class="flex-root d-flex justify-content-center">
+															<div class="flex-root d-flex justify-content-center" id="FreeApi">
 																<span class="h-40px w-40px d-flex flex-center d-none">
 																	<i class="ki-duotone ki-check fs-2x text-success"></i>
 																</span>
 																<span class="h-40px w-40px d-flex flex-center d-block">
 																	<i class="ki-duotone ki-cross fs-2x text-danger">
+																		<span class="path1"></span>
+																		<span class="path2"></span>
+																	</i>
+																</span>
+															</div>
+														</td>
+														<td>
+															<div class="flex-root d-flex justify-content-center" id="BaseApi">
+																<span class="h-40px w-40px d-flex flex-center d-none">
+																	<i class="ki-duotone ki-check fs-2x text-success"></i>
+																</span>
+																<span class="h-40px w-40px d-flex flex-center d-block">
+																	<i class="ki-duotone ki-cross fs-2x text-danger">
+																		<span class="path1"></span>
+																		<span class="path2"></span>
+																	</i>
+																</span>
+															</div>
+														</td>
+														<td>
+															<div class="flex-root d-flex justify-content-center" id="EntApi">
+																<span class="h-40px w-40px d-flex flex-center d-block">
+																	<i class="ki-duotone ki-check fs-2x text-success"></i>
+																</span>
+																<span class="h-40px w-40px d-flex flex-center d-none">
+																	<i class="ki-duotone ki-cross fs-2x text-0">
 																		<span class="path1"></span>
 																		<span class="path2"></span>
 																	</i>
@@ -523,7 +579,6 @@
 												</button>
 												</div>
 												<!--end::Button-->
-
 										</div>
 										<!--end::Table container-->
 										<div class="text-muted fw-bold mb-10" style="float: right">Pagamento con <img src="assets/media/logos/img.png" class="h-60px h-lg-60px"/>
@@ -582,18 +637,51 @@
 		<!--begin::Javascript-->
 		<script>var hostUrl = "assets/";</script>
 		<!--begin::Global Javascript Bundle(mandatory for all pages)-->
-		<script src="assets/plugins/global/plugins.bundle.js"></script>
-		<script src="assets/js/scripts.bundle.js"></script>
+		<script src="{{BASEURL}}/assets/plugins/global/plugins.bundle.js"></script>
+		<script src="{{BASEURL}}/assets/js/scripts.bundle.js"></script>
 		<!--end::Global Javascript Bundle-->
 		<!--begin::Vendors Javascript(used for this page only)-->
-		<script src="assets/plugins/custom/datatables/datatables.bundle.js"></script>
+		<script src="{{BASEURL}}/assets/plugins/custom/datatables/datatables.bundle.js"></script>
 		<!--end::Vendors Javascript-->
 		<!--begin::Custom Javascript(used for this page only)-->
-		<script src="assets/js/custom/pages/pricing/general.js"></script>
-		<script src="assets/js/widgets.bundle.js"></script>
-		<script src="assets/js/custom/widgets.js"></script>
-		<script src="assets/js/custom/apps/chat/chat.js"></script>
-		<script src="assets/js/custom/utilities/modals/users-search.js"></script>
+		<script src="{{BASEURL}}/assets/js/custom/pages/pricing/general.js"></script>
+		<script src="{{BASEURL}}/assets/js/widgets.bundle.js"></script>
+		<script src="{{BASEURL}}/assets/js/custom/widgets.js"></script>
+		<script src="{{BASEURL}}/models/abbonamento.js"></script>
+		<script src="{{BASEURL}}/models/utente.js"></script>
+		<script>
+            import utenteService from "../../services/utenteService";
+
+            let idUtente={{idUtente}}
+			let idSub=utenteService.getActualAbbonamento(idUtente).nomeTier;
+			function CambiaDiv()
+			{
+				if(idSub==="Free")
+				{
+					document.getElementById(FreeSub).classList.add("Ceck");
+                    document.getElementById(FreeReq).classList.add("Ceck");
+                    document.getElementById(FreePrio).classList.add("Ceck");
+                    document.getElementById(FreePrec).classList.add("Ceck");
+                    document.getElementById(FreeApi).classList.add("Ceck");
+				}
+                if(idSub==="Base")
+                {
+                    document.getElementById(BaseSub).classList.add("Ceck");
+                    document.getElementById(BaseReq).classList.add("Ceck");
+                    document.getElementById(BasePrio).classList.add("Ceck");
+                    document.getElementById(BasePrec).classList.add("Ceck");
+                    document.getElementById(BaseApi).classList.add("Ceck");
+                }
+                if(idSub==="Enterprise")
+                {
+                    document.getElementById(EntSub).classList.add("Ceck");
+                    document.getElementById(EntReq).classList.add("Ceck");
+                    document.getElementById(EntPrio).classList.add("Ceck");
+                    document.getElementById(EntPrec).classList.add("Ceck");
+                    document.getElementById(EntApi).classList.add("Ceck");
+                }
+			}
+		</script>
 		<!--end::Custom Javascript-->
 		<!--end::Javascript-->
 	</body>
