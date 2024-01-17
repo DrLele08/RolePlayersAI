@@ -398,7 +398,7 @@
 					</div>
 					<!--end::Header-->
 					<!--begin::Content-->
-					<div class="content d-flex flex-column flex-column-fluid" id="kt_content" onload="CambiaDiv">
+					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 						<!--begin::Post-->
 						<div class="post d-flex flex-column-fluid" id="kt_post">
 							<!--begin::Container-->
@@ -414,11 +414,20 @@
 												<!--begin::Table head-->
 												<thead class="">
 													<tr id="kt_pricing">
+                                                        <th class="text-center min-w-200px" >
+                                                            <div class="min-w-200px mb-15">
+                                                                <div class="text-primary fs-3 fw-bold mb-3"></div>
+                                                                <div class="fs-5x d-flex justify-content-center">
+                                                                    <span class="lh-sm fw-semibold"></span>
+                                                                </div>
+                                                                <div class="text-muted fw-bold mb-10">&nbsp</div>
+                                                            </div>
+                                                        </th>
 														<th class="text-center min-w-200px" id="FreeSub">
 															<div class="min-w-200px mb-15">
 																<div class="text-primary fs-3 fw-bold mb-3">Free</div>
 																<div class="fs-5x d-flex justify-content-center">
-																	<span class="lh-sm fw-semibold" data-kt-plan-price-month="0">Gratis</span>
+																	<span class="lh-sm fw-semibold">Gratis</span>
 																</div>
 																<div class="text-muted fw-bold mb-10">&nbsp</div>
 															</div>
@@ -428,7 +437,7 @@
 																<div class="text-primary fs-3 fw-bold mb-3">Base</div>
 																<div class="fs-5x d-flex justify-content-center">
 																	<span class="fs-2 mt-3">€</span>
-																	<span class="lh-sm fw-semibold" data-kt-plan-price-month="19,99">19,99</span>
+																	<span class="lh-sm fw-semibold">19,99</span>
 																</div>
 																<div class="text-muted fw-bold mb-10">Mensile</div>
 															</div>
@@ -438,7 +447,7 @@
 																<div class="text-primary fs-3 fw-bold mb-3">Enterprise</div>
 																<div class="fs-5x d-flex justify-content-center">
 																	<span class="fs-2 mt-3">€</span>
-																	<span class="lh-sm fw-semibold" data-kt-plan-price-month="29,99">29,99</span>
+																	<span class="lh-sm fw-semibold">29,99</span>
 																</div>
 																<div class="text-muted fw-bold mb-10">Mensile</div>
 															</div>
@@ -558,25 +567,34 @@
 											<!--end::Table-->
 												<!--begin::Button-->
 												<div class="mb-10">
-													<button type="submit" id="downgrade_sub" class="btn btn-danger" style="background-color: #ff0000; float: left">
+                                                    <a href="{{BASE_URL}}/pagamento/1" id="FreeBut" class="btn btn-primary">
+                                                        <!--begin::Indicator label-->
+                                                        <span class="indicator-label">Passa ad Abbonamento Free</span>
+                                                        <!--end::Indicator label-->
+                                                        <!--begin::Indicator progress-->
+                                                        <span class="indicator-progress">Attendi per favore...
+															<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                                        <!--end::Indicator progress-->
+                                                    </a>
+													<a href="{{BASE_URL}}/pagamento/2" id="BaseBut" class="btn btn-primary">
 														<!--begin::Indicator label-->
-														<span class="indicator-label">Passa ad un piano più economico</span>
+														<span class="indicator-label">Passa ad Abbonamento Base</span>
 														<!--end::Indicator label-->
 														<!--begin::Indicator progress-->
 															<span class="indicator-progress">Attendi per favore...
 															<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
 														<!--end::Indicator progress-->
-													</button>
+													</a>
 												<!--end::Button-->
-												<button type="submit" id="upgrade_sub" class="btn btn-primary" style="float: right">
+												<a href="{{BASE_URL}}/pagamento/3" id="EntBut" class="btn btn-primary">
 													<!--begin::Indicator label-->
-													<span class="indicator-label">Passa ad un abbonamento migliore</span>
+													<span class="indicator-label">Passa ad Abbonamento Enterprise</span>
 													<!--end::Indicator label-->
 													<!--begin::Indicator progress-->
 													<span class="indicator-progress">Attendi per favore...
 														<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
 													<!--end::Indicator progress-->
-												</button>
+												</a>
 												</div>
 												<!--end::Button-->
 										</div>
@@ -647,40 +665,38 @@
 		<script src="{{BASEURL}}/assets/js/custom/pages/pricing/general.js"></script>
 		<script src="{{BASEURL}}/assets/js/widgets.bundle.js"></script>
 		<script src="{{BASEURL}}/assets/js/custom/widgets.js"></script>
-		<script src="{{BASEURL}}/models/abbonamento.js"></script>
-		<script src="{{BASEURL}}/models/utente.js"></script>
 		<script>
-            import utenteService from "../../services/utenteService";
 
-            let idUtente={{idUtente}}
-			let idSub=utenteService.getActualAbbonamento(idUtente).nomeTier;
-			function CambiaDiv()
-			{
-				if(idSub==="Free")
-				{
-					document.getElementById(FreeSub).classList.add("Ceck");
-                    document.getElementById(FreeReq).classList.add("Ceck");
-                    document.getElementById(FreePrio).classList.add("Ceck");
-                    document.getElementById(FreePrec).classList.add("Ceck");
-                    document.getElementById(FreeApi).classList.add("Ceck");
-				}
-                if(idSub==="Base")
-                {
-                    document.getElementById(BaseSub).classList.add("Ceck");
-                    document.getElementById(BaseReq).classList.add("Ceck");
-                    document.getElementById(BasePrio).classList.add("Ceck");
-                    document.getElementById(BasePrec).classList.add("Ceck");
-                    document.getElementById(BaseApi).classList.add("Ceck");
-                }
-                if(idSub==="Enterprise")
-                {
-                    document.getElementById(EntSub).classList.add("Ceck");
-                    document.getElementById(EntReq).classList.add("Ceck");
-                    document.getElementById(EntPrio).classList.add("Ceck");
-                    document.getElementById(EntPrec).classList.add("Ceck");
-                    document.getElementById(EntApi).classList.add("Ceck");
-                }
-			}
+			let idSub="{{Abbonamento.nomeTier}}";
+            (function() {
+                    if(idSub==="Free")
+                    {
+                        document.getElementById("FreeSub").classList.add("Ceck");
+                        document.getElementById("FreeReq").classList.add("Ceck");
+                        document.getElementById("FreePrio").classList.add("Ceck");
+                        document.getElementById("FreePrec").classList.add("Ceck");
+                        document.getElementById("FreeApi").classList.add("Ceck");
+                        document.getElementById("FreeBut").classList.add("Ceck");
+                    }
+                    if(idSub==="Base")
+                    {
+                        document.getElementById("BaseSub").classList.add("Ceck");
+                        document.getElementById("BaseReq").classList.add("Ceck");
+                        document.getElementById("BasePrio").classList.add("Ceck");
+                        document.getElementById("BasePrec").classList.add("Ceck");
+                        document.getElementById("BaseApi").classList.add("Ceck");
+                        document.getElementById("BaseBut").classList.add("Ceck");
+                    }
+                    if(idSub==="Enterprise")
+                    {
+                        document.getElementById("EntSub").classList.add("Ceck");
+                        document.getElementById("EntReq").classList.add("Ceck");
+                        document.getElementById("EntPrio").classList.add("Ceck");
+                        document.getElementById("EntPrec").classList.add("Ceck");
+                        document.getElementById("EntApi").classList.add("Ceck");
+                        document.getElementById("EntBut").classList.add("Ceck");
+                    }
+            })();
 		</script>
 		<!--end::Custom Javascript-->
 		<!--end::Javascript-->
