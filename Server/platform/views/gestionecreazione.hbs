@@ -640,10 +640,10 @@
                             <div class="card-body pt-5">
                                 <span>Privacy<br></span>
                                 <div>
-                                    <input type="radio" id="priv"  name="fas" value="privato">
+                                    <input type="radio" id="priv"  name="priv" value="privato">
                                     <label for="priv">Privato &nbsp</label>
                                     <span>Il contesto sarà visibile solo nel tuo inventario.</span><br><br>
-                                    <input type="radio" id="publ"  name="fas" value="pubblico">
+                                    <input type="radio" id="publ"  name="publ" value="pubblico">
                                     <label for="publ">Pubblico &nbsp</label>
                                     <span>Il contesto sarà visibile a tutti nella libreria.</span>
                                 </div>
@@ -711,7 +711,7 @@
 <<script>
     const apiUrl = '{{BASE_URL}}/api/contesto/cercaContesto?Pagina=1'
 
-    // Effettua una richiesta GET all'API
+    // Effettua una richiesta GET all'API per contenuto
     axios.get(apiUrl,{
         headers:{
             "Authorization":"{{idUtente}}.{{tokenAuth}}"
@@ -723,8 +723,6 @@
                 if(ris === 1) {
                     const data = response.data.Contesto.contesti;
                     const selectElement = document.getElementById("selAmbiente");
-                    const personaggio1 = document.getElementById("p1");
-                    const personaggio2 = document.getElementById("p2");
                     // Aggiungi una nuova opzione per ogni elemento nel tuo array
                     data.forEach(contesto => {
                         const optionElement = document.createElement('option');
@@ -758,13 +756,65 @@
                 });
             });
 
+    // Effettua una richiesta GET all'API per relazione
+    const apiUrl2 = '{{BASE_URL}}/api/creazione/cerca?Nome&Tipo=Personaggio&Pagina=1'
+
+    axios.get(apiUrl2,{
+        headers:{
+            "Authorization":"{{idUtente}}.{{tokenAuth}}"
+        }
+    })
+            .then(response => {
+                const risp = response.data.Ris;
+                console.log(response);
+                if(risp === 1) {
+                    const data = response.data.Creazione.creazioni;
+                    const personaggio1 = document.getElementById("p1");
+                    const personaggio2 = document.getElementById("p2");
+                    // Aggiungi una nuova opzione per ogni elemento nel tuo array
+                    data.forEach(creazioni => {
+                        const optionElement = document.createElement('option');
+                        const optionElement2 = document.createElement('option');
+                        optionElement.value = creazioni.idContesto;
+                        optionElement.innerText = creazioni.nome;
+                        optionElement2.value = creazioni.idContesto;
+                        optionElement2.innerText = creazioni.nome;
+                        personaggio1.appendChild(optionElement);
+                        personaggio2.appendChild(optionElement2);
+                    });
+                }
+                else{
+                    const mess = response.data.Mess;
+                    Swal.fire({
+                        text: mess,
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok",
+                        customClass: {
+                            confirmButton: "btn fw-bold btn-primary",
+                        }
+                    });
+                }
+            })
+            .catch(error => {
+                Swal.fire({
+                    text: error.message,
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok",
+                    customClass: {
+                        confirmButton: "btn fw-bold btn-primary",
+                    }
+                });
+            });
+
 
 // Funzione Crea Contesto
     function CreaContesto(){
-        const apiUrl = '{{BASE_URL}}/api/relazionePersonaggi/'
+        const apiUrl = '{{BASE_URL}}/api/contesto/'
 
         // Effettua una richiesta GET all'API
-        axios.get(apiUrl,{
+        axios.post(apiUrl,{
             headers:{
                 "Authorization":"{{idUtente}}.{{tokenAuth}}"
             }
@@ -775,6 +825,8 @@
         const idp1 = document.getElementById("p1").value;
         const idp2 = document.getElementById("p2").value;
         const relazione = document.getElementById("relazione").value.trim();
+        const controllo = document.querySelector('input[name="publ"]:checked');
+        const controllo2 = document.querySelector('input[name="priv"]:checked');
         if(nome.length>0){
             const formData = new FormData();
             formData.append('fkAmbiente',idAmbiente);
@@ -782,14 +834,17 @@
             formData.append('fkPersonaggio1',idp1);
             formData.append('fkPersonaggio2',idp2);
             formData.append('descrizione', relazione);
-            const config = {
-                headers: {
-                    Authorization: "{{idUtente}}.{{tokenAuth}}"
-                }
-            };
+            if(controllo || controllo2  ) {
 
-            const urlApi="{{BASE_URL}}/api/contesto/";
-            axios.post(urlApi, formData, config)
+
+             const config = {
+                   headers: {
+                    Authorization: "{{idUtente}}.{{tokenAuth}}"
+                 }
+              };
+
+                 const urlApi="{{BASE_URL}}/api/relazionePersonaggi/";
+                    axios.post(urlApi, formData, config)
                     .then(response => {
                         const ris=response.data.Ris;
                         if(ris===1) {
@@ -829,6 +884,19 @@
                             }
                         });
                     });
+        }
+        else{
+            Swal.fire({
+                text: "Nome richiesto",
+                icon: "error",
+                buttonsStyling: false,
+                confirmButtonText: "Ok",
+                customClass: {
+                    confirmButton: "btn fw-bold btn-primary",
+                }
+            });
+        }
+
         }
         else{
             Swal.fire({
