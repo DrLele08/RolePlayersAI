@@ -254,6 +254,60 @@
 				});
 			});
 
+
+            function Rimuovi(idRimosso, tipo) {
+                let urlApiRimuovi = "{{BASE_URL}}/api/inventario/remove"
+
+                let json = {};
+
+                if (tipo === 2) {
+                    json.idContesto = idRimosso;
+                } else {
+                    json.idCreazione = idRimosso;
+                }
+                axios.post(urlApiRimuovi, json, {
+                    headers: {
+                        Authorization: "{{idUtente}}.{{tokenAuth}}"
+                    }
+                }).then((result) => {
+                            let ris = result.data.Ris;
+                            if (ris === 1) {
+                                Ricerca(this.tipo)
+                                Swal.fire({
+                                    text: "Rimosso con successo",
+                                    icon: "success",
+                                    buttonsStyling: false,
+                                    confirmButtonText: "Ok",
+                                    customClass: {
+                                        confirmButton: "btn btn-primary",
+                                    }
+                                });
+                            } else {
+                                let mess = result.data.Mess;
+                                Swal.fire({
+                                    text: mess,
+                                    icon: "error",
+                                    buttonsStyling: false,
+                                    confirmButtonText: "Ok",
+                                    customClass: {
+                                        confirmButton: "btn btn-primary",
+                                    }
+                                });
+                            }
+                        }
+                ).catch((error) => {
+                    Swal.fire({
+                        text: error.message,
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok",
+                        customClass: {
+                            confirmButton: "btn btn-primary",
+                        }
+                    });
+                })
+            }
+
 			function Ricerca(tipo)
 			{
                 this.tipo=tipo;
@@ -293,9 +347,11 @@
                                     <!--end::Title-->
                                 </div>
                                 <!--end::Info-->
-                                <!--begin::Button-->
-                                <div class="d-grid mb-10">
-                                    <button type="submit" class="btn btn-danger" style="background: #ff0000>
+                                <!--begin::Button-->`
+                                    if(elem.tipoContenuto===3)
+                                    {
+                                        html+=` <div class="d-grid mb-10">
+                                    <button type="submit" class="btn btn-danger" style="background: #ff0000" onclick="Rimuovi(${elem.idContesto}, 2)">
                                         <!--begin::Indicator label-->
                                         <span class="indicator-label">Rimuovi dall'inventario</span>
                                         <!--end::Indicator label-->
@@ -309,10 +365,31 @@
                             </div>
                             <!--end::Body-->
                         </div>`;
+                                    }
+                                else
+                                    {
+                                        html+=` <div class="d-grid mb-10">
+                                    <button type="submit" class="btn btn-danger" style="background: #ff0000" onclick="Rimuovi(${elem.idCreazione}, 1)">
+                                        <!--begin::Indicator label-->
+                                        <span class="indicator-label">Rimuovi dall'inventario</span>
+                                        <!--end::Indicator label-->
+                                        <!--begin::Indicator progress-->
+                                        <span class="indicator-progress">Attendi per favore...
+                                                                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                        <!--end::Indicator progress-->
+                                    </button>
+                                </div>
+                                <!--end::Button-->
+                            </div>
+                            <!--end::Body-->
+                        </div>`;
+                                    }
+                }
                 }
 
                 document.getElementById("divContenuti").innerHTML=html;
 			}
+
 
             document.getElementById("searchBar").addEventListener("input", (_) => {
                 Ricerca(tipo)
