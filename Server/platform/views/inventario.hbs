@@ -272,7 +272,6 @@
                 }).then((result) => {
                             let ris = result.data.Ris;
                             if (ris === 1) {
-                                Ricerca(this.tipo)
                                 Swal.fire({
                                     text: "Rimosso con successo",
                                     icon: "success",
@@ -281,6 +280,8 @@
                                     customClass: {
                                         confirmButton: "btn btn-primary",
                                     }
+                                }).then(()=>{
+                                    window.location.href = "{{BASE_URL}}/inventario";
                                 });
                             } else {
                                 let mess = result.data.Mess;
@@ -305,7 +306,7 @@
                             confirmButton: "btn btn-primary",
                         }
                     });
-                })
+                });
             }
 
 			function Ricerca(tipo)
@@ -351,7 +352,7 @@
                                     if(elem.tipoContenuto===3)
                                     {
                                         html+=` <div class="d-grid mb-10">
-                                    <button type="submit" class="btn btn-danger" style="background: #ff0000" onclick="Rimuovi(${elem.idContesto}, 2)">
+                                    <button type="submit" class="btn btn-danger" style="background: #ff0000" onclick="Rimuovi(${elem.id}, 2)">
                                         <!--begin::Indicator label-->
                                         <span class="indicator-label">Rimuovi dall'inventario</span>
                                         <!--end::Indicator label-->
@@ -369,7 +370,7 @@
                                 else
                                     {
                                         html+=` <div class="d-grid mb-10">
-                                    <button type="submit" class="btn btn-danger" style="background: #ff0000" onclick="Rimuovi(${elem.idCreazione}, 1)">
+                                    <button type="submit" class="btn btn-danger" style="background: #ff0000" onclick="Rimuovi(${elem.id}, 1)">
                                         <!--begin::Indicator label-->
                                         <span class="indicator-label">Rimuovi dall'inventario</span>
                                         <!--end::Indicator label-->
@@ -384,7 +385,6 @@
                             <!--end::Body-->
                         </div>`;
                                     }
-                }
                 }
 
                 document.getElementById("divContenuti").innerHTML=html;
