@@ -473,9 +473,11 @@
 													<!--begin::Item-->
 													<li class="nav-item mb-3 me-0">
 														<!--begin::Nav link-->
-														<a class="nav-link nav-link-border-solid btn btn-outline btn-flex btn-active-color-primary flex-column flex-stack pt-9 pb-7 page-bg show active" data-bs-toggle="pill" href="#lib_all" style="width: 138px;height: 180px">
+														<a class="nav-link nav-link-border-solid btn btn-outline btn-flex btn-active-color-primary flex-column flex-stack pt-9 pb-7 page-bg show active" data-bs-toggle="pill" href="#lib_all" style="width: 138px;height: 180px" onclick="Ricerca()">
 															<!--begin::Info-->
 															<div class="">
+																<span class="text-gray-800 fw-bold fs">&nbsp <br></span>
+																<span class="text-gray-800 fw-bold fs">&nbsp <br></span>
 																<span class="text-gray-800 fw-bold fs-2">Tutto</span>
 															</div>
 															<!--end::Info-->
@@ -486,7 +488,7 @@
 													<!--begin::Item-->
 													<li class="nav-item mb-3 me-0">
 														<!--begin::Nav link-->
-														<a class="nav-link nav-link-border-solid btn btn-outline btn-flex btn-active-color-primary flex-column flex-stack pt-9 pb-7 page-bg" data-bs-toggle="pill" href="#lib_cha" style="width: 138px;height: 180px">
+														<a class="nav-link nav-link-border-solid btn btn-outline btn-flex btn-active-color-primary flex-column flex-stack pt-9 pb-7 page-bg" data-bs-toggle="pill" href="#lib_cha" style="width: 138px;height: 180px" onclick="Ricerca">
 															<!--begin::Icon-->
 															<div class="nav-icon mb-3">
 																<!--begin::Characters icon-->
@@ -506,7 +508,7 @@
 													<!--begin::Item-->
 													<li class="nav-item mb-3 me-0">
 														<!--begin::Nav link-->
-														<a class="nav-link nav-link-border-solid btn btn-outline btn-flex btn-active-color-primary flex-column flex-stack pt-9 pb-7 page-bg" data-bs-toggle="pill" href="#lib_loc" style="width: 138px;height: 180px">
+														<a class="nav-link nav-link-border-solid btn btn-outline btn-flex btn-active-color-primary flex-column flex-stack pt-9 pb-7 page-bg" data-bs-toggle="pill" href="#lib_loc" style="width: 138px;height: 180px" onclick="Ricerca()">
 															<!--begin::Icon-->
 															<div class="nav-icon mb-3">
 																<!--begin::Locations icon-->
@@ -526,7 +528,7 @@
 													<!--begin::Item-->
 													<li class="nav-item mb-3 me-0">
 														<!--begin::Nav link-->
-														<a class="nav-link nav-link-border-solid btn btn-outline btn-flex btn-active-color-primary flex-column flex-stack pt-9 pb-7 page-bg" data-bs-toggle="pill" href="#lib_con" style="width: 138px;height: 180px">
+														<a class="nav-link nav-link-border-solid btn btn-outline btn-flex btn-active-color-primary flex-column flex-stack pt-9 pb-7 page-bg" data-bs-toggle="pill" href="#lib_con" style="width: 138px;height: 180px" onclick="Ricerca()">
 															<!--begin::Icon-->
 															<div class="nav-icon mb-3">
 																<!--begin::Context icon-->
@@ -545,32 +547,12 @@
 													<!--end::Item-->
 												</ul>
 												<!--end::Nav-->
-												<!--begin::Card-->
-												<div class="card mb-7">
-													<!--begin::Card body-->
-													<div class="card-body">
-														<!--begin::Compact form-->
-														<div class="d-flex align-items-center">
-															<!--begin::Input group-->
-															<div class="position-relative w-md-400px me-md-2">
-																<i class="ki-duotone ki-magnifier fs-3 text-gray-500 position-absolute top-50 translate-middle ms-6">
-																	<span class="path1"></span>
-																	<span class="path2"></span>
-																</i>
-																<input type="text" class="form-control form-control-solid ps-10" name="search" value="" placeholder="Cerca"/>
-															</div>
-															<!--end::Input group-->
-															<!--begin:Action-->
-															<div class="d-flex align-items-center">
-																<button type="submit" class="btn btn-primary me-5">Cerca</button>
-															</div>
-															<!--end:Action-->
+												<!--begin::Tab Content-->
+												<div class="tab-content">
+													<!--begin::Tap pane-->
+													<div class="tab-pane fade show active" id="lib_all">
 														</div>
-														<!--end::Compact form-->
 													</div>
-													<!--end::Card body-->
-												</div>
-												<!--end::Card-->
 												<!--begin::Tab Content-->
 												<div class="tab-content">
 													<!--begin::Tap pane-->
@@ -598,7 +580,7 @@
 																	<!--end::Info-->
 																	<!--begin::Button-->
 																	<div class="d-grid mb-10">
-																		<button type="submit" id="inv_add" class="btn btn-primary">
+																		<button type="submit" class="btn btn-primary">
 																			<!--begin::Indicator label-->
 																			<span class="indicator-label">Aggiungi all'inventario</span>
 																			<!--end::Indicator label-->
@@ -834,7 +816,72 @@
 		<script src="assets/js/widgets.bundle.js"></script>
 		<script src="assets/js/custom/widgets.js"></script>
 		<script src="assets/js/custom/utilities/modals/users-search.js"></script>
-		<script src=""
+		<script>
+			let tipo=0;
+			function Ricerca()
+			{
+				if (tipo==0)
+				{
+					let vettTest=["xx", "yy", "zz"];
+					let html="";
+					for(let i=0, i<vettTest.length; i++)
+					{
+						html +=
+								<!--begin::Card-->
+								<div class="card card-flush flex-row-fluid p-6 pb-5 mw-100">
+									<!--begin::Body-->
+									<div class="card-body text-center">
+										<!--begin::Food img-->
+										<img src="assets/media/stock/food/img-2.jpg" class="rounded-3 mb-4 w-150px h-150px w-xxl-200px h-xxl-200px" alt="" />
+										<!--end::Food img-->
+										<!--begin::Info-->
+										<div class="mb-2">
+											<!--begin::Title-->
+											<div class="text-center">
+												<span class="fw-bold text-gray-800 cursor-pointer text-hover-primary fs-3 fs-xl-1">B</span>
+												<span class="text-gray-500 fw-semibold d-block fs-6 mt-n1">Creato da:
+																				<a href="#" class="ms-1 link-primary">A</a>
+																			</span>
+											</div>
+											<!--end::Title-->
+										</div>
+										<!--end::Info-->
+										<!--begin::Button-->
+										<div class="d-grid mb-10">
+											<button type="submit" id="inv_add" class="btn btn-primary">
+												<!--begin::Indicator label-->
+												<span class="indicator-label">Aggiungi all'inventario</span>
+												<!--end::Indicator label-->
+												<!--begin::Indicator progress-->
+												<span class="indicator-progress">Attendi per favore...
+																			<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+												<!--end::Indicator progress-->
+											</button>
+										</div>
+										<!--end::Button-->
+									</div>
+									<!--end::Body-->
+								</div>
+						<!--end::Card-->
+						;
+					}
+					document.getElementById("libAll").innerHTML=html;
+				}
+				if (tipo==1)
+				{
+					alert("PERSONAGGI")
+				}
+				if (tipo==2)
+				{
+					alert("AMBIENTI")
+				}
+				if (tipo==3)
+				{
+					alert("CONTESTI")
+				}
+			}
+		</script>
+
 		<!--end::Custom Javascript-->
 		<!--end::Javascript-->
 	</body>
