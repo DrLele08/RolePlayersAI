@@ -159,4 +159,13 @@ utenteService.getAll = async() =>{
     return utenti;
 }
 
+utenteService.hasCreazione = async (idUtente, idCreazione)=>{
+    if(utils.checkId(idUtente) && utils.checkId(idCreazione)){
+        return utente.hasCreazione(idUtente, idCreazione);
+    }
+    else{
+        return Promise.reject("ID non validi");
+    }
+}
+
 module.exports = utenteService;
