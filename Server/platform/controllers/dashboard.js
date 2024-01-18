@@ -31,6 +31,38 @@ exports.GetDashboard = async (req, ris) => {
     }
 };
 
+exports.GetLibreria=async (req,ris)=>{
+    const idUtente = req.idUtente;
+
+    try{
+        const user = await utente.getById(idUtente);
+        const abbonamento = await user.getAbbonamento();
+
+        ris.render("libreria", {
+            Utente: utils.convertToNormalObject(user),
+            Abbonamento: utils.convertToNormalObject(abbonamento)
+        });
+    }catch(error){
+        ris.render("error", {errore: error});
+    }
+};
+
+exports.GetInventario=async (req,ris)=>{
+    const idUtente = req.idUtente;
+
+    try{
+        const user = await utente.getById(idUtente);
+        const abbonamento = await user.getAbbonamento();
+
+        ris.render("inventario", {
+            Utente: utils.convertToNormalObject(user),
+            Abbonamento: utils.convertToNormalObject(abbonamento)
+        });
+    }catch(error){
+        ris.render("error", {errore: error});
+    }
+};
+
 exports.GetHome = async (req, ris) => {
     ris.render("landing");
 };

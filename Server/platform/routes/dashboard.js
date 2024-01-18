@@ -17,5 +17,9 @@ module.exports=app=>{
      */
     router.get("/dashboard", middlewareAuth([1,2,3]), dashboard.GetDashboard);
 
+    router.get("/libreria",middlewareAuth([1,2,3]),dashboard.GetLibreria);
+
+    router.get("/inventario",middlewareAuth([1,2,3]),dashboard.GetInventario);
+
     app.use("/",router);
 };
