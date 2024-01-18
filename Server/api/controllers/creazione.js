@@ -61,7 +61,7 @@ exports.GetByFilter = async (req,res)=>{
         });
 
         for(let i=0; i<risCreazione.creazioni.length; i++){
-            risCreazione.creazioni[i].dataValues.invetario = await utenteService.hasCreazione(idUtente, risCreazione.creazioni[i].idCreazione);
+            risCreazione.creazioni[i].dataValues.inventario = await utenteService.hasCreazione(idUtente, risCreazione.creazioni[i].idCreazione);
         }
 
         json.Ris = 1;
