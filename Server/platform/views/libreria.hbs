@@ -216,6 +216,7 @@
                             id:creazione.idCreazione,
                             nome:creazione.nome,
                             immagine:creazione.immagine,
+                            inventario:creazione.inventario,
                             tipoContenuto:tipoContenuto
                         });
                     }
@@ -236,6 +237,7 @@
                                     id:contesto.idContesto,
                                     nome:contesto.nome,
                                     immagine:contesto.immagine,
+                                    inventario:contesto.inventario,
                                     tipoContenuto:3
                                 });
                             }
@@ -289,6 +291,68 @@
 				});
 			});
 
+            /*
+                tipoToggle: 0->Aggiungi    1-> Rimuovi
+                tipoContenuto: Personaggio:1 Ambiente:2 Contesto:3
+             */
+            function ToggleInventario(idRimosso,tipoContenuto,tipoToggle) {
+
+                let urlApi = "{{BASE_URL}}/api/inventario/remove"
+                if(tipoToggle===0){
+                    urlApi = "{{BASE_URL}}/api/inventario/add"
+                }
+
+                let json = {};
+
+                if (tipoContenuto === 3) {
+                    json.idContesto = idRimosso;
+                } else {
+                    json.idCreazione = idRimosso;
+                }
+                axios.post(urlApi, json, {
+                    headers: {
+                        Authorization: "{{idUtente}}.{{tokenAuth}}"
+                    }
+                }).then((result) => {
+                            let ris = result.data.Ris;
+                            if (ris === 1) {
+                                Swal.fire({
+                                    text: "Operazione effettuata con successo",
+                                    icon: "success",
+                                    buttonsStyling: false,
+                                    confirmButtonText: "Ok",
+                                    customClass: {
+                                        confirmButton: "btn btn-primary",
+                                    }
+                                }).then(()=>{
+                                    window.location.href = "{{BASE_URL}}/libreria";
+                                });
+                            } else {
+                                let mess = result.data.Mess;
+                                Swal.fire({
+                                    text: mess,
+                                    icon: "error",
+                                    buttonsStyling: false,
+                                    confirmButtonText: "Ok",
+                                    customClass: {
+                                        confirmButton: "btn btn-primary",
+                                    }
+                                });
+                            }
+                        }
+                ).catch((error) => {
+                    Swal.fire({
+                        text: error.message,
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok",
+                        customClass: {
+                            confirmButton: "btn btn-primary",
+                        }
+                    });
+                });
+            }
+
 			function Ricerca(tipo)
 			{
                 this.tipo=tipo;
@@ -329,17 +393,19 @@
                                 </div>
                                 <!--end::Info-->
                                 <!--begin::Button-->
-                                <div class="d-grid mb-10">
-                                    <button type="submit" class="btn btn-primary">
-                                        <!--begin::Indicator label-->
-                                        <span class="indicator-label">Aggiungi all'inventario</span>
-                                        <!--end::Indicator label-->
-                                        <!--begin::Indicator progress-->
-                                        <span class="indicator-progress">Attendi per favore...
-                                                                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                        <!--end::Indicator progress-->
-                                    </button>
-                                </div>
+                                <div class="d-grid mb-10">`;
+
+                            if(elem.inventario){
+                            html+=`<button type="submit" class="btn btn-danger" onclick="ToggleInventario(${elem.id},${elem.tipoContenuto},1)">
+                                    <span class="indicator-label">Rimuovi dall'inventario</span>
+                                    </button>`;
+                            }
+                            else{
+                                html+=`<button type="submit" class="btn btn-primary" onclick="ToggleInventario(${elem.id},${elem.tipoContenuto},0)">
+                                    <span class="indicator-label">Aggiungi all'inventario</span>
+                                    </button>`;
+                            }
+                                html+=`</div>
                                 <!--end::Button-->
                             </div>
                             <!--end::Body-->
