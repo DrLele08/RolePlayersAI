@@ -272,11 +272,23 @@ utente.getAll = async () => {
     });
 };
 
+
 utente.hasCreazione = async (idUtente, idCreazione)=>{
     let user = await Utente.findByPk(idUtente);
     let creazioni = await user.getCreaziones();
     for(let i=0; i<creazioni.length; i++){
         if(creazioni[i].idCreazione === idCreazione){
+            return true;
+        }
+    }
+    return false;
+}
+
+utente.hasContesto = async (idUtente, idContesto)=>{
+    let user = await Utente.findByPk(idUtente);
+    let contesti = await user.getContestos();
+    for(let i=0; i<contesti.length; i++){
+        if(contesti[i].idContesto === idContesto){
             return true;
         }
     }

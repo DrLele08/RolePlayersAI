@@ -1,4 +1,6 @@
 const contestoService = require("../../services/contestoService");
+const utenteService = require("../../services/utenteService");
+const utils = require("../../models/utils");
 
 exports.CreateContesto = async (req,res) =>{
     let json = {};
@@ -81,13 +83,16 @@ exports.GetByFilter = async (req,res)=>{
 
 
     try{
-
         const risContesto = await contestoService.getByFilter(nome,pagina,{
             idUtente: idUtente,
             idRuolo: idRuolo
         });
+
+        for(let i=0; i<risContesto.contesti.length; i++){
+            risContesto.contesti[i].dataValues.inventario = await utenteService.hasContesto(idUtente, risContesto.contesti[i].idContesto);
+        }
         json.Ris = 1;
-        json.Contesto = risContesto;
+        json.Contesto = utils.convertToNormalObject(risContesto);
         res.json(json);
     }catch (error){
         json.Ris = 0;

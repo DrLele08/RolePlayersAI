@@ -168,4 +168,13 @@ utenteService.hasCreazione = async (idUtente, idCreazione)=>{
     }
 }
 
+utenteService.hasContesto = async (idUtente, idContesto)=>{
+    if(utils.checkId(idUtente) && utils.checkId(idContesto)){
+        return utente.hasContesto(idUtente, idContesto);
+    }
+    else{
+        return Promise.reject("ID non validi");
+    }
+}
+
 module.exports = utenteService;
