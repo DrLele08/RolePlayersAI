@@ -2,6 +2,7 @@ const utente= require("../../services/utenteService");
 const creazione = require("../../services/creazioneService");
 const utils = require("../../models/utils");
 const sessione = require("../../services/sessioneService");
+const utenteService = require("../../services/utenteService");
 
 /**
  * Ottiene le informazioni necessarie e renderizza la dashboard.
@@ -19,6 +20,14 @@ exports.GetDashboard = async (req, ris) => {
         const abbonamento = await user.getAbbonamento();
         const personaggiPopolari = await creazione.getCreazioniPopolari(8, "Personaggio");
         const ambientiPopolari = await creazione.getCreazioniPopolari(8, "Ambiente");
+
+        for(let i=0; i<personaggiPopolari.length; i++){
+            personaggiPopolari[i].dataValues.inventario = await utenteService.hasCreazione(idUtente, personaggiPopolari[i].idCreazione);
+        }
+
+        for(let i=0; i<ambientiPopolari.length; i++){
+            ambientiPopolari[i].dataValues.inventario = await utenteService.hasCreazione(idUtente, ambientiPopolari[i].idCreazione);
+        }
 
         ris.render("index", {
             Utente: utils.convertToNormalObject(user),
