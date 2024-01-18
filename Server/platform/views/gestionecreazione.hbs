@@ -319,13 +319,11 @@
                                 <!--begin::Card header-->
                                 <div class="card-header pt-7">
                                     <!--begin::Form-->
-                                    <form class="w-100 position-relative align-center" autocomplete="off">
                                         <span>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</span>
                                         <button type="button" class="btn btn-sm btn-light btn-active-light-primary me-3 align-bottom" onclick="CreaPersonaggio()">
                                             <span class="menu-title">Crea</span>
                                         </button>
                                         <span>&nbsp &nbsp &nbsp &nbsp</span>
-                                    </form>
                                     <span>&nbsp</span>
                                     <!--end::Form-->
                                 </div>
@@ -433,13 +431,11 @@
                                 <!--begin::Card header-->
                                 <div class="card-header pt-7">
                                     <!--begin::Form-->
-                                    <form class="w-100 position-relative align-center" autocomplete="off">
                                         <span>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</span>
                                         <button class="btn btn-sm btn-light btn-active-light-primary me-3 align-bottom" onclick="CreaAmbiente()">
                                             <span class="menu-title">Crea</span>
                                         </button>
                                         <span>&nbsp &nbsp &nbsp &nbsp</span>
-                                    </form>
                                     <span>&nbsp</span>
                                     <!--end::Form-->
                                 </div>
@@ -914,81 +910,65 @@
 
     // Funzione Crea Ambiente
     function CreaAmbiente(){
-        const apiUrl = '{{BASE_URL}}/api/creazione/'
+        const nome = document.getElementById("nameEnv").value.trim();
+        const descrizione=document.getElementById("dexEnv").value.trim();
+        const foto=document.getElementById("ambiente").files;
 
-        // Effettua una richiesta GET all'API
-        axios.post(apiUrl,{
-            headers:{
-                "Authorization":"{{idUtente}}.{{tokenAuth}}"
-            }
-        })
-                .then(response => {
-                    const nome = document.getElementById("nameEnv").value.trim();
-                    const tipo="Ambiente";
-                    const descrizione=document.getElementById("dexEnv").value.trim();
-                    const foto=document.getElementById("ambiente").value;
-                    const controllo = document.querySelector('input[name="publl"]:checked');
-                    const controllo2 = document.querySelector('input[name="priva"]:checked');
-                    if(nome.length>0){
+        const checkPrivato = document.getElementById("priva").checked;
+        const checkPubblico = document.getElementById("publl").checked;
+
+        if(nome.length>2 && nome.length<=50){
+            if(descrizione.length>0 && descrizione.length<=512){
+                    if(checkPrivato || checkPubblico){
+                        let isPubblico=1;
+                        if(checkPrivato){
+                            isPubblico=0;
+                        }
+
                         const formData = new FormData();
                         formData.append('nome',nome);
-                        formData.append('tipo', tipo)
+                        formData.append("isPubblico",isPubblico);
+                        formData.append('tipo', "Ambiente");
                         formData.append('descrizione', descrizione);
-                        formData.append('foto', foto)
-                        if(controllo || controllo2) {
-
-
-                            const config = {
-                                headers: {
-                                    Authorization: "{{idUtente}}.{{tokenAuth}}"
-                                }
-                            };
-
-                            const urlApi="{{BASE_URL}}/api/creazione/";
-                            axios.post(urlApi, formData, config)
-                                    .then(response => {
-                                        const ris=response.data.Ris;
-                                        if(ris===1) {
-                                            Swal.fire({
-                                                text: "Ambiente creato!",
-                                                icon: "success",
-                                                buttonsStyling: false,
-                                                confirmButtonText: "Ok",
-                                                customClass: {
-                                                    confirmButton: "btn fw-bold btn-primary",
-                                                }
-                                            }).then(function() {
-                                                window.location = "{{BASE_URL}}/sessione";
-                                            });
-                                        }
-                                        else{
-                                            const mess=response.data.Mess;
-                                            Swal.fire({
-                                                text: mess,
-                                                icon: "error",
-                                                buttonsStyling: false,
-                                                confirmButtonText: "Ok",
-                                                customClass: {
-                                                    confirmButton: "btn fw-bold btn-primary",
-                                                }
-                                            });
-                                        }
-                                    })
-                                    .catch(error => {
-                                        Swal.fire({
-                                            text: error.message,
-                                            icon: "error",
-                                            buttonsStyling: false,
-                                            confirmButtonText: "Ok",
-                                            customClass: {
-                                                confirmButton: "btn fw-bold btn-primary",
-                                            }
-                                        });
-                                    });
+                        if(foto.length>0){
+                            formData.append('foto', foto[0])
                         }
-                        else{
+
+                        const apiUrl = '{{BASE_URL}}/api/creazione/'
+                        axios.post(apiUrl,formData,{
+                            headers:{
+                                Authorization: "{{idUtente}}.{{tokenAuth}}"
+                            }
+                        }).then((result)=>{
+                            let ris=result.data.Ris;
+                            if(ris===1){
+                                Swal.fire({
+                                    text: "Ambiente creato!",
+                                    icon: "success",
+                                    buttonsStyling: false,
+                                    confirmButtonText: "Ok",
+                                    customClass: {
+                                        confirmButton: "btn fw-bold btn-primary",
+                                    }
+                                }).then(()=>{
+                                    window.location.href = "{{BASE_URL}}/contenuto";
+                                });
+                            }
+                            else{
+                                let mess=result.data.Mess;
+                                Swal.fire({
+                                    text: mess,
+                                    icon: "error",
+                                    buttonsStyling: false,
+                                    confirmButtonText: "Ok",
+                                    customClass: {
+                                        confirmButton: "btn fw-bold btn-primary",
+                                    }
+                                });
+                            }
+                        }).catch((error)=>{
                             Swal.fire({
-                                text: "Nome richiesto",
+                                text: error.message,
                                 icon: "error",
                                 buttonsStyling: false,
                                 confirmButtonText: "Ok",
@@ -996,12 +976,11 @@
                                     confirmButton: "btn fw-bold btn-primary",
                                 }
                             });
-                        }
-
+                        });
                     }
                     else{
                         Swal.fire({
-                            text: "Nome richiesto",
+                            text: "Deve selezionare la privacy del personaggio",
                             icon: "error",
                             buttonsStyling: false,
                             confirmButtonText: "Ok",
@@ -1010,18 +989,30 @@
                             }
                         });
                     }
-                })
-                .catch(error => {
-                    Swal.fire({
-                        text: error.message,
-                        icon: "error",
-                        buttonsStyling: false,
-                        confirmButtonText: "Ok",
-                        customClass: {
-                            confirmButton: "btn fw-bold btn-primary",
-                        }
-                    });
+            }
+            else{
+                Swal.fire({
+                    text: "La descrizione deve essere compresa tra 1 e 512 caratteri",
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok",
+                    customClass: {
+                        confirmButton: "btn fw-bold btn-primary",
+                    }
                 });
+            }
+        }
+        else{
+            Swal.fire({
+                text: "Devi inserire un nome compreso tra 2 e 50 caratteri",
+                icon: "error",
+                buttonsStyling: false,
+                confirmButtonText: "Ok",
+                customClass: {
+                    confirmButton: "btn fw-bold btn-primary",
+                }
+            });
+        }
     }
 
     // Funzione Crea Personaggio
