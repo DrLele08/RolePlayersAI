@@ -1,4 +1,6 @@
-const creazioneService = require("../../services/creazioneService")
+const creazioneService = require("../../services/creazioneService");
+const utenteService = require("../../services/utenteService");
+const utils = require("../../models/utils");
 
 exports.GetById = async (req,res)=>{
     let json = {};
@@ -57,8 +59,13 @@ exports.GetByFilter = async (req,res)=>{
             idUtente: idUtente,
             idRuolo: idRuolo
         });
+
+        for(let i=0; i<risCreazione.creazioni.length; i++){
+            risCreazione.creazioni[i].dataValues.inventario = await utenteService.hasCreazione(idUtente, risCreazione.creazioni[i].idCreazione);
+        }
+
         json.Ris = 1;
-        json.Creazione = risCreazione;
+        json.Creazione = utils.convertToNormalObject(risCreazione);
         res.json(json);
     }catch (error){
         json.Ris = 0;
