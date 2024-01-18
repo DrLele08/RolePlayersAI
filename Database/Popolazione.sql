@@ -8,8 +8,15 @@ VALUES ('Free', 0, 100),
 -- password: Password@1
 INSERT INTO Utente(fkAbbonamento, username, nome, cognome, email, `password`, dataNascita, telefono, ruolo, msgRimanenti, scadenzaAbbonamento, authToken)
 VALUES (1, 'utente1', 'Mario', 'Rossi', 'mario.rossi@example.com', 'nMPlq9+u4Zimt0uX6pHjBuF0Td9Jh209z2y5Nt/Vydc=', '1990-01-01', '1234567890', 'Utente', 100, null, 'auth_token_1'),
-       (2, 'utente2', 'Luca', 'Bianchi', 'luca.bianchi@example.com', 'nMPlq9+u4Zimt0uX6pHjBuF0Td9Jh209z2y5Nt/Vydc=', '1985-05-15', '9876543210', 'Moderatore', 500, '2024-01-30', 'auth_token_2');
-
+       (2, 'utente2', 'Luca', 'Bianchi', 'luca.bianchi@example.com', 'nMPlq9+u4Zimt0uX6pHjBuF0Td9Jh209z2y5Nt/Vydc=', '1985-05-15', '9876543210', 'Moderatore', 500, '2024-01-30', 'auth_token_2'),
+       --  pw: Dario384!
+       (3, 'dariofranchino', 'Dario', 'Franchino', 'dario.franchino@gmail.com', 'RUkWRPH86WOYVfM4SD1IoSB5WqaN5Our6sl4TtlJAbg=', '1999-08-22', '+399876659210', 'Utente', 100, '2024-09-30', 'auth_token_3'),
+       -- pw: Elia!42
+       (4, 'giacomino38', 'Giacomo', 'Elia', 'g.elia22@gmail.com', 'V8kivWNDCQ7zRDMm5RcbJuwaCwamUf7oXNJ6TBcNzGE=', '2000-04-12', '+399876053820', 'Utente', 100, '2024-05-10', 'auth_token_4'),
+       --  pw: Lucy928!
+       (5, 'Lucia03', 'Lucia', 'Terra', 'l.ter28@gmail.com', 'E9yno889PYj66+E5HjN2gvM069CWLp7edXscMdojThQ=', '1989-03-02', '+399126659210', 'Utente', 100, '2024-08-15', 'auth_token_5'),
+       -- pw: Jj843!
+       (6, 'jeremy21', 'Jeremy', 'Basso', 'j.basso21@gmail.com', 'b5Svv6bQF9K0rbvqKrQQw+ygJ3jrFFmkc0SaFv5LuFE=', '1999-08-22', '+399876659210', 'Utente', 100, '2024-09-30', 'auth_token_3');
 INSERT INTO Creazione(fkUtente, nome, immagine, descrizione, isPubblico, tipo, sesso)
 VALUES (1, 'Mago', 'http://localhost:3000/img/creazione/creazione_1.jpg', 'Un potente personaggio magico...', true, 'Personaggio', 'Altro'),
        (1, 'Guerriero', 'http://localhost:3000/img/creazione/creazione_2.jpg', 'Un coraggioso guerriero...', true, 'Personaggio', 'Uomo'),
@@ -21,14 +28,22 @@ VALUES (1, 'Mago', 'http://localhost:3000/img/creazione/creazione_1.jpg', 'Un po
 
        (2, 'Gandalf', 'http://localhost:3000/img/creazione/creazione_7.jpg', 'Conosciuto anche come Mithrandir, Gandalf è un membro dell`Ordine dei Maghi e fa parte di un gruppo di cinque maghi inviati in Terra di Mezzo per aiutare le razze libere a resistere all`oscurità crescente. La sua personalità è complessa e affascinante, combinando una profonda saggezza e conoscenza con un grande senso dell`umorismo. La sua figura è spesso avvolta in un mantello grigio e un cappello a punta, e porta con sé un bastone magico', true, 'Personaggio', 'Uomo'),
        (2, 'Gimli', 'http://localhost:3000/img/creazione/creazione_8.jpg', 'Gimli è un nano robusto e muscoloso con una barba lunga e folta. Indossa un elmo a punta e un`armatura robusta, spesso brandisce un`ascia da battaglia a doppia lama. Gimli è noto per la sua determinazione, coraggio e orgoglio. È leale agli amici e alla sua razza, ma inizialmente ha una certa diffidenza verso gli elfi. Nel corso della sua avventura con la Compagnia dell`Anello, dimostra un cuore gentile e un forte senso di giustizia.', true, 'Personaggio', 'Uomo'),
-       (2, 'Miniere di Moria', 'http://localhost:3000/img/creazione/creazione_9.jpg', 'Le Miniere di Moria, conosciute anche come Khazad-dûm, sono un vasto sistema di gallerie, sale, stanze e cunicoli sotterranei che si estendono sotto le Montagne Nebbiose nella Terra di Mezzo. Questo complesso sotterraneo fu originariamente scavato dai Nani come una delle loro più grandi e ricche città, dove estrassero minerali preziosi come l`adamantio e l`oro. La grandezza delle Miniere di Moria si rifletteva nella maestosità delle sue sale, colonne scolpite e scalinate intricate.', true, 'Ambiente', 'Altro');
+       (2, 'Miniere di Moria', 'http://localhost:3000/img/creazione/creazione_9.jpg', 'Le Miniere di Moria, conosciute anche come Khazad-dûm, sono un vasto sistema di gallerie, sale, stanze e cunicoli sotterranei che si estendono sotto le Montagne Nebbiose nella Terra di Mezzo. Questo complesso sotterraneo fu originariamente scavato dai Nani come una delle loro più grandi e ricche città, dove estrassero minerali preziosi come l`adamantio e l`oro. La grandezza delle Miniere di Moria si rifletteva nella maestosità delle sue sale, colonne scolpite e scalinate intricate.', true, 'Ambiente', 'Altro'),
+
+       (4, 'Micheal Jordan', 'http://localhost:3000/img/creazione/default.jpg', 'Il miglior giocatore di basket di tutti i tempi, conosciuto per aver vinto molti trofei e per il suo carattere: determinato e vincente', true, 'Personaggio', 'Uomo'),
+       (5, 'Micheal Jordan', 'http://localhost:3000/img/creazione/default.jpg', 'Il miglior giocatore di basket di tutti i tempi, spocchioso e antipatico', false, 'Personaggio', 'Uomo'),
+       (3, 'Zio Fernando', 'http://localhost:3000/img/creazione/default.jpg', 'Mio zio molto simpatico e appassionato di golf e libri, ama cantare canzoni pop', false, 'Personaggio', 'Uomo'),
+       (4, 'Ada Lovelace', 'http://localhost:3000/img/creazione/default.jpg', ' nobildonna e matematica britannica, nota soprattutto per il suo contributo alla macchina analitica ideata da Charles Babbage. E una delle contributrici maggiori nel campo informatico', true, 'Personaggio', 'Donna');
 
 INSERT INTO Contesto(fkUtente, fkAmbiente, nome, descrizione, isPubblico)
 VALUES (1, 3, 'Accademia di Magia', 'Una scuola per maghi...', true),
        (2, 3, 'Grotta Misteriosa', 'Una grotta misteriosa...', false),
 
        (1, 6, 'Visita Guidata', 'I visitatori, entusiasti ed eccitati, varcano l`ingresso dorato della Fabbrica di Cioccolato di Willy Wonka. La guida, un Umpa Lumpa con abito vivace, li accoglie con un sorriso e li conduce attraverso corridoi luminosi e aromatizzati di cioccolato fresco. Le pareti sono decorate con immagini di dolci fantastici mentre il ronzio delle macchine dolci riempie l`aria. I partecipanti si preparano a immergersi in un mondo magico di golosità e avventure zuccherate.', true),
-       (2, 9, 'Spedizione a Moria', 'La notizia della misteriosa riscoperta di un antico manoscritto in una biblioteca segreta di Rivendell ha attirato l`attenzione di Gandalf, il saggio mago, e Gimli, il fiero nano. Il manoscritto contiene indizi sulla presunta presenza di tesori nascosti nelle Miniere di Moria, un luogo in gran parte dimenticato e considerato pericoloso. Così i due si sono avventurati verso le miniere di Moria e dopo aver attraversato le porte sono giunti al salone principale...', true);
+       (2, 9, 'Spedizione a Moria', 'La notizia della misteriosa riscoperta di un antico manoscritto in una biblioteca segreta di Rivendell ha attirato l`attenzione di Gandalf, il saggio mago, e Gimli, il fiero nano. Il manoscritto contiene indizi sulla presunta presenza di tesori nascosti nelle Miniere di Moria, un luogo in gran parte dimenticato e considerato pericoloso. Così i due si sono avventurati verso le miniere di Moria e dopo aver attraversato le porte sono giunti al salone principale...', true),
+
+       (4, 6, 'Periodo natalizio', 'Luci scintillanti, alberi addobbati, profumo di cannella, famiglia riunita, gioia contagiosa.',true),
+       (5,3,'Estate','Sole cocente, mare cristallino, sabbia dorata, sorrisi spensierati, vacanza indimenticabile.',false);
 
 INSERT INTO Sessione(fkUtente, fkContesto, titolo, dataCreazione, ultimoAvvio)
 VALUES (1, 1, 'Lezioni di Magia', '2023-01-15 08:00:00', '2023-01-15 10:30:00'),
