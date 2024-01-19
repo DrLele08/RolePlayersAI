@@ -1,4 +1,4 @@
-jest.mock("../models/utente");
+ jest.mock("../models/utente");
 jest.mock("randomstring");
 jest.mock("../models/creazione");
 
