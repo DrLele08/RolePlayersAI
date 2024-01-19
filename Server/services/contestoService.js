@@ -1,9 +1,10 @@
 const contesto = require("../models/contesto");
+const creazione = require("../models/creazione");
 const utils = require("../models/utils");
 
 const contestoService = {};
 
-const requiredFields = ['nome','fkUtente', 'fkAmbiente','descrizione', 'isPubblico'];
+const requiredFields = ['nome','fkUtente','listaPersonaggi', 'fkAmbiente','descrizione', 'isPubblico'];
 
 contestoService.createContesto = async (dati) =>{
     if(utils.checkParameters(dati, requiredFields)){
@@ -19,8 +20,24 @@ contestoService.createContesto = async (dati) =>{
                         if(dati.isPubblico.toString().length > 0 && !isNaN(dati.isPubblico)) {
                             let isPubblico = parseInt(dati.isPubblico);
                             if (isPubblico === 0 || isPubblico === 1) {
-                                return await contesto.createContesto(dati);
-                            } else {
+
+                                if (Array.isArray(dati.listaPersonaggi)) {
+                                    const contestoCreato = await contesto.createContesto(dati);
+                                    for (const personaggio of dati.listaPersonaggi) {
+                                        const personaggioTrovato = await creazione.getById(personaggio);
+                                        if (personaggioTrovato.tipo === "Personaggio") {
+                                            if (utils.checkId(personaggio)) {
+                                                await contestoCreato.addCreazione(personaggio);
+                                            }
+                                        }
+                                    }
+                                    return contestoCreato;
+                                }
+                                else{
+                                    return Promise.reject("Array listaPersonaggi non valido");
+                                }
+                            }
+                            else {
                                 return Promise.reject("Parametro isPubblico non valido");
                             }
                         }
