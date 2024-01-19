@@ -13,11 +13,9 @@ exports.getUtenti = async(req, res) => {
     }
 
     await utenteService.getByFilters(data).then(result => {
-        res.status(200);
         json.Ris = 1;
         json.Utenti = result.utenti;
     }).catch(error => {
-        res.status(400);
         json.Ris = 0;
         json.Mess = error || "Errore generico";
     }).finally(() => res.json(json));
@@ -32,11 +30,9 @@ exports.setRuolo = async(req, res) => {
     }
 
     await utenteService.setRuolo(data).then(result => {
-        res.status(200);
         json.Ris = 1;
         json.AggiornamentiEffettuati = result[0];
     }).catch(error => {
-        res.status(400);
         json.Ris = 0;
         json.Mess = error || "Errore generico";
     }).finally(() => res.json(json));

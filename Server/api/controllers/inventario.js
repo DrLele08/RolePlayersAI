@@ -13,11 +13,9 @@ exports.getInventario = async(req, res) => {
     }
 
     await inventarioService.getInventario(data).then(result => {
-        res.status(200);
         json.Ris = 1;
         json.Inventario = result;
     }).catch(error => {
-        res.status(400);
         json.Ris = 0;
         json.Mess = error || "Errore generico";
     }).finally(() => res.json(json));
@@ -34,11 +32,9 @@ exports.addContenuto = async(req, res) => {
     }
 
     await inventarioService.addContenuto(data).then(result => {
-        res.status(200);
         json.Ris = 1;
         json.Aggiunto = result;
     }).catch(error => {
-        res.status(400);
         json.Ris = 0;
         json.Mess = error || "Errore generico";
     }).finally(() => res.json(json));
@@ -54,11 +50,9 @@ exports.removeContenuto = async(req, res) => {
     }
 
     await inventarioService.removeContenuto(data).then(result => {
-        res.status(200);
         json.Ris = 1;
         json.ContenutiRimossi = result;
     }).catch(error => {
-        res.status(400);
         json.Ris = 0;
         json.Mess = error || "Errore generico";
     }).finally(() => res.json(json));
