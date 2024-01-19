@@ -18,6 +18,12 @@ VALUES (1, 'utente1', 'Mario', 'Rossi', 'mario.rossi@example.com', 'nMPlq9+u4Zim
        -- pw: Jj843!
        (6, 'jeremy21', 'Jeremy', 'Basso', 'j.basso21@gmail.com', 'b5Svv6bQF9K0rbvqKrQQw+ygJ3jrFFmkc0SaFv5LuFE=', '1999-08-22', '+399876659210', 'Utente', 100, '2024-09-30', 'auth_token_3');
        (7, 'NinoFra', 'Tonino', 'Frassica', 'frassi92@gmail.com', 'fnkTWkmfei93mcawjRdakoadmkw3dwINJasdlIlkasP=', '1992-07-17', '+393146820894', 'Utente', 1000, '2024-04-13', 'auth_token_7');
+       -- pw: Br4h!
+       (8, 'Ceck', 'Pino', 'Banfi', 'p.banfi@gmail.com', 'z0pvv6bP4VK0bjkqKrKLw+ig67jrFHmkc5SaHy6LuFE=', '1989-02-12', '+399257859210', 'Utente', 100, '2024-09-24', 'auth_token_8');
+       -- pw: P3ret!
+       (9, 'Gass', 'Gastani', 'Frinzi', 'fr.gasolino@gmail.com', 'p7Dmm9kHF9P0rasdKrRTf+ygH6tYdfQVc34aRn5UlXC=', '2001-08-02', '+389567734210', 'Utente', 500, '2024-09-11', 'auth_token_9');
+       -- pw: Gle33!
+       (10, 'veterano', 'Pietro', 'Smusi', 'ti.trollo12@gmail.com', 'b5Ass6iQF9O0ndipErLac+itT3aqUAdro0SaFv5LuFE=', '1989-06-12', '+399112359460', 'Utente', 1000, '2024-09-05', 'auth_token_10');
 INSERT INTO Creazione(fkUtente, nome, immagine, descrizione, isPubblico, tipo, sesso)
 VALUES (1, 'Mago', 'http://localhost:3000/img/creazione/creazione_1.jpg', 'Un potente personaggio magico...', true, 'Personaggio', 'Altro'),
        (1, 'Guerriero', 'http://localhost:3000/img/creazione/creazione_2.jpg', 'Un coraggioso guerriero...', true, 'Personaggio', 'Uomo'),
@@ -61,7 +67,8 @@ VALUES (1, 3, 'Accademia di Magia', 'Una scuola per maghi...', true),
 
        (7,5,'Giornata di esame','Mattinata in aula, piena di studenti raggruppati qua e là che ansiosamente aspettano che il professore arrivi mentre loro ripetono, chi consapevole di aver studiato abbastanza e chi sa già che dovrà fare un altro tentativo.',true);
 
-
+       (10,5,'Giornata a Unisa','Mattinata in aula alle 9 del mattino con sveglia alle 7, 5 minuti per riprendere conoscenza e 5 minuti per capire chi sei.Aula piena di studenti raggruppati qua e là a fare casino perchè nessuno vuole fare questo esame che andrà male. Fai caciara e vai al bar. Sei felice.',true);
+       (9,1,'Birra gratis','Niente di meglio di una birra gratis per rallegrare la giornata. Di tutti i gusti con stuzzichini annessi, il paradiso.',true);
 
 INSERT INTO Sessione(fkUtente, fkContesto, titolo, dataCreazione, ultimoAvvio)
 VALUES (1, 1, 'Lezioni di Magia', '2023-01-15 08:00:00', '2023-01-15 10:30:00'),
