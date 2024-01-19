@@ -4,7 +4,6 @@ exports.createUtente = async(req, res) => {
     let json = {};
 
     if (req.session.idUtente != null) {
-        res.status(400);
         json.Ris = 0;
         json.Mess = "Hai già effettuato l'accesso!";
         res.json(json);
@@ -20,7 +19,6 @@ exports.createUtente = async(req, res) => {
         };
 
         utenteService.createUtente(data).then((utente) => {
-            res.status(201);
 
             // salva ID e auth-token dell'utente nella sessione
             req.session.idUtente = utente.idUtente;
@@ -37,7 +35,6 @@ exports.createUtente = async(req, res) => {
             json.Ris = 1;
             json.Utente = utente;
         }).catch(error => {
-            res.status(400);
             json.Ris = 0;
             json.Mess = error || "Errore generico";
         }).finally(() => res.json(json));
