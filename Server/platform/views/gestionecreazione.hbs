@@ -792,9 +792,9 @@
         const nome = document.getElementById("nome").value.trim();
         const descrizione = document.getElementById("textDescrizione").value.trim();
         const idAmbiente = document.getElementById("selAmbiente").value;
+        const selPers = document.getElementById('selPers');
         const idp1 = document.getElementById("p1").value;
         const idp2 = document.getElementById("p2").value;
-        const selPers = document.getElementById('selPers');
         const relazione = document.getElementById("relazione").value.trim();
         const controlloPriv = document.getElementById("priv").checked;
         const controlloPub = document.getElementById("publ").checked;
@@ -802,63 +802,74 @@
         if(nome.length>0){
             if(descrizione.length>20 && descrizione.length<512){
                 if(idAmbiente>0){
-                    if(idp1>0 && idp2>0 && idp1 !== idp2){
-                        if(relazione.length>0){
-                            if(controlloPub || controlloPriv){
-                                let isPubblico=0;
-                                if(controlloPub){
-                                    isPubblico=1;
-                                }
-
-                                const apiUrl = '{{BASE_URL}}/api/contesto/'
-
-                                let jsonCreazioneContesto={
-                                    nome:nome,
-                                    descrizione:descrizione,
-                                    fkUtente:{{idUtente}},
-                                    fkAmbiente:idAmbiente,
-                                    isPubblico:isPubblico
-                                };
-
-                                axios.post(apiUrl,jsonCreazioneContesto,{
-                                    headers:{
-                                        "Authorization":"{{idUtente}}.{{tokenAuth}}"
+                    if(selPers > 0) {
+                        if (idp1 > 0 && idp2 > 0 && idp1 !== idp2) {
+                            if (relazione.length > 0) {
+                                if (controlloPub || controlloPriv) {
+                                    let isPubblico = 0;
+                                    if (controlloPub) {
+                                        isPubblico = 1;
                                     }
-                                }).then((result)=>{
-                                    let ris=result.data.Ris;
-                                    if(ris===1){
-                                        const fkContesto=result.data.nuovoContesto.idContesto;
-                                        const urlApi="{{BASE_URL}}/api/relazionePersonaggi";
-                                        const jsonRelazione={
-                                            fkContesto: fkContesto,
-                                            fkPersonaggio1: idp1,
-                                            fkPersonaggio2: idp2,
-                                            descrizione: relazione
-                                        };
 
-                                        axios.post(urlApi,jsonRelazione,{
-                                            headers:{
-                                                "Authorization":"{{idUtente}}.{{tokenAuth}}"
-                                            }
-                                        }).then((result)=>{
-                                            let ris=result.data.Ris;
-                                            if(ris===1){
+                                    const apiUrl = '{{BASE_URL}}/api/contesto/'
+
+                                    let jsonCreazioneContesto = {
+                                        nome: nome,
+                                        descrizione: descrizione,
+                                        fkUtente:{{idUtente}},
+                                        fkAmbiente: idAmbiente,
+                                        isPubblico: isPubblico
+                                    };
+
+                                    axios.post(apiUrl, jsonCreazioneContesto, {
+                                        headers: {
+                                            "Authorization": "{{idUtente}}.{{tokenAuth}}"
+                                        }
+                                    }).then((result) => {
+                                        let ris = result.data.Ris;
+                                        if (ris === 1) {
+                                            const fkContesto = result.data.nuovoContesto.idContesto;
+                                            const urlApi = "{{BASE_URL}}/api/relazionePersonaggi";
+                                            const jsonRelazione = {
+                                                fkContesto: fkContesto,
+                                                fkPersonaggio1: idp1,
+                                                fkPersonaggio2: idp2,
+                                                descrizione: relazione
+                                            };
+
+                                            axios.post(urlApi, jsonRelazione, {
+                                                headers: {
+                                                    "Authorization": "{{idUtente}}.{{tokenAuth}}"
+                                                }
+                                            }).then((result) => {
+                                                let ris = result.data.Ris;
+                                                if (ris === 1) {
+                                                    Swal.fire({
+                                                        text: "Contesto creato con successo!",
+                                                        icon: "success",
+                                                        buttonsStyling: false,
+                                                        confirmButtonText: "Ok",
+                                                        customClass: {
+                                                            confirmButton: "btn fw-bold btn-primary",
+                                                        }
+                                                    }).then(() => {
+                                                        window.location.href = "{{BASE_URL}}/contenuto";
+                                                    });
+                                                } else {
+                                                    let mess = result.data.Mess;
+                                                    Swal.fire({
+                                                        text: mess,
+                                                        icon: "error",
+                                                        buttonsStyling: false,
+                                                        confirmButtonText: "Ok",
+                                                        customClass: {
+                                                            confirmButton: "btn fw-bold btn-primary",
+                                                        }
+                                                    });
+                                                }
+                                            }).catch((error) => {
                                                 Swal.fire({
-                                                    text: "Contesto creato con successo!",
-                                                    icon: "success",
-                                                    buttonsStyling: false,
-                                                    confirmButtonText: "Ok",
-                                                    customClass: {
-                                                        confirmButton: "btn fw-bold btn-primary",
-                                                    }
-                                                }).then(()=>{
-                                                    window.location.href = "{{BASE_URL}}/contenuto";
-                                                });
-                                            }
-                                            else{
-                                                let mess=result.data.Mess;
-                                                Swal.fire({
-                                                    text: mess,
+                                                    text: error.message,
                                                     icon: "error",
                                                     buttonsStyling: false,
                                                     confirmButtonText: "Ok",
@@ -866,10 +877,11 @@
                                                         confirmButton: "btn fw-bold btn-primary",
                                                     }
                                                 });
-                                            }
-                                        }).catch((error)=>{
+                                            });
+                                        } else {
+                                            let mess = result.data.Mess;
                                             Swal.fire({
-                                                text: error.message,
+                                                text: mess,
                                                 icon: "error",
                                                 buttonsStyling: false,
                                                 confirmButtonText: "Ok",
@@ -877,12 +889,10 @@
                                                     confirmButton: "btn fw-bold btn-primary",
                                                 }
                                             });
-                                        });
-                                    }
-                                    else{
-                                        let mess=result.data.Mess;
+                                        }
+                                    }).catch((error) => {
                                         Swal.fire({
-                                            text: mess,
+                                            text: error.message,
                                             icon: "error",
                                             buttonsStyling: false,
                                             confirmButtonText: "Ok",
@@ -890,10 +900,10 @@
                                                 confirmButton: "btn fw-bold btn-primary",
                                             }
                                         });
-                                    }
-                                }).catch((error)=>{
+                                    });
+                                } else {
                                     Swal.fire({
-                                        text: error.message,
+                                        text: "Inserisci la privacy del contenuto!",
                                         icon: "error",
                                         buttonsStyling: false,
                                         confirmButtonText: "Ok",
@@ -901,11 +911,10 @@
                                             confirmButton: "btn fw-bold btn-primary",
                                         }
                                     });
-                                });
-                            }
-                            else{
+                                }
+                            } else {
                                 Swal.fire({
-                                    text: "Inserisci la privacy del contenuto!",
+                                    text: "Inserisci una relazione",
                                     icon: "error",
                                     buttonsStyling: false,
                                     confirmButtonText: "Ok",
@@ -914,10 +923,9 @@
                                     }
                                 });
                             }
-                        }
-                        else{
+                        } else {
                             Swal.fire({
-                                text: "Inserisci una relazione",
+                                text: "Selezione dei personaggi non valida",
                                 icon: "error",
                                 buttonsStyling: false,
                                 confirmButtonText: "Ok",
@@ -929,7 +937,7 @@
                     }
                     else{
                         Swal.fire({
-                            text: "Selezione dei personaggi non valida",
+                            text: "Personaggi non validi",
                             icon: "error",
                             buttonsStyling: false,
                             confirmButtonText: "Ok",
