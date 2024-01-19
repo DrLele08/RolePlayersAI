@@ -64,43 +64,43 @@ creazioneService.createCreazione = async (dati) =>{
 
             dati.nome = dati.nome.trim();
             dati.descrizione = dati.descrizione.trim();
-            dati.tipo = dati.tipo.trim();
+            dati.tipo = dati.tipo.trim().toLowerCase();
 
-            if (dati.nome.length <= 0 || dati.nome.length >= 51) {
-                return Promise.reject("Dati non validi");
-            }
+            if (dati.nome.length < 1)
+                return Promise.reject("Nome troppo corto");
+
+            if (dati.nome.length > 50)
+                return Promise.reject("Nome troppo lungo");
+
+            if (dati.descrizione.length < 1)
+                return Promise.reject("Descrizione troppo corta");
+
+            if (dati.descrizione.length > 512)
+                return Promise.reject("Descrizione troppo lunga");
+
             if(isNaN(dati.isPubblico))
-            {
-                return Promise.reject("Dati non validi");
-            }
+                return Promise.reject("Il valore di isPubblico deve essere numerico");
 
             dati.isPubblico = parseInt(dati.isPubblico);
 
-            if ( 0 !== dati.isPubblico && 1 !== dati.isPubblico){
-                return Promise.reject("Dati non validi");
-            }
-            if (dati.descrizione.length < 1 || dati.descrizione.length >= 513) {
+            if ( 0 !== dati.isPubblico && 1 !== dati.isPubblico)
+                return Promise.reject("Valore di isPubblico non ammesso");
 
-                return Promise.reject("Dati non validi");
+            if (dati.tipo !== 'personaggio' && dati.tipo !== 'ambiente') {
+                return Promise.reject("Tipo non valido");
             }
-            if (dati.tipo !== 'Personaggio' && dati.tipo !== 'Ambiente') {
-                return Promise.reject("Dati non validi");
-            }
-            if (dati.tipo === 'Personaggio' && dati.sesso !== undefined) {
-                dati.sesso = dati.sesso.trim();
-                if (dati.sesso !== 'Uomo' && dati.sesso !== 'Donna' && dati.sesso !== 'Altro') {
-                    return Promise.reject("Dati non validi");
+            if (dati.tipo === 'personaggio' && dati.sesso !== undefined) {
+                dati.sesso = dati.sesso.trim().toLowerCase();
+                if (dati.sesso !== 'uomo' && dati.sesso !== 'donna' && dati.sesso !== 'altro') {
+                    return Promise.reject("Sesso non valido");
                 }
-            } else if (dati.tipo === 'Personaggio' && dati.sesso === undefined) {
-                return Promise.reject("Dati non validi");
-
+            } else if (dati.tipo === 'personaggio' && dati.sesso === undefined) {
+                return Promise.reject("Sesso non specificato");
             }
-
-
 
             let nuovaCreazione;
 
-            if ('Personaggio' === dati.tipo) // se è un personaggio
+            if ('personaggio' === dati.tipo) // se è un personaggio
             {
                 nuovaCreazione = await creazione.createPersonaggio(dati);
 
@@ -133,11 +133,11 @@ creazioneService.createCreazione = async (dati) =>{
             return nuovaCreazione;
         }
         else{
-            return Promise.reject("ID non valido");
+            return Promise.reject("ID utente non valido");
         }
     }
     else{
-        return Promise.reject("Parametri non validi");
+        return Promise.reject("Dati non validi");
     }
 }
 
