@@ -17,6 +17,7 @@ VALUES (1, 'utente1', 'Mario', 'Rossi', 'mario.rossi@example.com', 'nMPlq9+u4Zim
        (5, 'Lucia03', 'Lucia', 'Terra', 'l.ter28@gmail.com', 'E9yno889PYj66+E5HjN2gvM069CWLp7edXscMdojThQ=', '1989-03-02', '+399126659210', 'Utente', 100, '2024-08-15', 'auth_token_5'),
        -- pw: Jj843!
        (6, 'jeremy21', 'Jeremy', 'Basso', 'j.basso21@gmail.com', 'b5Svv6bQF9K0rbvqKrQQw+ygJ3jrFFmkc0SaFv5LuFE=', '1999-08-22', '+399876659210', 'Utente', 100, '2024-09-30', 'auth_token_3');
+       (7, 'NinoFra', 'Tonino', 'Frassica', 'frassi92@gmail.com', 'fnkTWkmfei93mcawjRdakoadmkw3dwINJasdlIlkasP=', '1992-07-17', '+393146820894', 'Utente', 1000, '2024-04-13', 'auth_token_7');
 INSERT INTO Creazione(fkUtente, nome, immagine, descrizione, isPubblico, tipo, sesso)
 VALUES (1, 'Mago', 'http://localhost:3000/img/creazione/creazione_1.jpg', 'Un potente personaggio magico...', true, 'Personaggio', 'Altro'),
        (1, 'Guerriero', 'http://localhost:3000/img/creazione/creazione_2.jpg', 'Un coraggioso guerriero...', true, 'Personaggio', 'Uomo'),
@@ -35,6 +36,19 @@ VALUES (1, 'Mago', 'http://localhost:3000/img/creazione/creazione_1.jpg', 'Un po
        (3, 'Zio Fernando', 'http://localhost:3000/img/creazione/default.jpg', 'Mio zio molto simpatico e appassionato di golf e libri, ama cantare canzoni pop', false, 'Personaggio', 'Uomo'),
        (4, 'Ada Lovelace', 'http://localhost:3000/img/creazione/default.jpg', ' nobildonna e matematica britannica, nota soprattutto per il suo contributo alla macchina analitica ideata da Charles Babbage. E una delle contributrici maggiori nel campo informatico', true, 'Personaggio', 'Donna');
 
+       (3, 'Villagio Steampunk', 'http://localhost:3000/img/creazione/default.jpg', 'Viaggia nel tempo in questo villaggio steampunk. Strade lastricate, luci al vapore, e edifici in stile industriale ti fanno immergere in un era di ingegneria straordinaria. L aria è impregnata di un misto di odori di olio e metallo, mentre abiti eleganti richiamano uno stile di vita affascinante e retrò.', true, 'Ambiente', 'Altro' ),
+       (5, 'Oasi Aliena', 'http://localhost:3000/img/creazione/default.jpg', 'Oasi aliena, dove piante luminescenti emanano bagliori iridescenti e creature extraterrestri fluttuano nell`aria. Il terreno alieno sotto i tuoi piedi offre una sensazione unica, mentre il cielo è illuminato da costellazioni alienigeni, creando uno scenario surreale e affascinante su questo pianeta misterioso.', false, 'Ambiente', 'Altro' ),
+       (3, 'Spiaggia Paradisiaca', 'http://localhost:3000/img/creazione/default.jpg', 'Rilassati sulla sabbia dorata di questa spiaggia paradisiaca, dove le onde dolcemente accarezzano la costa. Palme ondeggiando al vento forniscono ombra, e la trasparenza delle acque permette di esplorare il mondo sottomarino. Il suono rassicurante delle onde completa questa fuga tropicale.', false, 'Ambiente', 'Altro' ),
+       (4, 'Castello Medievale', 'http://localhost:3000/img/creazione/default.jpg', 'Trasportati indietro nel tempo in questo castello medievale. Le torri imponenti si ergono contro un cielo azzurro, mentre ponti levatoi e fossati creano una difesa impenetrabile. All interno, saloni sontuosi e cortili con pavimenti in lastricato ti immergono nell atmosfera ricca di storia e di avventure cavalleresche.', true, 'Ambiente', 'Altro' ),
+       (3, 'Studio d`Arte', 'http://localhost:3000/img/creazione/default.jpg', 'Immergiti in uno studio d`arte, con tavolozze di colori, cavalletti e opere d`arte in progress. L`odore di vernice e la luce naturale filtrante dalle finestre contribuiscono a un ambiente creativo e ispirante. Artisti locali si dedicano alla loro arte, creando un`atmosfera di espressione e passione.', false, 'Ambiente', 'Altro' ),
+       (5, 'Mercato del Quartiere', 'http://localhost:3000/img/creazione/default.jpg', 'Esplora il vivace mercato del quartiere, con bancarelle colorate piene di frutta fresca, prodotti locali e oggetti artigianali. Il vociferare degli ambulanti, i colori accesi e l`aroma di cibo appena cucinato si combinano per creare un`esperienza autentica e affascinante.', true, 'Ambiente', 'Altro' ),
+       (4, 'Caffetteria Artistica', 'http://localhost:3000/img/creazione/default.jpg', 'Entra in una caffetteria artistica, dove le pareti sono adornate da opere d`arte locali e il profumo di caffè appena macinato pervade l`aria. Tavoli in legno consumato offrono uno spazio accogliente per gli artisti e gli scrittori locali, mentre il suono di sorsi e discussioni crea un`atmosfera vibrante.', true, 'Ambiente', 'Altro' ),
+       (2, 'Ristorante Gourmet', 'http://localhost:3000/img/creazione/default.jpg', 'Delizia il palato in un ristorante gourmet, dove piatti prelibati e presentazioni artistiche creano un`esperienza culinaria sofisticata. Luci soffuse e arredi eleganti contribuiscono a un`atmosfera perfetta per una cena raffinata.', false, 'Ambiente', 'Altro' ),
+       (2, 'Palestra', 'http://localhost:3000/img/creazione/default.jpg', 'Frequenta una palestra, dove attrezzi moderni e allenamenti su misura creano un ambiente di benessere e fitness. Il suono dei pesi che si scontrano e la musica motivante creano un`atmosfera energica e determinata.', true, 'Ambiente', 'Altro' ),
+       (1, 'Birreria', 'http://localhost:3000/img/creazione/default.jpg', 'Goditi l`atmosfera conviviale di una birreria, con birre artigianali alla spina e stuzzichini deliziosi. Il suono di chiacchiere allegre, bicchieri che si scontrano e musica dal vivo crea un ambiente accogliente e informale.', false, 'Ambiente', 'Altro' );
+
+       (7, 'Aula universitaria', 'http://localhost:3000/img/creazione/creazione_10.jpg', 'Aula di università generica, dove studenti possono seguire corsi non meglio specificati, spiegati da professori mediamente capaci nel loro lavoro', true, 'Ambiente', 'Altro')
+
 INSERT INTO Contesto(fkUtente, fkAmbiente, nome, descrizione, isPubblico)
 VALUES (1, 3, 'Accademia di Magia', 'Una scuola per maghi...', true),
        (2, 3, 'Grotta Misteriosa', 'Una grotta misteriosa...', false),
@@ -45,12 +59,18 @@ VALUES (1, 3, 'Accademia di Magia', 'Una scuola per maghi...', true),
        (4, 6, 'Periodo natalizio', 'Luci scintillanti, alberi addobbati, profumo di cannella, famiglia riunita, gioia contagiosa.',true),
        (5,3,'Estate','Sole cocente, mare cristallino, sabbia dorata, sorrisi spensierati, vacanza indimenticabile.',false);
 
+       (7,5,'Giornata di esame','Mattinata in aula, piena di studenti raggruppati qua e là che ansiosamente aspettano che il professore arrivi mentre loro ripetono, chi consapevole di aver studiato abbastanza e chi sa già che dovrà fare un altro tentativo.',true);
+
+
+
 INSERT INTO Sessione(fkUtente, fkContesto, titolo, dataCreazione, ultimoAvvio)
 VALUES (1, 1, 'Lezioni di Magia', '2023-01-15 08:00:00', '2023-01-15 10:30:00'),
        (2, 2, 'Esplorazione Magica', '2023-02-01 14:00:00', '2023-02-01 15:45:00'),
 
        (1, 3, 'Visita Guidata', '2023-02-01 14:00:00', '2023-02-01 15:45:00'),
        (2, 4, 'Spedizione a Moria', '2023-02-01 14:00:00', '2023-02-01 15:45:00');
+
+       (5, 7, 'Esame', '2023-10-24 15:23:35', '2023-10-25 16:30:52');
 
 INSERT INTO Conversazione(fkSessione, fkPersonaggio, dataAvvio, ultimoAvvio)
 VALUES (1, 1, '2023-01-15 09:00:00', '2023-01-15 09:30:00'),
@@ -90,6 +110,8 @@ VALUES (1, 1),
 
        (1, 3),
        (2, 4);
+
+       (6, 5);
 
 INSERT INTO InventarioCreazione(idUtente, idCreazione)
 VALUES (1, 1),
