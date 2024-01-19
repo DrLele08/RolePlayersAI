@@ -257,14 +257,30 @@
                 }
             })
             .catch(error => {
-               alert(error.message);
+                Swal.fire({
+                    text: error.message,
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok",
+                    customClass: {
+                        confirmButton: "btn fw-bold btn-primary",
+                    }
+                });
             });
     }
 
     function invia(){
         const messaggioUtente = document.getElementById("inviaMessa").value.trim();
         if (!messaggioUtente) {
-            alert("Il messaggio non può essere vuoto.");
+            Swal.fire({
+                text: "Il messaggio non può essere vuoto",
+                icon: "error",
+                buttonsStyling: false,
+                confirmButtonText: "Ok",
+                customClass: {
+                    confirmButton: "btn fw-bold btn-primary",
+                }
+            });
         }
         else{
             // URL dell'API di esempio (JSONPlaceholder)
