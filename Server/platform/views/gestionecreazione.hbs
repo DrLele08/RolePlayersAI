@@ -516,7 +516,28 @@
                             <!--end::Contacts-->
                         </div>
                         <!--end::Sidebar-->
-
+                        <!--begin::Sidebar-->
+                        <div class="flex-row flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0 ms-lg-7 ms-xl-10" style="margin-top:5%;">
+                            <!--begin::Contacts-->
+                            <div class="card card-flush">
+                                <!--begin::Card header-->
+                                <div class="card-header pt-7">
+                                    <!--begin::Form-->
+                                    <form class="w-100 position-relative" autocomplete="off">
+                                        <span>Seleziona personaggi</span>
+                                        <select class="form-select" name="selPers" id="selPers" multiple>
+                                        <option value="" disabled selected hidden>Seleziona un personaggio</option>
+                                        </select>
+                                        <!--end::Input-->
+                                        <span>&nbsp</span>
+                                    </form>
+                                    <!--end::Form-->
+                                </div>
+                                <!--end::Card header-->
+                            </div>
+                            <!--end::Contacts-->
+                        </div>
+                        <!--end::Sidebar-->
                         <!--begin::Sidebar-->
                         <div class="flex-row flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0 ms-lg-7 ms-xl-10" style="margin-top:5%;">
                             <!--begin::Contacts-->
@@ -619,6 +640,12 @@
 <script src="{{BASE_URL}}/assets/js/custom/apps/chat/chat.js"></script>
 <script src="{{BASE_URL}}/assets/js/custom/utilities/modals/users-search.js"></script>
 
+<script>
+    $(document).ready(function(){
+        $('#selPers').select2();
+    });
+</script>
+
 <<script>
     const apiUrl = '{{BASE_URL}}/api/creazione/cerca?Nome&Tipo=Ambiente&Pagina=1'
 
@@ -719,12 +746,59 @@
                 });
             });
 
+    // Effettua una richiesta GET all'API per relazione
+    const apiUrl3 = '{{BASE_URL}}/api/creazione/cerca?Nome&Tipo=Personaggio&Pagina=1'
+
+    axios.get(apiUrl3,{
+        headers:{
+            "Authorization":"{{idUtente}}.{{tokenAuth}}"
+        }
+    })
+            .then(response => {
+                const risp = response.data.Ris;
+                console.log(response);
+                if(risp === 1) {
+                    const data = response.data.Creazione.creazioni;
+                    const selPers = document.getElementById("selPers");
+                    // Aggiungi una nuova opzione per ogni elemento nel tuo array
+                    data.forEach(creazioni => {
+                        const optionElement = document.createElement('option');
+                        optionElement.value = creazioni.idCreazione;
+                        optionElement.innerText = creazioni.nome;
+                        selPers.appendChild(optionElement);
+                    });
+                }
+                else{
+                    const mess = response.data.Mess;
+                    Swal.fire({
+                        text: mess,
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok",
+                        customClass: {
+                            confirmButton: "btn fw-bold btn-primary",
+                        }
+                    });
+                }
+            })
+            .catch(error => {
+                Swal.fire({
+                    text: error.message,
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok",
+                    customClass: {
+                        confirmButton: "btn fw-bold btn-primary",
+                    }
+                });
+            });
 
     // Funzione Crea Contesto
     function CreaContesto(){
         const nome = document.getElementById("nome").value.trim();
         const descrizione = document.getElementById("textDescrizione").value.trim();
         const idAmbiente = document.getElementById("selAmbiente").value;
+        const selPers = document.getElementById('selPers');
         const idp1 = document.getElementById("p1").value;
         const idp2 = document.getElementById("p2").value;
         const relazione = document.getElementById("relazione").value.trim();
@@ -734,63 +808,74 @@
         if(nome.length>0){
             if(descrizione.length>20 && descrizione.length<512){
                 if(idAmbiente>0){
-                    if(idp1>0 && idp2>0 && idp1 !== idp2){
-                        if(relazione.length>0){
-                            if(controlloPub || controlloPriv){
-                                let isPubblico=0;
-                                if(controlloPub){
-                                    isPubblico=1;
-                                }
-
-                                const apiUrl = '{{BASE_URL}}/api/contesto/'
-
-                                let jsonCreazioneContesto={
-                                    nome:nome,
-                                    descrizione:descrizione,
-                                    fkUtente:{{idUtente}},
-                                    fkAmbiente:idAmbiente,
-                                    isPubblico:isPubblico
-                                };
-
-                                axios.post(apiUrl,jsonCreazioneContesto,{
-                                    headers:{
-                                        "Authorization":"{{idUtente}}.{{tokenAuth}}"
+                    if(selPers > 0) {
+                        if (idp1 > 0 && idp2 > 0 && idp1 !== idp2) {
+                            if (relazione.length > 0) {
+                                if (controlloPub || controlloPriv) {
+                                    let isPubblico = 0;
+                                    if (controlloPub) {
+                                        isPubblico = 1;
                                     }
-                                }).then((result)=>{
-                                    let ris=result.data.Ris;
-                                    if(ris===1){
-                                        const fkContesto=result.data.nuovoContesto.idContesto;
-                                        const urlApi="{{BASE_URL}}/api/relazionePersonaggi";
-                                        const jsonRelazione={
-                                            fkContesto: fkContesto,
-                                            fkPersonaggio1: idp1,
-                                            fkPersonaggio2: idp2,
-                                            descrizione: relazione
-                                        };
 
-                                        axios.post(urlApi,jsonRelazione,{
-                                            headers:{
-                                                "Authorization":"{{idUtente}}.{{tokenAuth}}"
-                                            }
-                                        }).then((result)=>{
-                                            let ris=result.data.Ris;
-                                            if(ris===1){
+                                    const apiUrl = '{{BASE_URL}}/api/contesto/'
+
+                                    let jsonCreazioneContesto = {
+                                        nome: nome,
+                                        descrizione: descrizione,
+                                        fkUtente:{{idUtente}},
+                                        fkAmbiente: idAmbiente,
+                                        isPubblico: isPubblico
+                                    };
+
+                                    axios.post(apiUrl, jsonCreazioneContesto, {
+                                        headers: {
+                                            "Authorization": "{{idUtente}}.{{tokenAuth}}"
+                                        }
+                                    }).then((result) => {
+                                        let ris = result.data.Ris;
+                                        if (ris === 1) {
+                                            const fkContesto = result.data.nuovoContesto.idContesto;
+                                            const urlApi = "{{BASE_URL}}/api/relazionePersonaggi";
+                                            const jsonRelazione = {
+                                                fkContesto: fkContesto,
+                                                fkPersonaggio1: idp1,
+                                                fkPersonaggio2: idp2,
+                                                descrizione: relazione
+                                            };
+
+                                            axios.post(urlApi, jsonRelazione, {
+                                                headers: {
+                                                    "Authorization": "{{idUtente}}.{{tokenAuth}}"
+                                                }
+                                            }).then((result) => {
+                                                let ris = result.data.Ris;
+                                                if (ris === 1) {
+                                                    Swal.fire({
+                                                        text: "Contesto creato con successo!",
+                                                        icon: "success",
+                                                        buttonsStyling: false,
+                                                        confirmButtonText: "Ok",
+                                                        customClass: {
+                                                            confirmButton: "btn fw-bold btn-primary",
+                                                        }
+                                                    }).then(() => {
+                                                        window.location.href = "{{BASE_URL}}/contenuto";
+                                                    });
+                                                } else {
+                                                    let mess = result.data.Mess;
+                                                    Swal.fire({
+                                                        text: mess,
+                                                        icon: "error",
+                                                        buttonsStyling: false,
+                                                        confirmButtonText: "Ok",
+                                                        customClass: {
+                                                            confirmButton: "btn fw-bold btn-primary",
+                                                        }
+                                                    });
+                                                }
+                                            }).catch((error) => {
                                                 Swal.fire({
-                                                    text: "Contesto creato con successo!",
-                                                    icon: "success",
-                                                    buttonsStyling: false,
-                                                    confirmButtonText: "Ok",
-                                                    customClass: {
-                                                        confirmButton: "btn fw-bold btn-primary",
-                                                    }
-                                                }).then(()=>{
-                                                    window.location.href = "{{BASE_URL}}/contenuto";
-                                                });
-                                            }
-                                            else{
-                                                let mess=result.data.Mess;
-                                                Swal.fire({
-                                                    text: mess,
+                                                    text: error.message,
                                                     icon: "error",
                                                     buttonsStyling: false,
                                                     confirmButtonText: "Ok",
@@ -798,10 +883,11 @@
                                                         confirmButton: "btn fw-bold btn-primary",
                                                     }
                                                 });
-                                            }
-                                        }).catch((error)=>{
+                                            });
+                                        } else {
+                                            let mess = result.data.Mess;
                                             Swal.fire({
-                                                text: error.message,
+                                                text: mess,
                                                 icon: "error",
                                                 buttonsStyling: false,
                                                 confirmButtonText: "Ok",
@@ -809,12 +895,10 @@
                                                     confirmButton: "btn fw-bold btn-primary",
                                                 }
                                             });
-                                        });
-                                    }
-                                    else{
-                                        let mess=result.data.Mess;
+                                        }
+                                    }).catch((error) => {
                                         Swal.fire({
-                                            text: mess,
+                                            text: error.message,
                                             icon: "error",
                                             buttonsStyling: false,
                                             confirmButtonText: "Ok",
@@ -822,10 +906,10 @@
                                                 confirmButton: "btn fw-bold btn-primary",
                                             }
                                         });
-                                    }
-                                }).catch((error)=>{
+                                    });
+                                } else {
                                     Swal.fire({
-                                        text: error.message,
+                                        text: "Inserisci la privacy del contenuto!",
                                         icon: "error",
                                         buttonsStyling: false,
                                         confirmButtonText: "Ok",
@@ -833,11 +917,10 @@
                                             confirmButton: "btn fw-bold btn-primary",
                                         }
                                     });
-                                });
-                            }
-                            else{
+                                }
+                            } else {
                                 Swal.fire({
-                                    text: "Inserisci la privacy del contenuto!",
+                                    text: "Inserisci una relazione",
                                     icon: "error",
                                     buttonsStyling: false,
                                     confirmButtonText: "Ok",
@@ -846,10 +929,9 @@
                                     }
                                 });
                             }
-                        }
-                        else{
+                        } else {
                             Swal.fire({
-                                text: "Inserisci una relazione",
+                                text: "Selezione dei personaggi non valida",
                                 icon: "error",
                                 buttonsStyling: false,
                                 confirmButtonText: "Ok",
@@ -861,7 +943,7 @@
                     }
                     else{
                         Swal.fire({
-                            text: "Selezione dei personaggi non valida",
+                            text: "Personaggi non validi",
                             icon: "error",
                             buttonsStyling: false,
                             confirmButtonText: "Ok",
