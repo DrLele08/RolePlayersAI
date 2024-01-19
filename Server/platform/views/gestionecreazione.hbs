@@ -516,7 +516,28 @@
                             <!--end::Contacts-->
                         </div>
                         <!--end::Sidebar-->
+                        <!--begin::Sidebar-->
+                        <div class="flex-row flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0 ms-lg-7 ms-xl-10" style="margin-top:5%;">
+                            <!--begin::Contacts-->
+                            <div class="card card-flush">
+                                <!--begin::Card header-->
+                                <div class="card-header pt-7">
+                                    <!--begin::Form-->
+                                    <form class="w-100 position-relative" autocomplete="off">
+                                        <span>Seleziona personaggi</span>
+                                        <select class="form-select" name="selPers" id="selPers" multiple>
 
+                                        </select>
+                                        <!--end::Input-->
+                                        <span>&nbsp</span>
+                                    </form>
+                                    <!--end::Form-->
+                                </div>
+                                <!--end::Card header-->
+                            </div>
+                            <!--end::Contacts-->
+                        </div>
+                        <!--end::Sidebar-->
                         <!--begin::Sidebar-->
                         <div class="flex-row flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0 ms-lg-7 ms-xl-10" style="margin-top:5%;">
                             <!--begin::Contacts-->
@@ -719,6 +740,52 @@
                 });
             });
 
+    // Effettua una richiesta GET all'API per relazione
+    const apiUrl3 = '{{BASE_URL}}/api/creazione/cerca?Nome&Tipo=Personaggio&Pagina=1'
+
+    axios.get(apiUrl3,{
+        headers:{
+            "Authorization":"{{idUtente}}.{{tokenAuth}}"
+        }
+    })
+            .then(response => {
+                const risp = response.data.Ris;
+                console.log(response);
+                if(risp === 1) {
+                    const data = response.data.Creazione.creazioni;
+                    const selPers = document.getElementById("selPers");
+                    // Aggiungi una nuova opzione per ogni elemento nel tuo array
+                    data.forEach(creazioni => {
+                        const optionElement = document.createElement('option');
+                        optionElement.value = creazioni.idCreazione;
+                        optionElement.innerText = creazioni.nome;
+                        selPers.appendChild(optionElement);
+                    });
+                }
+                else{
+                    const mess = response.data.Mess;
+                    Swal.fire({
+                        text: mess,
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok",
+                        customClass: {
+                            confirmButton: "btn fw-bold btn-primary",
+                        }
+                    });
+                }
+            })
+            .catch(error => {
+                Swal.fire({
+                    text: error.message,
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok",
+                    customClass: {
+                        confirmButton: "btn fw-bold btn-primary",
+                    }
+                });
+            });
 
     // Funzione Crea Contesto
     function CreaContesto(){
@@ -727,6 +794,7 @@
         const idAmbiente = document.getElementById("selAmbiente").value;
         const idp1 = document.getElementById("p1").value;
         const idp2 = document.getElementById("p2").value;
+        const selPers = document.getElementById('selPers');
         const relazione = document.getElementById("relazione").value.trim();
         const controlloPriv = document.getElementById("priv").checked;
         const controlloPub = document.getElementById("publ").checked;
