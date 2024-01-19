@@ -10,11 +10,13 @@ exports.CreateContesto = async (req,res) =>{
     const fkAmbiente = req.body.fkAmbiente;
     const descrizione = req.body.descrizione;
     const isPubblico = req.body.isPubblico;
+    const listaPersonaggi = req.body.listaPersonaggi;
 
     try{
         const nuovoContesto = await contestoService.createContesto({
             nome: nome,
             fkUtente: fkUtente,
+            listaPersonaggi: listaPersonaggi,
             fkAmbiente: fkAmbiente,
             descrizione: descrizione,
             isPubblico: isPubblico
