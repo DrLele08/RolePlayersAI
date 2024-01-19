@@ -111,6 +111,9 @@ VALUES (1, 1),
        (4, 7),
        (4, 8);
 
+        (8, 4),
+        (9, 7);
+
 INSERT INTO InventarioContesto(idUtente, idContesto)
 VALUES (1, 1),
        (2, 2),
