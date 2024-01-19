@@ -87,20 +87,26 @@
                                                 <!--begin::Wrapper-->
                                                 <div class="d-flex align-items-center">
                                                     <!--begin::Icon-->
-                                                    <img src="{{this.immagine}}" alt="" class="me-4 h-50px h-lg-50px" />
+                                                    <img src="{{this.immagine}}" alt="" width="50px" height="50px" class="me-4 h-50px h-lg-50px" />
                                                     <!--end::Icon-->
                                                     <!--begin::Details-->
                                                     <div>
                                                         <div class="fs-4 fw-bold">{{this.nome}}</div>
-                                                        <button class="btn btn-sm btn-light btn-active-light-primary me-3" id="btnAdd{{this.idCreazione}}" data-kt-billing-action="card-delete" onclick="addToInventario({{this.idCreazione}})">
-                                                            <!--begin::Indicator label-->
-                                                            <span class="indicator-label">Aggiungi all'inventario</span>
-                                                            <!--end::Indicator label-->
-                                                            <!--begin::Indicator progress-->
-                                                            <span class="indicator-progress">Please wait...
-																<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                                            <!--end::Indicator progress-->
-                                                        </button>
+                                                        {{#equal this.inventario true}}
+                                                            <button class="btn btn-sm btn-light btn-active-light-danger me-3" id="btnAdd{{../this.idCreazione}}" data-kt-billing-action="card-delete" onclick="removeToInventario({{../this.idCreazione}})">
+                                                                <!--begin::Indicator label-->
+                                                                <span class="indicator-label">Rimuovi dall'inventario</span>
+                                                                <!--end::Indicator label-->
+                                                            </button>
+                                                        {{/equal}}
+
+                                                        {{#equal this.inventario false}}
+                                                            <button class="btn btn-sm btn-light btn-active-light-success me-3" id="btnAdd{{../this.idCreazione}}" data-kt-billing-action="card-delete" onclick="addToInventario({{../this.idCreazione}})">
+                                                                <!--begin::Indicator label-->
+                                                                <span class="indicator-label">Aggiungi all'inventario</span>
+                                                                <!--end::Indicator label-->
+                                                            </button>
+                                                        {{/equal}}
                                                     </div>
                                                     <!--end::Details-->
                                                 </div>
@@ -125,20 +131,26 @@
                                                 <!--begin::Wrapper-->
                                                 <div class="d-flex align-items-center">
                                                     <!--begin::Icon-->
-                                                    <img src="{{this.immagine}}" alt="" class="me-4 h-50px h-lg-50px" />
+                                                    <img src="{{this.immagine}}" alt="" width="50px" height="50px" class="me-4 h-50px h-lg-50px" />
                                                     <!--end::Icon-->
                                                     <!--begin::Details-->
                                                     <div>
                                                         <div class="fs-4 fw-bold">{{this.nome}}</div>
-                                                        <button class="btn btn-sm btn-light btn-active-light-primary me-3" id="btnAdd{{this.idCreazione}}" data-kt-billing-action="card-delete" onclick="addToInventario({{this.idCreazione}})">
-                                                            <!--begin::Indicator label-->
-                                                            <span class="indicator-label">Aggiungi all'inventario</span>
-                                                            <!--end::Indicator label-->
-                                                            <!--begin::Indicator progress-->
-                                                            <span class="indicator-progress">Please wait...
-																<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                                            <!--end::Indicator progress-->
-                                                        </button>
+                                                        {{#equal this.inventario true}}
+                                                            <button class="btn btn-sm btn-light btn-active-light-danger me-3" id="btnAdd{{../this.idCreazione}}" data-kt-billing-action="card-delete" onclick="removeToInventario({{../this.idCreazione}})">
+                                                                <!--begin::Indicator label-->
+                                                                <span class="indicator-label">Rimuovi dall'inventario</span>
+                                                                <!--end::Indicator label-->
+                                                            </button>
+                                                        {{/equal}}
+
+                                                        {{#equal this.inventario false}}
+                                                            <button class="btn btn-sm btn-light btn-active-light-success me-3" id="btnAdd{{../this.idCreazione}}" data-kt-billing-action="card-delete" onclick="addToInventario({{../this.idCreazione}})">
+                                                                <!--begin::Indicator label-->
+                                                                <span class="indicator-label">Aggiungi all'inventario</span>
+                                                                <!--end::Indicator label-->
+                                                            </button>
+                                                        {{/equal}}
                                                     </div>
                                                     <!--end::Details-->
                                                 </div>
@@ -171,6 +183,57 @@
 <script>var hostUrl = "{{BASE_URL}}/assets/";</script>
 
 <script>
+    function removeToInventario(idContenuto){
+        let url="{{BASE_URL}}/api/inventario/remove";
+
+        axios.post(url,{
+            idCreazione:idContenuto
+        },{
+            headers:{
+                "Authorization": "{{idUtente}}.{{tokenAuth}}"
+            }
+        }).then((result)=>{
+            let ris=result.data.Ris;
+            console.log(ris);
+            if(ris===1){
+                Swal.fire({
+                    text: "Contenuto rimosso dall'inventario",
+                    icon: "success",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok",
+                    customClass: {
+                        confirmButton: "btn fw-bold btn-primary",
+                    }
+                }).then(()=>{
+                    window.location.href = "{{BASE_URL}}/dashboard";
+                });
+            }
+            else{
+                let mess=result.data.Mess;
+                Swal.fire({
+                    text: mess,
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok",
+                    customClass: {
+                        confirmButton: "btn fw-bold btn-primary",
+                    }
+                });
+            }
+        }).catch((_)=>{
+            Swal.fire({
+                text: "Creazione già presente nell'inventario",
+                icon: "error",
+                buttonsStyling: false,
+                confirmButtonText: "Ok",
+                customClass: {
+                    confirmButton: "btn fw-bold btn-primary",
+                }
+            });
+            document.getElementById("btnAdd"+idContenuto).classList.add("invisible");
+        });
+    }
+
     function addToInventario(idContenuto){
         let url="{{BASE_URL}}/api/inventario/add";
 
@@ -192,8 +255,9 @@
                     customClass: {
                         confirmButton: "btn fw-bold btn-primary",
                     }
+                }).then(()=>{
+                    window.location.href = "{{BASE_URL}}/dashboard";
                 });
-                document.getElementById("btnAdd"+idContenuto).classList.add("invisible");
             }
             else{
                 let mess=result.data.Mess;
@@ -209,7 +273,7 @@
             }
         }).catch((_)=>{
             Swal.fire({
-                text: "Creazione già  presente nell'inventario",
+                text: "Creazione già presente nell'inventario",
                 icon: "error",
                 buttonsStyling: false,
                 confirmButtonText: "Ok",
@@ -217,7 +281,6 @@
                     confirmButton: "btn fw-bold btn-primary",
                 }
             });
-            document.getElementById("btnAdd"+idContenuto).classList.add("invisible");
         });
     }
 </script>

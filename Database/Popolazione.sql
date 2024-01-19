@@ -16,8 +16,7 @@ VALUES (1, 'utente1', 'Mario', 'Rossi', 'mario.rossi@example.com', 'nMPlq9+u4Zim
        --  pw: Lucy928!
        (5, 'Lucia03', 'Lucia', 'Terra', 'l.ter28@gmail.com', 'E9yno889PYj66+E5HjN2gvM069CWLp7edXscMdojThQ=', '1989-03-02', '+399126659210', 'Utente', 100, '2024-08-15', 'auth_token_5'),
        -- pw: Jj843!
-       (6, 'jeremy21', 'Jeremy', 'Basso', 'j.basso21@gmail.com', 'b5Svv6bQF9K0rbvqKrQQw+ygJ3jrFFmkc0SaFv5LuFE=', '1999-08-22', '+399876659210', 'Utente', 100, '2024-09-30', 'auth_token_6');
-       (7, 'NinoFra', 'Tonino', 'Frassica', 'frassi92@gmail.com', 'fnkTWkmfei93mcawjRdakoadmkw3dwINJasdlIlkasP=', '1992-07-17', '+393146820894', 'Utente', 1000, '2024-04-13', 'auth_token_7');
+       (6, 'jeremy21', 'Jeremy', 'Basso', 'j.basso21@gmail.com', 'b5Svv6bQF9K0rbvqKrQQw+ygJ3jrFFmkc0SaFv5LuFE=', '1999-08-22', '+399876659210', 'Utente', 100, '2024-09-30', 'auth_token_3');
 INSERT INTO Creazione(fkUtente, nome, immagine, descrizione, isPubblico, tipo, sesso)
 VALUES (1, 'Mago', 'http://localhost:3000/img/creazione/creazione_1.jpg', 'Un potente personaggio magico...', true, 'Personaggio', 'Altro'),
        (1, 'Guerriero', 'http://localhost:3000/img/creazione/creazione_2.jpg', 'Un coraggioso guerriero...', true, 'Personaggio', 'Uomo'),
@@ -36,7 +35,6 @@ VALUES (1, 'Mago', 'http://localhost:3000/img/creazione/creazione_1.jpg', 'Un po
        (3, 'Zio Fernando', 'http://localhost:3000/img/creazione/default.jpg', 'Mio zio molto simpatico e appassionato di golf e libri, ama cantare canzoni pop', false, 'Personaggio', 'Uomo'),
        (4, 'Ada Lovelace', 'http://localhost:3000/img/creazione/default.jpg', ' nobildonna e matematica britannica, nota soprattutto per il suo contributo alla macchina analitica ideata da Charles Babbage. E una delle contributrici maggiori nel campo informatico', true, 'Personaggio', 'Donna');
 
-       (7, 'Aula universitaria', 'http://localhost:3000/img/creazione/creazione_10.jpg', 'Aula di università generica, dove studenti possono seguire corsi non meglio specificati, spiegati da professori mediamente capaci nel loro lavoro', true, 'Ambiente', 'Altro')
 INSERT INTO Contesto(fkUtente, fkAmbiente, nome, descrizione, isPubblico)
 VALUES (1, 3, 'Accademia di Magia', 'Una scuola per maghi...', true),
        (2, 3, 'Grotta Misteriosa', 'Una grotta misteriosa...', false),
@@ -47,8 +45,6 @@ VALUES (1, 3, 'Accademia di Magia', 'Una scuola per maghi...', true),
        (4, 6, 'Periodo natalizio', 'Luci scintillanti, alberi addobbati, profumo di cannella, famiglia riunita, gioia contagiosa.',true),
        (5,3,'Estate','Sole cocente, mare cristallino, sabbia dorata, sorrisi spensierati, vacanza indimenticabile.',false);
 
-       (7,5,'Giornata di esame','Mattinata in aula, piena di studenti raggruppati qua e là che ansiosamente aspettano che il professore arrivi mentre loro ripetono, chi consapevole di aver studiato abbastanza e chi sa già che dovrà fare un altro tentativo.',true);
-
 INSERT INTO Sessione(fkUtente, fkContesto, titolo, dataCreazione, ultimoAvvio)
 VALUES (1, 1, 'Lezioni di Magia', '2023-01-15 08:00:00', '2023-01-15 10:30:00'),
        (2, 2, 'Esplorazione Magica', '2023-02-01 14:00:00', '2023-02-01 15:45:00'),
@@ -56,7 +52,6 @@ VALUES (1, 1, 'Lezioni di Magia', '2023-01-15 08:00:00', '2023-01-15 10:30:00'),
        (1, 3, 'Visita Guidata', '2023-02-01 14:00:00', '2023-02-01 15:45:00'),
        (2, 4, 'Spedizione a Moria', '2023-02-01 14:00:00', '2023-02-01 15:45:00');
 
-       (5, 7, 'Esame', '2023-10-24 15:23:35', '2023-10-25 16:30:52');
 INSERT INTO Conversazione(fkSessione, fkPersonaggio, dataAvvio, ultimoAvvio)
 VALUES (1, 1, '2023-01-15 09:00:00', '2023-01-15 09:30:00'),
        (2, 2, '2023-02-01 14:30:00', '2023-02-01 15:15:00'),
@@ -95,8 +90,6 @@ VALUES (1, 1),
 
        (1, 3),
        (2, 4);
-
-       (6, 5);
 
 INSERT INTO InventarioCreazione(idUtente, idCreazione)
 VALUES (1, 1),
