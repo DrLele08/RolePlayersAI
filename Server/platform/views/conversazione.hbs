@@ -257,7 +257,15 @@
                 }
             })
             .catch(error => {
-               alert(error.message);
+                Swal.fire({
+                    text: error.message,
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok",
+                    customClass: {
+                        confirmButton: "btn fw-bold btn-primary",
+                    }
+                });
             });
     }
 
