@@ -526,7 +526,7 @@
                                     <form class="w-100 position-relative" autocomplete="off">
                                         <span>Seleziona personaggi</span>
                                         <select class="form-select" name="selPers" id="selPers" multiple>
-
+                                        <option value="" disabled selected hidden>Seleziona un personaggio</option>
                                         </select>
                                         <!--end::Input-->
                                         <span>&nbsp</span>
@@ -639,6 +639,12 @@
 <script src="{{BASE_URL}}/assets/js/custom/widgets.js"></script>
 <script src="{{BASE_URL}}/assets/js/custom/apps/chat/chat.js"></script>
 <script src="{{BASE_URL}}/assets/js/custom/utilities/modals/users-search.js"></script>
+
+<script>
+    $(document).ready(function(){
+        $('#selPers').select2();
+    });
+</script>
 
 <<script>
     const apiUrl = '{{BASE_URL}}/api/creazione/cerca?Nome&Tipo=Ambiente&Pagina=1'
