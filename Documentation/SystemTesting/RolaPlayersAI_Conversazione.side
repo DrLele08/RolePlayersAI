@@ -1,0 +1,195 @@
+{
+  "id": "e30c0061-51c9-487f-99e8-631acf642815",
+  "version": "2.0",
+  "name": "RolaPlayersAI_Conversazione",
+  "url": "http://localhost:3000/sessione/1",
+  "tests": [{
+    "id": "44cf6aab-53c4-4d42-ad52-3d69eb60126e",
+    "name": "TC_2.1.1",
+    "commands": [{
+      "id": "920fdb55-58dc-41b3-915a-2306b857e9fd",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:3000/sessione/1",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "de769d0d-7e55-4e73-aeeb-bda9584f2982",
+      "comment": "",
+      "command": "click",
+      "target": "css=.menu-title:nth-child(1)",
+      "targets": [
+        ["css=.menu-title:nth-child(1)", "css:finder"],
+        ["xpath=//div[@id='kt_chat_contacts_body']/div/div/div/div[2]/button/span", "xpath:idRelative"],
+        ["xpath=//button/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Conversa')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "bdefbc2c-851a-4a80-800c-20b83234c10a",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn > img",
+      "targets": [
+        ["css=.btn > img", "css:finder"],
+        ["xpath=(//img[@alt='Logo'])[7]", "xpath:img"],
+        ["xpath=//div[@id='kt_chat_messenger_footer']/div/button/img", "xpath:idRelative"],
+        ["xpath=//button/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "fa8d277d-901d-43d9-8a63-e380a895ce45",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=swal2-html-container",
+      "targets": [],
+      "value": "Il messaggio non può essere vuoto"
+    }]
+  }, {
+    "id": "eb029cf4-97a0-4ede-8232-7f215ddc61c2",
+    "name": "TC_2.1.2",
+    "commands": [{
+      "id": "bdad8ec0-9a7d-477f-9231-31e6c8aef557",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:3000/sessione/1",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "64d24a1c-f3fc-48f0-9a01-464b00ae94f2",
+      "comment": "",
+      "command": "click",
+      "target": "css=.menu-title:nth-child(1)",
+      "targets": [
+        ["css=.menu-title:nth-child(1)", "css:finder"],
+        ["xpath=//div[@id='kt_chat_contacts_body']/div/div/div/div[2]/button/span", "xpath:idRelative"],
+        ["xpath=//button/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Conversa')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "e2e178a5-aa50-4e43-9e6d-12988ee578dd",
+      "comment": "",
+      "command": "click",
+      "target": "id=inviaMessa",
+      "targets": [
+        ["id=inviaMessa", "id"],
+        ["css=#inviaMessa", "css:finder"],
+        ["xpath=//textarea[@id='inviaMessa']", "xpath:attributes"],
+        ["xpath=//div[@id='kt_chat_messenger_footer']/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c84296b5-5169-4576-a38a-8f24a972000f",
+      "comment": "",
+      "command": "type",
+      "target": "id=inviaMessa",
+      "targets": [
+        ["id=inviaMessa", "id"],
+        ["css=#inviaMessa", "css:finder"],
+        ["xpath=//textarea[@id='inviaMessa']", "xpath:attributes"],
+        ["xpath=//div[@id='kt_chat_messenger_footer']/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": "Ciao Mario! Ho da poco iniziato un nuovo progetto al lavoro che mi sta dando un sacco di soddisfazioni. Com'è la tua situazione professionale? Ultimamente sto anche cercando di dedicare più tempo a me stesso. Ho preso l'abitudine di fare lunghe passeggiate nel parco qui vicino, relax totale! Tu hai qualche hobby o novità interessante? Che ne dici se organizziamo qualcosa nei prossimi giorni? Ho sentito parlare di un nuovo ristorante qui in zona, oppure se preferisci possiamo cucinare qualcosa a casa mia. Ho iniziato un corso di cucina e mi sto divertendo un sacco! Fammi sapere cosa ne pensi e se hai qualche altra idea."
+    }, {
+      "id": "95f7978b-1f17-4b28-8fe5-a823a414606f",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn > img",
+      "targets": [
+        ["css=.btn > img", "css:finder"],
+        ["xpath=(//img[@alt='Logo'])[7]", "xpath:img"],
+        ["xpath=//div[@id='kt_chat_messenger_footer']/div/button/img", "xpath:idRelative"],
+        ["xpath=//button/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7673c30f-dffc-4916-8097-0b74097d1fcd",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=swal2-html-container",
+      "targets": [],
+      "value": "Lunghezza messaggio non valida"
+    }]
+  }, {
+    "id": "8f20828a-170b-4ce6-8184-4319a644586b",
+    "name": "TC_2.1.3",
+    "commands": [{
+      "id": "c2e319a3-4ae0-42ee-8ffb-1a99c6d80cba",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:3000/sessione/1",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "01e24d3e-e348-4827-aa43-4d9f540cb7e2",
+      "comment": "",
+      "command": "click",
+      "target": "css=.menu-title:nth-child(1)",
+      "targets": [
+        ["css=.menu-title:nth-child(1)", "css:finder"],
+        ["xpath=//div[@id='kt_chat_contacts_body']/div/div/div/div[2]/button/span", "xpath:idRelative"],
+        ["xpath=//button/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Conversa')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "332a44b7-a29e-4efa-b579-8557a85c46dd",
+      "comment": "",
+      "command": "click",
+      "target": "id=inviaMessa",
+      "targets": [
+        ["id=inviaMessa", "id"],
+        ["css=#inviaMessa", "css:finder"],
+        ["xpath=//textarea[@id='inviaMessa']", "xpath:attributes"],
+        ["xpath=//div[@id='kt_chat_messenger_footer']/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b1f153d8-4af6-4239-b0b1-8b2dfb2e9de2",
+      "comment": "",
+      "command": "type",
+      "target": "id=inviaMessa",
+      "targets": [
+        ["id=inviaMessa", "id"],
+        ["css=#inviaMessa", "css:finder"],
+        ["xpath=//textarea[@id='inviaMessa']", "xpath:attributes"],
+        ["xpath=//div[@id='kt_chat_messenger_footer']/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": "Ciao Mario! Come stai?"
+    }, {
+      "id": "36e883e7-f26b-4d01-acb5-570387bda1a3",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn > img",
+      "targets": [
+        ["css=.btn > img", "css:finder"],
+        ["xpath=(//img[@alt='Logo'])[7]", "xpath:img"],
+        ["xpath=//div[@id='kt_chat_messenger_footer']/div/button/img", "xpath:idRelative"],
+        ["xpath=//button/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "dbaf7276-6060-4f66-bdb3-cc8d90df1af3",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.d-flex:nth-child(1) .p-5",
+      "targets": [],
+      "value": "Ciao Mario! Come stai?"
+    }]
+  }],
+  "suites": [{
+    "id": "b087f793-11fe-45cf-8823-5a2378272892",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["44cf6aab-53c4-4d42-ad52-3d69eb60126e"]
+  }],
+  "urls": ["http://localhost:3000/sessione/1"],
+  "plugins": []
+}
