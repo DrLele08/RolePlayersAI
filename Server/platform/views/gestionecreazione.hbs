@@ -319,11 +319,11 @@
                                 <!--begin::Card header-->
                                 <div class="card-header pt-7">
                                     <!--begin::Form-->
-                                        <span>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</span>
-                                        <button type="button" class="btn btn-sm btn-light btn-active-light-primary me-3 align-bottom" onclick="CreaPersonaggio()">
-                                            <span class="menu-title">Crea</span>
-                                        </button>
-                                        <span>&nbsp &nbsp &nbsp &nbsp</span>
+                                    <span>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</span>
+                                    <button type="button" class="btn btn-sm btn-light btn-active-light-primary me-3 align-bottom" onclick="CreaPersonaggio()">
+                                        <span class="menu-title">Crea</span>
+                                    </button>
+                                    <span>&nbsp &nbsp &nbsp &nbsp</span>
                                     <span>&nbsp</span>
                                     <!--end::Form-->
                                 </div>
@@ -431,11 +431,11 @@
                                 <!--begin::Card header-->
                                 <div class="card-header pt-7">
                                     <!--begin::Form-->
-                                        <span>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</span>
-                                        <button class="btn btn-sm btn-light btn-active-light-primary me-3 align-bottom" onclick="CreaAmbiente()">
-                                            <span class="menu-title">Crea</span>
-                                        </button>
-                                        <span>&nbsp &nbsp &nbsp &nbsp</span>
+                                    <span>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</span>
+                                    <button class="btn btn-sm btn-light btn-active-light-primary me-3 align-bottom" onclick="CreaAmbiente()">
+                                        <span class="menu-title">Crea</span>
+                                    </button>
+                                    <span>&nbsp &nbsp &nbsp &nbsp</span>
                                     <span>&nbsp</span>
                                     <!--end::Form-->
                                 </div>
@@ -525,8 +525,7 @@
                                     <!--begin::Form-->
                                     <form class="w-100 position-relative" autocomplete="off">
                                         <span>Seleziona personaggi</span>
-                                        <select class="form-select" name="selPers" id="selPers" multiple>
-                                        <option value="" disabled selected hidden>Seleziona un personaggio</option>
+                                        <select class="form-select" name="selPers" id="selPers" multiple onchange="UpdateRelazioni()">
                                         </select>
                                         <!--end::Input-->
                                         <span>&nbsp</span>
@@ -539,7 +538,7 @@
                         </div>
                         <!--end::Sidebar-->
                         <!--begin::Sidebar-->
-                        <div class="flex-row flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0 ms-lg-7 ms-xl-10" style="margin-top:5%;">
+                        <div class="flex-row flex-lg-row-auto w-100 w-lg-300px w-xl-400px mb-10 mb-lg-0 ms-lg-7 ms-xl-10 Ceck" style="margin-top:5%;" id="divRelazioni">
                             <!--begin::Contacts-->
                             <div class="card card-flush">
                                 <!--begin::Card header-->
@@ -550,13 +549,13 @@
                                         <span>&nbsp<br></span>
                                         <label for="p1">Scegli il primo personaggio:</label><span>&nbsp &nbsp &nbsp</span>
 
-                                        <select class="form-select" name="p1" id="p1" >
+                                        <select class="form-select" name="p1" id="p1" onchange="CheckPers('p1','p2')">
 
                                         </select>
                                         <span><br>&nbsp<br></span>
                                         <label for="p2">Scegli il secondo personaggio:</label>
 
-                                        <select class="form-select" name="p2" id="p2" >
+                                        <select class="form-select" name="p2" id="p2" onchange="CheckPers('p2','p1')">
 
                                         </select>
                                         <span>&nbsp<br></span>
@@ -647,6 +646,7 @@
 </script>
 
 <<script>
+
     const apiUrl = '{{BASE_URL}}/api/creazione/cerca?Nome&Tipo=Ambiente&Pagina=1'
 
     // Effettua una richiesta GET all'API per contenuto
@@ -657,7 +657,6 @@
     })
             .then(response => {
                 const ris = response.data.Ris;
-                console.log(response);
                 if(ris === 1) {
                     const data = response.data.Creazione.creazioni;
                     const selectElement = document.getElementById("selAmbiente");
@@ -695,58 +694,6 @@
             });
 
     // Effettua una richiesta GET all'API per relazione
-    const apiUrl2 = '{{BASE_URL}}/api/creazione/cerca?Nome&Tipo=Personaggio&Pagina=1'
-
-    axios.get(apiUrl2,{
-        headers:{
-            "Authorization":"{{idUtente}}.{{tokenAuth}}"
-        }
-    })
-            .then(response => {
-                const risp = response.data.Ris;
-                console.log(response);
-                if(risp === 1) {
-                    const data = response.data.Creazione.creazioni;
-                    const personaggio1 = document.getElementById("p1");
-                    const personaggio2 = document.getElementById("p2");
-                    // Aggiungi una nuova opzione per ogni elemento nel tuo array
-                    data.forEach(creazioni => {
-                        const optionElement = document.createElement('option');
-                        const optionElement2 = document.createElement('option');
-                        optionElement.value = creazioni.idCreazione;
-                        optionElement.innerText = creazioni.nome;
-                        optionElement2.value = creazioni.idCreazione;
-                        optionElement2.innerText = creazioni.nome;
-                        personaggio1.appendChild(optionElement);
-                        personaggio2.appendChild(optionElement2);
-                    });
-                }
-                else{
-                    const mess = response.data.Mess;
-                    Swal.fire({
-                        text: mess,
-                        icon: "error",
-                        buttonsStyling: false,
-                        confirmButtonText: "Ok",
-                        customClass: {
-                            confirmButton: "btn fw-bold btn-primary",
-                        }
-                    });
-                }
-            })
-            .catch(error => {
-                Swal.fire({
-                    text: error.message,
-                    icon: "error",
-                    buttonsStyling: false,
-                    confirmButtonText: "Ok",
-                    customClass: {
-                        confirmButton: "btn fw-bold btn-primary",
-                    }
-                });
-            });
-
-    // Effettua una richiesta GET all'API per relazione
     const apiUrl3 = '{{BASE_URL}}/api/creazione/cerca?Nome&Tipo=Personaggio&Pagina=1'
 
     axios.get(apiUrl3,{
@@ -756,7 +703,6 @@
     })
             .then(response => {
                 const risp = response.data.Ris;
-                console.log(response);
                 if(risp === 1) {
                     const data = response.data.Creazione.creazioni;
                     const selPers = document.getElementById("selPers");
@@ -798,17 +744,26 @@
         const nome = document.getElementById("nome").value.trim();
         const descrizione = document.getElementById("textDescrizione").value.trim();
         const idAmbiente = document.getElementById("selAmbiente").value;
-        const selPers = document.getElementById('selPers').value;
+        const selPers = document.getElementById('selPers');
         const idp1 = document.getElementById("p1").value;
         const idp2 = document.getElementById("p2").value;
         const relazione = document.getElementById("relazione").value.trim();
         const controlloPriv = document.getElementById("priv").checked;
         const controlloPub = document.getElementById("publ").checked;
 
+        const selectedIds=[];
+
+        for (let i = 0; i < selPers.options.length; i++) {
+            // Se l'opzione è selezionata, aggiungila all'array
+            if (selPers.options[i].selected) {
+                selectedIds.push(selPers.options[i].value);
+            }
+        }
+
         if(nome.length>0){
             if(descrizione.length>20 && descrizione.length<512){
                 if(idAmbiente>0){
-                    if(selPers > 0) {
+                    if(selectedIds.length > 0) {
                         if (idp1 > 0 && idp2 > 0 && idp1 !== idp2) {
                             if (relazione.length > 0) {
                                 if (controlloPub || controlloPriv) {
@@ -823,6 +778,7 @@
                                         nome: nome,
                                         descrizione: descrizione,
                                         fkUtente:{{idUtente}},
+                                        listaPersonaggi:selectedIds,
                                         fkAmbiente: idAmbiente,
                                         isPubblico: isPubblico
                                     };
@@ -1001,56 +957,45 @@
 
         if(nome.length>1 && nome.length<=50){
             if(descrizione.length>0 && descrizione.length<=512){
-                    if(checkPrivato || checkPubblico){
-                        let isPubblico=1;
-                        if(checkPrivato){
-                            isPubblico=0;
-                        }
+                if(checkPrivato || checkPubblico){
+                    let isPubblico=1;
+                    if(checkPrivato){
+                        isPubblico=0;
+                    }
 
-                        const formData = new FormData();
-                        formData.append('nome',nome);
-                        formData.append("isPubblico",isPubblico);
-                        formData.append('tipo', "Ambiente");
-                        formData.append('descrizione', descrizione);
-                        if(foto.length>0){
-                            formData.append('foto', foto[0])
-                        }
+                    const formData = new FormData();
+                    formData.append('nome',nome);
+                    formData.append("isPubblico",isPubblico);
+                    formData.append('tipo', "Ambiente");
+                    formData.append('descrizione', descrizione);
+                    if(foto.length>0){
+                        formData.append('foto', foto[0])
+                    }
 
-                        const apiUrl = '{{BASE_URL}}/api/creazione/'
-                        axios.post(apiUrl,formData,{
-                            headers:{
-                                Authorization: "{{idUtente}}.{{tokenAuth}}"
-                            }
-                        }).then((result)=>{
-                            let ris=result.data.Ris;
-                            if(ris===1){
-                                Swal.fire({
-                                    text: "Ambiente creato!",
-                                    icon: "success",
-                                    buttonsStyling: false,
-                                    confirmButtonText: "Ok",
-                                    customClass: {
-                                        confirmButton: "btn fw-bold btn-primary",
-                                    }
-                                }).then(()=>{
-                                    window.location.href = "{{BASE_URL}}/contenuto";
-                                });
-                            }
-                            else{
-                                let mess=result.data.Mess;
-                                Swal.fire({
-                                    text: mess,
-                                    icon: "error",
-                                    buttonsStyling: false,
-                                    confirmButtonText: "Ok",
-                                    customClass: {
-                                        confirmButton: "btn fw-bold btn-primary",
-                                    }
-                                });
-                            }
-                        }).catch((error)=>{
+                    const apiUrl = '{{BASE_URL}}/api/creazione/'
+                    axios.post(apiUrl,formData,{
+                        headers:{
+                            Authorization: "{{idUtente}}.{{tokenAuth}}"
+                        }
+                    }).then((result)=>{
+                        let ris=result.data.Ris;
+                        if(ris===1){
                             Swal.fire({
-                                text: error.message,
+                                text: "Ambiente creato!",
+                                icon: "success",
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok",
+                                customClass: {
+                                    confirmButton: "btn fw-bold btn-primary",
+                                }
+                            }).then(()=>{
+                                window.location.href = "{{BASE_URL}}/contenuto";
+                            });
+                        }
+                        else{
+                            let mess=result.data.Mess;
+                            Swal.fire({
+                                text: mess,
                                 icon: "error",
                                 buttonsStyling: false,
                                 confirmButtonText: "Ok",
@@ -1058,11 +1003,10 @@
                                     confirmButton: "btn fw-bold btn-primary",
                                 }
                             });
-                        });
-                    }
-                    else{
+                        }
+                    }).catch((error)=>{
                         Swal.fire({
-                            text: "Deve selezionare la privacy del personaggio",
+                            text: error.message,
                             icon: "error",
                             buttonsStyling: false,
                             confirmButtonText: "Ok",
@@ -1070,7 +1014,19 @@
                                 confirmButton: "btn fw-bold btn-primary",
                             }
                         });
-                    }
+                    });
+                }
+                else{
+                    Swal.fire({
+                        text: "Deve selezionare la privacy del personaggio",
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok",
+                        customClass: {
+                            confirmButton: "btn fw-bold btn-primary",
+                        }
+                    });
+                }
             }
             else{
                 Swal.fire({
@@ -1227,6 +1183,57 @@
             });
         }
     }
+
+    let vettPersonaggi=[];
+    function UpdateRelazioni(){
+        vettPersonaggi.length=0;
+        let select=document.getElementById("selPers");
+        for (let i = 0; i < select.options.length; i++) {
+            if (select.options[i].selected) {
+                vettPersonaggi.push({
+                    id:select.options[i].value,
+                    nome:select.options[i].text
+                });
+            }
+        }
+
+        UpdateSelect("p1",vettPersonaggi);
+        UpdateSelect("p2",vettPersonaggi);
+
+        if(vettPersonaggi.length>1){
+            document.getElementById("p2").value=vettPersonaggi[1].id;
+            document.getElementById("divRelazioni").classList.remove("Ceck");
+        }
+        else{
+            document.getElementById("divRelazioni").classList.add("Ceck");
+        }
+    }
+
+    function UpdateSelect(idSelect,vett){
+        const selP1 = document.getElementById(idSelect);
+
+        let actualId=selP1.value;
+
+        selP1.innerHTML = "";
+
+        // Aggiungi una nuova opzione per ogni elemento nel tuo array
+        vett.forEach(creazioni => {
+            const optionElement = document.createElement('option');
+            optionElement.value = creazioni.id;
+            optionElement.innerText = creazioni.nome;
+            selP1.appendChild(optionElement);
+        });
+
+        selP1.value=actualId;
+    }
+
+    function CheckPers(mySelect,otherSelect){
+        const selP1 = document.getElementById(mySelect);
+        let firstId=selP1.value;
+        let secondVett = vettPersonaggi.filter(elemento => elemento.id !== firstId);
+
+        UpdateSelect(otherSelect,secondVett);
+    }
 </script>
 
 <script>
@@ -1247,3 +1254,4 @@
 </body>
 <!--end::Body-->
 </html>
+
