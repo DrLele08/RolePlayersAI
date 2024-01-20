@@ -1,0 +1,1018 @@
+{
+  "id": "1a99d8c6-7342-430d-87b9-d4e8a1c55030",
+  "version": "2.0",
+  "name": "RolePlayersAI_CreazioneContesto",
+  "url": "http://localhost:3000/login",
+  "tests": [{
+    "id": "037e0814-9e04-4f7c-bca8-a81e41a6e2e3",
+    "name": "TC_3.3.1",
+    "commands": [{
+      "id": "0c2f5543-974c-4a52-9224-b5042b9b90d4",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:3000/contenuto",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "80058ac4-820f-45d4-884a-83f2f3307f68",
+      "comment": "",
+      "command": "click",
+      "target": "css=.card:nth-child(3) .p-5 .menu-title",
+      "targets": [
+        ["css=.card:nth-child(3) .p-5 .menu-title", "css:finder"],
+        ["xpath=//div[@id='kt_post']/div/div/div[3]/div/div/div/div/div/div[3]/a/span", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/div/div/div[3]/a/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "13d9b0ee-de4c-4587-894e-371744a53577",
+      "comment": "",
+      "command": "type",
+      "target": "id=nome",
+      "targets": [
+        ["id=nome", "id"],
+        ["name=nome", "name"],
+        ["css=#nome", "css:finder"],
+        ["xpath=//input[@id='nome']", "xpath:attributes"],
+        ["xpath=//div[@id='divContesti']/div/div/div/div/form/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/div/form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "445df109-2157-4a7b-8d29-117adc6a7f99",
+      "comment": "",
+      "command": "type",
+      "target": "id=textDescrizione",
+      "targets": [
+        ["id=textDescrizione", "id"],
+        ["css=#textDescrizione", "css:finder"],
+        ["xpath=//input[@id='textDescrizione']", "xpath:attributes"],
+        ["xpath=//div[@id='divContesti']/div/div[2]/div/div/form/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div[2]/div/div/form/input", "xpath:position"]
+      ],
+      "value": "Gli acquisti di natale, periodo fantastico per stare in compagnia con la famiglia"
+    }, {
+      "id": "d6c39e89-58fd-4ca3-92a1-edf6ba006dbc",
+      "comment": "",
+      "command": "select",
+      "target": "id=selAmbiente",
+      "targets": [],
+      "value": "label=Fabbrica di Cioccolato"
+    }, {
+      "id": "7d337101-6099-4b65-9635-2a184bfd6406",
+      "comment": "",
+      "command": "addSelection",
+      "target": "id=selPers",
+      "targets": [],
+      "value": "Mago"
+    }, {
+      "id": "415b2baa-d7d7-473d-a082-7b44fdea4b21",
+      "comment": "",
+      "command": "addSelection",
+      "target": "id=selPers",
+      "targets": [],
+      "value": "Willy Wonka"
+    }, {
+      "id": "14258430-9ace-44f4-9b9c-d1e7bf6c7810",
+      "comment": "",
+      "command": "select",
+      "target": "id=p1",
+      "targets": [],
+      "value": "label=Mago"
+    }, {
+      "id": "3fd50978-ca25-4989-b3a4-a86af2f177ee",
+      "comment": "",
+      "command": "select",
+      "target": "id=p2",
+      "targets": [],
+      "value": "label=Willy Wonka"
+    }, {
+      "id": "22da221f-debc-4eb8-a6d0-9ff435670e86",
+      "comment": "",
+      "command": "type",
+      "target": "id=relazione",
+      "targets": [
+        ["id=relazione", "id"],
+        ["name=relazione", "name"],
+        ["css=#relazione", "css:finder"],
+        ["xpath=//input[@id='relazione']", "xpath:attributes"],
+        ["xpath=//div[@id='divRelazioni']/div/div/form/input", "xpath:idRelative"],
+        ["xpath=//div[5]/div/div/form/input", "xpath:position"]
+      ],
+      "value": "sono fratelli che scartano i regali insieme in allegria"
+    }, {
+      "id": "549cd7b8-f5bd-44b3-af6d-4fa6b696ba9b",
+      "comment": "",
+      "command": "click",
+      "target": "id=publ",
+      "targets": [
+        ["id=publ", "id"],
+        ["css=#publ", "css:finder"],
+        ["xpath=//input[@id='publ']", "xpath:attributes"],
+        ["xpath=//div[@id='divContesti']/div/div[6]/div/div/div/input[2]", "xpath:idRelative"],
+        ["xpath=//div[6]/div/div/div/input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a5d879d6-19b1-448c-ac14-3e424db9da88",
+      "comment": "",
+      "command": "click",
+      "target": "css=.card-header > .btn:nth-child(1) > .menu-title",
+      "targets": [
+        ["css=.card-header > .btn:nth-child(1) > .menu-title", "css:finder"],
+        ["xpath=//div[@id='divContesti']/div/div[7]/div/div/button/span", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/button/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "1a00279c-149c-4dbb-a19b-c02f3453b350",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.card-header > .btn:nth-child(1) > .menu-title",
+      "targets": [
+        ["css=.card-header > .btn:nth-child(1) > .menu-title", "css:finder"],
+        ["xpath=//div[@id='divContesti']/div/div[7]/div/div/button/span", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/button/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "885507fc-784d-4e4d-9766-81f18fa9ecb2",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=.card-header > .btn:nth-child(1) > .menu-title",
+      "targets": [
+        ["css=.card-header > .btn:nth-child(1) > .menu-title", "css:finder"],
+        ["xpath=//div[@id='divContesti']/div/div[7]/div/div/button/span", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/button/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9b969ca1-d6c4-4fc8-a34a-b747b9548b3a",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=swal2-html-container",
+      "targets": [],
+      "value": "Il nome non può essere vuoto"
+    }]
+  }, {
+    "id": "07a60e0e-f82e-4e4a-8f3d-211ea60b21bb",
+    "name": "TC_3.3.2",
+    "commands": [{
+      "id": "b03d7ef6-fb17-45f9-951b-4eeda41e40b4",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:3000/contenuto",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "d663dbe8-2766-42fd-8776-a09b22dc9dc1",
+      "comment": "",
+      "command": "click",
+      "target": "css=.card:nth-child(3) .p-5 .menu-title",
+      "targets": [
+        ["css=.card:nth-child(3) .p-5 .menu-title", "css:finder"],
+        ["xpath=//div[@id='kt_post']/div/div/div[3]/div/div/div/div/div/div[3]/a/span", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/div/div/div[3]/a/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "bf0e4c42-c833-4233-a3f9-0d2e5d826f06",
+      "comment": "",
+      "command": "type",
+      "target": "id=nome",
+      "targets": [
+        ["id=nome", "id"],
+        ["name=nome", "name"],
+        ["css=#nome", "css:finder"],
+        ["xpath=//input[@id='nome']", "xpath:attributes"],
+        ["xpath=//div[@id='divContesti']/div/div/div/div/form/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/div/form/input", "xpath:position"]
+      ],
+      "value": "Gli incredibili saldi invernali per natale incredibile entusiasmante wow, sconti da non perdere"
+    }, {
+      "id": "2301f8e6-7bf3-42d2-8f6c-1239bac2f8f5",
+      "comment": "",
+      "command": "type",
+      "target": "id=textDescrizione",
+      "targets": [
+        ["id=textDescrizione", "id"],
+        ["css=#textDescrizione", "css:finder"],
+        ["xpath=//input[@id='textDescrizione']", "xpath:attributes"],
+        ["xpath=//div[@id='divContesti']/div/div[2]/div/div/form/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div[2]/div/div/form/input", "xpath:position"]
+      ],
+      "value": "Gli acquisti di natale, periodo fantastico per stare in compagnia con la famiglia"
+    }, {
+      "id": "cb74d708-2fc5-40b3-a9d3-1aee125df190",
+      "comment": "",
+      "command": "select",
+      "target": "id=selAmbiente",
+      "targets": [],
+      "value": "label=Fabbrica di Cioccolato"
+    }, {
+      "id": "bcda8a7a-fbb2-4bf3-8ad3-682fc9578dfa",
+      "comment": "",
+      "command": "addSelection",
+      "target": "id=selPers",
+      "targets": [],
+      "value": "Mago"
+    }, {
+      "id": "045f1bf1-9726-4028-8b59-c590d5a95e55",
+      "comment": "",
+      "command": "addSelection",
+      "target": "id=selPers",
+      "targets": [],
+      "value": "Willy Wonka"
+    }, {
+      "id": "8147bfea-2bd9-47ed-a3b4-c35df66982b1",
+      "comment": "",
+      "command": "select",
+      "target": "id=p1",
+      "targets": [],
+      "value": "label=Mago"
+    }, {
+      "id": "781b447f-10e0-4720-891e-b11015ebc09a",
+      "comment": "",
+      "command": "select",
+      "target": "id=p2",
+      "targets": [],
+      "value": "label=Willy Wonka"
+    }, {
+      "id": "7d6f215b-d728-46fc-b573-0c505ec3d287",
+      "comment": "",
+      "command": "type",
+      "target": "id=relazione",
+      "targets": [
+        ["id=relazione", "id"],
+        ["name=relazione", "name"],
+        ["css=#relazione", "css:finder"],
+        ["xpath=//input[@id='relazione']", "xpath:attributes"],
+        ["xpath=//div[@id='divRelazioni']/div/div/form/input", "xpath:idRelative"],
+        ["xpath=//div[5]/div/div/form/input", "xpath:position"]
+      ],
+      "value": "sono fratelli che scartano i regali insieme in allegria"
+    }, {
+      "id": "a6245c68-2b09-4e70-b4e9-cbd83f8a2c83",
+      "comment": "",
+      "command": "click",
+      "target": "id=publ",
+      "targets": [
+        ["id=publ", "id"],
+        ["css=#publ", "css:finder"],
+        ["xpath=//input[@id='publ']", "xpath:attributes"],
+        ["xpath=//div[@id='divContesti']/div/div[6]/div/div/div/input[2]", "xpath:idRelative"],
+        ["xpath=//div[6]/div/div/div/input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "be71b83d-8ee2-43aa-bf06-0c0f05346182",
+      "comment": "",
+      "command": "click",
+      "target": "css=.card-header > .btn:nth-child(1) > .menu-title",
+      "targets": [
+        ["css=.card-header > .btn:nth-child(1) > .menu-title", "css:finder"],
+        ["xpath=//div[@id='divContesti']/div/div[7]/div/div/button/span", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/button/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4d624255-f385-4f8d-853a-a17606a306cb",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.card-header > .btn:nth-child(1) > .menu-title",
+      "targets": [
+        ["css=.card-header > .btn:nth-child(1) > .menu-title", "css:finder"],
+        ["xpath=//div[@id='divContesti']/div/div[7]/div/div/button/span", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/button/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e88278f6-9c7d-4524-80f5-9edc9009c923",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=.card-header > .btn:nth-child(1) > .menu-title",
+      "targets": [
+        ["css=.card-header > .btn:nth-child(1) > .menu-title", "css:finder"],
+        ["xpath=//div[@id='divContesti']/div/div[7]/div/div/button/span", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/button/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "238ade26-8b46-46d6-a1c0-8f880f1d3f30",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=swal2-html-container",
+      "targets": [],
+      "value": "Nome non valido"
+    }]
+  }, {
+    "id": "1f760094-e336-480f-b86f-b7498676cb21",
+    "name": "TC_3.3.3",
+    "commands": [{
+      "id": "cdbda329-ea0e-42bb-aafb-e3ffabf17bd0",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:3000/contenuto",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "31a549f5-13ea-4c2d-8a55-54b399eb6c44",
+      "comment": "",
+      "command": "click",
+      "target": "css=.card:nth-child(3) .p-5 .menu-title",
+      "targets": [
+        ["css=.card:nth-child(3) .p-5 .menu-title", "css:finder"],
+        ["xpath=//div[@id='kt_post']/div/div/div[3]/div/div/div/div/div/div[3]/a/span", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/div/div/div[3]/a/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ef966225-db0e-4a90-ab44-b7a3f987277a",
+      "comment": "",
+      "command": "type",
+      "target": "id=nome",
+      "targets": [
+        ["id=nome", "id"],
+        ["name=nome", "name"],
+        ["css=#nome", "css:finder"],
+        ["xpath=//input[@id='nome']", "xpath:attributes"],
+        ["xpath=//div[@id='divContesti']/div/div/div/div/form/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/div/form/input", "xpath:position"]
+      ],
+      "value": "Gli incredibili saldi invernali per natale"
+    }, {
+      "id": "f8006569-fd62-4365-9f25-66c743e4f15a",
+      "comment": "",
+      "command": "type",
+      "target": "id=textDescrizione",
+      "targets": [
+        ["id=textDescrizione", "id"],
+        ["css=#textDescrizione", "css:finder"],
+        ["xpath=//input[@id='textDescrizione']", "xpath:attributes"],
+        ["xpath=//div[@id='divContesti']/div/div[2]/div/div/form/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div[2]/div/div/form/input", "xpath:position"]
+      ],
+      "value": "natale"
+    }, {
+      "id": "69a50011-52b9-44fb-a859-aa49617ab8ac",
+      "comment": "",
+      "command": "select",
+      "target": "id=selAmbiente",
+      "targets": [],
+      "value": "label=Fabbrica di Cioccolato"
+    }, {
+      "id": "68d575d7-cbc6-44d0-aede-fe15f05e8d5a",
+      "comment": "",
+      "command": "addSelection",
+      "target": "id=selPers",
+      "targets": [],
+      "value": "Mago"
+    }, {
+      "id": "08846a5f-660e-4e30-a110-26d94447e974",
+      "comment": "",
+      "command": "addSelection",
+      "target": "id=selPers",
+      "targets": [],
+      "value": "Willy Wonka"
+    }, {
+      "id": "4fedfe41-b295-4471-8b7b-d4543354e5b3",
+      "comment": "",
+      "command": "select",
+      "target": "id=p1",
+      "targets": [],
+      "value": "label=Mago"
+    }, {
+      "id": "2d80aab8-5528-4295-a3fe-3c9fb85fb02d",
+      "comment": "",
+      "command": "select",
+      "target": "id=p2",
+      "targets": [],
+      "value": "label=Willy Wonka"
+    }, {
+      "id": "6f421ada-9bbc-40ff-823a-ee3f4b877e22",
+      "comment": "",
+      "command": "type",
+      "target": "id=relazione",
+      "targets": [
+        ["id=relazione", "id"],
+        ["name=relazione", "name"],
+        ["css=#relazione", "css:finder"],
+        ["xpath=//input[@id='relazione']", "xpath:attributes"],
+        ["xpath=//div[@id='divRelazioni']/div/div/form/input", "xpath:idRelative"],
+        ["xpath=//div[5]/div/div/form/input", "xpath:position"]
+      ],
+      "value": "sono fratelli che scartano i regali insieme in allegria"
+    }, {
+      "id": "ac03478d-f377-41df-a4e3-d5c1572612a5",
+      "comment": "",
+      "command": "click",
+      "target": "id=publ",
+      "targets": [
+        ["id=publ", "id"],
+        ["css=#publ", "css:finder"],
+        ["xpath=//input[@id='publ']", "xpath:attributes"],
+        ["xpath=//div[@id='divContesti']/div/div[6]/div/div/div/input[2]", "xpath:idRelative"],
+        ["xpath=//div[6]/div/div/div/input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "78cc7522-1731-40e6-a439-54dccd953c64",
+      "comment": "",
+      "command": "click",
+      "target": "css=.card-header > .btn:nth-child(1) > .menu-title",
+      "targets": [
+        ["css=.card-header > .btn:nth-child(1) > .menu-title", "css:finder"],
+        ["xpath=//div[@id='divContesti']/div/div[7]/div/div/button/span", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/button/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e70a0711-ee1f-4699-985c-4331c81ae498",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.card-header > .btn:nth-child(1) > .menu-title",
+      "targets": [
+        ["css=.card-header > .btn:nth-child(1) > .menu-title", "css:finder"],
+        ["xpath=//div[@id='divContesti']/div/div[7]/div/div/button/span", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/button/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "fc7b129f-ca72-4ace-a533-dc4e67c785d2",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=.card-header > .btn:nth-child(1) > .menu-title",
+      "targets": [
+        ["css=.card-header > .btn:nth-child(1) > .menu-title", "css:finder"],
+        ["xpath=//div[@id='divContesti']/div/div[7]/div/div/button/span", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/button/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "bc040018-cd97-4eaf-b4f0-837dc7fde95d",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=swal2-html-container",
+      "targets": [],
+      "value": "La descrizione deve essere compresa tra i 20 e i 512 caratteri!"
+    }]
+  }, {
+    "id": "bdfc3aa4-b1cd-416a-ba5c-41ad8af163f5",
+    "name": "TC_3.3.4",
+    "commands": [{
+      "id": "41c4a5e5-2006-4ddc-9911-73e39c9089de",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:3000/contenuto",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b9dd2bfe-9a38-4929-8721-3e01351dbbbb",
+      "comment": "",
+      "command": "click",
+      "target": "css=.card:nth-child(3) .p-5 .menu-title",
+      "targets": [
+        ["css=.card:nth-child(3) .p-5 .menu-title", "css:finder"],
+        ["xpath=//div[@id='kt_post']/div/div/div[3]/div/div/div/div/div/div[3]/a/span", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/div/div/div[3]/a/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3cdf90f4-fc62-430e-aaba-333ad1bf5d4d",
+      "comment": "",
+      "command": "type",
+      "target": "id=nome",
+      "targets": [
+        ["id=nome", "id"],
+        ["name=nome", "name"],
+        ["css=#nome", "css:finder"],
+        ["xpath=//input[@id='nome']", "xpath:attributes"],
+        ["xpath=//div[@id='divContesti']/div/div/div/div/form/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/div/form/input", "xpath:position"]
+      ],
+      "value": "Gli incredibili saldi invernali per natale"
+    }, {
+      "id": "6e00a87c-156d-448f-90d6-d91b21581532",
+      "comment": "",
+      "command": "type",
+      "target": "id=textDescrizione",
+      "targets": [
+        ["id=textDescrizione", "id"],
+        ["css=#textDescrizione", "css:finder"],
+        ["xpath=//input[@id='textDescrizione']", "xpath:attributes"],
+        ["xpath=//div[@id='divContesti']/div/div[2]/div/div/form/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div[2]/div/div/form/input", "xpath:position"]
+      ],
+      "value": "Il Natale è la festa annuale che commemora la nascita di Gesù, osservata principalmente il 25 dicembre come celebrazione religiosa e culturale da miliardi di persone in tutto il mondo. Festa centrale dell'anno liturgico cristiano, è preceduta dal tempo dell'Avvento o del digiuno della Natività e dà inizio al tempo di Natale, che storicamente in Occidente dura dodici giorni e culmina nella dodicesima notte. Il giorno di Natale è un giorno festivo in molti paesi, è celebrato religiosamente dalla maggioranza dei cristiani, così come culturalmente da molti non cristiani, e costituisce una parte integrante delle festività natalizie organizzate attorno ad esso.\\n\\nLa tradizionale narrazione natalizia raccontata nel Nuovo Testamento, conosciuta come la Natività di Gesù, disse che Gesù nacque a Betlemme, secondo le profezie messianiche. Quando Giuseppe e Maria giunsero in città, la locanda non aveva posto e così fu loro offerta una stalla dove presto nacque Gesù Bambino, con un angelo che annunciava questa notizia ai pastori che poi spargevano la voce.\\n\\nCade il 25 dicembre per tutte le Chiese cristiane che seguono il calendario gregoriano, mentre cade il 7 gennaio (con un ritardo di tredici giorni) per quelle che seguono il calendario giuliano. Tuttavia, anche la Chiesa greco-ortodossa, con eccezione della Chiesa slava polacca e delle Chiese orientali (siriache o copte), si sono adeguate al calendario gregoriano, pur mantenendo il calendario giuliano per la loro tradizionale liturgia."
+    }, {
+      "id": "5507a9f3-0fcf-4a1f-b0e3-134a3f071538",
+      "comment": "",
+      "command": "select",
+      "target": "id=selAmbiente",
+      "targets": [],
+      "value": "label=Fabbrica di Cioccolato"
+    }, {
+      "id": "2eac01d8-0a2d-4710-9449-736d783ebc3e",
+      "comment": "",
+      "command": "addSelection",
+      "target": "id=selPers",
+      "targets": [],
+      "value": "Mago"
+    }, {
+      "id": "30c0da4c-f6e5-4042-bb01-a9aacc6877c4",
+      "comment": "",
+      "command": "addSelection",
+      "target": "id=selPers",
+      "targets": [],
+      "value": "Willy Wonka"
+    }, {
+      "id": "f49fa644-d170-4db4-8ae2-91038b3bb781",
+      "comment": "",
+      "command": "select",
+      "target": "id=p1",
+      "targets": [],
+      "value": "label=Mago"
+    }, {
+      "id": "7df32262-32ba-4cb0-a829-de3964a27fb7",
+      "comment": "",
+      "command": "select",
+      "target": "id=p2",
+      "targets": [],
+      "value": "label=Willy Wonka"
+    }, {
+      "id": "dcdbed3d-4a43-44fb-94b8-6470e36570b9",
+      "comment": "",
+      "command": "type",
+      "target": "id=relazione",
+      "targets": [
+        ["id=relazione", "id"],
+        ["name=relazione", "name"],
+        ["css=#relazione", "css:finder"],
+        ["xpath=//input[@id='relazione']", "xpath:attributes"],
+        ["xpath=//div[@id='divRelazioni']/div/div/form/input", "xpath:idRelative"],
+        ["xpath=//div[5]/div/div/form/input", "xpath:position"]
+      ],
+      "value": "sono fratelli che scartano i regali insieme in allegria"
+    }, {
+      "id": "c6eb39d7-696a-4bda-888a-9f20154dd7e6",
+      "comment": "",
+      "command": "click",
+      "target": "id=publ",
+      "targets": [
+        ["id=publ", "id"],
+        ["css=#publ", "css:finder"],
+        ["xpath=//input[@id='publ']", "xpath:attributes"],
+        ["xpath=//div[@id='divContesti']/div/div[6]/div/div/div/input[2]", "xpath:idRelative"],
+        ["xpath=//div[6]/div/div/div/input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e8916419-2eb3-4d6f-9cda-4a97a51db59b",
+      "comment": "",
+      "command": "click",
+      "target": "css=.card-header > .btn:nth-child(1) > .menu-title",
+      "targets": [
+        ["css=.card-header > .btn:nth-child(1) > .menu-title", "css:finder"],
+        ["xpath=//div[@id='divContesti']/div/div[7]/div/div/button/span", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/button/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7284e80c-dfa1-4be1-8abb-66104c0dcb72",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.card-header > .btn:nth-child(1) > .menu-title",
+      "targets": [
+        ["css=.card-header > .btn:nth-child(1) > .menu-title", "css:finder"],
+        ["xpath=//div[@id='divContesti']/div/div[7]/div/div/button/span", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/button/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f4a13f23-5f95-4bdc-b7b2-f276f919d0ce",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=.card-header > .btn:nth-child(1) > .menu-title",
+      "targets": [
+        ["css=.card-header > .btn:nth-child(1) > .menu-title", "css:finder"],
+        ["xpath=//div[@id='divContesti']/div/div[7]/div/div/button/span", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/button/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "1a43cc31-c9d6-4651-b0cf-bcbcbb8b17a4",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=swal2-html-container",
+      "targets": [],
+      "value": "La descrizione deve essere compresa tra i 20 e i 512 caratteri!"
+    }]
+  }, {
+    "id": "0eff2ee5-bc74-43d3-a5e5-f477b2f5786b",
+    "name": "TC_3.3.5",
+    "commands": [{
+      "id": "d5a437ab-a232-4df0-8fd2-8133da272d00",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:3000/contenuto",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "c7e2f104-d871-41e8-85d6-96d431151541",
+      "comment": "",
+      "command": "click",
+      "target": "css=.card:nth-child(3) .p-5 .menu-title",
+      "targets": [
+        ["css=.card:nth-child(3) .p-5 .menu-title", "css:finder"],
+        ["xpath=//div[@id='kt_post']/div/div/div[3]/div/div/div/div/div/div[3]/a/span", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/div/div/div[3]/a/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ae606fb3-0dff-4fd2-85aa-6640fac3753b",
+      "comment": "",
+      "command": "type",
+      "target": "id=nome",
+      "targets": [
+        ["id=nome", "id"],
+        ["name=nome", "name"],
+        ["css=#nome", "css:finder"],
+        ["xpath=//input[@id='nome']", "xpath:attributes"],
+        ["xpath=//div[@id='divContesti']/div/div/div/div/form/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/div/form/input", "xpath:position"]
+      ],
+      "value": "Gli incredibili saldi invernali per natale"
+    }, {
+      "id": "5d511b8b-a551-44f8-af49-7240a711f91a",
+      "comment": "",
+      "command": "type",
+      "target": "id=textDescrizione",
+      "targets": [
+        ["id=textDescrizione", "id"],
+        ["css=#textDescrizione", "css:finder"],
+        ["xpath=//input[@id='textDescrizione']", "xpath:attributes"],
+        ["xpath=//div[@id='divContesti']/div/div[2]/div/div/form/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div[2]/div/div/form/input", "xpath:position"]
+      ],
+      "value": "la magica festa di natale con la famiglia"
+    }, {
+      "id": "65200099-bbcc-4d11-a576-fbadce2a2b49",
+      "comment": "",
+      "command": "select",
+      "target": "id=selAmbiente",
+      "targets": [],
+      "value": "label=Fabbrica di Cioccolato"
+    }, {
+      "id": "6a34b7de-7d35-484b-abce-b26b988e5c2b",
+      "comment": "",
+      "command": "addSelection",
+      "target": "id=selPers",
+      "targets": [],
+      "value": "Mago"
+    }, {
+      "id": "a6d3bf4b-d2e6-49a7-be8a-49e65685379e",
+      "comment": "",
+      "command": "select",
+      "target": "id=p1",
+      "targets": [],
+      "value": "label=Mago"
+    }, {
+      "id": "22240e2c-80a4-4178-a670-ddeccfc9bdf9",
+      "comment": "",
+      "command": "click",
+      "target": "id=publ",
+      "targets": [
+        ["id=publ", "id"],
+        ["css=#publ", "css:finder"],
+        ["xpath=//input[@id='publ']", "xpath:attributes"],
+        ["xpath=//div[@id='divContesti']/div/div[6]/div/div/div/input[2]", "xpath:idRelative"],
+        ["xpath=//div[6]/div/div/div/input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ad500b5b-1084-44fd-98d0-a0800ed17c1c",
+      "comment": "",
+      "command": "click",
+      "target": "css=.card-header > .btn:nth-child(1) > .menu-title",
+      "targets": [
+        ["css=.card-header > .btn:nth-child(1) > .menu-title", "css:finder"],
+        ["xpath=//div[@id='divContesti']/div/div[7]/div/div/button/span", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/button/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b451d03e-818a-4c3c-9e48-1fd08b087b72",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.card-header > .btn:nth-child(1) > .menu-title",
+      "targets": [
+        ["css=.card-header > .btn:nth-child(1) > .menu-title", "css:finder"],
+        ["xpath=//div[@id='divContesti']/div/div[7]/div/div/button/span", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/button/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4dbbce97-4a97-4d0d-aa90-1c101b4206c1",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=.card-header > .btn:nth-child(1) > .menu-title",
+      "targets": [
+        ["css=.card-header > .btn:nth-child(1) > .menu-title", "css:finder"],
+        ["xpath=//div[@id='divContesti']/div/div[7]/div/div/button/span", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/button/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9ba72307-fe25-48a7-9df3-830764ccbd20",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=swal2-html-container",
+      "targets": [],
+      "value": "Selezione dei personaggi non valida"
+    }]
+  }, {
+    "id": "4513e29c-54fa-451c-9761-fe33ab085e57",
+    "name": "TC_3.3.6",
+    "commands": [{
+      "id": "24a948e8-d1fe-46ac-ae9d-d50292f236fe",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:3000/contenuto",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6ff5e9b1-2557-4f00-b68e-6fd0dca8a0a0",
+      "comment": "",
+      "command": "click",
+      "target": "css=.card:nth-child(3) .p-5 .menu-title",
+      "targets": [
+        ["css=.card:nth-child(3) .p-5 .menu-title", "css:finder"],
+        ["xpath=//div[@id='kt_post']/div/div/div[3]/div/div/div/div/div/div[3]/a/span", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/div/div/div[3]/a/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "712e8cd4-d2b5-4fba-9799-439c9b794980",
+      "comment": "",
+      "command": "type",
+      "target": "id=nome",
+      "targets": [
+        ["id=nome", "id"],
+        ["name=nome", "name"],
+        ["css=#nome", "css:finder"],
+        ["xpath=//input[@id='nome']", "xpath:attributes"],
+        ["xpath=//div[@id='divContesti']/div/div/div/div/form/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/div/form/input", "xpath:position"]
+      ],
+      "value": "Gli incredibili saldi invernali per natale"
+    }, {
+      "id": "29628600-120e-4aa3-8896-5c88e2fdc038",
+      "comment": "",
+      "command": "type",
+      "target": "id=textDescrizione",
+      "targets": [
+        ["id=textDescrizione", "id"],
+        ["css=#textDescrizione", "css:finder"],
+        ["xpath=//input[@id='textDescrizione']", "xpath:attributes"],
+        ["xpath=//div[@id='divContesti']/div/div[2]/div/div/form/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div[2]/div/div/form/input", "xpath:position"]
+      ],
+      "value": "la magica festa di natale con la famiglia"
+    }, {
+      "id": "d0955bbd-a2be-4d06-ad43-e47a1a84852a",
+      "comment": "",
+      "command": "select",
+      "target": "id=selAmbiente",
+      "targets": [],
+      "value": "label=Fabbrica di Cioccolato"
+    }, {
+      "id": "b6a63f0e-f75a-462d-8413-e3690d55f155",
+      "comment": "",
+      "command": "addSelection",
+      "target": "id=selPers",
+      "targets": [],
+      "value": "Mago"
+    }, {
+      "id": "5025b07b-faa7-4eeb-b255-e519d3326bfc",
+      "comment": "",
+      "command": "select",
+      "target": "id=p1",
+      "targets": [],
+      "value": "label=Mago"
+    }, {
+      "id": "5586cc5b-e712-4110-943a-cac0a8ed51c5",
+      "comment": "",
+      "command": "click",
+      "target": "id=publ",
+      "targets": [
+        ["id=publ", "id"],
+        ["css=#publ", "css:finder"],
+        ["xpath=//input[@id='publ']", "xpath:attributes"],
+        ["xpath=//div[@id='divContesti']/div/div[6]/div/div/div/input[2]", "xpath:idRelative"],
+        ["xpath=//div[6]/div/div/div/input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0281ba88-b5d7-47cd-a3ca-4d92aba7b20d",
+      "comment": "",
+      "command": "click",
+      "target": "css=.card-header > .btn:nth-child(1) > .menu-title",
+      "targets": [
+        ["css=.card-header > .btn:nth-child(1) > .menu-title", "css:finder"],
+        ["xpath=//div[@id='divContesti']/div/div[7]/div/div/button/span", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/button/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "238398ea-14b3-469f-abc0-94efeb8f352c",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.card-header > .btn:nth-child(1) > .menu-title",
+      "targets": [
+        ["css=.card-header > .btn:nth-child(1) > .menu-title", "css:finder"],
+        ["xpath=//div[@id='divContesti']/div/div[7]/div/div/button/span", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/button/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "232c8cfd-5cfe-44e2-b7a0-0529226bb046",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=.card-header > .btn:nth-child(1) > .menu-title",
+      "targets": [
+        ["css=.card-header > .btn:nth-child(1) > .menu-title", "css:finder"],
+        ["xpath=//div[@id='divContesti']/div/div[7]/div/div/button/span", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/button/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "39181c6e-3f42-4911-ac66-c88aea274a0a",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=swal2-html-container",
+      "targets": [],
+      "value": "Selezione dei personaggi non valida"
+    }]
+  }, {
+    "id": "e3d40261-1602-4e4b-8370-7ef6bfbbe50e",
+    "name": "TC_3.3.7",
+    "commands": [{
+      "id": "48a35792-b9e0-4223-b680-945835e3132d",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:3000/contenuto",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "89f0f2ca-a920-43c9-a8ca-158d425ddaf9",
+      "comment": "",
+      "command": "click",
+      "target": "css=.card:nth-child(3) .p-5 .menu-title",
+      "targets": [
+        ["css=.card:nth-child(3) .p-5 .menu-title", "css:finder"],
+        ["xpath=//div[@id='kt_post']/div/div/div[3]/div/div/div/div/div/div[3]/a/span", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/div/div/div[3]/a/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "30334419-9bbf-4556-9320-0a2bde71a28e",
+      "comment": "",
+      "command": "type",
+      "target": "id=nome",
+      "targets": [
+        ["id=nome", "id"],
+        ["name=nome", "name"],
+        ["css=#nome", "css:finder"],
+        ["xpath=//input[@id='nome']", "xpath:attributes"],
+        ["xpath=//div[@id='divContesti']/div/div/div/div/form/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/div/form/input", "xpath:position"]
+      ],
+      "value": "Gli incredibili saldi invernali per natale"
+    }, {
+      "id": "93d9e7f7-cd7a-4a33-a88b-cd490096aa4a",
+      "comment": "",
+      "command": "type",
+      "target": "id=textDescrizione",
+      "targets": [
+        ["id=textDescrizione", "id"],
+        ["css=#textDescrizione", "css:finder"],
+        ["xpath=//input[@id='textDescrizione']", "xpath:attributes"],
+        ["xpath=//div[@id='divContesti']/div/div[2]/div/div/form/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div[2]/div/div/form/input", "xpath:position"]
+      ],
+      "value": "Periodo di natale dove tutti sono più buoni"
+    }, {
+      "id": "cde02a37-a766-46bb-96dd-f9ccb54a9234",
+      "comment": "",
+      "command": "select",
+      "target": "id=selAmbiente",
+      "targets": [],
+      "value": "label=Fabbrica di Cioccolato"
+    }, {
+      "id": "6f7c8c60-506b-4de2-9e3b-d26f93357f78",
+      "comment": "",
+      "command": "addSelection",
+      "target": "id=selPers",
+      "targets": [],
+      "value": "Mago"
+    }, {
+      "id": "ca4540d1-43b4-4661-982c-3035b3cdfb4b",
+      "comment": "",
+      "command": "addSelection",
+      "target": "id=selPers",
+      "targets": [],
+      "value": "Willy Wonka"
+    }, {
+      "id": "991fb3be-a59b-4b51-a854-d8bff813224a",
+      "comment": "",
+      "command": "select",
+      "target": "id=p1",
+      "targets": [],
+      "value": "label=Mago"
+    }, {
+      "id": "e40a95b2-c2be-43f4-8af0-2b3085b6b805",
+      "comment": "",
+      "command": "select",
+      "target": "id=p2",
+      "targets": [],
+      "value": "label=Willy Wonka"
+    }, {
+      "id": "8d319ac7-9404-4b8c-92df-bd8bc00636c4",
+      "comment": "",
+      "command": "type",
+      "target": "id=relazione",
+      "targets": [
+        ["id=relazione", "id"],
+        ["name=relazione", "name"],
+        ["css=#relazione", "css:finder"],
+        ["xpath=//input[@id='relazione']", "xpath:attributes"],
+        ["xpath=//div[@id='divRelazioni']/div/div/form/input", "xpath:idRelative"],
+        ["xpath=//div[5]/div/div/form/input", "xpath:position"]
+      ],
+      "value": "sono fratelli che scartano i regali insieme in allegria"
+    }, {
+      "id": "4135a6cc-7ff4-4432-9a24-ca3bbb2e04e9",
+      "comment": "",
+      "command": "click",
+      "target": "id=publ",
+      "targets": [
+        ["id=publ", "id"],
+        ["css=#publ", "css:finder"],
+        ["xpath=//input[@id='publ']", "xpath:attributes"],
+        ["xpath=//div[@id='divContesti']/div/div[6]/div/div/div/input[2]", "xpath:idRelative"],
+        ["xpath=//div[6]/div/div/div/input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4aef7a90-a6f0-41eb-be29-5ee005d5c735",
+      "comment": "",
+      "command": "click",
+      "target": "css=.card-header > .btn:nth-child(1) > .menu-title",
+      "targets": [
+        ["css=.card-header > .btn:nth-child(1) > .menu-title", "css:finder"],
+        ["xpath=//div[@id='divContesti']/div/div[7]/div/div/button/span", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/button/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b98d61ed-540a-4fdb-87ca-ea73baf75d42",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.card-header > .btn:nth-child(1) > .menu-title",
+      "targets": [
+        ["css=.card-header > .btn:nth-child(1) > .menu-title", "css:finder"],
+        ["xpath=//div[@id='divContesti']/div/div[7]/div/div/button/span", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/button/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4d3a21f4-d234-401c-a946-3fcb2760a676",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=.card-header > .btn:nth-child(1) > .menu-title",
+      "targets": [
+        ["css=.card-header > .btn:nth-child(1) > .menu-title", "css:finder"],
+        ["xpath=//div[@id='divContesti']/div/div[7]/div/div/button/span", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/button/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ce546411-8a30-4e58-b0ab-86f516f2cb98",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=swal2-html-container",
+      "targets": [],
+      "value": "Contesto creato con successo!"
+    }]
+  }],
+  "suites": [{
+    "id": "81975f0f-1401-4e21-8640-0106c9a0557d",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["037e0814-9e04-4f7c-bca8-a81e41a6e2e3"]
+  }],
+  "urls": ["http://localhost:3000/login"],
+  "plugins": []
+}
