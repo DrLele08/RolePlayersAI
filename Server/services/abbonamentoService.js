@@ -1,30 +1,25 @@
-const abbonamento = require("../models/contesto");
-const utils = require("../models/utils");
-
-
+const abbonamento = require('../models/contesto');
+const utils = require('../models/utils');
 
 const abbonamentoService = {};
 
-abbonamentoService.getById = async(idAbbonamento) => {
-    if(utils.checkId(idAbbonamento))
-    {
-        let abbonamentoCercato = await abbonamento.getById(idAbbonamento);
-        if(abbonamentoCercato !== null){
-            return abbonamentoCercato;
-        }
-        else{
-            return Promise.reject("Abbonamento non trovato");
-        }
+abbonamentoService.getById = async (idAbbonamento) => {
+  if (utils.checkId(idAbbonamento)) {
+    const abbonamentoCercato = await abbonamento.getById(idAbbonamento);
+    if (abbonamentoCercato !== null) {
+      return abbonamentoCercato;
     }
-}
 
-abbonamentoService.getAll = async()=>{
-    let listaAbbonamenti = abbonamento.getAll();
+    return Promise.reject('Abbonamento non trovato');
+  }
+};
 
-    if(listaAbbonamenti !== null){
-        return listaAbbonamenti;
-    }
-    else{
-        return Promise.reject("Lista degli Abbonamenti vuota");
-    }
-}
+abbonamentoService.getAll = async () => {
+  const listaAbbonamenti = abbonamento.getAll();
+
+  if (listaAbbonamenti !== null) {
+    return listaAbbonamenti;
+  }
+
+  return Promise.reject('Lista degli Abbonamenti vuota');
+};

@@ -1,58 +1,58 @@
-const db= require("./database");
-const DataTypes= require("sequelize").DataTypes;
-const utente = require("./utente");
-const contesto = require("./contesto");
-const moment = require("moment-timezone");
+const { DataTypes } = require('sequelize');
+const moment = require('moment-timezone');
+const db = require('./database');
+const utente = require('./utente');
+const contesto = require('./contesto');
 
-const sessione = {}
+const sessione = {};
 
 const Sessione = db.define('Sessione', {
-    idSessione: {
-        type: DataTypes.BIGINT,
-        autoIncrement: true,
-        primaryKey: true,
-        allowNull: false
+  idSessione: {
+    type: DataTypes.BIGINT,
+    autoIncrement: true,
+    primaryKey: true,
+    allowNull: false,
+  },
+  fkUtente: {
+    type: DataTypes.BIGINT,
+    allowNull: false,
+    references: {
+      model: utente.Utente,
+      key: 'idUtente',
     },
-    fkUtente: {
-        type: DataTypes.BIGINT,
-        allowNull: false,
-        references:{
-            model: utente.Utente,
-            key: 'idUtente'
-        }
+  },
+  fkContesto: {
+    type: DataTypes.BIGINT,
+    allowNull: false,
+    references: {
+      model: contesto.Contesto,
+      key: 'idContesto',
     },
-    fkContesto: {
-        type: DataTypes.BIGINT,
-        allowNull: false,
-        references:{
-            model: contesto.Contesto,
-            key: 'idContesto'
-        }
+  },
+  titolo: {
+    type: DataTypes.STRING(255),
+    allowNull: false,
+  },
+  dataCreazione: {
+    type: DataTypes.DATE,
+    allowNull: false,
+    defaultValue: DataTypes.NOW,
+    get() {
+      const value = this.getDataValue('dataCreazione');
+      return moment(value).format();
     },
-    titolo: {
-        type: DataTypes.STRING(255),
-        allowNull: false
+  },
+  ultimoAvvio: {
+    type: DataTypes.DATE,
+    allowNull: true,
+    get() {
+      const value = this.getDataValue('ultimoAvvio');
+      return moment(value).format();
     },
-    dataCreazione: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: DataTypes.NOW,
-        get() {
-            const value = this.getDataValue('dataCreazione');
-            return moment(value).format();
-        }
-    },
-    ultimoAvvio: {
-        type: DataTypes.DATE,
-        allowNull: true,
-        get() {
-            const value = this.getDataValue('ultimoAvvio');
-            return moment(value).format();
-        }
-    }
-},{
-    freezeTableName: true,
-    timestamps: false
+  },
+}, {
+  freezeTableName: true,
+  timestamps: false,
 });
 
 /**
@@ -60,27 +60,26 @@ const Sessione = db.define('Sessione', {
  *
  * @param {Number} id - ID della Sessione da cercare.
  *
- * @returns {Promise<Sessione>} - Promise che si risolve con l'istanza della Sessione corrispondente, o null se non trovato.
+ * @returns {Promise<Sessione>} - Promise che si risolve con l'istanza
+ * della Sessione corrispondente, o null se non trovato.
  */
-sessione.getById = async (id) => {
-    return await Sessione.findByPk(id);
-}
+sessione.getById = async (id) => Sessione.findByPk(id);
 
 /**
- * Ottiene tutte le sessioni di un utente, ordinate in base all'ultimo avvio (ordine discendente).
+ * Ottiene tutte le sessioni di un utente, ordinate in base
+ * all'ultimo avvio (ordine discendente).
  *
  * @param {Number} idUtente - ID dell'utente da cercare.
  *
- * @returns {Promise<Array>} - Array di tutte le sessioni trovate, ordinate in base all'ultimo avvio.
+ * @returns {Promise<Array>} - Array di tutte le sessioni trovate,
+ * ordinate in base all'ultimo avvio.
  */
-sessione.getByUtente = async (idUtente) => {
-    return await Sessione.findAll({
-        where: {
-            fkUtente: idUtente
-        },
-        order: [['ultimoAvvio', 'DESC']]
-    });
-}
+sessione.getByUtente = async (idUtente) => Sessione.findAll({
+  where: {
+    fkUtente: idUtente,
+  },
+  order: [['ultimoAvvio', 'DESC']],
+});
 
 /**
  * Crea una nuova Sessione e la inserisce nel database.
@@ -92,40 +91,37 @@ sessione.getByUtente = async (idUtente) => {
  *
  * @returns {Promise<Sessione>} - Istanza della Sessione appena creata.
  */
-sessione.createSessione = async (data) => {
-    return await Sessione.create({
-        fkUtente: data.idUtente,
-        fkContesto: data.idContesto,
-        titolo: data.titolo
-    });
-}
+sessione.createSessione = async (data) => Sessione.create({
+  fkUtente: data.idUtente,
+  fkContesto: data.idContesto,
+  titolo: data.titolo,
+});
 
 /**
  * Imposta la data di ultimo avvio di una Sessione all'istante attuale.
  *
  * @param {Number} id - L'ID della Sessione.
- * @returns {Promise<Boolean>} - Promise che risolve a `true` se l'aggiornamento ha avuto successo, altrimenti a `false`.
+ * @returns {Promise<Boolean>} - Promise che risolve a `true` se
+ * l'aggiornamento ha avuto successo, altrimenti a `false`.
  */
 sessione.setUltimoAvvioToNow = async (id) => {
-    const result = await Sessione.update({
-        ultimoAvvio: db.literal("NOW()")
-    }, {
-        where: {
-            idSessione: id
-        }
-    });
+  const result = await Sessione.update({
+    ultimoAvvio: db.literal('NOW()'),
+  }, {
+    where: {
+      idSessione: id,
+    },
+  });
 
-    // verifica se l'aggiornamento è avvenuto con successo
-    return result[0] === 1;
-}
+  // verifica se l'aggiornamento è avvenuto con successo
+  return result[0] === 1;
+};
 
-sessione.deleteById = async (id) => {
-    return await Sessione.destroy({
-        where: {
-            idSessione: id
-        }
-    });
-}
+sessione.deleteById = async (id) => Sessione.destroy({
+  where: {
+    idSessione: id,
+  },
+});
 
 sessione.Sessione = Sessione;
 

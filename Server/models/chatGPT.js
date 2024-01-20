@@ -1,16 +1,16 @@
-const OpenAI = require("openai").OpenAI;
+const { OpenAI } = require('openai');
 
 const openai = new OpenAI({
-    apiKey: process.env.CHAT_GPT_KEY
+  apiKey: process.env.CHAT_GPT_KEY,
 });
 
 /**
  * Oggetto che contiene le funzioni per interagire con l`API di OpenAI GPT
  * @namespace
- * @property {Function} inviaMessaggio - Funzione per inviare un messaggio a GPT e ricevere una risposta
+ * @property {Function} inviaMessaggio - Funzione per
+ * inviare un messaggio a GPT e ricevere una risposta
  */
-const chatGPT={};
-
+const chatGPT = {};
 
 /**
  * Invia una richiesta di completamento chat ad OpenAI GPT
@@ -34,18 +34,17 @@ const chatGPT={};
  * }
  *
  */
-chatGPT.inviaMessaggio=async(listaMessaggi)=>{
-    const chatCompletion = await openai.chat.completions.create({
-        model: "gpt-3.5-turbo",
-        messages: listaMessaggi,
-        max_tokens: 130
-    });
-    if(chatCompletion.choices !== undefined && chatCompletion.choices.length>0) {
-        return chatCompletion.choices[0].message;
-    }
-    else {
-        return Promise.reject("Errore CHAT GPT");
-    }
+chatGPT.inviaMessaggio = async (listaMessaggi) => {
+  const chatCompletion = await openai.chat.completions.create({
+    model: 'gpt-3.5-turbo',
+    messages: listaMessaggi,
+    max_tokens: 130,
+  });
+  if (chatCompletion.choices !== undefined && chatCompletion.choices.length > 0) {
+    return chatCompletion.choices[0].message;
+  }
+
+  return Promise.reject(new Error('Errore CHAT GPT'));
 };
 
-module.exports=chatGPT;
+module.exports = chatGPT;

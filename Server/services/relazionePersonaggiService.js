@@ -1,10 +1,9 @@
-const relazionePersonaggi=require("../models/relazionePersonaggi");
-const utils = require("../models/utils");
+const relazionePersonaggi = require('../models/relazionePersonaggi');
+const utils = require('../models/utils');
 
-const relazionePersonaggiService={};
+const relazionePersonaggiService = {};
 
 const requiredFields = ['descrizione', 'fkContesto', 'fkPersonaggio1', 'fkPersonaggio2'];
-
 
 /**
  * Ottiene una relazione tra personaggi dal database tramite il suo ID
@@ -15,18 +14,17 @@ const requiredFields = ['descrizione', 'fkContesto', 'fkPersonaggio1', 'fkPerson
  * @throws {Error} se l'ID della relazione non è valido
  * @throws {Error} se la relazione non è stata trovata
  */
-relazionePersonaggiService.getById = async (idRelazione) =>{
-    if(!utils.checkId(idRelazione)){
-        return Promise.reject("ID non valido");
-    }
+relazionePersonaggiService.getById = async (idRelazione) => {
+  if (!utils.checkId(idRelazione)) {
+    return Promise.reject('ID non valido');
+  }
 
-    let relazione = await relazionePersonaggi.getById(idRelazione);
-    if(relazione !== null){
-        return relazione;
-    }
-    else{
-        return Promise.reject("Relazione tra personaggi non trovata");
-    }
+  const relazione = await relazionePersonaggi.getById(idRelazione);
+  if (relazione !== null) {
+    return relazione;
+  }
+
+  return Promise.reject('Relazione tra personaggi non trovata');
 };
 
 /**
@@ -44,37 +42,36 @@ relazionePersonaggiService.getById = async (idRelazione) =>{
  * @throws {Error} se la lunghezza della descrizione non è valida
  * @throws {Error} se la creazione fallisce
  */
-relazionePersonaggiService.createRelazionePersonaggi = async (dati) =>{
-    //Verifica Parametri obbligatori
-    if(!utils.checkParameters(dati, requiredFields)){
-        return Promise.reject("Dati non validi");
-    }
+relazionePersonaggiService.createRelazionePersonaggi = async (dati) => {
+  // Verifica Parametri obbligatori
+  if (!utils.checkParameters(dati, requiredFields)) {
+    return Promise.reject('Dati non validi');
+  }
 
-    //Verifica id contesto
-    if(!utils.checkId(dati.fkContesto)){
-        return Promise.reject("ID contesto non valido");
-    }
+  // Verifica id contesto
+  if (!utils.checkId(dati.fkContesto)) {
+    return Promise.reject('ID contesto non valido');
+  }
 
-    //Verifica id personaggi
-    if(!utils.checkId(dati.fkPersonaggio1) || !utils.checkId(dati.fkPersonaggio2) || dati.fkPersonaggio1 === dati.fkPersonaggio2){
-        return Promise.reject("ID personaggi non validi");
-    }
+  // Verifica id personaggi
+  if (!utils.checkId(dati.fkPersonaggio1) || !utils.checkId(dati.fkPersonaggio2) || dati.fkPersonaggio1 === dati.fkPersonaggio2) {
+    return Promise.reject('ID personaggi non validi');
+  }
 
-    //Verifica descrizione
-    dati.descrizione = dati.descrizione.trim();
-    if(dati.descrizione.length < 2 || dati.descrizione.length > 255){
-        return Promise.reject("Lunghezza della descrizione non valida");
-    }
+  // Verifica descrizione
+  dati.descrizione = dati.descrizione.trim();
+  if (dati.descrizione.length < 2 || dati.descrizione.length > 255) {
+    return Promise.reject('Lunghezza della descrizione non valida');
+  }
 
-    //Creazione nuova relazione
-    let nuovaRelazione = await relazionePersonaggi.createRelazionePersonaggi(dati);
-    if(nuovaRelazione !== null){
-        return nuovaRelazione;
-    }
-    else{
-        return Promise.reject("Creazione relazione tra personaggi fallita");
-    }
-}
+  // Creazione nuova relazione
+  const nuovaRelazione = await relazionePersonaggi.createRelazionePersonaggi(dati);
+  if (nuovaRelazione !== null) {
+    return nuovaRelazione;
+  }
+
+  return Promise.reject('Creazione relazione tra personaggi fallita');
+};
 
 /**
  * Ottiene le relazioni tra personaggi definite in un contesto tramite l`ID del contesto
@@ -85,18 +82,17 @@ relazionePersonaggiService.createRelazionePersonaggi = async (dati) =>{
  * @throws {Error} se l'ID del contesto non è valido
  * @throws {Error} se non è stata trovata nessuna relazione
  */
-relazionePersonaggiService.getByContesto = async (idContesto) =>{
-    if(!utils.checkId(idContesto)){
-        return Promise.reject("ID Contesto non valido");
-    }
+relazionePersonaggiService.getByContesto = async (idContesto) => {
+  if (!utils.checkId(idContesto)) {
+    return Promise.reject('ID Contesto non valido');
+  }
 
-    let relazioni = await relazionePersonaggi.getByContesto(idContesto);
-    if(relazioni !== null && relazioni.length > 0){
-        return relazioni;
-    }
-    else{
-        return Promise.reject("Nessuna Relazione tra personaggi trovata nel contesto")
-    }
-}
+  const relazioni = await relazionePersonaggi.getByContesto(idContesto);
+  if (relazioni !== null && relazioni.length > 0) {
+    return relazioni;
+  }
 
-module.exports=relazionePersonaggiService;
+  return Promise.reject('Nessuna Relazione tra personaggi trovata nel contesto');
+};
+
+module.exports = relazionePersonaggiService;

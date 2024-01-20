@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --setupFiles dotenv/config"
+    "test": "jest --setupFiles dotenv/config",
+    "lint:fix": "eslint --fix ./models/*.js --ignore-pattern *.test.js"
   },
   "author": "C06",
   "license": "ISC",
@@ -27,6 +28,9 @@
     "stripe": "^14.10.0"
   },
   "devDependencies": {
+    "eslint": "^8.56.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.29.1",
     "jest": "^29.7.0",
     "jest-html-reporter": "^3.10.2"
   }
