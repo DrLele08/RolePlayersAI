@@ -1,0 +1,1006 @@
+{
+  "id": "bf979d2f-e220-4ace-b501-0b0fc93b732c",
+  "version": "2.0",
+  "name": "creazione_personaggio",
+  "url": "http://localhost:3000",
+  "tests": [{
+    "id": "c24a01ca-63a0-441d-843f-5c4a3f7b86c3",
+    "name": "TC_3.1.1",
+    "commands": [{
+      "id": "d28293d3-17c0-4da1-8ff3-0a4cb28fff9c",
+      "comment": "",
+      "command": "open",
+      "target": "/contenuto",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "34941c42-6c38-4ba7-9a50-6d3e93d02424",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1936x1056",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "bad04fe2-dcbe-49ae-85d9-ce46fae2c331",
+      "comment": "",
+      "command": "click",
+      "target": "css=.card:nth-child(1) .p-5 .menu-title",
+      "targets": [
+        ["css=.card:nth-child(1) .p-5 .menu-title", "css:finder"],
+        ["xpath=//div[@id='kt_post']/div/div/div/div/div/div/div/div/div[3]/button/span", "xpath:idRelative"],
+        ["xpath=//button/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b5fa0530-b52d-40e2-973b-ad315707b0c8",
+      "comment": "",
+      "command": "click",
+      "target": "id=charName",
+      "targets": [
+        ["id=charName", "id"],
+        ["css=#charName", "css:finder"],
+        ["xpath=//input[@id='charName']", "xpath:attributes"],
+        ["xpath=//div[@id='kt_chat_contacts_header']/form/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/div/form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c875f60f-0ee8-4b25-b691-18ec4ddb9533",
+      "comment": "",
+      "command": "type",
+      "target": "id=charName",
+      "targets": [
+        ["id=charName", "id"],
+        ["css=#charName", "css:finder"],
+        ["xpath=//input[@id='charName']", "xpath:attributes"],
+        ["xpath=//div[@id='kt_chat_contacts_header']/form/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/div/form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "178a5e01-caae-4f0b-bc58-2a5ac37e06bc",
+      "comment": "",
+      "command": "click",
+      "target": "id=charDesc",
+      "targets": [
+        ["id=charDesc", "id"],
+        ["css=#charDesc", "css:finder"],
+        ["xpath=//input[@id='charDesc']", "xpath:attributes"],
+        ["xpath=//div[@id='divPersonaggi']/div/div/div/div[2]/div/form/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/div[2]/div/form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "51c35010-2da1-45d2-aaeb-8a0c30adadd2",
+      "comment": "",
+      "command": "type",
+      "target": "id=charDesc",
+      "targets": [
+        ["id=charDesc", "id"],
+        ["css=#charDesc", "css:finder"],
+        ["xpath=//input[@id='charDesc']", "xpath:attributes"],
+        ["xpath=//div[@id='divPersonaggi']/div/div/div/div[2]/div/form/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/div[2]/div/form/input", "xpath:position"]
+      ],
+      "value": "Personaggio Test è un personaggio creato appositamente per effettuare i test case"
+    }, {
+      "id": "55cb7899-d615-4254-9719-33ed91177093",
+      "comment": "",
+      "command": "click",
+      "target": "id=genere_altro",
+      "targets": [
+        ["id=genere_uomo", "id"],
+        ["name=fav_language", "name"],
+        ["css=#genere_uomo", "css:finder"],
+        ["xpath=//input[@id='genere_uomo']", "xpath:attributes"],
+        ["xpath=//div[@id='kt_chat_contacts_body']/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b46a7af0-ad77-4503-9838-9aa16ee98b0d",
+      "comment": "",
+      "command": "type",
+      "target": "id=pers",
+      "targets": [
+        ["id=pers", "id"],
+        ["name=pers", "name"],
+        ["css=#pers", "css:finder"],
+        ["xpath=//input[@id='pers']", "xpath:attributes"],
+        ["xpath=//div[@id='divPersonaggi']/div/div[2]/div/div/form/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/form/input", "xpath:position"]
+      ],
+      "value": "C:\\Users\\Raffaele\\Desktop\\Magic\\74b5cd766d3659374f95098c1c48f9b5.jpg"
+    }, {
+      "id": "18e65939-3e47-48a7-94da-c17b523c5e90",
+      "comment": "",
+      "command": "click",
+      "target": "id=privato_pers",
+      "targets": [
+        ["id=pubblico_pers", "id"],
+        ["css=#pubblico_pers", "css:finder"],
+        ["xpath=//input[@id='pubblico_pers']", "xpath:attributes"],
+        ["xpath=//div[@id='divPersonaggi']/div/div[3]/div/div/div/input[2]", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "dabbf368-c80b-4631-86c2-55849af93632",
+      "comment": "",
+      "command": "click",
+      "target": "css=.flex-row:nth-child(4) .menu-title",
+      "targets": [
+        ["css=.flex-row:nth-child(4) .menu-title", "css:finder"],
+        ["xpath=//div[@id='divPersonaggi']/div/div[4]/div/div/button/span", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div/button/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b0f6b3a5-0743-4860-87ee-3e216f8813e7",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=swal2-html-container",
+      "targets": [],
+      "value": "Devi inserire un nome compreso tra 2 e 50 caratteri"
+    }]
+  }, {
+    "id": "23e9d789-33df-40e8-8229-de96630c8561",
+    "name": "TC_3.1.2",
+    "commands": [{
+      "id": "f071e87b-57e9-40f8-862f-7cce1c0e2fdb",
+      "comment": "",
+      "command": "open",
+      "target": "/contenuto",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "7f5a7c1c-3731-4e16-80fc-484fb7c2d4e2",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1936x1056",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "0a6af640-17ae-4619-882a-044ebcaccc1b",
+      "comment": "",
+      "command": "click",
+      "target": "css=.card:nth-child(1) .p-5 .menu-title",
+      "targets": [
+        ["css=.card:nth-child(1) .p-5 .menu-title", "css:finder"],
+        ["xpath=//div[@id='kt_post']/div/div/div/div/div/div/div/div/div[3]/button/span", "xpath:idRelative"],
+        ["xpath=//button/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "cf520955-5db7-4a64-845a-c7cf07e4a343",
+      "comment": "",
+      "command": "click",
+      "target": "id=charName",
+      "targets": [
+        ["id=charName", "id"],
+        ["css=#charName", "css:finder"],
+        ["xpath=//input[@id='charName']", "xpath:attributes"],
+        ["xpath=//div[@id='kt_chat_contacts_header']/form/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/div/form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d129ab70-c400-4666-84a3-84b936dc38cc",
+      "comment": "",
+      "command": "type",
+      "target": "id=charName",
+      "targets": [
+        ["id=charName", "id"],
+        ["css=#charName", "css:finder"],
+        ["xpath=//input[@id='charName']", "xpath:attributes"],
+        ["xpath=//div[@id='kt_chat_contacts_header']/form/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/div/form/input", "xpath:position"]
+      ],
+      "value": "Megadirettore Galattico Duca Conte Maria Rita Vittorio Balabam"
+    }, {
+      "id": "cbe2c455-969a-4210-883b-3fc05693c984",
+      "comment": "",
+      "command": "click",
+      "target": "id=charDesc",
+      "targets": [
+        ["id=charDesc", "id"],
+        ["css=#charDesc", "css:finder"],
+        ["xpath=//input[@id='charDesc']", "xpath:attributes"],
+        ["xpath=//div[@id='divPersonaggi']/div/div/div/div[2]/div/form/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/div[2]/div/form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "bea9241e-377e-425c-b8b5-c776a4d6e92a",
+      "comment": "",
+      "command": "type",
+      "target": "id=charDesc",
+      "targets": [
+        ["id=charDesc", "id"],
+        ["css=#charDesc", "css:finder"],
+        ["xpath=//input[@id='charDesc']", "xpath:attributes"],
+        ["xpath=//div[@id='divPersonaggi']/div/div/div/div[2]/div/form/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/div[2]/div/form/input", "xpath:position"]
+      ],
+      "value": "Personaggio Test è un personaggio creato appositamente per effettuare i test case"
+    }, {
+      "id": "a7f4b6ac-5473-480e-b43f-54f4ecc5ca13",
+      "comment": "",
+      "command": "click",
+      "target": "id=genere_uomo",
+      "targets": [
+        ["id=genere_uomo", "id"],
+        ["name=fav_language", "name"],
+        ["css=#genere_uomo", "css:finder"],
+        ["xpath=//input[@id='genere_uomo']", "xpath:attributes"],
+        ["xpath=//div[@id='kt_chat_contacts_body']/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c54ec467-b589-4bf0-a07b-32707ac4d22b",
+      "comment": "",
+      "command": "type",
+      "target": "id=pers",
+      "targets": [
+        ["id=pers", "id"],
+        ["name=pers", "name"],
+        ["css=#pers", "css:finder"],
+        ["xpath=//input[@id='pers']", "xpath:attributes"],
+        ["xpath=//div[@id='divPersonaggi']/div/div[2]/div/div/form/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/form/input", "xpath:position"]
+      ],
+      "value": "C:\\Users\\Raffaele\\Desktop\\Magic\\74b5cd766d3659374f95098c1c48f9b5.jpg"
+    }, {
+      "id": "b896c2f8-b93e-4e51-a546-4059c07be9cc",
+      "comment": "",
+      "command": "click",
+      "target": "id=privato_pers",
+      "targets": [
+        ["id=pubblico_pers", "id"],
+        ["css=#pubblico_pers", "css:finder"],
+        ["xpath=//input[@id='pubblico_pers']", "xpath:attributes"],
+        ["xpath=//div[@id='divPersonaggi']/div/div[3]/div/div/div/input[2]", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2b234d6d-6bfa-4e6c-8e13-a852ca769a51",
+      "comment": "",
+      "command": "click",
+      "target": "css=.flex-row:nth-child(4) .menu-title",
+      "targets": [
+        ["css=.flex-row:nth-child(4) .menu-title", "css:finder"],
+        ["xpath=//div[@id='divPersonaggi']/div/div[4]/div/div/button/span", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div/button/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "45db7a21-4c5d-413b-826f-f75ac5fd68c8",
+      "comment": "",
+      "command": "click",
+      "target": "css=.swal2-confirm",
+      "targets": [
+        ["css=.swal2-confirm", "css:finder"],
+        ["xpath=(//button[@type='button'])[3]", "xpath:attributes"],
+        ["xpath=//body[@id='kt_body']/div[4]/div/div[6]/button", "xpath:idRelative"],
+        ["xpath=//div[6]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Ok')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "4bcb8a0d-84da-48b1-9a88-30901f4512a1",
+    "name": "TC_3.1.3",
+    "commands": [{
+      "id": "17c53072-edf8-4a6d-9834-b7623370ad9b",
+      "comment": "",
+      "command": "open",
+      "target": "/contenuto",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "f93888f9-0488-49ab-a248-8688df1d1b59",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1936x1056",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6078f043-1b51-496c-9e30-072f209e961a",
+      "comment": "",
+      "command": "click",
+      "target": "css=.card:nth-child(1) .p-5 .menu-title",
+      "targets": [
+        ["css=.card:nth-child(1) .p-5 .menu-title", "css:finder"],
+        ["xpath=//div[@id='kt_post']/div/div/div/div/div/div/div/div/div[3]/button/span", "xpath:idRelative"],
+        ["xpath=//button/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "17832702-a000-42e0-8a45-f026861a5525",
+      "comment": "",
+      "command": "click",
+      "target": "id=charName",
+      "targets": [
+        ["id=charName", "id"],
+        ["css=#charName", "css:finder"],
+        ["xpath=//input[@id='charName']", "xpath:attributes"],
+        ["xpath=//div[@id='kt_chat_contacts_header']/form/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/div/form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c4faee51-ed0e-4096-a608-523e191023bb",
+      "comment": "",
+      "command": "type",
+      "target": "id=charName",
+      "targets": [
+        ["id=charName", "id"],
+        ["css=#charName", "css:finder"],
+        ["xpath=//input[@id='charName']", "xpath:attributes"],
+        ["xpath=//div[@id='kt_chat_contacts_header']/form/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/div/form/input", "xpath:position"]
+      ],
+      "value": "Personaggio Test "
+    }, {
+      "id": "b949b0d1-0345-401e-b2e3-17efb99d23f8",
+      "comment": "",
+      "command": "click",
+      "target": "id=charDesc",
+      "targets": [
+        ["id=charDesc", "id"],
+        ["css=#charDesc", "css:finder"],
+        ["xpath=//input[@id='charDesc']", "xpath:attributes"],
+        ["xpath=//div[@id='divPersonaggi']/div/div/div/div[2]/div/form/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/div[2]/div/form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "680a49d6-3873-40a2-9040-5658ba0fc6a8",
+      "comment": "",
+      "command": "type",
+      "target": "id=charDesc",
+      "targets": [
+        ["id=charDesc", "id"],
+        ["css=#charDesc", "css:finder"],
+        ["xpath=//input[@id='charDesc']", "xpath:attributes"],
+        ["xpath=//div[@id='divPersonaggi']/div/div/div/div[2]/div/form/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/div[2]/div/form/input", "xpath:position"]
+      ],
+      "value": "Personaggio bello"
+    }, {
+      "id": "1541f786-46d7-4174-b605-6bb6c6c94240",
+      "comment": "",
+      "command": "click",
+      "target": "id=genere_altro",
+      "targets": [
+        ["id=genere_uomo", "id"],
+        ["name=fav_language", "name"],
+        ["css=#genere_uomo", "css:finder"],
+        ["xpath=//input[@id='genere_uomo']", "xpath:attributes"],
+        ["xpath=//div[@id='kt_chat_contacts_body']/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2e060fd6-c036-4b10-91c4-56804478b234",
+      "comment": "",
+      "command": "type",
+      "target": "id=pers",
+      "targets": [
+        ["id=pers", "id"],
+        ["name=pers", "name"],
+        ["css=#pers", "css:finder"],
+        ["xpath=//input[@id='pers']", "xpath:attributes"],
+        ["xpath=//div[@id='divPersonaggi']/div/div[2]/div/div/form/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/form/input", "xpath:position"]
+      ],
+      "value": "C:\\Users\\Raffaele\\Desktop\\Magic\\74b5cd766d3659374f95098c1c48f9b5.jpg"
+    }, {
+      "id": "04dbfe15-bde2-469b-a248-c998aa116160",
+      "comment": "",
+      "command": "click",
+      "target": "id=privato_pers",
+      "targets": [
+        ["id=pubblico_pers", "id"],
+        ["css=#pubblico_pers", "css:finder"],
+        ["xpath=//input[@id='pubblico_pers']", "xpath:attributes"],
+        ["xpath=//div[@id='divPersonaggi']/div/div[3]/div/div/div/input[2]", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ea48a71c-4e24-44bd-9842-d965e23965bc",
+      "comment": "",
+      "command": "click",
+      "target": "css=.flex-row:nth-child(4) .menu-title",
+      "targets": [
+        ["css=.flex-row:nth-child(4) .menu-title", "css:finder"],
+        ["xpath=//div[@id='divPersonaggi']/div/div[4]/div/div/button/span", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div/button/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b749066a-6af3-4309-b87c-044f0e452ebb",
+      "comment": "",
+      "command": "click",
+      "target": "css=.swal2-confirm",
+      "targets": [
+        ["css=.swal2-confirm", "css:finder"],
+        ["xpath=(//button[@type='button'])[3]", "xpath:attributes"],
+        ["xpath=//body[@id='kt_body']/div[4]/div/div[6]/button", "xpath:idRelative"],
+        ["xpath=//div[6]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Ok')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "7fedfd66-e481-4e2e-a33e-b971d38d9813",
+    "name": "TC_3.1.4",
+    "commands": [{
+      "id": "8574980c-dfac-4df4-96af-914df0d147fe",
+      "comment": "",
+      "command": "open",
+      "target": "/contenuto",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e620ea68-10c0-461e-996b-dac1a856cbdf",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1936x1056",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "adad0c71-8ac6-4372-a6d0-0d076ade5bae",
+      "comment": "",
+      "command": "click",
+      "target": "css=.card:nth-child(1) .p-5 .menu-title",
+      "targets": [
+        ["css=.card:nth-child(1) .p-5 .menu-title", "css:finder"],
+        ["xpath=//div[@id='kt_post']/div/div/div/div/div/div/div/div/div[3]/button/span", "xpath:idRelative"],
+        ["xpath=//button/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f9d2a0e1-2e31-46af-a972-288d784290a9",
+      "comment": "",
+      "command": "click",
+      "target": "id=charName",
+      "targets": [
+        ["id=charName", "id"],
+        ["css=#charName", "css:finder"],
+        ["xpath=//input[@id='charName']", "xpath:attributes"],
+        ["xpath=//div[@id='kt_chat_contacts_header']/form/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/div/form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "5d11913a-56b5-407d-bce5-013df8f679e4",
+      "comment": "",
+      "command": "type",
+      "target": "id=charName",
+      "targets": [
+        ["id=charName", "id"],
+        ["css=#charName", "css:finder"],
+        ["xpath=//input[@id='charName']", "xpath:attributes"],
+        ["xpath=//div[@id='kt_chat_contacts_header']/form/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/div/form/input", "xpath:position"]
+      ],
+      "value": "Personaggio Test "
+    }, {
+      "id": "476a9fdd-94f9-4c7d-aae1-2ad7ddc2c4cb",
+      "comment": "",
+      "command": "click",
+      "target": "id=charDesc",
+      "targets": [
+        ["id=charDesc", "id"],
+        ["css=#charDesc", "css:finder"],
+        ["xpath=//input[@id='charDesc']", "xpath:attributes"],
+        ["xpath=//div[@id='divPersonaggi']/div/div/div/div[2]/div/form/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/div[2]/div/form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4af84aa1-856c-49d7-b55d-0476d5829a58",
+      "comment": "",
+      "command": "type",
+      "target": "id=charDesc",
+      "targets": [
+        ["id=charDesc", "id"],
+        ["css=#charDesc", "css:finder"],
+        ["xpath=//input[@id='charDesc']", "xpath:attributes"],
+        ["xpath=//div[@id='divPersonaggi']/div/div/div/div[2]/div/form/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/div[2]/div/form/input", "xpath:position"]
+      ],
+      "value": "Personaggio Test è un individuo enigmatico, con capelli corvini che incorniciano un volto penetrante. Occhi che riflettono mistero e intelligenza, vestito con abiti impeccabili, trasuda un’aura di eleganza. La sua presenza magnetica cattura l'attenzione, mentre il sorriso enigmatico suscita curiosità. La voce profonda aggiunge fascino al suo carattere misterioso. Noto per risolvere enigmi e affrontare sfide con astuzia, dietro la facciata impenetrabile si nasconde un mondo di conoscenze e segreti. Le azioni sono ben ponderate, la mente brillante lavora incessantemente per svelare misteri. In ogni situazione, Test dimostra calma e controllo delle emozioni. La sua presenza è avvolta da un'aura di mistero, alimentando la fama di individuo affascinante."
+    }, {
+      "id": "116ec766-5c38-4174-88c5-f335bffc506e",
+      "comment": "",
+      "command": "click",
+      "target": "id=genere_altro",
+      "targets": [
+        ["id=genere_uomo", "id"],
+        ["name=fav_language", "name"],
+        ["css=#genere_uomo", "css:finder"],
+        ["xpath=//input[@id='genere_uomo']", "xpath:attributes"],
+        ["xpath=//div[@id='kt_chat_contacts_body']/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "34846426-f1bf-4e46-9e6b-936d1ed99332",
+      "comment": "",
+      "command": "type",
+      "target": "id=pers",
+      "targets": [
+        ["id=pers", "id"],
+        ["name=pers", "name"],
+        ["css=#pers", "css:finder"],
+        ["xpath=//input[@id='pers']", "xpath:attributes"],
+        ["xpath=//div[@id='divPersonaggi']/div/div[2]/div/div/form/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/form/input", "xpath:position"]
+      ],
+      "value": "C:\\Users\\Raffaele\\Desktop\\Magic\\74b5cd766d3659374f95098c1c48f9b5.jpg"
+    }, {
+      "id": "035f72f4-dc78-4061-a4b7-07d2ae3be20b",
+      "comment": "",
+      "command": "click",
+      "target": "id=privato_pers",
+      "targets": [
+        ["id=pubblico_pers", "id"],
+        ["css=#pubblico_pers", "css:finder"],
+        ["xpath=//input[@id='pubblico_pers']", "xpath:attributes"],
+        ["xpath=//div[@id='divPersonaggi']/div/div[3]/div/div/div/input[2]", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "83f98e62-2cb2-49d8-a9e2-22a164ad74c4",
+      "comment": "",
+      "command": "click",
+      "target": "css=.flex-row:nth-child(4) .menu-title",
+      "targets": [
+        ["css=.flex-row:nth-child(4) .menu-title", "css:finder"],
+        ["xpath=//div[@id='divPersonaggi']/div/div[4]/div/div/button/span", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div/button/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f11f3b59-3d72-4abd-bd18-cf0b83f5f418",
+      "comment": "",
+      "command": "click",
+      "target": "css=.swal2-confirm",
+      "targets": [
+        ["css=.swal2-confirm", "css:finder"],
+        ["xpath=(//button[@type='button'])[3]", "xpath:attributes"],
+        ["xpath=//body[@id='kt_body']/div[4]/div/div[6]/button", "xpath:idRelative"],
+        ["xpath=//div[6]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Ok')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "e2e80851-af41-4c1d-b349-da563fb7d02c",
+    "name": "TC_3.1.5",
+    "commands": [{
+      "id": "95e45c3f-37bd-4cbc-b820-65b497fe3099",
+      "comment": "",
+      "command": "open",
+      "target": "/contenuto",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "bea609ba-c264-445d-93ad-ad908d0e5916",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1936x1056",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "c4bf60ac-7d0e-4926-962e-2061a6e59854",
+      "comment": "",
+      "command": "click",
+      "target": "css=.card:nth-child(1) .p-5 .menu-title",
+      "targets": [
+        ["css=.card:nth-child(1) .p-5 .menu-title", "css:finder"],
+        ["xpath=//div[@id='kt_post']/div/div/div/div/div/div/div/div/div[3]/button/span", "xpath:idRelative"],
+        ["xpath=//button/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7e7c670b-0cb8-469a-9edf-ac468382cb2d",
+      "comment": "",
+      "command": "click",
+      "target": "id=charName",
+      "targets": [
+        ["id=charName", "id"],
+        ["css=#charName", "css:finder"],
+        ["xpath=//input[@id='charName']", "xpath:attributes"],
+        ["xpath=//div[@id='kt_chat_contacts_header']/form/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/div/form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f84d042b-f714-4a43-b9ad-255a5d9caac3",
+      "comment": "",
+      "command": "type",
+      "target": "id=charName",
+      "targets": [
+        ["id=charName", "id"],
+        ["css=#charName", "css:finder"],
+        ["xpath=//input[@id='charName']", "xpath:attributes"],
+        ["xpath=//div[@id='kt_chat_contacts_header']/form/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/div/form/input", "xpath:position"]
+      ],
+      "value": "Personaggio Test "
+    }, {
+      "id": "44d02c43-4377-4db0-91e4-32df2cbb6284",
+      "comment": "",
+      "command": "click",
+      "target": "id=charDesc",
+      "targets": [
+        ["id=charDesc", "id"],
+        ["css=#charDesc", "css:finder"],
+        ["xpath=//input[@id='charDesc']", "xpath:attributes"],
+        ["xpath=//div[@id='divPersonaggi']/div/div/div/div[2]/div/form/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/div[2]/div/form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8ae41573-1efe-46f1-82d8-5d307f3b8a8e",
+      "comment": "",
+      "command": "type",
+      "target": "id=charDesc",
+      "targets": [
+        ["id=charDesc", "id"],
+        ["css=#charDesc", "css:finder"],
+        ["xpath=//input[@id='charDesc']", "xpath:attributes"],
+        ["xpath=//div[@id='divPersonaggi']/div/div/div/div[2]/div/form/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/div[2]/div/form/input", "xpath:position"]
+      ],
+      "value": "Personaggio Test è un personaggio creato appositamente per effettuare i test case"
+    }, {
+      "id": "16f2ef64-5149-49c7-8d27-5e1506299218",
+      "comment": "",
+      "command": "click",
+      "target": "id=genere_altro",
+      "targets": [
+        ["id=genere_uomo", "id"],
+        ["name=fav_language", "name"],
+        ["css=#genere_uomo", "css:finder"],
+        ["xpath=//input[@id='genere_uomo']", "xpath:attributes"],
+        ["xpath=//div[@id='kt_chat_contacts_body']/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "369bd1a3-026f-4ac0-aa76-35c363aa7a2a",
+      "comment": "",
+      "command": "type",
+      "target": "id=pers",
+      "targets": [
+        ["id=pers", "id"],
+        ["name=pers", "name"],
+        ["css=#pers", "css:finder"],
+        ["xpath=//input[@id='pers']", "xpath:attributes"],
+        ["xpath=//div[@id='divPersonaggi']/div/div[2]/div/div/form/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/form/input", "xpath:position"]
+      ],
+      "value": "C:\\Users\\Raffaele\\Desktop\\Magic\\74b5cd766d3659374f95098c1c48f9b5.jpg"
+    }, {
+      "id": "844d040e-dd25-45b6-b4dd-d8babb9b66c7",
+      "comment": "",
+      "command": "click",
+      "target": "css=.flex-row:nth-child(4) .menu-title",
+      "targets": [
+        ["css=.flex-row:nth-child(4) .menu-title", "css:finder"],
+        ["xpath=//div[@id='divPersonaggi']/div/div[4]/div/div/button/span", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div/button/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "bed396cf-eb13-4a73-889c-10e5fa923e7d",
+      "comment": "",
+      "command": "click",
+      "target": "css=.swal2-confirm",
+      "targets": [
+        ["css=.swal2-confirm", "css:finder"],
+        ["xpath=(//button[@type='button'])[3]", "xpath:attributes"],
+        ["xpath=//body[@id='kt_body']/div[4]/div/div[6]/button", "xpath:idRelative"],
+        ["xpath=//div[6]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Ok')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "bb603bae-f07a-4c55-861e-8b00b28de8a5",
+    "name": "TC_3.1.6",
+    "commands": [{
+      "id": "62218d18-189c-43c9-8be5-2959caaac7f9",
+      "comment": "",
+      "command": "open",
+      "target": "/contenuto",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "58ad3663-31b3-4178-ae14-0db7a4c8f9d5",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1936x1056",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "027b5ddb-2b1d-4db6-b89f-698d464fd74e",
+      "comment": "",
+      "command": "click",
+      "target": "css=.card:nth-child(1) .p-5 .menu-title",
+      "targets": [
+        ["css=.card:nth-child(1) .p-5 .menu-title", "css:finder"],
+        ["xpath=//div[@id='kt_post']/div/div/div/div/div/div/div/div/div[3]/button/span", "xpath:idRelative"],
+        ["xpath=//button/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e01e534e-1c7a-4a7d-99aa-bddb081ece9d",
+      "comment": "",
+      "command": "click",
+      "target": "id=charName",
+      "targets": [
+        ["id=charName", "id"],
+        ["css=#charName", "css:finder"],
+        ["xpath=//input[@id='charName']", "xpath:attributes"],
+        ["xpath=//div[@id='kt_chat_contacts_header']/form/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/div/form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "14c6c2d1-aa2b-498a-a90f-3d893563d171",
+      "comment": "",
+      "command": "type",
+      "target": "id=charName",
+      "targets": [
+        ["id=charName", "id"],
+        ["css=#charName", "css:finder"],
+        ["xpath=//input[@id='charName']", "xpath:attributes"],
+        ["xpath=//div[@id='kt_chat_contacts_header']/form/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/div/form/input", "xpath:position"]
+      ],
+      "value": "Personaggio Test "
+    }, {
+      "id": "17e41d57-14f8-4874-a532-696d52727a9c",
+      "comment": "",
+      "command": "click",
+      "target": "id=charDesc",
+      "targets": [
+        ["id=charDesc", "id"],
+        ["css=#charDesc", "css:finder"],
+        ["xpath=//input[@id='charDesc']", "xpath:attributes"],
+        ["xpath=//div[@id='divPersonaggi']/div/div/div/div[2]/div/form/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/div[2]/div/form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "900118cc-c553-4faa-9305-4232c48e3d81",
+      "comment": "",
+      "command": "type",
+      "target": "id=charDesc",
+      "targets": [
+        ["id=charDesc", "id"],
+        ["css=#charDesc", "css:finder"],
+        ["xpath=//input[@id='charDesc']", "xpath:attributes"],
+        ["xpath=//div[@id='divPersonaggi']/div/div/div/div[2]/div/form/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/div[2]/div/form/input", "xpath:position"]
+      ],
+      "value": "Personaggio Test è un personaggio creato appositamente per effettuare i test case"
+    }, {
+      "id": "64a76b43-a76f-4518-bba9-6bfee0c544ef",
+      "comment": "",
+      "command": "type",
+      "target": "id=pers",
+      "targets": [
+        ["id=pers", "id"],
+        ["name=pers", "name"],
+        ["css=#pers", "css:finder"],
+        ["xpath=//input[@id='pers']", "xpath:attributes"],
+        ["xpath=//div[@id='divPersonaggi']/div/div[2]/div/div/form/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/form/input", "xpath:position"]
+      ],
+      "value": "C:\\Users\\Raffaele\\Desktop\\Magic\\74b5cd766d3659374f95098c1c48f9b5.jpg"
+    }, {
+      "id": "97854112-d83f-410d-9cc6-0f7e9800e5d2",
+      "comment": "",
+      "command": "click",
+      "target": "id=privato_pers",
+      "targets": [
+        ["id=pubblico_pers", "id"],
+        ["css=#pubblico_pers", "css:finder"],
+        ["xpath=//input[@id='pubblico_pers']", "xpath:attributes"],
+        ["xpath=//div[@id='divPersonaggi']/div/div[3]/div/div/div/input[2]", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "08177d2c-cd2f-40e8-9a4a-cea18ef430e4",
+      "comment": "",
+      "command": "click",
+      "target": "css=.flex-row:nth-child(4) .menu-title",
+      "targets": [
+        ["css=.flex-row:nth-child(4) .menu-title", "css:finder"],
+        ["xpath=//div[@id='divPersonaggi']/div/div[4]/div/div/button/span", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div/button/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d61222c7-dae7-4e1b-a0cc-11f1f00e806f",
+      "comment": "",
+      "command": "click",
+      "target": "css=.swal2-confirm",
+      "targets": [
+        ["css=.swal2-confirm", "css:finder"],
+        ["xpath=(//button[@type='button'])[3]", "xpath:attributes"],
+        ["xpath=//body[@id='kt_body']/div[4]/div/div[6]/button", "xpath:idRelative"],
+        ["xpath=//div[6]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Ok')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "14782a80-1532-4b47-88d4-e01d694a4059",
+    "name": "TC_3.1.7",
+    "commands": [{
+      "id": "b644f99f-f8be-4d37-8aab-62922069e306",
+      "comment": "",
+      "command": "open",
+      "target": "/contenuto",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b061c35f-7052-450b-90c8-6477677c1e34",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1936x1056",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "cf4fd054-e0d7-41ec-8e32-7417b4a29a05",
+      "comment": "",
+      "command": "click",
+      "target": "css=.card:nth-child(1) .p-5 .menu-title",
+      "targets": [
+        ["css=.card:nth-child(1) .p-5 .menu-title", "css:finder"],
+        ["xpath=//div[@id='kt_post']/div/div/div/div/div/div/div/div/div[3]/button/span", "xpath:idRelative"],
+        ["xpath=//button/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f6ca51a3-002c-4291-8af3-94cb56fcafaf",
+      "comment": "",
+      "command": "click",
+      "target": "id=charName",
+      "targets": [
+        ["id=charName", "id"],
+        ["css=#charName", "css:finder"],
+        ["xpath=//input[@id='charName']", "xpath:attributes"],
+        ["xpath=//div[@id='kt_chat_contacts_header']/form/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/div/form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "29620f4f-461d-4a99-ad26-be7028fb9e9a",
+      "comment": "",
+      "command": "type",
+      "target": "id=charName",
+      "targets": [
+        ["id=charName", "id"],
+        ["css=#charName", "css:finder"],
+        ["xpath=//input[@id='charName']", "xpath:attributes"],
+        ["xpath=//div[@id='kt_chat_contacts_header']/form/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/div/form/input", "xpath:position"]
+      ],
+      "value": "Personaggio Test"
+    }, {
+      "id": "bbfb1079-1fc7-4a5e-9dd2-2fabbd422911",
+      "comment": "",
+      "command": "click",
+      "target": "id=charDesc",
+      "targets": [
+        ["id=charDesc", "id"],
+        ["css=#charDesc", "css:finder"],
+        ["xpath=//input[@id='charDesc']", "xpath:attributes"],
+        ["xpath=//div[@id='divPersonaggi']/div/div/div/div[2]/div/form/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/div[2]/div/form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "11e78449-b2e7-45ef-9942-f2bd5882fe9f",
+      "comment": "",
+      "command": "type",
+      "target": "id=charDesc",
+      "targets": [
+        ["id=charDesc", "id"],
+        ["css=#charDesc", "css:finder"],
+        ["xpath=//input[@id='charDesc']", "xpath:attributes"],
+        ["xpath=//div[@id='divPersonaggi']/div/div/div/div[2]/div/form/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/div[2]/div/form/input", "xpath:position"]
+      ],
+      "value": "Personaggio Test è un personaggio creato appositamente per effettuare i test case"
+    }, {
+      "id": "37c6f0c5-5b1f-478b-b3eb-26464b6bc9c3",
+      "comment": "",
+      "command": "click",
+      "target": "id=genere_altro",
+      "targets": [
+        ["id=genere_uomo", "id"],
+        ["name=fav_language", "name"],
+        ["css=#genere_uomo", "css:finder"],
+        ["xpath=//input[@id='genere_uomo']", "xpath:attributes"],
+        ["xpath=//div[@id='kt_chat_contacts_body']/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "1fe708fb-b943-4fd5-9eef-138933412398",
+      "comment": "",
+      "command": "type",
+      "target": "id=pers",
+      "targets": [
+        ["id=pers", "id"],
+        ["name=pers", "name"],
+        ["css=#pers", "css:finder"],
+        ["xpath=//input[@id='pers']", "xpath:attributes"],
+        ["xpath=//div[@id='divPersonaggi']/div/div[2]/div/div/form/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/form/input", "xpath:position"]
+      ],
+      "value": "C:\\Users\\Raffaele\\Desktop\\Magic\\74b5cd766d3659374f95098c1c48f9b5.jpg"
+    }, {
+      "id": "6bc46d0c-bc3f-4dde-a7fd-cff9efd0818f",
+      "comment": "",
+      "command": "click",
+      "target": "id=privato_pers",
+      "targets": [
+        ["id=pubblico_pers", "id"],
+        ["css=#pubblico_pers", "css:finder"],
+        ["xpath=//input[@id='pubblico_pers']", "xpath:attributes"],
+        ["xpath=//div[@id='divPersonaggi']/div/div[3]/div/div/div/input[2]", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div/input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9eb232dd-943d-4941-a84d-7a4b067024c0",
+      "comment": "",
+      "command": "click",
+      "target": "css=.flex-row:nth-child(4) .menu-title",
+      "targets": [
+        ["css=.flex-row:nth-child(4) .menu-title", "css:finder"],
+        ["xpath=//div[@id='divPersonaggi']/div/div[4]/div/div/button/span", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div/button/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0502eb5c-5e43-400b-b861-b825bec8d988",
+      "comment": "",
+      "command": "click",
+      "target": "css=.swal2-confirm",
+      "targets": [
+        ["css=.swal2-confirm", "css:finder"],
+        ["xpath=(//button[@type='button'])[3]", "xpath:attributes"],
+        ["xpath=//body[@id='kt_body']/div[4]/div/div[6]/button", "xpath:idRelative"],
+        ["xpath=//div[6]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Ok')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "1e31c380-2c94-41a3-ad12-12c470be70c9",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["c24a01ca-63a0-441d-843f-5c4a3f7b86c3"]
+  }],
+  "urls": ["http://localhost:3000/"],
+  "plugins": []
+}
