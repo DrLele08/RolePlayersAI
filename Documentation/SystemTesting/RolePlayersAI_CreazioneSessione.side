@@ -1,0 +1,277 @@
+{
+  "id": "cbf358c0-266a-4682-a186-56d16fadc895",
+  "version": "2.0",
+  "name": "Creazione_Sessione",
+  "url": "http://localhost:3000/sessione",
+  "tests": [{
+    "id": "ace4b53d-2268-4c64-9e99-33be3f0856dd",
+    "name": "TC_1",
+    "commands": [{
+      "id": "356cd156-efd4-4037-8d7c-cda401eba0ac",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:3000/sessione",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "7f69feb4-6331-4877-a6dc-44ea16954883",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn:nth-child(1) > .menu-title",
+      "targets": [
+        ["css=.btn:nth-child(1) > .menu-title", "css:finder"],
+        ["xpath=//div[@id='kt_content_container']/div/div/div[2]/div/div/button/span", "xpath:idRelative"],
+        ["xpath=//button/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Crea la tua sessione')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "3efa100f-c9c9-4837-b01b-906969b02654",
+      "comment": "",
+      "command": "click",
+      "target": "id=selContesto",
+      "targets": [
+        ["id=selContesto", "id"],
+        ["name=selContesto", "name"],
+        ["css=#selContesto", "css:finder"],
+        ["xpath=//select[@id='selContesto']", "xpath:attributes"],
+        ["xpath=//div[@id='divSessione']/div/div[2]/div/div/form/select", "xpath:idRelative"],
+        ["xpath=//select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "514f3766-d7f7-4318-a55b-4b651d24ea56",
+      "comment": "",
+      "command": "select",
+      "target": "id=selContesto",
+      "targets": [],
+      "value": "label=Visita Guidata"
+    }, {
+      "id": "2a4ed418-be98-4f33-a7fc-a2b3c5d35139",
+      "comment": "",
+      "command": "click",
+      "target": "css=#creaBottone > .menu-title",
+      "targets": [
+        ["css=#creaBottone > .menu-title", "css:finder"],
+        ["xpath=//button[@id='creaBottone']/span", "xpath:idRelative"],
+        ["xpath=//form/button/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a2b144dd-c965-4de6-828f-bc12b5e3821b",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=swal2-html-container",
+      "targets": [],
+      "value": "Nome richiesto"
+    }, {
+      "id": "e5a9f2c0-2a6a-4671-932b-97e735df595f",
+      "comment": "",
+      "command": "click",
+      "target": "css=.swal2-confirm",
+      "targets": [
+        ["css=.swal2-confirm", "css:finder"],
+        ["xpath=(//button[@type='button'])[3]", "xpath:attributes"],
+        ["xpath=//body[@id='kt_body']/div[3]/div/div[6]/button", "xpath:idRelative"],
+        ["xpath=//div[6]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Ok')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "1da04bb7-656c-4e77-9a1f-ddfe3bdc47c3",
+    "name": "TC_2",
+    "commands": [{
+      "id": "cc7c11ec-f431-4b6f-befb-b3e7f4315b05",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:3000/sessione",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e90939c5-aa17-4a20-963c-7f77a67c4f5a",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn:nth-child(1) > .menu-title",
+      "targets": [
+        ["css=.btn:nth-child(1) > .menu-title", "css:finder"],
+        ["xpath=//div[@id='kt_content_container']/div/div/div[2]/div/div/button/span", "xpath:idRelative"],
+        ["xpath=//button/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Crea la tua sessione')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "15131a2d-e28b-46fe-a689-aaba3942ffce",
+      "comment": "",
+      "command": "click",
+      "target": "id=textNome",
+      "targets": [
+        ["id=textNome", "id"],
+        ["name=textNome", "name"],
+        ["css=#textNome", "css:finder"],
+        ["xpath=//input[@id='textNome']", "xpath:attributes"],
+        ["xpath=//div[@id='divSessione']/div/div/div/div/form/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4387713f-60b7-4de8-90e4-cc4d83313192",
+      "comment": "",
+      "command": "type",
+      "target": "id=textNome",
+      "targets": [
+        ["id=textNome", "id"],
+        ["name=textNome", "name"],
+        ["css=#textNome", "css:finder"],
+        ["xpath=//input[@id='textNome']", "xpath:attributes"],
+        ["xpath=//div[@id='divSessione']/div/div/div/div/form/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/form/input", "xpath:position"]
+      ],
+      "value": "La Fabbrica di Cioccolato"
+    }, {
+      "id": "709cf10b-3334-46cd-9a6f-1e2a0618660e",
+      "comment": "",
+      "command": "click",
+      "target": "css=#creaBottone > .menu-title",
+      "targets": [
+        ["css=#creaBottone > .menu-title", "css:finder"],
+        ["xpath=//button[@id='creaBottone']/span", "xpath:idRelative"],
+        ["xpath=//form/button/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9c32a7dd-aea0-4c4a-a636-409fbbbc19fa",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=swal2-html-container",
+      "targets": [],
+      "value": "ID contesto non valido!"
+    }, {
+      "id": "8865485f-c8b3-406f-9d94-95e97071e735",
+      "comment": "",
+      "command": "click",
+      "target": "css=.swal2-confirm",
+      "targets": [
+        ["css=.swal2-confirm", "css:finder"],
+        ["xpath=(//button[@type='button'])[3]", "xpath:attributes"],
+        ["xpath=//body[@id='kt_body']/div[3]/div/div[6]/button", "xpath:idRelative"],
+        ["xpath=//div[6]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Ok')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "7c8adefc-dd9c-4b87-a30b-5d873a6fade5",
+    "name": "TC_3",
+    "commands": [{
+      "id": "c8c8900f-8dba-4f02-9b33-0e7543a9c0ce",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:3000/sessione",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "c400ec28-c18a-43ea-9d55-f330c16e89ae",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn:nth-child(1) > .menu-title",
+      "targets": [
+        ["css=.btn:nth-child(1) > .menu-title", "css:finder"],
+        ["xpath=//div[@id='kt_content_container']/div/div/div[2]/div/div/button/span", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/button/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Crea la tua sessione')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "7833ddbb-0d95-4d72-9f0c-89b9a63ced63",
+      "comment": "",
+      "command": "click",
+      "target": "id=textNome",
+      "targets": [
+        ["id=textNome", "id"],
+        ["name=textNome", "name"],
+        ["css=#textNome", "css:finder"],
+        ["xpath=//input[@id='textNome']", "xpath:attributes"],
+        ["xpath=//div[@id='divSessione']/div/div/div/div/form/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8add463a-b8c2-4769-8c5c-aeb913c4a941",
+      "comment": "",
+      "command": "type",
+      "target": "id=textNome",
+      "targets": [
+        ["id=textNome", "id"],
+        ["name=textNome", "name"],
+        ["css=#textNome", "css:finder"],
+        ["xpath=//input[@id='textNome']", "xpath:attributes"],
+        ["xpath=//div[@id='divSessione']/div/div/div/div/form/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/form/input", "xpath:position"]
+      ],
+      "value": "La Fabbrica di Cioccolato"
+    }, {
+      "id": "aa6a9981-a7d3-4b16-b5ba-2e021bc7b36f",
+      "comment": "",
+      "command": "click",
+      "target": "id=selContesto",
+      "targets": [
+        ["id=selContesto", "id"],
+        ["name=selContesto", "name"],
+        ["css=#selContesto", "css:finder"],
+        ["xpath=//select[@id='selContesto']", "xpath:attributes"],
+        ["xpath=//div[@id='divSessione']/div/div[2]/div/div/form/select", "xpath:idRelative"],
+        ["xpath=//select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f8d451fe-7b46-4a13-a029-f96b4e453c8e",
+      "comment": "",
+      "command": "select",
+      "target": "id=selContesto",
+      "targets": [],
+      "value": "label=Visita Guidata"
+    }, {
+      "id": "8cde67bf-4ce0-4173-8a07-fcdd16496859",
+      "comment": "",
+      "command": "click",
+      "target": "css=#creaBottone > .menu-title",
+      "targets": [
+        ["css=#creaBottone > .menu-title", "css:finder"],
+        ["xpath=//button[@id='creaBottone']/span", "xpath:idRelative"],
+        ["xpath=//form/button/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "5f938706-2d98-422b-882e-bf0edacbcbb0",
+      "comment": "",
+      "command": "assertText",
+      "target": "id=swal2-html-container",
+      "targets": [],
+      "value": "Sessione creata!"
+    }, {
+      "id": "e88bf05f-027f-472e-9255-0c76b43a5eaf",
+      "comment": "",
+      "command": "click",
+      "target": "css=.swal2-confirm",
+      "targets": [
+        ["css=.swal2-confirm", "css:finder"],
+        ["xpath=(//button[@type='button'])[5]", "xpath:attributes"],
+        ["xpath=//body[@id='kt_body']/div[3]/div/div[6]/button", "xpath:idRelative"],
+        ["xpath=//div[6]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Ok')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "45af33b9-be0e-4946-85b4-ed4638bff6a4",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": []
+  }],
+  "urls": ["http://localhost:3000/", "http://localhost:3000/sessione"],
+  "plugins": []
+}
