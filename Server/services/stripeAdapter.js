@@ -36,9 +36,6 @@ class stripeAdapter extends pagamentoInterface {
     try {
       const { idAbbonamento } = session.metadata;
 
-      console.log(`Pagamento: ${session.payment_status}`);
-      console.log(idUtente);
-
       if (session.payment_status === 'paid') {
         // Tutto ok, cambiare tipo abbonamento
         await utente.cambiaAbbonamento(idUtente, idAbbonamento);
@@ -47,7 +44,7 @@ class stripeAdapter extends pagamentoInterface {
       // Errore, non hai pagato
       return { success: false, message: 'Errore: il pagamento non è stato effettuato.' };
     } catch (error) {
-      return { success: false, message: 'Errore: il pagamento non è stato effettuato.' };
+      return { success: false, message: 'Errore: il pagamento non è stato trovato.' };
     }
   }
 }
