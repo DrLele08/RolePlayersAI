@@ -78,7 +78,7 @@ describe("relazionePersonaggiService",()=>{
                 fkPersonaggio1:1,
                 fkPersonaggio2:2
             };
-            relazionePersonaggi.createRelazionePersonaggi.mockResolvedValue(1);
+            relazionePersonaggi.createRelazionePersonaggi.mockResolvedValue({});
             await expect(relazionePersonaggiService.createRelazionePersonaggi(mockDati)).resolves.toBeDefined();
         })
     })
