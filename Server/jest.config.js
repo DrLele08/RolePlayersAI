@@ -8,7 +8,7 @@ module.exports = {
         }]
     ],
     collectCoverage: true,
-    collectCoverageFrom: ["*/services/.{js,jsx}"],
+    collectCoverageFrom: ["**/services/**.{js,jsx}"],
     coverageReporters: ["json", "lcov", "text", "clover"],
     coverageThreshold: {
         global: {
