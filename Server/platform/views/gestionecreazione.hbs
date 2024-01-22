@@ -761,7 +761,7 @@
         }
 
         if(nome.length>0){
-            if(descrizione.length>20 && descrizione.length<512){
+            if(descrizione.length>0 && descrizione.length<=512){
                 if(idAmbiente>0){
                     if(selectedIds.length > 0) {
                         if (idp1 > 0 && idp2 > 0 && idp1 !== idp2) {
@@ -1018,7 +1018,7 @@
                 }
                 else{
                     Swal.fire({
-                        text: "Deve selezionare la privacy del personaggio",
+                        text: "Devi selezionare la privacy dell'ambiente",
                         icon: "error",
                         buttonsStyling: false,
                         confirmButtonText: "Ok",
