@@ -5,6 +5,32 @@ const utente = require('../models/utente');
 
 const inventarioService = {};
 
+inventarioService.checkUtenteAndCreazione=async(data)=>{
+  if (!utils.checkParameters(data, ['idUtente', 'idCreazione'])) { return Promise.reject('Dati non validi!'); }
+
+  if (!utils.checkId(data.idUtente)) { return Promise.reject('ID utente non valido!'); }
+
+  if (!utils.checkId(data.idCreazione)) { return Promise.reject('ID creazione non valido!'); }
+
+  const c = await creazione.getById(data.idCreazione);
+  if (c == null) { return Promise.reject('Creazione non trovata!'); }
+
+  return c;
+}
+
+inventarioService.checkUtenteAndContesto=async (data)=>{
+  if (!utils.checkParameters(data, ['idUtente', 'idContesto'])) { return Promise.reject('Dati non validi!'); }
+
+  if (!utils.checkId(data.idUtente)) { return Promise.reject('ID utente non valido!'); }
+
+  if (!utils.checkId(data.idContesto)) { return Promise.reject('ID contesto non valido!'); }
+
+  const c = await contesto.getContestoById(data.idContesto);
+  if (c == null) { return Promise.reject('Contesto non trovato!'); }
+
+  return c;
+}
+
 inventarioService.getInventario = async (data) => {
   if (!utils.checkId(data.idUtente)) { return Promise.reject('ID utente non valido!'); }
 
@@ -32,7 +58,7 @@ inventarioService.addContenuto = async (data) => {
   const u = await utente.getById(data.idUtente);
   let c;
   if (data.idCreazione) {
-    c = await checkUtenteAndCreazione(data);
+    c = await inventarioService.checkUtenteAndCreazione(data);
 
     if (c.fkUtente !== data.idUtente && !c.isPubblico) { return Promise.reject('Non hai i permessi!'); }
 
@@ -40,7 +66,7 @@ inventarioService.addContenuto = async (data) => {
 
     return await u.addCreazione(c);
   } if (data.idContesto) {
-    c = await checkUtenteAndContesto(data);
+    c = await inventarioService.checkUtenteAndContesto(data);
 
     if (c.fkUtente !== data.idUtente && !c.isPubblico) { return Promise.reject('Non hai i permessi!'); }
 
@@ -58,13 +84,13 @@ inventarioService.removeContenuto = async (data) => {
   const u = await utente.getById(data.idUtente);
   let c;
   if (data.idCreazione) {
-    c = await checkUtenteAndCreazione(data);
+    c = await inventarioService.checkUtenteAndCreazione(data);
 
     if (!await u.hasCreazione(c)) { return Promise.reject("Creazione non presente nell'Inventario!"); }
 
     return await u.removeCreazione(c);
   } if (data.idContesto) {
-    c = await checkUtenteAndContesto(data);
+    c = await inventarioService.checkUtenteAndContesto(data);
 
     if (!await u.hasContesto(c)) { return Promise.reject("Contesto non presente nell'Inventario!"); }
 
@@ -101,32 +127,6 @@ async function getCreazioni(u, filters) {
     if (filters.tipo) { return filters.tipo.includes(c.tipo.toLowerCase()); }
     return true;
   });
-}
-
-async function checkUtenteAndCreazione(data) {
-  if (!utils.checkParameters(data, ['idUtente', 'idCreazione'])) { return Promise.reject('Dati non validi!'); }
-
-  if (!utils.checkId(data.idUtente)) { return Promise.reject('ID utente non valido!'); }
-
-  if (!utils.checkId(data.idCreazione)) { return Promise.reject('ID creazione non valido!'); }
-
-  const c = await creazione.getById(data.idCreazione);
-  if (c == null) { return Promise.reject('Creazione non trovata!'); }
-
-  return c;
-}
-
-async function checkUtenteAndContesto(data) {
-  if (!utils.checkParameters(data, ['idUtente', 'idContesto'])) { return Promise.reject('Dati non validi!'); }
-
-  if (!utils.checkId(data.idUtente)) { return Promise.reject('ID utente non valido!'); }
-
-  if (!utils.checkId(data.idContesto)) { return Promise.reject('ID contesto non valido!'); }
-
-  const c = await contesto.getContestoById(data.idContesto);
-  if (c == null) { return Promise.reject('Contesto non trovato!'); }
-
-  return c;
 }
 
 module.exports = inventarioService;
