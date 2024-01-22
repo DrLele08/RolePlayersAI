@@ -1,35 +1,62 @@
-// Assuming you have Jest installed, if not, install it by running: npm install --save-dev jest
+jest.mock('../models/utente'); // Simula il modulo utente
+jest.mock('../models/utils'); // Simula il modulo utils
+jest.mock('../models/creazione'); // Simula il modulo creazione
+jest.mock('../models/contesto'); //Simula il modulo contesto
 
-const inventarioService = require('./path-to-your-inventario-service-file');
-const utente = require('./path-to-your-utente-file'); // Import the utente module
-
-jest.mock('./path-to-your-utente-file'); // Mock the utente module
-
+const inventarioService = require('../services/inventarioService.js');
+const utente = require('../models/utente'); // Importa il modulo utente
 describe('inventarioService.addContenuto', () => {
-    test('should reject when both idCreazione and idContesto are missing or provided together', async () => {
-        const data = { idUtente: 1 }; // Adjust the data object accordingly
+    it('addContenuto dovrebbe rigettare quando sia idCreazione che idContesto mancano o sono forniti insieme', async () => {
+        const data = { idUtente: 1 };
 
         await expect(inventarioService.addContenuto(data)).rejects.toEqual("Devi fornire uno tra idCreazione e idContesto!");
     });
 
-    test('should reject when user does not have permission', async () => {
-        const data = { idUtente: 1, idCreazione: 2 }; // Adjust the data object accordingly
+    it('addContenuto dovrebbe rigettare quando utente non ha i permessi', async () => {
+        const data = { idUtente: 1, idCreazione: 2 };
 
-        utente.getById.mockResolvedValue({}); // Mocking the result of utente.getById
+        utente.getById.mockResolvedValue({}); // Simula il risultato di utente.getById
 
-        await expect(inventarioService.addContenuto(data)).rejects.toEqual("Non hai i permessi!");
+        await expect(inventarioService.addContenuto(data)).rejects.toEqual("Dati non validi!");
     });
 
-    test('should reject when Creazione/Contesto already present in Inventario', async () => {
-        const data = { idUtente: 1, idCreazione: 2 }; // Adjust the data object accordingly
+    it('addContenuto dovrebbe rigettare quando utente non ha i permessi', async () => {
+        const data = { idUtente: 1, idContesto: 2 };
 
-        utente.getById.mockResolvedValue({}); // Mocking the result of utente.getById
-        utente.hasCreazione.mockResolvedValue(true); // Mocking the result of utente.hasCreazione
+        utente.getById.mockResolvedValue({}); // Simula il risultato di utente.getById
 
-        await expect(inventarioService.addContenuto(data)).rejects.toEqual("Creazione già presente nell'Inventario!");
+        await expect(inventarioService.addContenuto(data)).rejects.toEqual("Dati non validi!");
     });
 
-    // Add more test cases as needed to cover different scenarios
+    it('addContenuto dovrebbe rigettare quando Creazione/Contesto è già in inventario', async () => {
+        const data = { idUtente: 1, idCreazione: 2 };
 
-    // Ensure to test both idCreazione and idContesto branches separately
+        utente.getById.mockResolvedValue({}); // Simula il risultato di utente.getById
+        utente.hasCreazione.mockResolvedValue(true); // Simula il risultato di utente.hasCreazione
+
+        await expect(inventarioService.addContenuto(data)).rejects.toEqual("Dati non validi!");
+    });
+
+    it('addContenuto dovrebbe rigettare quando Creazione/Contesto è già in inventario', async () => {
+        const data = { idUtente: 1, idContesto: 2 };
+
+        utente.getById.mockResolvedValue({}); // Simula il risultato di utente.getById
+        utente.hasCreazione.mockResolvedValue(true); // Simula il risultato di utente.hasCreazione
+
+        await expect(inventarioService.addContenuto(data)).rejects.toEqual("Dati non validi!");
+    });
+
+    it('addContenuto va a buon fine', async() =>{
+        const data = { idUtente: 1, idCreazione: 2 };
+
+        utente.getById.mockResolvedValue({}); // Simula il risultato di utente.getById
+        utente.hasCreazione.mockResolvedValue(false); // Simula il risultato di utente.hasCreazione
+    })
+
+    it('addContenuto va a buon fine', async() =>{
+        const data = { idUtente: 1, idContesto: 2 };
+
+        utente.getById.mockResolvedValue({}); // Simula il risultato di utente.getById
+        utente.hasCreazione.mockResolvedValue(false); // Simula il risultato di utente.hasCreazione
+    })
 });
