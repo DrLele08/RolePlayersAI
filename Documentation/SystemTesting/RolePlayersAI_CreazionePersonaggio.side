@@ -278,8 +278,8 @@
     }, {
       "id": "45db7a21-4c5d-413b-826f-f75ac5fd68c8",
       "comment": "",
-      "command": "click",
-      "target": "css=.swal2-confirm",
+      "command": "assertText",
+      "target": "id=swal2-html-container",
       "targets": [
         ["css=.swal2-confirm", "css:finder"],
         ["xpath=(//button[@type='button'])[3]", "xpath:attributes"],
@@ -287,7 +287,7 @@
         ["xpath=//div[6]/button", "xpath:position"],
         ["xpath=//button[contains(.,'Ok')]", "xpath:innerText"]
       ],
-      "value": ""
+      "value": "Devi inserire un nome compreso tra 2 e 50 caratteri"
     }]
   }, {
     "id": "4bcb8a0d-84da-48b1-9a88-30901f4512a1",
@@ -368,7 +368,7 @@
         ["xpath=//div[@id='divPersonaggi']/div/div/div/div[2]/div/form/input", "xpath:idRelative"],
         ["xpath=//div[2]/div/div/div/div/div[2]/div/form/input", "xpath:position"]
       ],
-      "value": "Personaggio bello"
+      "value": ""
     }, {
       "id": "1541f786-46d7-4174-b605-6bb6c6c94240",
       "comment": "",
@@ -424,8 +424,8 @@
     }, {
       "id": "b749066a-6af3-4309-b87c-044f0e452ebb",
       "comment": "",
-      "command": "click",
-      "target": "css=.swal2-confirm",
+      "command": "assertText",
+      "target": "id=swal2-html-container",
       "targets": [
         ["css=.swal2-confirm", "css:finder"],
         ["xpath=(//button[@type='button'])[3]", "xpath:attributes"],
@@ -433,7 +433,7 @@
         ["xpath=//div[6]/button", "xpath:position"],
         ["xpath=//button[contains(.,'Ok')]", "xpath:innerText"]
       ],
-      "value": ""
+      "value": "La descrizione deve essere compresa tra 1 e 512 caratteri"
     }]
   }, {
     "id": "7fedfd66-e481-4e2e-a33e-b971d38d9813",
@@ -570,8 +570,8 @@
     }, {
       "id": "f11f3b59-3d72-4abd-bd18-cf0b83f5f418",
       "comment": "",
-      "command": "click",
-      "target": "css=.swal2-confirm",
+      "command": "assertText",
+      "target": "id=swal2-html-container",
       "targets": [
         ["css=.swal2-confirm", "css:finder"],
         ["xpath=(//button[@type='button'])[3]", "xpath:attributes"],
@@ -579,7 +579,7 @@
         ["xpath=//div[6]/button", "xpath:position"],
         ["xpath=//button[contains(.,'Ok')]", "xpath:innerText"]
       ],
-      "value": ""
+      "value": "La descrizione deve essere compresa tra 1 e 512 caratteri"
     }]
   }, {
     "id": "e2e80851-af41-4c1d-b349-da563fb7d02c",
@@ -703,8 +703,8 @@
     }, {
       "id": "bed396cf-eb13-4a73-889c-10e5fa923e7d",
       "comment": "",
-      "command": "click",
-      "target": "css=.swal2-confirm",
+      "command": "assertText",
+      "target": "id=swal2-html-container",
       "targets": [
         ["css=.swal2-confirm", "css:finder"],
         ["xpath=(//button[@type='button'])[3]", "xpath:attributes"],
@@ -712,7 +712,7 @@
         ["xpath=//div[6]/button", "xpath:position"],
         ["xpath=//button[contains(.,'Ok')]", "xpath:innerText"]
       ],
-      "value": ""
+      "value": "Deve selezionare la privacy del personaggio"
     }]
   }, {
     "id": "bb603bae-f07a-4c55-861e-8b00b28de8a5",
@@ -835,8 +835,8 @@
     }, {
       "id": "d61222c7-dae7-4e1b-a0cc-11f1f00e806f",
       "comment": "",
-      "command": "click",
-      "target": "css=.swal2-confirm",
+      "command": "assertText",
+      "target": "id=swal2-html-container",
       "targets": [
         ["css=.swal2-confirm", "css:finder"],
         ["xpath=(//button[@type='button'])[3]", "xpath:attributes"],
@@ -844,7 +844,7 @@
         ["xpath=//div[6]/button", "xpath:position"],
         ["xpath=//button[contains(.,'Ok')]", "xpath:innerText"]
       ],
-      "value": ""
+      "value": "Deve selezionare il genere del personaggio"
     }]
   }, {
     "id": "14782a80-1532-4b47-88d4-e01d694a4059",
@@ -981,8 +981,8 @@
     }, {
       "id": "0502eb5c-5e43-400b-b861-b825bec8d988",
       "comment": "",
-      "command": "click",
-      "target": "css=.swal2-confirm",
+      "command": "assertText",
+      "target": "id=swal2-html-container",
       "targets": [
         ["css=.swal2-confirm", "css:finder"],
         ["xpath=(//button[@type='button'])[3]", "xpath:attributes"],
@@ -990,7 +990,7 @@
         ["xpath=//div[6]/button", "xpath:position"],
         ["xpath=//button[contains(.,'Ok')]", "xpath:innerText"]
       ],
-      "value": ""
+      "value": "Personaggio creato!"
     }]
   }],
   "suites": [{
