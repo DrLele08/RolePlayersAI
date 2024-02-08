@@ -213,7 +213,7 @@ License: For each use you must have a valid license purchased only from above li
                                                 nuovoRuolo="Moderatore";
                                             }
 
-                                            const url="http://localhost:3000/api/admin/setRuolo";
+                                            const url="{{BASE_URL}}/api/admin/setRuolo";
 
                                             let obj={
                                                 "idUtente": idUtenteDaCambiare,
@@ -237,7 +237,7 @@ License: For each use you must have a valid license purchased only from above li
                                                             confirmButton: "btn btn-primary"
                                                         }
                                                     }).then(()=>{
-                                                        window.location.replace("http://localhost:3000/admin");
+                                                        window.location.replace("{{BASE_URL}}/admin");
                                                     });
                                                 }
                                                 else{

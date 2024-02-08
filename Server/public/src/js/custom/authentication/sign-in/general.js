@@ -61,7 +61,7 @@ var KTSigninGeneral = function () {
                     submitButton.disabled = true;
 
 
-                    const urlLogin= "http://localhost:3000/api/login"
+                    const urlLogin= "https://roleplayersai.saisraffaele.it/api/login"
 
                     axios.post(urlLogin,{
                         email: document.getElementById("inEmail").value.trim(),
@@ -80,7 +80,7 @@ var KTSigninGeneral = function () {
                                     confirmButton: "btn btn-primary"
                                 }
                             }).then(()=>{
-                                window.location="http://localhost:3000/dashboard"
+                                window.location="https://roleplayersai.saisraffaele.it/dashboard"
                             })
                         }
                         else {

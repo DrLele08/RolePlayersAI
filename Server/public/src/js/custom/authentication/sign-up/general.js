@@ -135,7 +135,7 @@ var KTSignupGeneral = function () {
                     // Disable button to avoid multiple click
                     submitButton.disabled = true;
 
-                    const urlLogin = "http://localhost:3000/api/registrazione"
+                    const urlLogin = "https://roleplayersai.saisraffaele.it/api/registrazione"
 
                     let dataNascita=document.getElementById("upBday").value
                     let dataConvertita=convertiData(dataNascita)
@@ -160,7 +160,7 @@ var KTSignupGeneral = function () {
                                     confirmButton: "btn btn-primary"
                                 }
                             }).then(()=>{
-                                window.location="http://localhost:3000/dashboard"
+                                window.location="https://roleplayersai.saisraffaele.it/dashboard"
                             })
                         }
                         else {
